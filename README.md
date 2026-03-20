@@ -2,11 +2,11 @@
 
 ## Download
 
-Grab the latest release for your platform from [GitHub Releases](https://github.com/nuketheburrito/theorem-releases/releases):
+Grab the latest release for your platform from [GitHub Releases](https://github.com/Theorem-Governance/theorem-releases/releases):
 
 ```bash
 # Example for x86_64 Linux
-curl -LO https://github.com/nuketheburrito/theorem-releases/releases/latest/download/theorem-node-v0.1.0-x86_64-unknown-linux-gnu.tar.gz
+curl -LO https://github.com/Theorem-Governance/theorem-releases/releases/latest/download/theorem-node-v0.1.0-x86_64-unknown-linux-gnu.tar.gz
 tar xzf theorem-node-*.tar.gz
 cd theorem-node-*/
 ```
