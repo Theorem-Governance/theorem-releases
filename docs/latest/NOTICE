@@ -1,0 +1,36 @@
+Theorem Project - NOTICE
+
+This project is dual-licensed:
+
+  Code (all Rust crates):  MIT License        — see LICENSE-CODE
+  Documentation:           CC-BY-SA-4.0       — see LICENSE-DOCS
+
+Third-party dependencies are listed in Cargo.lock and are subject to their
+own license terms. A summary of direct dependency licenses follows.
+
+Direct dependency licenses (Rust crates via crates.io):
+  axum            — MIT
+  clap            — MIT OR Apache-2.0
+  reqwest         — MIT OR Apache-2.0
+  rusqlite        — MIT
+  serde           — MIT OR Apache-2.0
+  serde_json      — MIT OR Apache-2.0
+  sha2            — MIT OR Apache-2.0
+  subtle          — BSD-3-Clause
+  tempfile        — MIT OR Apache-2.0
+  thiserror       — MIT OR Apache-2.0
+  tokio           — MIT
+  tower-http      — MIT
+  tracing         — MIT
+  uuid            — MIT OR Apache-2.0
+  anyhow          — MIT OR Apache-2.0
+  chrono          — MIT OR Apache-2.0
+  dashmap         — MIT
+  hex             — MIT OR Apache-2.0
+  hmac            — MIT OR Apache-2.0
+
+All MIT and Apache-2.0 licensed dependencies are compatible with the
+project's MIT license for code.
+
+For the full license text of each dependency, consult the respective crate's
+repository or https://crates.io.
