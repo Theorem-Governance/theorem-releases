@@ -1,262 +1,508 @@
-# Theorem — Roadmap
+# Theorem — Product Roadmap
 
-**Last updated:** 2026-03-15
-**Status:** Active — Steps 1-6 complete. Step 5 remediated and deployed to prod (21/22 audit, 23/25 verify). Step 7 (auditor) and Step 8 (DEC-010 bootstrap) next.
-**Goal:** Conforming production instance operated by a single entity.
+**Last updated:** 2026-03-20
+**Owner:** Product / CPO
+**Status:** Active
 
----
+## Product Thesis
 
-## Dependency Graph
+Theorem is not trying to become a better helper process around an existing
+system. Theorem is trying to become the trusted state machine for the larger
+system.
 
+The governing roadmap question is therefore:
+
+"What important thing still has to be trusted outside Theorem?"
+
+If a planned item reduces that answer, it is core roadmap work. If it does not,
+it is secondary.
+
+## Product Standard
+
+Theorem is only succeeding when all of the following become true:
+
+- canonical authority state lives in Theorem
+- irreversible transitions originate in theorem-governed surfaces
+- artifact and release authority are theorem-native
+- external execution is capability-based and fail-closed
+- operators have a production-grade contract
+- authoritative truth can be rebuilt from theorem-native records and events
+
+This means the roadmap should optimize for authority, revocation,
+rebuildability, and fail-closed control before it optimizes for breadth,
+ergonomics, or ecosystem polish.
+
+## What v0.3.0 Must Feel Like
+
+`v0.3.0` should not feel like "more governance features." It should feel like a
+change in who the system trusts.
+
+At that point:
+
+- an operator can prove why a release is eligible before rollout
+- a governed runtime shell cannot self-authorize work
+- artifact and capability revocation have real stopping power
+- theorem-native truth survives projection, cache, and adapter loss
+- downstream systems can consume theorem authority without guessing which
+  surfaces are canonical
+
+## Current Product Position
+
+Today Theorem is between two product states:
+
+- it is already a deployable runtime with a deterministic kernel, audit
+  surface, witness model, real host deployment path, and ring3 execution stack
+- it is not yet the sole authority layer for runtime admission, artifact
+  eligibility, capability issuance, release control, or irreversible execution
+
+In product terms: the runtime exists, but the trusted state machine does not
+yet fully exist.
+
+## Strategic Priorities
+
+The roadmap priorities, in order, are:
+
+1. canonical authority state
+2. governed irreversible transitions
+3. runtime and release authority
+4. capability-based external execution
+5. rebuildable truth
+6. production operational contract
+7. model-driven governance quality and auditability
+
+## Enhancement Programs Through v0.3.0
+
+These are the major product enhancement tracks. Releases package them into
+thresholds, but the tracks themselves describe the full scope.
+
+### 1. Authority Ownership
+
+Move authority-bearing facts into theorem-native state:
+
+- intent, admission, commitment, capability, trust, fork, and lineage records
+- theorem-owned transitions for admission, verification, revocation, and
+  governed mutation
+- explicit distinction between canonical theorem truth and adapter-local
+  convenience state
+
+### 2. Runtime Gatekeeping
+
+Make theorem-native authority decide what may run:
+
+- capability issuance, validation, expiry, redemption, and revocation
+- runtime rechecks at the supervisor, bus, gateway, and govagent layers
+- removal of self-authorization and implicit local bypass paths
+- artifact and release eligibility enforced at runtime boundaries
+
+### 3. Recovery And Rebuild
+
+Make theorem-native truth survivable:
+
+- stable event and export surfaces
+- authoritative rebuild and restore flows
+- lineage and fork reasoning that survive projection destruction
+- trust downgrade and revocation semantics tied to the same history
+
+### 4. Operator Contract
+
+Make the product deployable and supportable on real hosts:
+
+- stable release assets, checksums, and SBOMs
+- source-tarball and flake verification
+- install, observe, upgrade, rollback, and recovery guidance
+- stable distinction between public, operator/admin, and adapter-internal
+  surfaces
+
+### 5. Consumption Integrity
+
+Make every consumer of theorem authority behave coherently:
+
+- one canonical contract across CLI, HTTP, Ring 3, and rebuild flows
+- stable public surfaces that are safe to integrate against
+- operator/admin surfaces that are explicit rather than leaked through docs or
+  code discovery
+- downstream consumers that transport theorem authority without redefining it
+
+## Release Train To v0.3.0
+
+This roadmap is intentionally release-shaped rather than phase-shaped. The goal
+is not to ship incremental patches that feel busy. The goal is to make each
+release cross a real product threshold.
+
+```text
+v0.1.1 -> production contract and host reliability
+v0.2.0 -> canonical authority layer
+v0.2.1 -> capability lifecycle and runtime bridge
+v0.2.2 -> lineage, trust, and rebuildable authority
+v0.3.0 -> fail-closed runtime control
 ```
-Step 8: Independent Auditor (PA-001 through PA-008)
-   │
-   └── Step 7: DEC-010 Governance Inference Engine ←── NEXT
-          │
-          ├── 7a: D+E Bootstrap (model behind gateway, E14 boundary) ←── NOW
-          │
-          └── 7b: F-phase (distillation) ←── 7a operational maturity
-          │
-          ├── Step 5: Ring 3 Enclave Runtime (complete, remediated, deployed) ✓
-          │      ├── 5a: Bus Foundation ✓
-          │      ├── 5b: Enclave Mode (Supervisor) ✓
-          │      ├── 5c: Sidecar Mode (Gateway) ✓
-          │      ├── 5d: Verified Drift Measurement ✓
-          │      └── 5e: Client SDK (optional) ✓
-          │
-          ├── Step 6: DEC-009 Calibration (complete, updated with 120B) ✓
-          │
-          └── Step 4: Proof Submissions (complete) ✓
-                 ├── Step 3: Peer Witness on NAS (complete) ✓
-                 │      └── Step 2: Deploy and Bootstrap (complete) ✓
-                 │             └── Step 1: NixOS on DEC-007 Hardware (complete) ✓
-                 └── Step 2 (also required) ✓
-```
 
-Steps 1-6 complete. Step 7a (D+E bootstrap — model behind gateway with E14 boundary) is next. The running model generates continuous governance activity (fixes C9), accumulates DPO corpus (enables 7b), and gives the auditor (Step 8) a live system to inspect.
+Each release below should retire one whole class of misplaced trust.
 
 ---
 
-## Step 1: NixOS on DEC-007 Hardware
+## v0.1.1 — Production Contract
 
-**Status:** Complete
-**Who:** Eric (manual)
-**Depends on:** Nothing
-**Produces:** Bootable NixOS machine with measured boot chain
+**Release outcome:** Operators can install, verify, observe, upgrade, and roll
+back a real Theorem host without reading the code.
 
-The i7-8700 / 32GB / GTX 2080 machine (hostname: theorem-ring1, 192.168.50.176) running NixOS.
+### Required scope
 
-### Checklist
+- Linux-first release publication independent of Darwin
+- explicit liveness and readiness semantics
+- stable release asset, checksum, and SBOM contract
+- production deployment docs
+- supported Nix story
+- explicit authority-surface classification
 
-- [x] NixOS installed, SSH enabled, flakes configured
-- [x] theorem-node binary built via `nix build`
-- [x] Hardening applied (kernel hardening, firewall)
-- [x] `nixos-rebuild switch` — everything applied
+### Exit gate
 
-### Verification
+- release path is verified on the real host path
+- root flake and source-tarball build are verified
+- operators have a stable release/install/rollback contract
+- public authority contract is separated from operator/admin and
+  adapter-internal surfaces
 
-```bash
-uname -a                    # NixOS kernel
-sbctl verify                # Secure Boot OK
-mokutil --sb-state          # SecureBoot enabled
-chronyc sources -v          # NTS sources active
-systemctl status theorem-node  # Service unit exists (not yet started)
-```
+### Why it matters
 
----
-
-## Step 2: Deploy and Bootstrap
-
-**Status:** Complete
-**Who:** Eric + Claude Code (on the NixOS machine)
-**Depends on:** Step 1
-**Produces:** Running theorem-node with `bootstrapped: true`
-
-Kernel running as systemd service on port 3170, bootstrapped with 25 proof obligations.
+We should not build authority on top of a runtime whose operational contract is
+still ambiguous.
 
 ---
 
-## Step 3: Peer Witness on NAS
+## v0.2.0 — Canonical Authority Layer
 
-**Status:** Complete
-**Who:** Eric (manual + config)
-**Depends on:** Step 2
-**Produces:** P13 compliance — two independent attestation locations
+**Release outcome:** Theorem stops being only the place where governance is
+checked and becomes the place where authority lives.
 
-Synology NAS (DS220+, eXodus, 192.168.50.50) runs theorem-node in witness-only mode on port 3171.
+### Product objective
 
-- Kernel configured: `THEOREM_PEER_WITNESSES=http://192.168.50.50:3171`
-- Same geographic location — declared risk acceptance per DEC-008
+Move the minimum canonical authority objects and transitions into theorem-native
+state so later runtime control work has something real to enforce.
 
----
+This is the release where theorem-native authority stops being implied and
+starts being structurally unavoidable.
 
-## Step 4: Proof Submissions
+### Required scope
 
-**Status:** Complete
-**Who:** Eric (operator)
-**Depends on:** Steps 2 and 3
-**Produces:** All 25 properties with Active proofs; `/verify` returns valid
+Canonical object ownership:
 
-- 23 properties: Pass (deterministic verification)
-- 2 properties: RequiresPhysicalAudit (PROP-SINCERITY-001, PROP-SUBSTRATE-001 — deferred to Step 7)
+- intent
+- admission
+- commitment
+- capability
+- trust record
+- fork record
+- authority history sufficient for export and rebuild
 
----
+Stable theorem-owned authority surfaces:
 
-## Step 5: Ring 3 Enclave Runtime
+- declare intent
+- submit act
+- establish entity
+- create scope
+- amend parameter
+- revoke authorization
+- submit proof
+- admit artifact
+- revoke artifact
+- admit action
+- revoke action admission
+- verify release
+- issue execution capability
+- validate execution capability
+- revoke execution capability
+- redeem execution capability
+- record trust
+- record fork
 
-**Status:** Complete — remediated, deployed to prod
-**Who:** Eric + Claude Code
-**Depends on:** Step 2
-**Produces:** Governance enclave — programmatic interface for governed entities to submit acts via bus protocol
+Authoritative operator/admin surfaces:
 
-Two deployment models (DEC-013):
+- export state
+- rebuild authority state
+- restore authority state
 
-- **Enclave mode** — Supervisor launches processes inside the governance boundary. Born governed.
-- **Sidecar mode** — Gateway exposes HTTP/gRPC. External systems call in. Also the deployment model for DEC-010 governance inference engine.
+### Enhancement themes
 
-### Remediation summary
+- stop mirroring external release decisions and start recording theorem-native
+  release authority
+- stop treating Ring 3 runtime state as implicit authority and start treating
+  it as a consumer of theorem-native capability state
+- make export and rebuild a first-class authority story rather than a
+  diagnostic convenience
 
-Full audit (AUD-2026-03-15-0004) found 63 findings across 8 domains. All 63 remediated with fail-closed defaults:
+### Exit gate
 
-- **Auth:** Services refuse to start without auth tokens or explicit `--allow-anonymous`
-- **Shell injection:** `CommandMode::Direct` is the default (shell requires opt-in)
-- **Rate limiting:** Token-bucket per-entity on gateway and bus
-- **Metrics:** Prometheus endpoint with 12 instrumented metrics
-- **869 tests pass**, 0 failures
+- theorem-native authority objects are explicit and durable
+- public and operator/admin contract boundaries are documented and enforced
+- export and rebuild treat authority objects as canonical
+- no important authority primitive still exists only as adapter-local state
 
-Evidence: `docs/remediation/2026-03-15-AUD-0004/` (38 evidence records, full traceability)
+### What does not count
 
-### Production state (NixOS)
-
-- **Binary:** `/nix/store/86165pysfvcm4y10m7cr3hdqmhxks6wj-theorem-node-0.1.0/bin/theorem-node`
-- **Audit:** 21/22 criteria pass (C9 signal production cadence needs continuous agent activity)
-- **Verify:** 23/25 properties pass (0 fail, 2 require physical audit)
-
-### Step 5a: Bus Foundation
-
-**Spec:** `docs/superpowers/specs/2026-03-14-ring3-agent-runtime-design.md`
-**Plan:** `docs/superpowers/plans/2026-03-14-ring3-bus-foundation.md`
-
-### Step 5b: Enclave Mode (Supervisor)
-
-### Step 5c: Sidecar Mode (Gateway)
-
-- Two-call governance: `POST /ring3/intent` → do work → `POST /ring3/outcome`
-
-### Step 5d: Verified Drift Measurement
-
-**Spec:** `docs/superpowers/specs/2026-03-15-verified-drift-measurement.md`
-**Plan:** `docs/superpowers/plans/2026-03-15-verified-drift-measurement.md`
-
-### Step 5e: Client SDK (Optional)
-
-### Build order
-
-5a → 5b and 5c (parallel) → 5d (extends bus) → 5e (optional)
+- adding more helper APIs that bypass theorem-native authority objects
+- documenting adapter behavior as if it were canonical product truth
 
 ---
 
-## Step 6: DEC-009 Calibration
+## v0.2.1 — Capability Lifecycle And Runtime Bridge
 
-**Status:** Complete (2026-03-15, updated with 120B external inference)
-**Who:** Eric + Claude Code
-**Depends on:** Step 5
-**Produces:** Evidence that substance checks discriminate between capable and incapable models
+**Release outcome:** Theorem-issued capability state becomes the canonical
+runtime bridge into external execution.
 
-### Results
+### Product objective
 
-| Model | Params | Standard | Adversarial | Overall |
-|-------|--------|----------|-------------|---------|
-| Qwen 2.5 7B Q4_K_M | 7.6B | — | — | 1/3 (33%) |
-| Qwen 2.5 14B Q4_K_M | 14B | — | — | 0/18 (0%) |
-| Qwen 2.5 32B Q2_K | 32B | — | — | 5/18 (28%) |
-| gpt-oss-120B | 120B | 28/30 (93%) | 0/30 (0%) | 28/60 (47%) |
+Close the gap between "capabilities exist in theorem state" and "Ring 3
+actually runs through those capabilities."
 
-120B tested via Together.ai. Local E14 substance checks, no kernel act submission.
+This is the release where capability becomes the control membrane between
+theorem authority and external execution.
 
-### Decision gate outcomes
+### Required scope
 
-- Scale does not fix adversarial failures — concrete state grounding must be trained in
-- DEC-010 thesis validated, deployment model and training pipeline designed
-- Synthetic DPO corpus attempted and rejected — corrections are ID-stapling, not deliberation
+Capability lifecycle completion:
 
----
+- issuance
+- validation
+- redemption
+- revocation
+- expiry
+- replay protection
+- payload binding
+- scope binding
+- outcome binding
 
-## Step 7: DEC-010 Governance Inference Engine
+Ring 3 bridge work:
 
-**Status:** Next — D+E bootstrap
-**Who:** Eric + Claude Code (system), model (autonomous after bootstrap)
-**Depends on:** Step 5 (remediated), Step 6
-**Produces:** Fine-tuned governance model grown from real operational data; continuous governance activity that fixes C9 and gives the auditor a live system
+- theorem-bus consumes theorem-issued capability state for governed execution
+- theorem-gateway cannot tunnel around capability requirements
+- theorem-supervisor runtime admission and rechecks are theorem-native
+- theorem-govagent paths that perform governed work operate through theorem
+  capability semantics, not local convention
 
-The governance inference engine is grown, not built. See DEC-010 in DECISIONS.md for full deployment model and trust architecture.
+### Enhancement themes
 
-### Step 7a: D+E Bootstrap
+- remove or deprecate legacy execution paths that can bypass theorem-native
+  capability state
+- make runtime denial observable and auditable, not merely implied
+- make capability outcome return part of the authority story, not an afterthought
 
-**Depends on:** Step 5 remediation complete ✓
+### Exit gate
 
-- General-purpose model deployed behind sidecar gateway (Step 5c) as untrusted infrastructure
-- E14 evaluates every output (structural). PA-007 evaluates sincerity (substantive). Both required.
-- Model weights on local hardware declared as substrate — PA-008 applies (C, always)
-- Bus generates templates for adversarial failures — labeled honestly as bus-generated
-- Three-artifact logging per adversarial failure: original, regeneration, bus template
-- DPO pairs: (original, regeneration) only when regeneration passes E14
+- every governed external execution path can be expressed through theorem
+  capability state
+- denial, expiry, and revocation have one canonical meaning across bus,
+  gateway, supervisor, and govagent
+- no Ring 3 component can honestly claim theorem-native authority while still
+  bypassing theorem-native capability checks
 
-### Step 7b: F-phase (Distillation)
+### What does not count
 
-**Depends on:** Step 7a accumulated enough authentic correction pairs
-
-- Trigger: measurable corpus size and per-component pass-rate trends
-- DPO training on (failed-original, passed-regeneration) pairs from 7a
-- Train on cloud GPU, deploy new weights behind gateway, E14 evaluates immediately
-- Iterate: improved model generates new failures, new training signal
-
----
-
-## Step 8: Independent Auditor
-
-**Status:** Blocked on Step 7a operational maturity
-**Who:** Eric (procurement) + external auditor
-**Depends on:** Step 7a running (auditor needs a live system with governed entities to inspect)
-**Produces:** PA-001 through PA-008 attestations; first complete audit cycle
-
-### 8 Physical Audit Exits
-
-| PA | Property | What |
-|----|----------|------|
-| PA-001 | PROP-IDENTITY-001 | Identity binding mechanism inspection |
-| PA-002 | PROP-IDENTITY-003 | Timed revocation test |
-| PA-003 | PROP-LIVENESS-001 | Deployment topology inspection |
-| PA-004 | PROP-LIVENESS-002 | System entity suppression test |
-| PA-005 | PROP-LIVENESS-003 | Recovery procedure red-team |
-| PA-006 | PROP-AVAILABILITY-001 | Degraded mode behavior test |
-| PA-007 | PROP-SINCERITY-001 | Governance artifact substance rubric |
-| PA-008 | PROP-SUBSTRATE-001 | Substrate trust declaration verification (includes model weight provenance per DEC-010) |
-
-After all 8 attestations: meta-verification, then the instance is conforming.
+- issuing capabilities while continuing to let runtime shells self-authorize
+- adding more compatibility shims without removing the bypass paths
 
 ---
 
-## Current production state
+## v0.2.2 — Lineage, Trust, And Rebuildable Authority
 
-- [x] NixOS machine running theorem-node with Secure Boot and measured boot
-- [x] Bootstrapped with all 25 properties proven (23 pass, 2 physical audit)
-- [x] Witness log replicated to NAS
-- [x] Enclave runtime operational: bus, supervisor, gateway (remediated, fail-closed)
-- [x] Substance checks calibrated (8B through 120B)
-- [x] Audit: 21/22 criteria pass (C9 needs continuous agent activity)
-- [x] Verify: 23/25 properties pass, `valid: true`
-- [ ] Governance inference engine in D+E bootstrap, logging three-artifact protocol
-- [ ] Independent auditor has attested all 8 physical audit exits
-- [ ] First audit cycle complete: `/audit` returns `all_satisfied: true`
+**Release outcome:** Theorem-native authority becomes survivable, explainable,
+and branch-aware.
+
+### Product objective
+
+Complete the authority layer so operators and downstream systems can answer not
+just "what is true?" but "why is it true, what branch did it come from, and can
+it be rebuilt after loss?"
+
+This is the release where theorem-native truth becomes legible enough to trust
+under damage, rollback, and disagreement.
+
+### Required scope
+
+Lineage and trust:
+
+- explicit decision lineage or equivalent authority history structure
+- trust downgrade and revocation semantics tied to artifact, release, witness,
+  and capability flows
+- fork reasoning that is theorem-native rather than reconstructed from logs
+
+Rebuildability:
+
+- stable governance event feed shape
+- projection destruction and rebuild drills
+- restore path that proves theorem-native history is sufficient to recover
+  authority state
+
+Operational truth:
+
+- event consumption contract for operators and Ring 3 consumers
+- rebuild and recovery guidance that uses theorem-native history as the source
+  of truth
+
+### Enhancement themes
+
+- move from "authority records exist" to "authority records explain the system"
+- move from "export can dump data" to "history can reconstruct truth"
+- move from "trust is scattered across side effects" to "trust state is
+  explicit and governable"
+
+### Exit gate
+
+- destroyed projections can be rebuilt from theorem-native history
+- trust-critical state is explicit rather than spread across unrelated records
+- lineage and fork history are theorem-native enough to support rollback,
+  rebuild, and branch reasoning
+
+### What does not count
+
+- keeping event history as a debugging artifact rather than a rebuild substrate
+- claiming trust is explicit when it is still inferred from operator convention
 
 ---
 
-## Not on this roadmap
+## v0.3.0 — Fail-Closed Runtime Control
 
-These are real but not sequenced yet:
+**Release outcome:** Theorem becomes the real gatekeeper for what may run, what
+may continue running, and what must stop.
 
-- **ARCH-002: Multi-layer governance** — builder kernels, end-user kernels
-- **Geographic redundancy** — third witness location outside the home
-- **Auditor rotation** — second independent auditor after two cycles
-- **DEC-010 F-phase completion** — when the fine-tuned model consistently passes adversarial E14 checks
+This is the first release that should feel like a threshold crossing rather
+than a feature accumulation release.
+
+### Product objective
+
+Make theorem-native authority actually control runtime behavior. If Theorem is
+absent, revoked, expired, mismatched, or denied, governed external execution
+must fail closed.
+
+### Required scope
+
+Artifact and release control:
+
+- unadmitted artifacts are denied at runtime boundaries
+- revoked artifacts are denied at runtime boundaries
+- release verification is a real eligibility gate
+- rollout eligibility is theorem-governed rather than external convention
+
+Capability-based runtime control:
+
+- governed execution requires theorem-issued capability
+- capability expiry blocks execution
+- capability revocation blocks execution
+- payload mismatch blocks execution
+- scope mismatch blocks execution
+- unavailability of theorem authority blocks governed execution rather than
+  silently degrading into self-authorization
+
+Runtime control across the stack:
+
+- theorem-supervisor enforces runtime admission and revalidation fail-closed
+- theorem-bus cannot admit governed work without theorem-native authority
+- theorem-gateway cannot present a convenience surface that weakens theorem
+  control
+- theorem-govagent behaves correctly under denial, expiry, revocation, and
+  rebuild
+
+Operational survivability:
+
+- governance event surface is stable enough for subscription and recovery
+- destroy/rebuild drills prove loss of projections/adapters does not destroy
+  authoritative truth
+
+### Enhancement themes
+
+- eliminate the last meaningful self-authorization paths
+- turn theorem-native revocation into real runtime stopping power
+- make runtime control and recovery one coherent product, not separate stories
+
+### v0.3.0 release test
+
+Ask these questions before calling the release done:
+
+- can an external runtime still self-authorize governed work?
+- can an unadmitted or revoked artifact still run?
+- can a governed action continue when theorem capability state is absent,
+  expired, revoked, or mismatched?
+- can authoritative state be restored after adapter or projection destruction?
+
+If any answer is yes, `v0.3.0` is not complete.
+
+### What does not count
+
+- advisory denial paths
+- warnings without blocking behavior
+- runtime checks that can be bypassed by alternate Ring 3 paths
+- rebuild stories that still depend on adapter-local truth
+
+---
+
+## What We Are Explicitly Not Prioritizing Ahead Of v0.3.0
+
+These may still ship, but they should not lead the roadmap:
+
+- broader UI polish
+- non-critical SDK ergonomics
+- integrations that widen surface area without increasing authority ownership
+- analytics-first work that assumes external truth
+- model-quality work presented as a substitute for authority control
+
+## Parallel Track — DEC-010 Governance Inference Engine
+
+DEC-010 remains strategically important, but it is not the definition of
+`v0.3.0` and it is not the definition of 2.0.
+
+### What it should do
+
+- increase governance throughput
+- increase corpus quality
+- exercise theorem-native transitions under realistic load
+- improve decision quality and auditability
+
+### What it must not do
+
+- become the reason we declare authority ownership complete
+- substitute model quality for theorem-native control
+
+## 2.0 Gate Beyond v0.3.0
+
+`v0.3.0` is not 2.0. It is the release where runtime control becomes real.
+
+Theorem should only be declared 2.0 when all of the following are true:
+
+- authority objects are theorem-native
+- irreversible transitions originate in Theorem
+- artifacts, releases, and governed execution are theorem-controlled
+- external execution is capability-based and fail-closed
+- operators have a stable install / verify / observe / upgrade / rollback /
+  subscribe contract
+- authoritative state can be rebuilt from theorem-native commitments and event
+  history
+
+If any important irreversible truth still originates outside Theorem, we are
+not at 2.0.
+
+## Near-Term Execution Order
+
+Recommended order from here:
+
+1. finish `v0.1.1` verification and commit the authority-contract cleanup
+2. cut `v0.1.1`
+3. complete the remaining canonical authority layer work for `v0.2.0`
+4. move Ring 3 execution onto theorem-issued capability semantics for `v0.2.1`
+5. complete lineage, trust, and rebuild drills for `v0.2.2`
+6. cut `v0.3.0` only when runtime denial is fail-closed across the full stack
+
+This is the critical path. Anything that does not reduce trust outside Theorem
+should sequence behind it.
+
+## Summary
+
+Theorem should now be managed as a product becoming the authority substrate,
+not as a runtime accumulating features.
+
+The roadmap to `v0.3.0` should therefore feel like a control-surface takeover:
+
+- `v0.1.1` makes the runtime operable
+- `v0.2.0` makes authority explicit
+- `v0.2.1` makes capability the runtime bridge
+- `v0.2.2` makes authority rebuildable and explainable
+- `v0.3.0` makes runtime control real

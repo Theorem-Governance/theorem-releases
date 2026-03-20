@@ -1,12 +1,12 @@
 # Release Contract
 
 This document defines the supported release contract for `theorem-node`
-artifacts published from GitHub Actions.
+artifacts published from the Ring 1 release host.
 
 ## Scope
 
 This contract exists so deployment automation can rely on stable release output
-without reverse-engineering the CI workflow.
+without reverse-engineering the release tooling.
 
 ## Asset Naming
 
@@ -17,8 +17,8 @@ Binary release assets use this naming pattern:
 
 Examples:
 
-- `theorem-node-v0.1.1-x86_64-unknown-linux-gnu.tar.gz`
-- `theorem-node-v0.1.1-x86_64-unknown-linux-gnu.tar.gz.sha256`
+- `theorem-node-v0.3.0-x86_64-unknown-linux-gnu.tar.gz`
+- `theorem-node-v0.3.0-x86_64-unknown-linux-gnu.tar.gz.sha256`
 
 The tarball expands into a directory with the same base name:
 
@@ -32,7 +32,7 @@ base name plus `.sha256`.
 Verification example:
 
 ```bash
-shasum -a 256 -c theorem-node-v0.1.1-x86_64-unknown-linux-gnu.tar.gz.sha256
+shasum -a 256 -c theorem-node-v0.3.0-x86_64-unknown-linux-gnu.tar.gz.sha256
 ```
 
 ## SBOM Contract
@@ -61,10 +61,26 @@ allowed to proceed independently of Darwin artifact completion.
 
 ## Automation Guidance
 
-- Automate against explicit tags such as `v0.1.1`.
+- Automate against explicit tags such as `v0.3.0`.
 - Do not treat the GitHub "latest" pointer as a stable deployment contract.
 - Before promoting a release, verify the checksum for the exact asset you
   downloaded.
+
+## Canonical Release Authority Path
+
+Release publication and release authority are separate concerns.
+
+The canonical theorem-native authority path for a runtime artifact is:
+
+1. Admit the artifact hash with `POST /admit-artifact` or `theorem-node admit-artifact`.
+2. Verify the candidate hash with `POST /verify-release` or `theorem-node verify-release`.
+3. Use the verification result or a theorem-issued execution capability as the
+   gate for Ring 3 runtime admission.
+
+`POST /verify-release` is part of the stable public authority contract.
+`GET /export-state`, `GET /rebuild-authority-state`, and
+`POST /restore-authority-state` are operator/admin recovery routes, not release
+integration APIs.
 
 ## Production Install Guidance
 

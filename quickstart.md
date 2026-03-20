@@ -9,8 +9,8 @@ For a production enclave host, use the operator guide in
 Grab the latest release for your platform from [GitHub Releases](https://github.com/Theorem-Governance/theorem-releases/releases):
 
 ```bash
-# Example for x86_64 Linux — replace VERSION with the tag (e.g. v0.1.1)
-VERSION="v0.1.1"
+# Example for x86_64 Linux — replace VERSION with the tag (e.g. v0.3.0)
+VERSION="v0.3.0"
 curl -LO "https://github.com/Theorem-Governance/theorem-releases/releases/download/${VERSION}/theorem-node-${VERSION}-x86_64-unknown-linux-gnu.tar.gz"
 tar xzf theorem-node-*.tar.gz
 cd theorem-node-*/
@@ -67,7 +67,7 @@ Set environment variables (e.g. in a `.env` file sourced before running):
 | `THEOREM_DRIFT_THRESHOLD` | No | `0.15` | Drift tolerance (0.0–1.0) |
 | `THEOREM_COMMITMENT_TOKEN_TTL_HOURS` | No | `24` | Token expiry in hours |
 | `THEOREM_PEER_WITNESSES` | No | — | Comma-separated witness peer URLs |
-| `THEOREM_WITNESS_TOKEN` | No | — | Bearer token for witness auth |
+| `THEOREM_WITNESS_TOKEN` | No | — | Bearer token for witness-authenticated routes and `/ready`; omit only for basic local development |
 | `THEOREM_LOG_LEVEL` | No | `info` | Log level |
 
 ## Run
@@ -83,12 +83,19 @@ The API will be available at `http://localhost:3170`.
 
 ```bash
 curl http://localhost:3170/health
+curl -i http://localhost:3170/ready
 ./theorem-node --db theorem.db status
 ```
 
 `/health` is the canonical liveness probe and returns HTTP `200` with a minimal
-JSON status body whenever the process is up. `/status` is the richer readiness
-and governance-state command.
+JSON status body whenever the process is up.
+
+`/ready` is the readiness probe. It returns HTTP `200` only when the instance
+is bootstrapped and both `THEOREM_COMMITMENT_SECRET` and
+`THEOREM_WITNESS_TOKEN` are configured. In a minimal local setup you can run
+without `THEOREM_WITNESS_TOKEN`, but `/ready` will remain `503 not_ready`.
+
+`/status` is the richer governance-state inspection command.
 
 ## Available platforms
 
