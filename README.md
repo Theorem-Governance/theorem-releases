@@ -9,8 +9,8 @@ For a production enclave host, use the operator guide in
 Grab the latest release for your platform from [GitHub Releases](https://github.com/Theorem-Governance/theorem-releases/releases):
 
 ```bash
-# Example for x86_64 Linux — replace VERSION with the tag (e.g. v0.3.0)
-VERSION="v0.3.0"
+# Example for x86_64 Linux — replace VERSION with the tag (e.g. v2.0.0)
+VERSION="v2.0.0"
 curl -LO "https://github.com/Theorem-Governance/theorem-releases/releases/download/${VERSION}/theorem-node-${VERSION}-x86_64-unknown-linux-gnu.tar.gz"
 tar xzf theorem-node-*.tar.gz
 cd theorem-node-*/

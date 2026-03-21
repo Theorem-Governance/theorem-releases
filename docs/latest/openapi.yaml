@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Theorem Governance Node API
-  version: 0.3.0
+  version: 2.0.0
   description: |
     HTTP API for a Theorem governance kernel instance. Any program that can
     make HTTP requests can interact with this API — no SDK required.
@@ -13,6 +13,10 @@ info:
     routes that are intentionally excluded from this file:
     `GET /export-state`, `GET /rebuild-authority-state`,
     `POST /restore-authority-state`, `POST /retire-entity`,
+    `GET /authority-lineage/execution-capability`,
+    `GET /governance-context`, `GET /trust-state`,
+    `GET /runtime-eligibility/artifact`,
+    `GET /govagent/runtime-context`, `GET /govagent/prompt-context`,
     `POST /commit-intent-hash`, `POST /refresh-commitment-token`,
     `POST /register-measurement-method`, `POST /witness/commit-intent`,
     `POST /witness/commit-outcome`, and
@@ -720,6 +724,29 @@ paths:
       responses:
         "200":
           description: Trust recorded
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /revoke-trust:
+    post:
+      summary: Revoke a theorem-native trust relationship
+      operationId: revokeTrust
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [trust_record_id, entity_id]
+              properties:
+                trust_record_id: { type: string, format: uuid }
+                entity_id: { type: string, format: uuid }
+                rationale: { type: string }
+      responses:
+        "200":
+          description: Trust revoked
           content:
             application/json:
               schema:
