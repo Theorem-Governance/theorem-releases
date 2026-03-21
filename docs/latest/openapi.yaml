@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Theorem Governance Node API
-  version: 2.0.0
+  version: 3.0.0
   description: |
     HTTP API for a Theorem governance kernel instance. Any program that can
     make HTTP requests can interact with this API — no SDK required.
@@ -10,12 +10,25 @@ info:
     documents the stable public subset of the theorem-node HTTP surface.
 
     The running node also exposes additional operator/admin and Ring 3 adapter
-    routes that are intentionally excluded from this file:
+    routes. The 3.0 operator/admin contract is published below for the
+    theorem-native organization surfaces; lower-level witness and adapter
+    routes remain intentionally excluded from this file:
     `GET /export-state`, `GET /rebuild-authority-state`,
     `POST /restore-authority-state`, `POST /retire-entity`,
     `GET /authority-lineage/execution-capability`,
     `GET /governance-context`, `GET /trust-state`,
+    `GET /fork-history`,
     `GET /runtime-eligibility/artifact`,
+    `POST /authority-bundles/export`, `POST /authority-bundles/import`,
+    `GET /authority-bundles/imported`,
+    `POST /authority-bundles/imported/status`,
+    `POST /authority-bundles/disputes`,
+    `GET /authority-bundles/imported/verify`,
+    `POST /authority-bundles/delegations`,
+    `POST /policies`, `POST /policies/activate`,
+    `POST /policies/rollback`,
+    `GET /policies/active`,
+    `POST /policies/simulate/runtime-eligibility`,
     `GET /govagent/runtime-context`, `GET /govagent/prompt-context`,
     `POST /commit-intent-hash`, `POST /refresh-commitment-token`,
     `POST /register-measurement-method`, `POST /witness/commit-intent`,
@@ -31,6 +44,13 @@ info:
 servers:
   - url: http://localhost:3170
     description: Local instance
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 
 paths:
   /health:
@@ -866,6 +886,246 @@ paths:
                   capability_id: { type: string, format: uuid }
                   expires_at: { type: string, format: date-time }
 
+  /organizations/events:
+    get:
+      summary: Read the canonical organization-native event feed
+      operationId: getOrganizationEvents
+      parameters:
+        - in: query
+          name: scope_id
+          required: false
+          schema: { type: string, format: uuid }
+        - in: query
+          name: after_event_id
+          required: false
+          schema: { type: string, format: uuid }
+        - in: query
+          name: since_occurred_at
+          required: false
+          schema: { type: string, format: date-time }
+        - in: query
+          name: limit
+          required: false
+          schema: { type: integer, minimum: 1 }
+      responses:
+        "200":
+          description: Organization event feed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count: { type: integer }
+                  supported_event_types:
+                    type: array
+                    items: { type: string }
+                  events:
+                    type: array
+                    items: { type: object }
+
+  /activity-chronology:
+    get:
+      summary: Read the canonical wall-clock kernel activity chronology
+      operationId: getActivityChronology
+      parameters:
+        - in: query
+          name: event_type
+          required: false
+          schema: { type: string }
+        - in: query
+          name: entity_id
+          required: false
+          schema: { type: string, format: uuid }
+        - in: query
+          name: scope_id
+          required: false
+          schema: { type: string, format: uuid }
+        - in: query
+          name: after_event_id
+          required: false
+          schema: { type: string, format: uuid }
+        - in: query
+          name: since_occurred_at
+          required: false
+          schema: { type: string, format: date-time }
+        - in: query
+          name: limit
+          required: false
+          schema: { type: integer, minimum: 1 }
+      responses:
+        "200":
+          description: Activity chronology
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count: { type: integer }
+                  filters: { type: object }
+                  entries:
+                    type: array
+                    items: { type: object }
+
+  /organizations/explain:
+    get:
+      summary: Read a single-call theorem-native organization explanation
+      operationId: explainOrganization
+      parameters:
+        - in: query
+          name: scope_id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Organization explanation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scope: { type: object }
+                  summary: { type: object }
+                  roles:
+                    type: array
+                    items: { type: object }
+                  decision_paths:
+                    type: array
+                    items: { type: object }
+                  execution_lanes:
+                    type: array
+                    items: { type: object }
+                  budget_envelopes:
+                    type: array
+                    items: { type: object }
+                  interventions:
+                    type: array
+                    items: { type: object }
+                  treaties:
+                    type: array
+                    items: { type: object }
+                  explanation: { type: object }
+
+  /organization-roles/explain:
+    get:
+      summary: Read the authoritative explanation for an organization role
+      operationId: explainOrganizationRole
+      parameters:
+        - in: query
+          name: role_id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Role explanation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  organization_role: { type: object }
+                  role_charter: { type: object }
+                  explanation: { type: object }
+
+  /decision-paths/explain:
+    get:
+      summary: Read the authoritative explanation for a decision path
+      operationId: explainDecisionPath
+      parameters:
+        - in: query
+          name: decision_path_id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Decision path explanation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  decision_path: { type: object }
+                  explanation: { type: object }
+
+  /execution-lanes/explain:
+    get:
+      summary: Read the authoritative explanation for an execution lane
+      operationId: explainExecutionLane
+      parameters:
+        - in: query
+          name: lane_id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Execution lane explanation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  execution_lane: { type: object }
+                  explanation: { type: object }
+
+  /budget-envelopes/explain:
+    get:
+      summary: Read the authoritative explanation for a budget envelope
+      operationId: explainBudgetEnvelope
+      parameters:
+        - in: query
+          name: envelope_id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Budget envelope explanation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  budget_envelope: { type: object }
+                  explanation: { type: object }
+
+  /interventions/explain:
+    get:
+      summary: Read the authoritative explanation for an intervention record
+      operationId: explainIntervention
+      parameters:
+        - in: query
+          name: intervention_id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Intervention explanation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  intervention_record: { type: object }
+                  explanation: { type: object }
+
+  /treaties/explain:
+    get:
+      summary: Read the authoritative explanation for a treaty
+      operationId: explainTreaty
+      parameters:
+        - in: query
+          name: treaty_id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Treaty explanation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  treaty: { type: object }
+                  explanation: { type: object }
+
   /revoke-execution-capability:
     post:
       summary: Revoke an issued execution capability
@@ -923,3 +1183,494 @@ paths:
                   capability_id: { type: string, format: uuid }
                   status: { type: string }
                   outcome_ref: { type: string }
+
+  /execution-capabilities/lifecycle:
+    get:
+      summary: Read the authoritative lifecycle state and event history for an execution capability
+      operationId: getExecutionCapabilityLifecycle
+      parameters:
+        - in: query
+          name: capability_id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Execution lifecycle state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  execution_capability: { type: object }
+                  summary: { type: object }
+                  explanation: { type: object }
+                  history:
+                    type: array
+                    items: { type: object }
+    post:
+      summary: Record a host execution lifecycle event for an issued execution capability
+      operationId: recordExecutionCapabilityLifecycle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                [
+                  capability_id,
+                  nonce,
+                  secret,
+                  action_name,
+                  payload,
+                  scope_id,
+                  principal_entity_id,
+                  event_type,
+                ]
+              properties:
+                capability_id: { type: string, format: uuid }
+                nonce: { type: string }
+                secret: { type: string }
+                action_name: { type: string }
+                payload: { type: string }
+                scope_id: { type: string, format: uuid }
+                principal_entity_id: { type: string, format: uuid }
+                event_type:
+                  type: string
+                  enum:
+                    [
+                      started,
+                      progress,
+                      suspended,
+                      resumed,
+                      cancelled,
+                      failed,
+                      timed_out,
+                      intervention_acknowledged,
+                      outcome_recorded,
+                    ]
+                reason: { type: string, nullable: true }
+                progress_percent: { type: integer, minimum: 0, maximum: 100, nullable: true }
+                progress_message: { type: string, nullable: true }
+                outcome_ref: { type: string, nullable: true }
+                intervention_id: { type: string, format: uuid, nullable: true }
+      responses:
+        "200":
+          description: Lifecycle event recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  capability_id: { type: string, format: uuid }
+                  event_id: { type: string, format: uuid }
+                  event_type: { type: string }
+                  current_status: { type: string }
+                  outcome_ref: { type: string, nullable: true }
+                  recorded_at: { type: string, format: date-time }
+
+  /releases/declared:
+    get:
+      summary: Read theorem-native governed release declarations
+      operationId: getReleaseDeclarations
+      parameters:
+        - in: query
+          name: version
+          required: false
+          schema: { type: string }
+      responses:
+        "200":
+          description: Release declarations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count: { type: integer }
+                  release_declarations:
+                    type: array
+                    items:
+                      type: object
+    post:
+      summary: Record a governed release declaration linked to manifest and conformance evidence
+      operationId: recordReleaseDeclaration
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entity_id, scope_id, version, manifest_path]
+              properties:
+                entity_id: { type: string, format: uuid }
+                scope_id: { type: string, format: uuid }
+                version: { type: string }
+                manifest_path: { type: string }
+                conformance_report_path: { type: string, nullable: true }
+                release_url: { type: string, nullable: true }
+                evidence_summary:
+                  type: array
+                  items: { type: string }
+      responses:
+        "200":
+          description: Release declaration recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  release_declaration_id: { type: string, format: uuid }
+                  version: { type: string }
+                  status: { type: string }
+                  governance_act_id: { type: string, format: uuid }
+
+  /role-charters:
+    post:
+      summary: Record a theorem-native role charter
+      operationId: recordRoleCharter
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entity_id, name, charter_text]
+              properties:
+                entity_id: { type: string, format: uuid }
+                name: { type: string }
+                charter_text: { type: string }
+      responses:
+        "200":
+          description: Role charter recorded
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /organizations/bootstrap:
+    post:
+      summary: Bootstrap a governed organization in one theorem-native act
+      operationId: bootstrapOrganization
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entity_id, charters, roles]
+              properties:
+                entity_id: { type: string, format: uuid }
+                idempotency_key: { type: string, nullable: true }
+                charters:
+                  type: array
+                  items:
+                    type: object
+                    required: [ref_id, name, charter_text]
+                    properties:
+                      ref_id: { type: string }
+                      name: { type: string }
+                      charter_text: { type: string }
+                roles:
+                  type: array
+                  items:
+                    type: object
+                    required: [ref_id, name, scope_id, charter_ref]
+                    properties:
+                      ref_id: { type: string }
+                      name: { type: string }
+                      scope_id: { type: string, format: uuid }
+                      charter_ref: { type: string }
+                      parent_role_ref: { type: string, nullable: true }
+                      decision_rights:
+                        type: array
+                        items: { type: string }
+                      execution_rights:
+                        type: array
+                        items: { type: string }
+                      delegation_limits:
+                        type: array
+                        items: { type: string }
+                      intervention_paths:
+                        type: array
+                        items: { type: string }
+                decision_paths:
+                  type: array
+                  items:
+                    type: object
+                execution_lanes:
+                  type: array
+                  items:
+                    type: object
+                budget_envelopes:
+                  type: array
+                  items:
+                    type: object
+      responses:
+        "200":
+          description: Organization bootstrapped
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /organizations/admin-batch:
+    post:
+      summary: Apply batched organizational admin changes atomically
+      operationId: organizationAdminBatch
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entity_id]
+              properties:
+                entity_id: { type: string, format: uuid }
+                idempotency_key: { type: string, nullable: true }
+                charters:
+                  type: array
+                  items: { type: object }
+                roles:
+                  type: array
+                  items: { type: object }
+                decision_paths:
+                  type: array
+                  items: { type: object }
+                execution_lanes:
+                  type: array
+                  items: { type: object }
+                budget_envelopes:
+                  type: array
+                  items: { type: object }
+      responses:
+        "200":
+          description: Organization batch applied
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /organization-roles:
+    post:
+      summary: Record a theorem-native organization role
+      operationId: recordOrganizationRole
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entity_id, name, scope_id, charter_id]
+              properties:
+                entity_id: { type: string, format: uuid }
+                name: { type: string }
+                scope_id: { type: string, format: uuid }
+                charter_id: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Organization role recorded
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /decision-paths:
+    post:
+      summary: Record a theorem-native decision path
+      operationId: recordDecisionPath
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entity_id, name, scope_id, participant_role_ids, quorum]
+              properties:
+                entity_id: { type: string, format: uuid }
+                name: { type: string }
+                scope_id: { type: string, format: uuid }
+                participant_role_ids:
+                  type: array
+                  items: { type: string, format: uuid }
+                quorum: { type: integer }
+                veto_role_ids:
+                  type: array
+                  items: { type: string, format: uuid }
+                allowed_action_types:
+                  type: array
+                  items: { type: string }
+      responses:
+        "200":
+          description: Decision path recorded
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /execution-lanes:
+    post:
+      summary: Record a theorem-native execution lane
+      operationId: recordExecutionLane
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entity_id, name, scope_id, owning_role_id, resource_ceiling]
+              properties:
+                entity_id: { type: string, format: uuid }
+                name: { type: string }
+                scope_id: { type: string, format: uuid }
+                owning_role_id: { type: string, format: uuid }
+                allowed_action_types:
+                  type: array
+                  items: { type: string }
+                resource_ceiling: { type: integer, minimum: 1 }
+                stop_conditions:
+                  type: array
+                  items: { type: string }
+                intervention_paths:
+                  type: array
+                  items: { type: string }
+      responses:
+        "200":
+          description: Execution lane recorded
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /budget-envelopes:
+    post:
+      summary: Record a theorem-native budget envelope
+      operationId: recordBudgetEnvelope
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entity_id, name, scope_id, ceiling]
+              properties:
+                entity_id: { type: string, format: uuid }
+                name: { type: string }
+                scope_id: { type: string, format: uuid }
+                bound_role_id: { type: string, format: uuid, nullable: true }
+                bound_lane_id: { type: string, format: uuid, nullable: true }
+                ceiling: { type: integer, minimum: 1 }
+                consumed: { type: integer, minimum: 0 }
+                freeze_reason: { type: string, nullable: true }
+      responses:
+        "200":
+          description: Budget envelope recorded
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /interventions:
+    post:
+      summary: Record a theorem-native intervention
+      operationId: recordIntervention
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entity_id, scope_id, target_kind, target_id, action, reason]
+              properties:
+                entity_id: { type: string, format: uuid }
+                scope_id: { type: string, format: uuid }
+                target_kind: { type: string }
+                target_id: { type: string }
+                action: { type: string }
+                reason: { type: string }
+                recovery_of_intervention_id: { type: string, format: uuid, nullable: true }
+      responses:
+        "200":
+          description: Intervention recorded
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /treaties:
+    post:
+      summary: Record a treaty-backed cross-organization relationship
+      operationId: recordTreaty
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entity_id, name, local_scope_id, partner_instance_id, partner_scope_id, treaty_type, imported_bundle_ids, allowed_action_types]
+              properties:
+                entity_id: { type: string, format: uuid }
+                name: { type: string }
+                local_scope_id: { type: string, format: uuid }
+                partner_instance_id: { type: string }
+                partner_scope_id: { type: string, format: uuid }
+                treaty_type: { type: string }
+                imported_bundle_ids:
+                  type: array
+                  items: { type: string, format: uuid }
+                decision_path_id: { type: string, format: uuid, nullable: true }
+                allowed_action_types:
+                  type: array
+                  items: { type: string }
+      responses:
+        "200":
+          description: Treaty recorded
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /treaties/status:
+    post:
+      summary: Update treaty status
+      operationId: updateTreatyStatus
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entity_id, treaty_id, status]
+              properties:
+                entity_id: { type: string, format: uuid }
+                treaty_id: { type: string, format: uuid }
+                status: { type: string }
+                termination_reason: { type: string, nullable: true }
+      responses:
+        "200":
+          description: Treaty status updated
+          content:
+            application/json:
+              schema:
+                type: object

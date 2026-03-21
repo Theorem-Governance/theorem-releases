@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "releases": [
+    {
+      "version": "v3.0.0",
+      "release_date": "2026-03-21T21:00:25Z",
+      "compatibility_classification": "breaking-major",
+      "manifest_path": "releases/v3.0.0/manifest.json",
+      "conformance_report_path": "releases/v3.0.0/conformance.json",
+      "demonstration_path": "releases/v3.0.0/demo-path.json",
+      "human_release_notes_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v3.0.0",
+      "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v3.0.0"
+    }
+  ]
+}

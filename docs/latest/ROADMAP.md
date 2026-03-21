@@ -533,10 +533,10 @@ The long-range product path from here is:
 ```text
 v0.3.0 -> fail-closed runtime control
 2.0    -> trusted state machine declaration
-post-2.0 threshold 1 -> authority graph product
-post-2.0 threshold 2 -> programmable governance
-post-2.0 threshold 3 -> networked trust fabric
-post-2.0 threshold 4 -> autonomous organization surface
+2.1    -> network trust fabric
+2.2    -> programmable local governance
+2.3    -> authority graph and explanation product
+3.0    -> autonomous organization OS
 ```
 
 ### 2.0 Declaration Gate
@@ -551,22 +551,24 @@ Theorem should only be declared `2.0` when:
 
 This is the completion of the current thesis.
 
-### Post-2.0 Threshold 1: Authority Graph Product
+### 2.1: Network Trust Fabric
 
-After `2.0`, Theorem should become not only the source of authority, but the
-explainer of authority.
+After `2.0`, Theorem should first make theorem-native trust portable across
+theorem boundaries.
 
 This threshold should deliver:
 
-- authority timelines
-- decision-edge traversal
-- branch / fork inspection
-- trust-state history
-- event subscriptions safe for downstream consumption
+- cross-instance trust exchange
+- portable authority packages
+- delegated scopes across theorem instances
+- federated release and artifact verification
+- divergence and dispute handling
 
-### Post-2.0 Threshold 2: Programmable Governance
+This is where Theorem starts to govern ecosystems instead of single stacks.
 
-After the authority graph is legible, Theorem should make trust control
+### 2.2: Programmable Local Governance
+
+After network trust exists, Theorem should make local trust control
 programmable:
 
 - rollout policies
@@ -578,30 +580,35 @@ programmable:
 At this point Theorem stops feeling like a fixed set of governance endpoints and
 starts feeling like a real control plane.
 
-### Post-2.0 Threshold 3: Networked Trust Fabric
+### 2.3: Authority Graph And Explanation Product
 
-Theorem should then extend beyond a single local authority boundary:
+After trust is portable and programmable, Theorem should make authority,
+delegation, and trust state legible as a stable product surface.
 
-- cross-instance trust exchange
-- portable authority packages
-- delegated scopes across theorem instances
-- federated release and artifact verification
-- divergence and dispute handling
+This threshold should deliver:
 
-This is where Theorem starts to govern ecosystems instead of single stacks.
+- authority timelines
+- decision-edge traversal
+- branch / fork inspection
+- trust-state history
+- runtime-eligibility explanation
+- event subscriptions safe for downstream consumption
 
-### Post-2.0 Threshold 4: Autonomous Organization Surface
+### 3.0: Autonomous Organization OS
 
-The furthest-horizon product position is that Theorem becomes the trust
-substrate for AI-native organizations.
+At `3.0`, Theorem should become the operating system for autonomous
+organizations.
 
 That includes:
 
-- governed execution lanes for agents
-- theorem-native delegation between agents, roles, and processes
+- theorem-native roles and charters
+- theorem-native decision paths
+- governed execution lanes
+- budget and blast-radius boundaries
 - auditable interventions and overrides
-- visible organizational authority structure
-- unified control over release, runtime, trust, and delegation
+- cross-organization treaties over theorem-native trust
+- visible organizational operating surface
+- unified control over release, runtime, trust, delegation, and intervention
 
 This is not a side market. It is the natural product consequence of making
 Theorem the system that decides who may act, why, and under what revocable
@@ -613,13 +620,13 @@ Recommended order from here:
 
 1. complete the remaining `2.0` declaration-gate work: lineage, trust
    explicitation, and rebuildability with no adapter-local truth dependency
-2. turn theorem-native authority into an authority graph product surface
+2. make theorem-native trust portable across theorem boundaries
 3. make theorem-native trust control programmable rather than fixed to today’s
    runtime flows
-4. design federation-compatible authority objects now and sequence networked
-   trust only after local clarity is complete
-5. expose the resulting substrate as the operating surface for autonomous
-   organizations
+4. make authority, delegation, and trust state legible as stable product
+   surfaces
+5. make the organization itself theorem-native and expose it as an operating
+   system
 
 This is the strategic path. Anything that does not reduce trust outside Theorem
 or increase theorem-native control should sequence behind it.
@@ -640,8 +647,7 @@ The roadmap to `v0.3.0` should therefore feel like a control-surface takeover:
 The roadmap after `v0.3.0` should feel like category formation:
 
 - `2.0` completes the trusted state machine
-- the authority graph product makes truth legible
-- programmable governance makes trust control flexible
-- networked trust makes authority portable across systems
-- the autonomous organization surface makes Theorem the operating substrate for
-  AI-native institutions
+- `2.1` makes theorem-native trust portable across systems
+- `2.2` makes trust control programmable
+- `2.3` makes authority and trust state legible as product surfaces
+- `3.0` makes Theorem the OS for autonomous organizations

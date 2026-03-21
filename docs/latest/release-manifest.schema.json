@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theorem-governance.github.io/release-manifest.schema.json",
+  "title": "Theorem Release Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "product",
+    "version",
+    "release_date",
+    "compatibility_classification",
+    "upgrade_contract",
+    "summary",
+    "capabilities",
+    "schema_changes",
+    "api_changes",
+    "required_operator_actions",
+    "artifacts"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "product": { "type": "string" },
+    "version": { "type": "string" },
+    "release_date": { "type": "string", "format": "date-time" },
+    "compatibility_classification": {
+      "type": "string",
+      "enum": [
+        "compatible-additive",
+        "compatible-behavior-tightening",
+        "breaking-major"
+      ]
+    },
+    "upgrade_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "line",
+        "major_version_boundary_rule",
+        "deprecation_window_policy",
+        "behavior_change_policy"
+      ],
+      "properties": {
+        "line": { "type": "string" },
+        "major_version_boundary_rule": { "type": "string" },
+        "deprecation_window_policy": { "type": "string" },
+        "behavior_change_policy": { "type": "string" }
+      }
+    },
+    "summary": { "type": "string" },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["new", "changed", "deprecated", "removed"],
+      "properties": {
+        "new": { "$ref": "#/$defs/changeArray" },
+        "changed": { "$ref": "#/$defs/changeArray" },
+        "deprecated": { "$ref": "#/$defs/changeArray" },
+        "removed": { "$ref": "#/$defs/changeArray" }
+      }
+    },
+    "schema_changes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/changeRecord" }
+    },
+    "api_changes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["added", "removed"],
+      "properties": {
+        "added": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/apiChange" }
+        },
+        "removed": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/apiChange" }
+        }
+      }
+    },
+    "required_operator_actions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "human_release_notes_url": { "type": "string" },
+    "release_url": { "type": "string" }
+  },
+  "$defs": {
+    "changeArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/changeRecord" }
+    },
+    "changeRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "summary"],
+      "properties": {
+        "id": { "type": "string" },
+        "summary": { "type": "string" },
+        "contract_surface": { "type": "string" }
+      }
+    },
+    "apiChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "path", "summary"],
+      "properties": {
+        "method": { "type": "string" },
+        "path": { "type": "string" },
+        "summary": { "type": "string" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "sha256", "size_bytes"],
+      "properties": {
+        "name": { "type": "string" },
+        "sha256": { "type": "string" },
+        "size_bytes": { "type": "integer" }
+      }
+    }
+  }
+}

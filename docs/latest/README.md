@@ -7,6 +7,16 @@ Its product goal is not only to record governance, but to become the trusted
 state machine for authority, revocation, release verification, and fail-closed
 governed execution.
 
+The current long-range path is:
+
+- `2.1` network trust fabric
+- `2.2` programmable local governance
+- `2.3` authority graph and explanation product
+- `3.0` OS for autonomous organizations
+
+See [`ROADMAP.md`](ROADMAP.md) and the `3.0` execution docs in
+[`docs/execution/3.0-runbook.md`](docs/execution/3.0-runbook.md).
+
 ## Workspace Crates
 
 | Crate | Description |
@@ -72,6 +82,10 @@ Observability
   [`docs/release-contract.md`](docs/release-contract.md)
 - Stable documented HTTP subset:
   [`openapi.yaml`](openapi.yaml)
+- `3.0` strategy package:
+  [`docs/superpowers/specs/2026-03-21-theorem-3.0-autonomous-organization-os.md`](docs/superpowers/specs/2026-03-21-theorem-3.0-autonomous-organization-os.md),
+  [`docs/superpowers/plans/2026-03-21-road-to-3.0.md`](docs/superpowers/plans/2026-03-21-road-to-3.0.md),
+  [`docs/execution/3.0-runbook.md`](docs/execution/3.0-runbook.md)
 
 Note: the node exposes additional admin and runtime-internal routes beyond the
 current OpenAPI file. The OpenAPI contract documents the stable public subset,

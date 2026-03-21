@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0.0",
+  "artifact": "theorem-3.0-demo-path",
+  "generated_at": "2026-03-21T21:00:26Z",
+  "source_conformance_report": "C:\\Users\\Eric\\Theorem\\.release\\v3.0.0-conformance.json",
+  "status": "passed",
+  "summary": {
+    "total_steps": 10,
+    "passed_steps": 10
+  },
+  "steps": [
+    {
+      "step": 1,
+      "id": "governed-bootstrap",
+      "user_moment": "establish governed roles",
+      "passed": true,
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities organization_bootstrap_creates_charters_and_roles_in_one_governed_write -- --nocapture",
+      "duration_ms": 530
+    },
+    {
+      "step": 2,
+      "id": "bulk-admin-writes",
+      "user_moment": "perform batched administrative changes",
+      "passed": true,
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities organization_admin_batch_supports_batched_create_and_update -- --nocapture",
+      "duration_ms": 486
+    },
+    {
+      "step": 3,
+      "id": "decision-path-authority",
+      "user_moment": "produce executable authority through a decision path",
+      "passed": true,
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities decision_paths_flow_through_http_explanation_and_rebuild -- --nocapture",
+      "duration_ms": 512
+    },
+    {
+      "step": 4,
+      "id": "lanes-budgets-feed",
+      "user_moment": "route work through lanes and budget envelopes with stable subscriptions",
+      "passed": true,
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities organization_events_feed_includes_paths_lanes_and_budgets -- --nocapture",
+      "duration_ms": 508
+    },
+    {
+      "step": 5,
+      "id": "single-call-explanation",
+      "user_moment": "answer live operator questions from theorem-native surfaces",
+      "passed": true,
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities organization_explain_returns_single_call_scope_state -- --nocapture",
+      "duration_ms": 486
+    },
+    {
+      "step": 6,
+      "id": "intervention-recovery",
+      "user_moment": "exercise intervention and recovery",
+      "passed": true,
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities interventions_freeze_and_suspend_targets_with_explanation_and_rebuild -- --nocapture",
+      "duration_ms": 501
+    },
+    {
+      "step": 7,
+      "id": "host-execution-lifecycle",
+      "user_moment": "handoff host execution through a full machine lifecycle contract",
+      "passed": true,
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities execution_capability_lifecycle_is_queryable_and_rebuildable -- --nocapture",
+      "duration_ms": 497
+    },
+    {
+      "step": 8,
+      "id": "cross-instance-authority",
+      "user_moment": "exchange theorem-native authority across instances",
+      "passed": true,
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities authority_bundles_flow_across_instances_with_local_quarantine_and_dispute -- --nocapture",
+      "duration_ms": 641
+    },
+    {
+      "step": 9,
+      "id": "treaty-backed-cross-org-flow",
+      "user_moment": "execute one treaty-backed cross-organization flow",
+      "passed": true,
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities treaties_bind_imported_authority_and_survive_dispute_and_rebuild -- --nocapture",
+      "duration_ms": 630
+    },
+    {
+      "step": 10,
+      "id": "governed-release-declaration",
+      "user_moment": "publish 3.0 as a queryable governed release act",
+      "passed": true,
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities release_declaration_is_queryable_and_survives_rebuild -- --nocapture",
+      "duration_ms": 491
+    }
+  ]
+}

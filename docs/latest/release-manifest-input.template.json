@@ -1,0 +1,27 @@
+{
+  "compatibility_classification": "compatible-additive",
+  "summary": "Summarize the release in one sentence.",
+  "capabilities": {
+    "new": [
+      {
+        "id": "example.new-capability",
+        "summary": "Describe the new public capability."
+      }
+    ],
+    "changed": [],
+    "deprecated": [],
+    "removed": []
+  },
+  "schema_changes": [],
+  "api_changes": {
+    "added": [],
+    "removed": []
+  },
+  "required_operator_actions": [],
+  "upgrade_contract": {
+    "line": "3.x",
+    "major_version_boundary_rule": "Breaking removals and incompatible semantic changes require a major version boundary.",
+    "deprecation_window_policy": "Machine-consumable surfaces remain available for at least one full minor release after deprecation is published in a manifest.",
+    "behavior_change_policy": "Behavior changes that tighten validation or deny previously accepted input must be classified in the manifest."
+  }
+}

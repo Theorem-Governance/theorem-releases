@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0.0",
+  "product": "theorem-node",
+  "version": "v3.0.0",
+  "release_date": "2026-03-21T21:00:25Z",
+  "compatibility_classification": "breaking-major",
+  "upgrade_contract": {
+    "line": "3.x",
+    "major_version_boundary_rule": "Breaking removals and incompatible semantic changes require a major version boundary.",
+    "deprecation_window_policy": "Machine-consumable surfaces remain available for at least one full minor release after deprecation is published in a manifest.",
+    "behavior_change_policy": "Behavior changes that tighten validation or deny previously accepted input must be classified in the manifest."
+  },
+  "summary": "Theorem 3.0 promotes the organization itself into theorem-native state with governed roles, decision paths, execution lanes, budgets, interventions, treaties, explanation surfaces, lifecycle contracts, and governed release publication.",
+  "capabilities": {
+    "new": [
+      {
+        "id": "organization-os.roles-charters-bootstrap",
+        "summary": "Adds theorem-native role charters, organization roles, one-shot organization bootstrap, and bulk administrative writes for organization topology.",
+        "contract_surface": "HTTP machine contract"
+      },
+      {
+        "id": "organization-os.decision-paths-lanes-budgets",
+        "summary": "Adds theorem-native decision paths, execution lanes, and budget envelopes with rebuild-stable explanation and event feed surfaces.",
+        "contract_surface": "HTTP machine contract"
+      },
+      {
+        "id": "organization-os.interventions-treaties",
+        "summary": "Adds theorem-native interventions, treaty-backed cross-organization relationships, dispute-aware trust import, and recovery semantics.",
+        "contract_surface": "HTTP machine contract"
+      },
+      {
+        "id": "execution.lifecycle-contract",
+        "summary": "Expands execution capability handoff into a full machine lifecycle contract with queryable history and outcome tracking.",
+        "contract_surface": "HTTP machine contract"
+      },
+      {
+        "id": "release.governed-publication",
+        "summary": "Adds versioned release contract, machine-readable manifest and feed, conformance evidence, demonstration path, and governed release declaration.",
+        "contract_surface": "public release contract"
+      }
+    ],
+    "changed": [
+      {
+        "id": "runtime.policy-consumption",
+        "summary": "Runtime trust and drift consumers now honor active theorem-native governance policy rather than only local configuration defaults.",
+        "contract_surface": "runtime behavior"
+      }
+    ],
+    "deprecated": [],
+    "removed": []
+  },
+  "schema_changes": [
+    {
+      "id": "sqlite.authority-bundles-and-disputes",
+      "summary": "Adds persisted authority bundles, imported bundles, dispute records, and cross-instance delegations.",
+      "contract_surface": "SQLite authority state"
+    },
+    {
+      "id": "sqlite.organization-model",
+      "summary": "Adds persisted role charters, organization roles, decision paths, execution lanes, budget envelopes, intervention records, organization treaties, and release declarations.",
+      "contract_surface": "SQLite authority state"
+    },
+    {
+      "id": "sqlite.idempotency-and-execution-lifecycle",
+      "summary": "Adds persisted idempotent request records and execution lifecycle events for replay-stable machine answers.",
+      "contract_surface": "SQLite authority state"
+    }
+  ],
+  "api_changes": {
+    "added": [
+      {
+        "method": "POST",
+        "path": "/organizations/bootstrap",
+        "summary": "Bootstrap theorem-native organization topology in one governed write."
+      },
+      {
+        "method": "POST",
+        "path": "/organizations/admin-batch",
+        "summary": "Apply batched organization topology updates under one governed act."
+      },
+      {
+        "method": "GET",
+        "path": "/organizations/explain",
+        "summary": "Read one authoritative explanation over roles, paths, lanes, budgets, interventions, and treaties."
+      },
+      {
+        "method": "GET",
+        "path": "/organizations/events",
+        "summary": "Read the stable organization-native event feed."
+      },
+      {
+        "method": "POST",
+        "path": "/decision-paths",
+        "summary": "Record theorem-native decision paths."
+      },
+      {
+        "method": "POST",
+        "path": "/execution-lanes",
+        "summary": "Record theorem-native execution lanes."
+      },
+      {
+        "method": "POST",
+        "path": "/budget-envelopes",
+        "summary": "Record theorem-native budget envelopes."
+      },
+      {
+        "method": "POST",
+        "path": "/interventions",
+        "summary": "Apply theorem-native intervention and recovery actions."
+      },
+      {
+        "method": "POST",
+        "path": "/treaties",
+        "summary": "Record theorem-native cross-organization treaties."
+      },
+      {
+        "method": "GET",
+        "path": "/execution-capabilities/lifecycle",
+        "summary": "Query full host execution lifecycle history."
+      },
+      {
+        "method": "POST",
+        "path": "/execution-capabilities/lifecycle",
+        "summary": "Record host execution lifecycle events."
+      },
+      {
+        "method": "GET",
+        "path": "/releases/declared",
+        "summary": "Query governed release declarations."
+      },
+      {
+        "method": "POST",
+        "path": "/releases/declared",
+        "summary": "Record a governed release declaration linked to manifest and evidence."
+      }
+    ],
+    "removed": []
+  },
+  "required_operator_actions": [
+    "Treat theorem-native organization surfaces as canonical for operator authority, execution routing, budgets, interventions, and treaties.",
+    "Consume the release manifest, feed, conformance report, and demonstration path from published release artifacts rather than reconstructing release semantics from prose or shell behavior.",
+    "Provide release declaration endpoint and witness credentials when executing the public release flow so the governed release act is recorded."
+  ],
+  "artifacts": [
+    {
+      "name": "theorem-bus-client.cdx.xml",
+      "sha256": "313c6246e2b1c12d7dee3a46d87f54f2b5625616de7e8bd9141fc98dca655637",
+      "size_bytes": 198349
+    },
+    {
+      "name": "theorem-bus.cdx.xml",
+      "sha256": "3a2fb6395602429ef7fe7f93508e8e74ba6ad2e1de22b643e5f66c66d9111a20",
+      "size_bytes": 197067
+    },
+    {
+      "name": "theorem-dashboard.cdx.xml",
+      "sha256": "fbe62b12b5922387382c9a2f0d5b5dae2f52717f3031f65f49ab3bb9672d035a",
+      "size_bytes": 188853
+    },
+    {
+      "name": "theorem-gateway.cdx.xml",
+      "sha256": "cc7fdad7e658f77c6e00943b427529b501f3d2b3c7b8b2e8fa450993eea0d1e4",
+      "size_bytes": 227483
+    },
+    {
+      "name": "theorem-govagent.cdx.xml",
+      "sha256": "d8c00d7d90a2dc6a11b203d029c1c78d0cf89be03d666de2a427d7e44ea31cbc",
+      "size_bytes": 241655
+    },
+    {
+      "name": "theorem-kernel.cdx.xml",
+      "sha256": "b40dce9c80ed73d11a625ed763f8efd1f519290e9df3db5efb7bb9079f696d5c",
+      "size_bytes": 44397
+    },
+    {
+      "name": "theorem-node-v3.0.0-x86_64-unknown-linux-gnu.tar.gz",
+      "sha256": "feb24b4504a038ce2f9a110a7f9b66c5de20ce6fbdc53688d4f1c22f877f9e55",
+      "size_bytes": 6141724
+    },
+    {
+      "name": "theorem-node-v3.0.0-x86_64-unknown-linux-gnu.tar.gz.sha256",
+      "sha256": "f98909e9fd58205a05d1766985db0dcbd025091b4b11633ad743a352f12daa81",
+      "size_bytes": 117
+    },
+    {
+      "name": "theorem-node.cdx.xml",
+      "sha256": "0e0176975f2cdd4f6241e919bf2dec74d54fd15b1462f91bca4b0d1bffdcec8c",
+      "size_bytes": 222887
+    },
+    {
+      "name": "theorem-storage-sqlite.cdx.xml",
+      "sha256": "cb22d4db3b83bca81bb782938f2fed45777572125f3e185a85cacd7ea41f50de",
+      "size_bytes": 63547
+    },
+    {
+      "name": "theorem-supervisor.cdx.xml",
+      "sha256": "4b2c2965635e3603c40a3a89f14327d9cbfd418f5f5e574ff51778a15e1df82c",
+      "size_bytes": 234908
+    },
+    {
+      "name": "theorem-test-support.cdx.xml",
+      "sha256": "2995322c252c5b873e709b4068959f1423092f1c05cfa2e31b3e284e88f68b62",
+      "size_bytes": 47189
+    },
+    {
+      "name": "theorem-witness-storage.cdx.xml",
+      "sha256": "a9f0bea91081cbf3ffaa1dae8cce7a4fa2cf6c5ef3ac5207b7f2b9ba55ba1bd7",
+      "size_bytes": 60031
+    },
+    {
+      "name": "theorem-witness.cdx.xml",
+      "sha256": "d0b255f2d51795c51ff351a0b8c5d816276a339e5714f358736b83b40e2bd10f",
+      "size_bytes": 42525
+    }
+  ]
+}
