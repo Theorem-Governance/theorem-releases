@@ -1,0 +1,369 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theorem-governance.github.io/release-manifest.schema.json",
+  "title": "Theorem Release Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "product",
+    "version",
+    "release_date",
+    "compatibility_classification",
+    "upgrade_contract",
+    "summary",
+    "capabilities",
+    "capability_negotiation",
+    "principal_contract",
+    "stable_error_taxonomy",
+    "act_contract",
+    "schema_changes",
+    "api_changes",
+    "required_operator_actions",
+    "artifacts"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "product": { "type": "string" },
+    "version": { "type": "string" },
+    "release_date": { "type": "string", "format": "date-time" },
+    "compatibility_classification": {
+      "type": "string",
+      "enum": [
+        "compatible-additive",
+        "compatible-behavior-tightening",
+        "breaking-major"
+      ]
+    },
+    "upgrade_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "line",
+        "major_version_boundary_rule",
+        "deprecation_window_policy",
+        "behavior_change_policy"
+      ],
+      "properties": {
+        "line": { "type": "string" },
+        "major_version_boundary_rule": { "type": "string" },
+        "deprecation_window_policy": { "type": "string" },
+        "behavior_change_policy": { "type": "string" }
+      }
+    },
+    "summary": { "type": "string" },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["new", "changed", "deprecated", "removed"],
+      "properties": {
+        "new": { "$ref": "#/$defs/changeArray" },
+        "changed": { "$ref": "#/$defs/changeArray" },
+        "deprecated": { "$ref": "#/$defs/changeArray" },
+        "removed": { "$ref": "#/$defs/changeArray" }
+      }
+    },
+    "capability_negotiation": { "$ref": "#/$defs/capabilityNegotiation" },
+    "principal_contract": { "$ref": "#/$defs/principalContract" },
+    "stable_error_taxonomy": { "$ref": "#/$defs/stableErrorTaxonomy" },
+    "act_contract": { "$ref": "#/$defs/actContract" },
+    "schema_changes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/changeRecord" }
+    },
+    "api_changes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["added", "removed"],
+      "properties": {
+        "added": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/apiChange" }
+        },
+        "removed": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/apiChange" }
+        }
+      }
+    },
+    "required_operator_actions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "release_integrity": { "$ref": "#/$defs/releaseIntegrity" },
+    "human_release_notes_url": { "type": "string" },
+    "release_url": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^v4\\."
+          }
+        },
+        "required": ["version"]
+      },
+      "then": {
+        "required": ["release_integrity"]
+      }
+    }
+  ],
+  "$defs": {
+    "changeArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/changeRecord" }
+    },
+    "changeRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "summary"],
+      "properties": {
+        "id": { "type": "string" },
+        "summary": { "type": "string" },
+        "contract_surface": { "type": "string" }
+      }
+    },
+    "capabilityNegotiation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "surface",
+        "contract_line",
+        "stability_rule",
+        "consumer_rules",
+        "capabilities"
+      ],
+      "properties": {
+        "surface": { "type": "string" },
+        "contract_line": { "type": "string" },
+        "stability_rule": { "type": "string" },
+        "consumer_rules": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "capabilities": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/negotiatedCapability" }
+        }
+      }
+    },
+    "negotiatedCapability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "availability", "stability"],
+      "properties": {
+        "id": { "type": "string" },
+        "availability": { "type": "string" },
+        "stability": { "type": "string" }
+      }
+    },
+    "principalContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_id_field",
+        "principal_id_field",
+        "grantor_id_field",
+        "authorization_route",
+        "semantics"
+      ],
+      "properties": {
+        "entity_id_field": { "type": "string" },
+        "principal_id_field": { "type": "string" },
+        "grantor_id_field": { "type": "string" },
+        "authorization_route": { "type": "string" },
+        "semantics": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "stableErrorTaxonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "legacy_behavior", "taxonomy"],
+      "properties": {
+        "scope": { "type": "string" },
+        "legacy_behavior": { "type": "string" },
+        "taxonomy": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/errorTaxonomyEntry" }
+        }
+      }
+    },
+    "errorTaxonomyEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "surface",
+        "http_status",
+        "content_type",
+        "body_fields",
+        "error_codes"
+      ],
+      "properties": {
+        "surface": { "type": "string" },
+        "http_status": { "type": "integer" },
+        "content_type": { "type": "string" },
+        "body_fields": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "error_codes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "actContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["declare_intent", "submit_act"],
+      "properties": {
+        "declare_intent": { "$ref": "#/$defs/declareIntentContract" },
+        "submit_act": { "$ref": "#/$defs/submitActContract" }
+      }
+    },
+    "declareIntentContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route", "principal_field", "timing_fields", "enforcement_rule"],
+      "properties": {
+        "route": { "type": "string" },
+        "principal_field": { "type": "string" },
+        "timing_fields": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "enforcement_rule": { "type": "string" }
+      }
+    },
+    "submitActContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route",
+        "principal_field",
+        "authorization_field",
+        "resource_consumption_field",
+        "resource_consumption_entry_fields",
+        "elapsed_time_surfaces"
+      ],
+      "properties": {
+        "route": { "type": "string" },
+        "principal_field": { "type": "string" },
+        "authorization_field": { "type": "string" },
+        "resource_consumption_field": { "type": "string" },
+        "resource_consumption_entry_fields": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "elapsed_time_surfaces": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "apiChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "path", "summary"],
+      "properties": {
+        "method": { "type": "string" },
+        "path": { "type": "string" },
+        "summary": { "type": "string" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "sha256", "size_bytes"],
+      "properties": {
+        "name": { "type": "string" },
+        "sha256": { "type": "string" },
+        "size_bytes": { "type": "integer" }
+      }
+    },
+    "releaseIntegrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "release_ring",
+        "evidence_asset_path",
+        "sbom_assets",
+        "provenance_assets",
+        "minimum_version",
+        "downgrade_prevention_rule",
+        "rollback_authorization",
+        "revocation",
+        "mirror_policy"
+      ],
+      "properties": {
+        "release_ring": { "type": "string" },
+        "evidence_asset_path": { "type": "string" },
+        "sbom_assets": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "provenance_assets": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "minimum_version": { "type": "string" },
+        "downgrade_prevention_rule": { "type": "string" },
+        "rollback_authorization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["rule", "required_approval_count", "authorized_roles"],
+          "properties": {
+            "rule": { "type": "string" },
+            "required_approval_count": { "type": "integer", "minimum": 1 },
+            "authorized_roles": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "revocation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ledger_path", "record_path"],
+          "properties": {
+            "ledger_path": { "type": "string" },
+            "record_path": { "type": "string" }
+          }
+        },
+        "mirror_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "feed_path",
+            "mirror_generated_at",
+            "mirror_expires_at",
+            "mirror_ttl_hours",
+            "stale_behavior"
+          ],
+          "properties": {
+            "feed_path": { "type": "string" },
+            "mirror_generated_at": { "type": "string", "format": "date-time" },
+            "mirror_expires_at": { "type": "string", "format": "date-time" },
+            "mirror_ttl_hours": { "type": "integer", "minimum": 1 },
+            "stale_behavior": {
+              "type": "string",
+              "enum": ["fail_closed"]
+            }
+          }
+        }
+      }
+    }
+  }
+}

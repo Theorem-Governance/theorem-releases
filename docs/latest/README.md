@@ -86,10 +86,19 @@ Observability
   [`docs/superpowers/specs/2026-03-21-theorem-3.0-autonomous-organization-os.md`](docs/superpowers/specs/2026-03-21-theorem-3.0-autonomous-organization-os.md),
   [`docs/superpowers/plans/2026-03-21-road-to-3.0.md`](docs/superpowers/plans/2026-03-21-road-to-3.0.md),
   [`docs/execution/3.0-runbook.md`](docs/execution/3.0-runbook.md)
+- Licensee `T4` launch prep packet:
+  [`docs/execution/theorem-t4-launch-prep-packet.md`](docs/execution/theorem-t4-launch-prep-packet.md)
 
 Note: the node exposes additional admin and runtime-internal routes beyond the
 current OpenAPI file. The OpenAPI contract documents the stable public subset,
 not every live adapter-facing route.
+
+Runtime discovery surfaces published by the `3.x` server:
+
+- `GET /` for machine-readable discovery links
+- `GET /openapi.json` and `GET /openapi.yaml` for the live OpenAPI contract
+- `GET /capabilities` and `GET /capability-negotiation` for runtime capability discovery
+- `GET /auth/discovery` for the bearer-auth contract on protected routes
 
 ## Quick Start
 

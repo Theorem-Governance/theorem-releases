@@ -1,0 +1,299 @@
+{
+  "schema_version": "1.2.0",
+  "product": "theorem-node",
+  "version": "v4.0.1",
+  "release_date": "2026-03-23T03:26:02Z",
+  "compatibility_classification": "breaking-major",
+  "upgrade_contract": {
+    "line": "4.x",
+    "major_version_boundary_rule": "Breaking removals and incompatible semantic changes require a major version boundary.",
+    "deprecation_window_policy": "Machine-consumable surfaces remain available for at least one full minor release after deprecation is published in a manifest.",
+    "behavior_change_policy": "Behavior changes that tighten validation or deny previously accepted input must be classified in the manifest."
+  },
+  "summary": "Theorem 4.0.1 is the first public 4.x machine-contract release, carrying release integrity and explicit substrate trust for BIOS-mode cloud VMs, plus the E4 qualification fix that allowed the rig-built release to validate cleanly on the production build path.",
+  "capabilities": {
+    "new": [
+      {
+        "id": "substrate.tiered-boot-integrity",
+        "summary": "Adds theorem-native declaration of tiered boot integrity so BIOS-mode cloud VMs can report explicit trust degradation instead of silently omitting boot-chain state.",
+        "contract_surface": "bootstrap and substrate trust declaration"
+      },
+      {
+        "id": "release.integrity-evidence",
+        "summary": "Adds machine-readable release integrity evidence with SBOM, provenance, rollback authorization, revocation, and fail-closed mirror-expiry metadata.",
+        "contract_surface": "public release contract"
+      }
+    ],
+    "changed": [
+      {
+        "id": "release.governed-publication",
+        "summary": "Governed release publication now carries release_integrity metadata in the manifest and is expected to ship an integrity evidence asset for 4.x consumers.",
+        "contract_surface": "public release contract"
+      }
+    ],
+    "deprecated": [],
+    "removed": []
+  },
+  "capability_negotiation": {
+    "surface": "releases/feed.json plus releases/v4.0.1/manifest.json, with live runtime discovery at GET /capabilities and GET /capability-negotiation",
+    "contract_line": "4.x",
+    "stability_rule": "Capability ids published in a 4.x manifest are stable within the 4.x line once released.",
+    "consumer_rules": [
+      "Gate on compatibility_classification before enabling a new capability id.",
+      "Treat manifest capability ids and release_integrity metadata as authoritative rather than inferring behavior from prose notes or semver alone.",
+      "Use releases/feed.json, releases/v4.0.1/manifest.json, and releases/v4.0.1/integrity.json as the release-time capability source of record for public 4.x releases.",
+      "Use GET /capabilities and GET /capability-negotiation to confirm the live runtime discovery surface for a running 4.x node."
+    ],
+    "capabilities": [
+      {
+        "id": "substrate.tiered-boot-integrity",
+        "availability": "published",
+        "stability": "4.x"
+      },
+      {
+        "id": "release.integrity-evidence",
+        "availability": "published",
+        "stability": "4.x"
+      },
+      {
+        "id": "release.governed-publication",
+        "availability": "changed",
+        "stability": "4.x"
+      }
+    ]
+  },
+  "principal_contract": {
+    "entity_id_field": "entity_id",
+    "principal_id_field": "principal_id",
+    "grantor_id_field": "granted_by_id",
+    "authorization_route": "GET /authorizations?entity_id={entity_id}",
+    "semantics": [
+      "entity_id names the acting or queried entity on public request surfaces.",
+      "principal_id names the entity holding authority on authorization surfaces.",
+      "granted_by_id names the grantor and must not be interpreted as the principal.",
+      "GET /authorizations returns authorizations held by the queried principal entity, not authorizations granted by it."
+    ]
+  },
+  "stable_error_taxonomy": {
+    "scope": "Stable for the published 4.0 discovery, organization, lifecycle, release-verification, and governed-release routes in openapi.yaml.",
+    "legacy_behavior": "Legacy pre-4.0 routes may still return text/plain bodies and are outside this stable taxonomy.",
+    "taxonomy": [
+      {
+        "surface": "4.0 public routes",
+        "http_status": 400,
+        "content_type": "application/json",
+        "body_fields": [
+          "error_code",
+          "message"
+        ],
+        "error_codes": [
+          "not_bootstrapped",
+          "entity_not_found",
+          "scope_not_found",
+          "request_hash_failed",
+          "serialization_failed"
+        ]
+      },
+      {
+        "surface": "4.0 public routes",
+        "http_status": 409,
+        "content_type": "application/json",
+        "body_fields": [
+          "error_code",
+          "message"
+        ],
+        "error_codes": [
+          "idempotency_conflict"
+        ]
+      },
+      {
+        "surface": "4.0 public routes",
+        "http_status": 422,
+        "content_type": "application/json",
+        "body_fields": [
+          "error_code",
+          "message"
+        ],
+        "error_codes": [
+          "action_admission_inactive",
+          "action_admission_not_found",
+          "execution_capability_binding_mismatch",
+          "execution_capability_expired",
+          "execution_capability_not_found",
+          "execution_capability_secret_mismatch",
+          "governance_authority_required",
+          "intervention_path_authority_required",
+          "principal_not_trusted"
+        ]
+      }
+    ]
+  },
+  "act_contract": {
+    "declare_intent": {
+      "route": "POST /declare-intent",
+      "principal_field": "entity_id",
+      "timing_fields": [
+        "declared_at",
+        "minimum_wait_ms",
+        "earliest_execution_at"
+      ],
+      "enforcement_rule": "Acts must satisfy E4: declared_at plus minimum_intent_execution_interval_ms must be less than or equal to initiated_at."
+    },
+    "submit_act": {
+      "route": "POST /submit-act",
+      "principal_field": "executing_entity_id",
+      "authorization_field": "authorization_id",
+      "resource_consumption_field": "resource_consumption_entries",
+      "resource_consumption_entry_fields": [
+        "resource_type",
+        "quantity",
+        "unit",
+        "measurement_method_id",
+        "measured_at",
+        "within_limits",
+        "escalation_signal_id"
+      ],
+      "elapsed_time_surfaces": [
+        "declare-intent response declared_at",
+        "declare-intent response minimum_wait_ms",
+        "declare-intent response earliest_execution_at",
+        "submit-act response initiated_at",
+        "submit-act response intent_declared_at",
+        "submit-act response elapsed_ms_since_declared"
+      ]
+    }
+  },
+  "schema_changes": [],
+  "api_changes": {
+    "added": [],
+    "removed": []
+  },
+  "required_operator_actions": [
+    "Consume releases/feed.json, releases/v4.0.1/manifest.json, and releases/v4.0.1/integrity.json before mirroring or admitting a 4.x release.",
+    "Treat substrate_trust_declaration.boot_integrity_chain as the canonical runtime trust-tier signal for deployed machines.",
+    "Use the theorem-cloud flake target and theorem.substrateTier=2 when publishing BIOS-mode cloud deployments that rely on Nix store verification instead of UEFI Secure Boot."
+  ],
+  "artifacts": [
+    {
+      "name": "ref-impl.cdx.json",
+      "sha256": "3af059d209c9b870564eb59cd6c21e27547be0f820b49beb4ae491361972860c",
+      "size_bytes": 11074
+    },
+    {
+      "name": "theorem-bus-client.cdx.xml",
+      "sha256": "ae5b2ba3be77ecbcc0bbbdda3296867e3f1bf28261654f0c76da4d3acd085016",
+      "size_bytes": 198349
+    },
+    {
+      "name": "theorem-bus.cdx.xml",
+      "sha256": "faf9fb390f43be34c507cbbc3be9eb82a5b0c80dcff18509d5bf0f702d0ad21d",
+      "size_bytes": 197067
+    },
+    {
+      "name": "theorem-dashboard.cdx.xml",
+      "sha256": "f7877047f2a457aa3dea751dd43c3e1a2f98176c8e9f5316b050cb1988491976",
+      "size_bytes": 188853
+    },
+    {
+      "name": "theorem-gateway.cdx.xml",
+      "sha256": "e54c64306454b7bdd2dd305c6a829e8e78c4ac6254bdf7fa4ea222cc83d0b398",
+      "size_bytes": 227483
+    },
+    {
+      "name": "theorem-govagent.cdx.xml",
+      "sha256": "a943ea80718d26e9663e0d50190da23fac0d1b75d4df0721125c0c06d678e12d",
+      "size_bytes": 241655
+    },
+    {
+      "name": "theorem-kernel.cdx.xml",
+      "sha256": "5d8303a637a6876ac9920204339ae11a6d48c1065a94ebc075f21ae78e7af949",
+      "size_bytes": 44397
+    },
+    {
+      "name": "theorem-node-v4.0.1-x86_64-unknown-linux-gnu.tar.gz",
+      "sha256": "98d4bc4785e4bdefd5c55c631594c7b6b892e15da5fc78b381dbba4faef6a1bb",
+      "size_bytes": 6225706
+    },
+    {
+      "name": "theorem-node-v4.0.1-x86_64-unknown-linux-gnu.tar.gz.sha256",
+      "sha256": "0fff37b9d743efa5dad0bd1097e7cb80fcbdfa30b3cdefa4ece293065d9a0a01",
+      "size_bytes": 117
+    },
+    {
+      "name": "theorem-node-v4.0.1.provenance.json",
+      "sha256": "0428f1cdc44a6aa99787a1d0136a97f7781a81722311fbb58c265498d4903327",
+      "size_bytes": 458
+    },
+    {
+      "name": "theorem-node.cdx.xml",
+      "sha256": "096ecc580e56817ec185ed4d16e30664382ab01d8849263b5d66dcfe25fe0200",
+      "size_bytes": 225396
+    },
+    {
+      "name": "theorem-storage-sqlite.cdx.xml",
+      "sha256": "30d970c32e7342a42d31b0e92a31a511e71729890ee173507fb52fd9be37ae8f",
+      "size_bytes": 63547
+    },
+    {
+      "name": "theorem-supervisor.cdx.xml",
+      "sha256": "f5421652b268f28f128b1015882b13bc04eb1cf306eb6c5550b11746bc0df8e2",
+      "size_bytes": 234908
+    },
+    {
+      "name": "theorem-test-support.cdx.xml",
+      "sha256": "86e6cf5d77b86943c83faf3586223f658f97527b27ff6ca4d47a08d3798b4b6f",
+      "size_bytes": 47189
+    },
+    {
+      "name": "theorem-witness-storage.cdx.xml",
+      "sha256": "7b351d3e0f006cd928cdbb59b675ccd61d60255e46941ead22e7908af00c2066",
+      "size_bytes": 60031
+    },
+    {
+      "name": "theorem-witness.cdx.xml",
+      "sha256": "2004e79c006a03835b8068c3e75b781de26daa5c8f93f86c987d551d91b04346",
+      "size_bytes": 42525
+    }
+  ],
+  "release_integrity": {
+    "release_ring": "public",
+    "evidence_asset_path": "releases/v4.0.1/integrity.json",
+    "sbom_assets": [
+      "theorem-bus-client.cdx.xml",
+      "theorem-bus.cdx.xml",
+      "theorem-dashboard.cdx.xml",
+      "theorem-gateway.cdx.xml",
+      "theorem-govagent.cdx.xml",
+      "theorem-kernel.cdx.xml",
+      "theorem-node.cdx.xml",
+      "theorem-storage-sqlite.cdx.xml",
+      "theorem-supervisor.cdx.xml",
+      "theorem-test-support.cdx.xml",
+      "theorem-witness-storage.cdx.xml",
+      "theorem-witness.cdx.xml"
+    ],
+    "provenance_assets": [
+      "theorem-node-v4.0.1.provenance.json"
+    ],
+    "minimum_version": "v4.0.1",
+    "downgrade_prevention_rule": "Once a consumer admits the 4.x public feed, it must not mirror or promote a release older than release_integrity.minimum_version without an explicit governed rollback decision.",
+    "rollback_authorization": {
+      "rule": "Rollback to an older 4.x artifact requires explicit governed approval before repointing a machine or mirror.",
+      "required_approval_count": 2,
+      "authorized_roles": [
+        "root-governance-authority"
+      ]
+    },
+    "revocation": {
+      "ledger_path": "releases/revocations.json",
+      "record_path": "releases/revocations/v4.0.1.json"
+    },
+    "mirror_policy": {
+      "feed_path": "releases/feed.json",
+      "mirror_generated_at": "2026-03-23T03:26:02Z",
+      "mirror_expires_at": "2026-03-24T03:26:02Z",
+      "mirror_ttl_hours": 24,
+      "stale_behavior": "fail_closed"
+    }
+  }
+}

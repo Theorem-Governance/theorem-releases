@@ -1,12 +1,12 @@
 # Theorem 4.0 Downstream Pre-Release Memo
 
-Date: 2026-03-22
+Date: 2026-03-23
 
 Audience: downstream platform operators, integration owners, and release managers
 
 Status: public pre-release memo for the staged candidate; final verification audit closeout pending
 
-Candidate tag: `v4.0.0`
+Candidate tag: `v4.0.1`
 
 ## Position
 

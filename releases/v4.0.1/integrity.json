@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0.0",
+  "product": "theorem-node",
+  "version": "v4.0.1",
+  "release_date": "2026-03-23T03:26:02Z",
+  "generated_at": "2026-03-23T03:26:04Z",
+  "manifest": {
+    "path": "releases/v4.0.1/manifest.json",
+    "asset_name": "theorem-release-manifest-v4.0.1.json",
+    "sha256": "75720c74b98d3b772f999ef9d757298975ffc7eb35dc912096104b153bf2e6af"
+  },
+  "release_ring": "public",
+  "minimum_version": "v4.0.1",
+  "downgrade_prevention_rule": "Once a consumer admits the 4.x public feed, it must not mirror or promote a release older than release_integrity.minimum_version without an explicit governed rollback decision.",
+  "rollback_authorization": {
+    "rule": "Rollback to an older 4.x artifact requires explicit governed approval before repointing a machine or mirror.",
+    "required_approval_count": 2,
+    "authorized_roles": [
+      "root-governance-authority"
+    ]
+  },
+  "sbom_assets": [
+    {
+      "name": "theorem-bus-client.cdx.xml",
+      "sha256": "ae5b2ba3be77ecbcc0bbbdda3296867e3f1bf28261654f0c76da4d3acd085016",
+      "size_bytes": 198349
+    },
+    {
+      "name": "theorem-bus.cdx.xml",
+      "sha256": "faf9fb390f43be34c507cbbc3be9eb82a5b0c80dcff18509d5bf0f702d0ad21d",
+      "size_bytes": 197067
+    },
+    {
+      "name": "theorem-dashboard.cdx.xml",
+      "sha256": "f7877047f2a457aa3dea751dd43c3e1a2f98176c8e9f5316b050cb1988491976",
+      "size_bytes": 188853
+    },
+    {
+      "name": "theorem-gateway.cdx.xml",
+      "sha256": "e54c64306454b7bdd2dd305c6a829e8e78c4ac6254bdf7fa4ea222cc83d0b398",
+      "size_bytes": 227483
+    },
+    {
+      "name": "theorem-govagent.cdx.xml",
+      "sha256": "a943ea80718d26e9663e0d50190da23fac0d1b75d4df0721125c0c06d678e12d",
+      "size_bytes": 241655
+    },
+    {
+      "name": "theorem-kernel.cdx.xml",
+      "sha256": "5d8303a637a6876ac9920204339ae11a6d48c1065a94ebc075f21ae78e7af949",
+      "size_bytes": 44397
+    },
+    {
+      "name": "theorem-node.cdx.xml",
+      "sha256": "096ecc580e56817ec185ed4d16e30664382ab01d8849263b5d66dcfe25fe0200",
+      "size_bytes": 225396
+    },
+    {
+      "name": "theorem-storage-sqlite.cdx.xml",
+      "sha256": "30d970c32e7342a42d31b0e92a31a511e71729890ee173507fb52fd9be37ae8f",
+      "size_bytes": 63547
+    },
+    {
+      "name": "theorem-supervisor.cdx.xml",
+      "sha256": "f5421652b268f28f128b1015882b13bc04eb1cf306eb6c5550b11746bc0df8e2",
+      "size_bytes": 234908
+    },
+    {
+      "name": "theorem-test-support.cdx.xml",
+      "sha256": "86e6cf5d77b86943c83faf3586223f658f97527b27ff6ca4d47a08d3798b4b6f",
+      "size_bytes": 47189
+    },
+    {
+      "name": "theorem-witness-storage.cdx.xml",
+      "sha256": "7b351d3e0f006cd928cdbb59b675ccd61d60255e46941ead22e7908af00c2066",
+      "size_bytes": 60031
+    },
+    {
+      "name": "theorem-witness.cdx.xml",
+      "sha256": "2004e79c006a03835b8068c3e75b781de26daa5c8f93f86c987d551d91b04346",
+      "size_bytes": 42525
+    }
+  ],
+  "provenance_assets": [
+    {
+      "name": "theorem-node-v4.0.1.provenance.json",
+      "sha256": "0428f1cdc44a6aa99787a1d0136a97f7781a81722311fbb58c265498d4903327",
+      "size_bytes": 458
+    }
+  ],
+  "revocation": {
+    "ledger_path": "releases/revocations.json",
+    "record_path": "releases/revocations/v4.0.1.json"
+  },
+  "mirror_policy": {
+    "feed_path": "releases/feed.json",
+    "mirror_generated_at": "2026-03-23T03:26:02Z",
+    "mirror_expires_at": "2026-03-24T03:26:02Z",
+    "mirror_ttl_hours": 24,
+    "stale_behavior": "fail_closed"
+  }
+}

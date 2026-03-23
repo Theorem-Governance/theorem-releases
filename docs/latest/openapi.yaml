@@ -9,6 +9,11 @@ info:
     The kernel enforces all governance rules (E1-E16). This OpenAPI file
     documents the stable public subset of the theorem-node HTTP surface.
 
+    Public 3.x capability negotiation is release-time negotiation through
+    `releases/feed.json` and `releases/<tag>/manifest.json`, not request-time
+    version headers. The published manifest is the stable capability discovery
+    surface.
+
     The running node also exposes additional operator/admin and Ring 3 adapter
     routes. The 3.0 operator/admin contract is published below for the
     theorem-native organization surfaces; lower-level witness and adapter
@@ -51,8 +56,141 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  schemas:
+    ResourceConsumptionEntry:
+      type: object
+      required:
+        - resource_type
+        - quantity
+        - unit
+        - measurement_method_id
+        - measured_at
+        - within_limits
+      properties:
+        resource_type: { type: string }
+        quantity: { type: number }
+        unit: { type: string }
+        measurement_method_id: { type: string, format: uuid }
+        measured_at: { type: string, format: date-time }
+        within_limits: { type: boolean }
+        escalation_signal_id:
+          type: string
+          format: uuid
+          nullable: true
+    TheoremApiError:
+      type: object
+      required: [error_code, message]
+      properties:
+        error_code: { type: string }
+        message: { type: string }
 
 paths:
+  /:
+    get:
+      summary: Runtime discovery root
+      operationId: getRuntimeDiscovery
+      responses:
+        "200":
+          description: Runtime discovery links
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product: { type: string }
+                  version: { type: string }
+                  contract_line: { type: string }
+                  discovery: { type: object }
+
+  /openapi.json:
+    get:
+      summary: Live OpenAPI discovery document in JSON form
+      operationId: getOpenApiJson
+      responses:
+        "200":
+          description: OpenAPI document
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /openapi.yaml:
+    get:
+      summary: Live OpenAPI discovery document in YAML form
+      operationId: getOpenApiYaml
+      responses:
+        "200":
+          description: OpenAPI document
+          content:
+            application/yaml:
+              schema:
+                type: string
+
+  /capabilities:
+    get:
+      summary: List runtime-discoverable public 3.x capabilities
+      operationId: listRuntimeCapabilities
+      responses:
+        "200":
+          description: Runtime capabilities
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  contract_line: { type: string }
+                  count: { type: integer }
+                  capabilities:
+                    type: array
+                    items:
+                      type: object
+
+  /capability-negotiation:
+    get:
+      summary: Describe how to negotiate 3.x capabilities across release and runtime surfaces
+      operationId: getCapabilityNegotiation
+      responses:
+        "200":
+          description: Capability negotiation contract
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  contract_line: { type: string }
+                  mode: { type: string }
+                  rules:
+                    type: array
+                    items: { type: string }
+                  surfaces: { type: object }
+                  capabilities:
+                    type: array
+                    items:
+                      type: object
+
+  /auth/discovery:
+    get:
+      summary: Describe the bearer-auth contract for protected routes
+      operationId: getAuthDiscovery
+      responses:
+        "200":
+          description: Auth discovery document
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scheme: { type: string }
+                  header: { type: string }
+                  environment_variable: { type: string }
+                  token_domains:
+                    type: array
+                    items:
+                      type: object
+                  notes:
+                    type: array
+                    items: { type: string }
+
   /health:
     get:
       summary: Process liveness
@@ -267,6 +405,10 @@ paths:
     get:
       summary: List authorizations for a principal entity
       operationId: listAuthorizations
+      description: |
+        `entity_id` is the queried principal entity. Each returned
+        `principal_id` is the entity holding authority. `granted_by_id` is the
+        grantor and is not the principal selector for this route.
       parameters:
         - name: entity_id
           in: query
@@ -295,6 +437,10 @@ paths:
     post:
       summary: Declare an intent before execution or governance mutation
       operationId: declareIntent
+      description: |
+        Declares the timing contract for a later act. The response publishes
+        `declared_at`, `minimum_wait_ms`, and `earliest_execution_at`, which are
+        the stable elapsed-time surfaces used by E4 admission checks.
       requestBody:
         required: true
         content:
@@ -368,6 +514,11 @@ paths:
     post:
       summary: Submit an execution act
       operationId: submitAct
+      description: |
+        Submits an execution act against a previously declared intent.
+        `executing_entity_id` is the acting entity, `authorization_id` is the
+        authority binding, and `resource_consumption_entries` is the stable
+        published resource-accounting surface for the act.
       requestBody:
         required: true
         content:
@@ -396,6 +547,8 @@ paths:
                 resource_consumption_entries:
                   type: array
                   default: []
+                  items:
+                    $ref: "#/components/schemas/ResourceConsumptionEntry"
                 outcome_description:
                   type: string
                   description: Optional outcome summary for kernel-side drift verification
@@ -408,6 +561,25 @@ paths:
                 type: object
                 properties:
                   act_id: { type: string, format: uuid }
+                  attestation_id:
+                    type: string
+                    format: uuid
+                    nullable: true
+                  initiated_at:
+                    type: string
+                    format: date-time
+                  intent_declared_at:
+                    type: string
+                    format: date-time
+                  minimum_wait_ms:
+                    type: integer
+                  earliest_execution_at:
+                    type: string
+                    format: date-time
+                  elapsed_ms_since_declared:
+                    type: integer
+                  resource_consumption_entries_recorded:
+                    type: integer
                   acts_produced: { type: integer }
                   attributions: { type: integer }
                   attestations: { type: integer }
@@ -417,7 +589,7 @@ paths:
                     type: object
                     nullable: true
         "422":
-          description: Kernel rejected — enforcement rule violations
+          description: Kernel rejected — enforcement rule violations on the legacy execution surface
           content:
             text/plain:
               schema:
@@ -890,6 +1062,8 @@ paths:
     get:
       summary: Read the canonical organization-native event feed
       operationId: getOrganizationEvents
+      security:
+        - bearerAuth: []
       parameters:
         - in: query
           name: scope_id
@@ -970,6 +1144,8 @@ paths:
     get:
       summary: Read a single-call theorem-native organization explanation
       operationId: explainOrganization
+      security:
+        - bearerAuth: []
       parameters:
         - in: query
           name: scope_id
@@ -1188,6 +1364,8 @@ paths:
     get:
       summary: Read the authoritative lifecycle state and event history for an execution capability
       operationId: getExecutionCapabilityLifecycle
+      security:
+        - bearerAuth: []
       parameters:
         - in: query
           name: capability_id
@@ -1210,6 +1388,8 @@ paths:
     post:
       summary: Record a host execution lifecycle event for an issued execution capability
       operationId: recordExecutionCapabilityLifecycle
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:

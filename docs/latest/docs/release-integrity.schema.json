@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theorem-governance.github.io/release-integrity.schema.json",
+  "title": "Theorem Release Integrity Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "product",
+    "version",
+    "release_date",
+    "generated_at",
+    "manifest",
+    "release_ring",
+    "minimum_version",
+    "downgrade_prevention_rule",
+    "rollback_authorization",
+    "sbom_assets",
+    "provenance_assets",
+    "revocation",
+    "mirror_policy"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "product": { "type": "string" },
+    "version": { "type": "string" },
+    "release_date": { "type": "string", "format": "date-time" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "asset_name", "sha256"],
+      "properties": {
+        "path": { "type": "string" },
+        "asset_name": { "type": "string" },
+        "sha256": { "type": "string" }
+      }
+    },
+    "release_ring": { "type": "string" },
+    "minimum_version": { "type": "string" },
+    "downgrade_prevention_rule": { "type": "string" },
+    "rollback_authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule", "required_approval_count", "authorized_roles"],
+      "properties": {
+        "rule": { "type": "string" },
+        "required_approval_count": { "type": "integer", "minimum": 1 },
+        "authorized_roles": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "sbom_assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "provenance_assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "revocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ledger_path", "record_path"],
+      "properties": {
+        "ledger_path": { "type": "string" },
+        "record_path": { "type": "string" }
+      }
+    },
+    "mirror_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "feed_path",
+        "mirror_generated_at",
+        "mirror_expires_at",
+        "mirror_ttl_hours",
+        "stale_behavior"
+      ],
+      "properties": {
+        "feed_path": { "type": "string" },
+        "mirror_generated_at": { "type": "string", "format": "date-time" },
+        "mirror_expires_at": { "type": "string", "format": "date-time" },
+        "mirror_ttl_hours": { "type": "integer", "minimum": 1 },
+        "stale_behavior": {
+          "type": "string",
+          "enum": ["fail_closed"]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "sha256", "size_bytes"],
+      "properties": {
+        "name": { "type": "string" },
+        "sha256": { "type": "string" },
+        "size_bytes": { "type": "integer" }
+      }
+    }
+  }
+}

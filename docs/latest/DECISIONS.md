@@ -52,13 +52,23 @@ Implementation-level decisions (TypeScript reference implementation choices) are
 
 ## DEC-004: Linux substrate image
 
-**Status:** DECIDED — NixOS with measured boot
+**Status:** DECIDED — NixOS with tiered measured boot
 
-**Decision:** NixOS with flake-pinned dependencies, systemd-boot Secure Boot, and hardened kernel configuration. Implementation in `nix/` directory: `flake.nix` (reproducible build), `module.nix` (sandboxed systemd service), `hardening.nix` (measured boot, kernel hardening, authenticated NTP via Chrony NTS, auditd), `host.nix` (DEC-007 hardware config).
+**Decision:** NixOS with flake-pinned dependencies and tiered boot integrity chain. The substrate tier determines which integrity mechanism protects the boot-to-binary path:
 
-**Rationale:** The kernel controlling its own substrate means PROP-SUBSTRATE-001 declaration and reality are the same thing. PA-008 becomes a hardware audit. NixOS provides declarative, reproducible, version-controlled OS configuration.
+| Tier | Boot chain | Integrity mechanism | Use case |
+|------|-----------|---------------------|----------|
+| **Tier 1** (hardware-rooted) | UEFI Secure Boot + self-managed keys → kernel signature → binary hash | Hardware-rooted via sbctl | Dedicated hardware (DEC-007) |
+| **Tier 2** (software-rooted) | GRUB + password → kernel → Nix store verification → binary hash | Software-rooted via nix-store --verify | Cloud VMs without UEFI (e.g. Hetzner CPX) |
+| **Tier 3** (attestation-only) | Any boot → bootstrap attestation records binary hash | None — bootstrap-attested only | Dev, proving hosts |
 
-**Informed by:** Ring 1 architecture, PROP-SUBSTRATE-001.
+Implementation: `nix/hardening.nix` (tier-conditional boot config), `nix/module.nix` (sandboxed systemd service), `nix/host.nix` (Tier 1 hardware), `nix/host-cloud.nix` (Tier 2 cloud VM). The `theorem.substrateTier` NixOS option selects the tier. The `BootIntegrityChain` enum in the kernel carries the tier into the bootstrap act so the governance kernel knows its own trust level.
+
+**Amendment (2026-03-22):** Extended from UEFI-only to tiered model. The security property (binary integrity) is preserved across all tiers; the verification mechanism adapts to hardware capability. Tier 2 compensates for missing UEFI with Nix store content-addressed verification at boot — `theorem-nix-verify.service` runs before `theorem-node.service` and fails closed on mismatch. Motivated by downstream deployment on Hetzner CPX31 (BIOS-mode VM, no /sys/firmware/efi).
+
+**Rationale:** The kernel controlling its own substrate means PROP-SUBSTRATE-001 declaration and reality are the same thing. The tiered model makes the trust level explicit and auditable rather than silently degrading when UEFI is absent. PA-008 verification procedures adapt per tier.
+
+**Informed by:** Ring 1 architecture, PROP-SUBSTRATE-001, downstream Hetzner deployment.
 
 ---
 

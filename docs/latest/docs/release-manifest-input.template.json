@@ -1,0 +1,108 @@
+{
+  "compatibility_classification": "REPLACE_WITH_COMPATIBILITY_CLASSIFICATION",
+  "summary": "REPLACE_WITH_RELEASE_SUMMARY",
+  "capabilities": {
+    "new": [
+      {
+        "id": "REPLACE_WITH_NEW_CAPABILITY_ID",
+        "summary": "REPLACE_WITH_NEW_CAPABILITY_SUMMARY"
+      }
+    ],
+    "changed": [],
+    "deprecated": [],
+    "removed": []
+  },
+  "capability_negotiation": {
+    "surface": "REPLACE_WITH_CAPABILITY_NEGOTIATION_SURFACE",
+    "contract_line": "REPLACE_WITH_CONTRACT_LINE",
+    "stability_rule": "REPLACE_WITH_STABILITY_RULE",
+    "consumer_rules": [
+      "REPLACE_WITH_CONSUMER_RULE_1",
+      "REPLACE_WITH_CONSUMER_RULE_2"
+    ],
+    "capabilities": [
+      {
+        "id": "REPLACE_WITH_NEGOTIATED_CAPABILITY_ID",
+        "availability": "REPLACE_WITH_AVAILABILITY",
+        "stability": "REPLACE_WITH_STABILITY"
+      }
+    ]
+  },
+  "principal_contract": {
+    "entity_id_field": "REPLACE_WITH_ENTITY_ID_FIELD",
+    "principal_id_field": "REPLACE_WITH_PRINCIPAL_ID_FIELD",
+    "grantor_id_field": "REPLACE_WITH_GRANTOR_ID_FIELD",
+    "authorization_route": "REPLACE_WITH_AUTHORIZATION_ROUTE",
+    "semantics": [
+      "REPLACE_WITH_PRINCIPAL_SEMANTICS_1",
+      "REPLACE_WITH_PRINCIPAL_SEMANTICS_2",
+      "REPLACE_WITH_PRINCIPAL_SEMANTICS_3"
+    ]
+  },
+  "stable_error_taxonomy": {
+    "scope": "REPLACE_WITH_ERROR_TAXONOMY_SCOPE",
+    "legacy_behavior": "REPLACE_WITH_LEGACY_BEHAVIOR",
+    "taxonomy": [
+      {
+        "surface": "REPLACE_WITH_ERROR_SURFACE",
+        "http_status": 400,
+        "content_type": "application/json",
+        "body_fields": ["REPLACE_WITH_ERROR_BODY_FIELD"],
+        "error_codes": ["REPLACE_WITH_ERROR_CODE"]
+      }
+    ]
+  },
+  "act_contract": {
+    "declare_intent": {
+      "route": "REPLACE_WITH_DECLARE_INTENT_ROUTE",
+      "principal_field": "REPLACE_WITH_DECLARE_INTENT_PRINCIPAL_FIELD",
+      "timing_fields": ["REPLACE_WITH_TIMING_FIELD"],
+      "enforcement_rule": "REPLACE_WITH_DECLARE_INTENT_RULE"
+    },
+    "submit_act": {
+      "route": "REPLACE_WITH_SUBMIT_ACT_ROUTE",
+      "principal_field": "REPLACE_WITH_SUBMIT_ACT_PRINCIPAL_FIELD",
+      "authorization_field": "REPLACE_WITH_AUTHORIZATION_FIELD",
+      "resource_consumption_field": "REPLACE_WITH_RESOURCE_CONSUMPTION_FIELD",
+      "resource_consumption_entry_fields": [
+        "REPLACE_WITH_RESOURCE_CONSUMPTION_ENTRY_FIELD"
+      ],
+      "elapsed_time_surfaces": [
+        "REPLACE_WITH_ELAPSED_TIME_SURFACE"
+      ]
+    }
+  },
+  "schema_changes": [],
+  "api_changes": {
+    "added": [],
+    "removed": []
+  },
+  "required_operator_actions": [],
+  "upgrade_contract": {
+    "line": "REPLACE_WITH_UPGRADE_LINE",
+    "major_version_boundary_rule": "REPLACE_WITH_MAJOR_VERSION_BOUNDARY_RULE",
+    "deprecation_window_policy": "REPLACE_WITH_DEPRECATION_WINDOW_POLICY",
+    "behavior_change_policy": "REPLACE_WITH_BEHAVIOR_CHANGE_POLICY"
+  },
+  "release_integrity": {
+    "release_ring": "REPLACE_WITH_RELEASE_RING",
+    "minimum_version": "REPLACE_WITH_MINIMUM_VERSION",
+    "downgrade_prevention_rule": "REPLACE_WITH_DOWNGRADE_PREVENTION_RULE",
+    "rollback_authorization": {
+      "rule": "REPLACE_WITH_ROLLBACK_AUTHORIZATION_RULE",
+      "required_approval_count": 2,
+      "authorized_roles": [
+        "REPLACE_WITH_ROLLBACK_AUTHORIZED_ROLE"
+      ]
+    },
+    "revocation": {
+      "ledger_path": "REPLACE_WITH_REVOCATION_LEDGER_PATH",
+      "record_path": "REPLACE_WITH_REVOCATION_RECORD_PATH"
+    },
+    "mirror_policy": {
+      "feed_path": "REPLACE_WITH_RELEASE_FEED_PATH",
+      "mirror_ttl_hours": 24,
+      "stale_behavior": "fail_closed"
+    }
+  }
+}

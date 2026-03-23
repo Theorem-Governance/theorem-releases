@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0.0",
+  "artifact": "theorem-4.0-demo-path",
+  "generated_at": "2026-03-23T02:47:47Z",
+  "source_conformance_report": "C:\\Users\\Eric\\Theorem\\.release\\v4.0.1-conformance.json",
+  "status": "partial",
+  "summary": {
+    "total_steps": 9,
+    "passed_steps": 5,
+    "missing_steps": 4
+  },
+  "steps": [
+    {
+      "step": 1,
+      "id": "tiered-substrate-trust",
+      "user_moment": "record explicit substrate trust tier at bootstrap",
+      "status": "passed",
+      "passed": true,
+      "coverage": "implemented",
+      "command": "cargo test -p theorem-node --test bootstrap_config_contract bootstrap_config_records_nix_store_verified_boot_integrity_chain -- --nocapture"
+    },
+    {
+      "step": 2,
+      "id": "public-discovery-contract",
+      "user_moment": "publish runtime discovery and capability negotiation surfaces",
+      "status": "passed",
+      "passed": true,
+      "coverage": "implemented",
+      "command": "cargo test -p theorem-node --test e2e_public_discovery runtime_discovery_surfaces_are_published -- --nocapture"
+    },
+    {
+      "step": 3,
+      "id": "release-verification-revocation",
+      "user_moment": "deny revoked release artifacts through the public verification path",
+      "status": "passed",
+      "passed": true,
+      "coverage": "implemented",
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities http_admit_and_verify_release_respects_artifact_revocation -- --nocapture"
+    },
+    {
+      "step": 4,
+      "id": "governed-release-declaration",
+      "user_moment": "publish the release as a queryable governed act",
+      "status": "passed",
+      "passed": true,
+      "coverage": "implemented",
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities release_declaration_is_queryable_and_survives_rebuild -- --nocapture"
+    },
+    {
+      "step": 5,
+      "id": "intervention-recovery-explanation",
+      "user_moment": "preserve intervention and recovery explanation through rebuild",
+      "status": "passed",
+      "passed": true,
+      "coverage": "implemented",
+      "command": "cargo test -p theorem-node --test e2e_execution_capabilities interventions_freeze_and_suspend_targets_with_explanation_and_rebuild -- --nocapture"
+    },
+    {
+      "step": 6,
+      "id": "authority-state-recovery-equivalence",
+      "user_moment": "prove lawful recovery by authority-state equivalence rather than liveness",
+      "status": "missing",
+      "passed": false,
+      "coverage": "missing",
+      "command": null
+    },
+    {
+      "step": 7,
+      "id": "tenant-boundary-governance",
+      "user_moment": "govern tenant boundaries for shared-fleet operation",
+      "status": "missing",
+      "passed": false,
+      "coverage": "missing",
+      "command": null
+    },
+    {
+      "step": 8,
+      "id": "capacity-admission-law",
+      "user_moment": "govern quotas, reservations, and capacity admission",
+      "status": "missing",
+      "passed": false,
+      "coverage": "missing",
+      "command": null
+    },
+    {
+      "step": 9,
+      "id": "operator-provisioning-contract",
+      "user_moment": "exercise bounded provisioning and runtime-control operator surfaces",
+      "status": "missing",
+      "passed": false,
+      "coverage": "missing",
+      "command": null
+    }
+  ]
+}

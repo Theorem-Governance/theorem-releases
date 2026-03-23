@@ -29,8 +29,14 @@ Direct dependency licenses (Rust crates via crates.io):
   hex             — MIT OR Apache-2.0
   hmac            — MIT OR Apache-2.0
 
+Direct dependency licenses (TypeScript reference implementation via npm):
+  zod             — MIT
+  typescript      — Apache-2.0 (devDependency)
+  @types/node     — MIT (devDependency)
+
 All MIT and Apache-2.0 licensed dependencies are compatible with the
 project's MIT license for code.
 
-For the full license text of each dependency, consult the respective crate's
-repository or https://crates.io.
+For the full license text of each Rust dependency, consult the respective
+crate's repository or https://crates.io. For npm dependencies, consult
+the respective package on https://www.npmjs.com.
