@@ -2,6 +2,15 @@
   "schema_version": "1.0.0",
   "releases": [
     {
+      "version": "v5.0.0",
+      "release_date": "2026-03-24T20:52:14Z",
+      "compatibility_classification": "breaking-major",
+      "release_ring": "public",
+      "minimum_version": "v5.0.0",
+      "human_release_notes_url": "https://github.com/nuketheburrito/theorem-governance/releases/tag/v5.0.0",
+      "release_url": "https://github.com/nuketheburrito/theorem-governance/releases/tag/v5.0.0"
+    },
+    {
       "version": "v4.0.1",
       "release_date": "2026-03-23T03:26:02Z",
       "compatibility_classification": "breaking-major",
@@ -31,7 +40,7 @@
       "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v3.0.0"
     }
   ],
-  "mirror_generated_at": "2026-03-23T03:26:02Z",
-  "mirror_expires_at": "2026-03-24T03:26:02Z",
+  "mirror_generated_at": "2026-03-24T20:52:14Z",
+  "mirror_expires_at": "2026-03-25T20:52:14Z",
   "stale_behavior": "fail_closed"
 }

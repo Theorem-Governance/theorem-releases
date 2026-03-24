@@ -3,4 +3,4 @@
 This directory is synced from the Ring 1 release flow.
 
 Source repository: https://github.com/nuketheburrito/theorem-governance
-Current public release: v4.0.1
+Current public release: v5.0.0

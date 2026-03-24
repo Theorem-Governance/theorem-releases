@@ -1,6 +1,7 @@
 {
-  "published_at": "2026-03-23T01:16:56Z",
-  "source": "docs\\execution\\4.0-downstream-pre-release-memo.md",
-  "status": "pre_release",
-  "note": "This memo is published ahead of final release declaration."
+  "published_at": "2026-03-24T20:52:14Z",
+  "version": "v5.0.0",
+  "status": "released",
+  "release_url": "https://github.com/nuketheburrito/theorem-governance/releases/tag/v5.0.0",
+  "note": "v5.0.0 released. Binary, checksum, and SBOM published."
 }

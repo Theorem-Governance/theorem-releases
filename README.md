@@ -21,7 +21,7 @@ expectations.
 
 Have these ready:
 
-- a published release tag such as `v4.0.0`
+- a published release tag such as `v5.0.0`
 - the release tarball and checksum for your platform
 - the matching governance specification document used to compute `SPEC_HASH`
 - concrete values for `ARTIFACT_URL` and `LOG_ENDPOINT`
@@ -32,8 +32,8 @@ Have these ready:
 Grab the latest release for your platform from [GitHub Releases](https://github.com/Theorem-Governance/theorem-releases/releases):
 
 ```bash
-# Example for x86_64 Linux — replace VERSION with the tag (e.g. v4.0.0)
-VERSION="v4.0.0"
+# Example for x86_64 Linux — replace VERSION with the tag (e.g. v5.0.0)
+VERSION="v5.0.0"
 curl -LO "https://github.com/Theorem-Governance/theorem-releases/releases/download/${VERSION}/theorem-node-${VERSION}-x86_64-unknown-linux-gnu.tar.gz"
 tar xzf theorem-node-*.tar.gz
 cd theorem-node-*/
