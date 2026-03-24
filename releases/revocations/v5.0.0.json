@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "version": "v5.0.0",
+  "status": "active",
+  "changed_at": "2026-03-24T22:45:00Z",
+  "changed_by": "freebsd-release",
+  "manifest_path": "releases/v5.0.0/manifest.json",
+  "integrity_path": "releases/v5.0.0/integrity.json",
+  "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v5.0.0",
+  "ledger_path": "releases/revocations.json"
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "product": "theorem-node",
+  "version": "v5.0.0",
+  "release_date": "2026-03-24T22:27:13Z",
+  "generated_at": "2026-03-24T22:45:00Z",
+  "manifest": {
+    "path": "releases/v5.0.0/manifest.json",
+    "asset_name": "theorem-release-manifest-v5.0.0.json"
+  },
+  "release_ring": "public",
+  "minimum_version": "v5.0.0",
+  "downgrade_prevention_rule": "Once a consumer admits the 5.x public feed, it must not mirror or promote a release older than release_integrity.minimum_version without an explicit governed rollback decision.",
+  "rollback_authorization": {
+    "rule": "Rollback to an older 5.x artifact requires explicit governed approval before repointing a machine or mirror.",
+    "required_approval_count": 2,
+    "authorized_roles": ["root-governance-authority"]
+  },
+  "binary_assets": [
+    {
+      "name": "theorem-node-v5.0.0-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "074ac533334be1e7f2352c8e0ee8983a35465a2d5e58839a17fd35bb82c9560b",
+      "size_bytes": 18563463,
+      "target": "x86_64-unknown-freebsd",
+      "build_host": "FreeBSD 14.4-RELEASE amd64",
+      "rust_version": "1.92.0",
+      "binaries": [
+        "/sbin/theorem-init",
+        "/usr/local/bin/theorem-node",
+        "/usr/local/bin/theorem-supervisor",
+        "/usr/local/bin/theorem-gateway",
+        "/usr/local/bin/theorem-govagent",
+        "/usr/local/bin/theorem-dashboard"
+      ],
+      "veriexec_manifest_included": true,
+      "veriexec_entries": 5
+    }
+  ],
+  "sbom_assets": [],
+  "provenance_assets": [
+    {
+      "name": "theorem-node-v5.0.0.provenance.json",
+      "path": "releases/v5.0.0/theorem-node-v5.0.0.provenance.json"
+    }
+  ],
+  "revocation": {
+    "ledger_path": "releases/revocations.json",
+    "record_path": "releases/revocations/v5.0.0.json"
+  },
+  "mirror_policy": {
+    "feed_path": "releases/feed.json",
+    "mirror_generated_at": "2026-03-24T22:45:00Z",
+    "mirror_expires_at": "2026-03-25T22:45:00Z",
+    "mirror_ttl_hours": 24,
+    "stale_behavior": "fail_closed"
+  },
+  "build_verification": {
+    "live_health_check": {"endpoint": "/health", "response": {"bootstrapped": true, "healthy": true, "status": "ok"}},
+    "live_status_check": {"endpoint": "/status", "response_summary": "25 proof obligations, 2 active entities, bootstrapped"},
+    "zfs_pool": {"name": "theorem", "state": "ONLINE", "datasets": 10, "free_gb": 71.2},
+    "pf_firewall": "loaded and enabled",
+    "content_store": "admit + verify tested on real ZFS",
+    "binary_type": "ELF 64-bit LSB pie executable, x86-64, version 1 (FreeBSD), for FreeBSD 14.4"
+  }
+}

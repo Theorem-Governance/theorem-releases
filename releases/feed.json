@@ -3,12 +3,22 @@
   "releases": [
     {
       "version": "v5.0.0",
-      "release_date": "2026-03-24T20:52:14Z",
+      "release_date": "2026-03-24T22:27:13Z",
       "compatibility_classification": "breaking-major",
       "release_ring": "public",
       "minimum_version": "v5.0.0",
-      "human_release_notes_url": "https://github.com/nuketheburrito/theorem-governance/releases/tag/v5.0.0",
-      "release_url": "https://github.com/nuketheburrito/theorem-governance/releases/tag/v5.0.0"
+      "manifest_path": "releases/v5.0.0/manifest.json",
+      "integrity_path": "releases/v5.0.0/integrity.json",
+      "conformance_report_path": "releases/v5.0.0/conformance.json",
+      "demonstration_path": "releases/v5.0.0/demo-path.json",
+      "provenance_paths": [
+        "releases/v5.0.0/theorem-node-v5.0.0.provenance.json"
+      ],
+      "revocation_ledger_path": "releases/revocations.json",
+      "revocation_record_path": "releases/revocations/v5.0.0.json",
+      "revocation_status": "active",
+      "human_release_notes_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v5.0.0",
+      "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v5.0.0"
     },
     {
       "version": "v4.0.1",
@@ -40,7 +50,7 @@
       "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v3.0.0"
     }
   ],
-  "mirror_generated_at": "2026-03-24T20:52:14Z",
-  "mirror_expires_at": "2026-03-25T20:52:14Z",
+  "mirror_generated_at": "2026-03-24T22:45:00Z",
+  "mirror_expires_at": "2026-03-25T22:45:00Z",
   "stale_behavior": "fail_closed"
 }

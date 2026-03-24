@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0.0",
+  "artifact": "theorem-5.0-demo-path",
+  "generated_at": "2026-03-24T22:45:00Z",
+  "source_conformance_report": "releases/v5.0.0/conformance.json",
+  "status": "passed",
+  "summary": {
+    "total_steps": 12,
+    "passed_steps": 12,
+    "missing_steps": 0
+  },
+  "steps": [
+    {
+      "step": 1,
+      "id": "health-endpoint",
+      "user_moment": "verify theorem-node is alive and bootstrapped",
+      "status": "passed",
+      "passed": true,
+      "command": "curl -s http://127.0.0.1:3170/health"
+    },
+    {
+      "step": 2,
+      "id": "status-endpoint",
+      "user_moment": "inspect governance state — proof obligations, entities, scopes",
+      "status": "passed",
+      "passed": true,
+      "command": "curl -s http://127.0.0.1:3170/status"
+    },
+    {
+      "step": 3,
+      "id": "ready-endpoint",
+      "user_moment": "verify readiness probe behavior with and without witness token",
+      "status": "passed",
+      "passed": true,
+      "command": "curl -si http://127.0.0.1:3170/ready"
+    },
+    {
+      "step": 4,
+      "id": "capabilities-endpoint",
+      "user_moment": "discover runtime capabilities and contract line",
+      "status": "passed",
+      "passed": true,
+      "command": "curl -s http://127.0.0.1:3170/capabilities"
+    },
+    {
+      "step": 5,
+      "id": "openapi-endpoint",
+      "user_moment": "retrieve live API schema for integration",
+      "status": "passed",
+      "passed": true,
+      "command": "curl -s http://127.0.0.1:3170/openapi.json"
+    },
+    {
+      "step": 6,
+      "id": "auth-discovery",
+      "user_moment": "discover auth contract for protected routes",
+      "status": "passed",
+      "passed": true,
+      "command": "curl -s http://127.0.0.1:3170/auth/discovery"
+    },
+    {
+      "step": 7,
+      "id": "auth-gating",
+      "user_moment": "verify protected routes enforce authentication",
+      "status": "passed",
+      "passed": true,
+      "command": "curl -si http://127.0.0.1:3170/organizations/events"
+    },
+    {
+      "step": 8,
+      "id": "zfs-substrate",
+      "user_moment": "verify ZFS pool and datasets are real and mounted",
+      "status": "passed",
+      "passed": true,
+      "command": "zpool status theorem && zfs list"
+    },
+    {
+      "step": 9,
+      "id": "pf-substrate",
+      "user_moment": "verify PF firewall is loaded and governed",
+      "status": "passed",
+      "passed": true,
+      "command": "pfctl -s info"
+    },
+    {
+      "step": 10,
+      "id": "content-store",
+      "user_moment": "admit and verify an artifact in the ZFS-backed content store",
+      "status": "passed",
+      "passed": true,
+      "command": "theorem-init store admit /tmp/test-artifact.bin && theorem-init store verify"
+    },
+    {
+      "step": 11,
+      "id": "freebsd-binary-verification",
+      "user_moment": "confirm binaries are native FreeBSD with real substrate code paths",
+      "status": "passed",
+      "passed": true,
+      "command": "file /sbin/theorem-init"
+    },
+    {
+      "step": 12,
+      "id": "theorem-init-cli",
+      "user_moment": "exercise PID 1 supervisor CLI — config check, boot status, governance, workloads",
+      "status": "passed",
+      "passed": true,
+      "command": "theorem-init check && theorem-init boot status && theorem-init governance report && theorem-init workload list"
+    }
+  ]
+}

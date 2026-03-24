@@ -1,0 +1,241 @@
+{
+  "schema_version": "1.2.0",
+  "product": "theorem-node",
+  "version": "v5.0.0",
+  "release_date": "2026-03-24T22:27:13Z",
+  "compatibility_classification": "breaking-major",
+  "upgrade_contract": {
+    "line": "5.x",
+    "major_version_boundary_rule": "Breaking removals and incompatible semantic changes require a major version boundary.",
+    "deprecation_window_policy": "Machine-consumable surfaces remain available for at least one full minor release after deprecation is published in a manifest.",
+    "behavior_change_policy": "Behavior changes that tighten validation or deny previously accepted input must be classified in the manifest."
+  },
+  "summary": "Theorem 5.0 is the release where Theorem becomes a complete FreeBSD-native OS from PID 1 to organizational authority. It extends the 4.0 governed platform contract with a full substrate layer: ZFS-backed storage, jail-based compute, PF networking, hardware device governance, encrypted secret management, governed image pipelines, distributed fabric, economic settlement, branch reality, and autonomous governance runtime. Built natively on FreeBSD 14.4-RELEASE with all cfg(target_os = freebsd) gates active.",
+  "capabilities": {
+    "new": [
+      {
+        "id": "substrate.zfs-storage",
+        "summary": "ZFS dataset lifecycle, content-addressed artifact store, boot environments, snapshot management, and pool governance via theorem-zfs.",
+        "contract_surface": "theorem-init store, theorem-zfs"
+      },
+      {
+        "id": "substrate.jail-compute",
+        "summary": "FreeBSD jail-based workload isolation with governance admission, RCTL resource limits, and lifecycle management via theorem-compute.",
+        "contract_surface": "theorem-init workload, theorem-compute"
+      },
+      {
+        "id": "substrate.pf-networking",
+        "summary": "PF firewall rule governance via pf anchors, crossing policy enforcement, and network isolation via theorem-net.",
+        "contract_surface": "theorem-net"
+      },
+      {
+        "id": "substrate.encrypted-secrets",
+        "summary": "Argon2id+AES-256-GCM secret sealing with Capsicum capability restriction for admin operations via theorem-secrets and theorem-crypto.",
+        "contract_surface": "theorem-secrets, theorem-crypto"
+      },
+      {
+        "id": "substrate.veriexec-integrity",
+        "summary": "MAC veriexec verified execution manifest for all theorem binaries with SHA-256 hashes.",
+        "contract_surface": "theorem-init, /etc/theorem/veriexec.manifest"
+      },
+      {
+        "id": "substrate.pid1-supervisor",
+        "summary": "theorem-init PID 1 supervisor with governance runtime, quarantine escalation, service graph, alert dispatch, and boot attestation.",
+        "contract_surface": "theorem-init run"
+      },
+      {
+        "id": "substrate.branch-reality",
+        "summary": "ZFS-backed counterfactual governance lanes with branch engine, timeline graph, merge strategy, and fork ledger via theorem-branch.",
+        "contract_surface": "theorem-branch"
+      },
+      {
+        "id": "substrate.autonomous-governance",
+        "summary": "Intent compiler, self-challenger, drift detector, circuit breaker, and path-not-taken recording via theorem-auto.",
+        "contract_surface": "theorem-auto"
+      },
+      {
+        "id": "substrate.economic-settlement",
+        "summary": "Crossing settlement, privacy budgets, escrow ledger, and data retention via theorem-econ and theorem-settle.",
+        "contract_surface": "theorem-econ, theorem-settle"
+      },
+      {
+        "id": "substrate.distributed-fabric",
+        "summary": "Fleet mesh and distributed compute fabric via theorem-fabric.",
+        "contract_surface": "theorem-fabric"
+      },
+      {
+        "id": "substrate.governed-images",
+        "summary": "Staged rollout image pipeline with governance controls via theorem-image.",
+        "contract_surface": "theorem-image"
+      },
+      {
+        "id": "substrate.device-governance",
+        "summary": "Hardware device governance with devfs ruleset management via theorem-devices.",
+        "contract_surface": "theorem-devices"
+      }
+    ],
+    "changed": [
+      {
+        "id": "release.governed-publication",
+        "summary": "Release publication now targets FreeBSD x86_64 as the primary platform. Linux artifacts are no longer the authoritative production target.",
+        "contract_surface": "public release contract"
+      }
+    ],
+    "deprecated": [],
+    "removed": []
+  },
+  "capability_negotiation": {
+    "surface": "releases/feed.json plus releases/v5.0.0/manifest.json, with live runtime discovery at GET /capabilities and GET /capability-negotiation",
+    "contract_line": "5.x",
+    "stability_rule": "Capability ids published in a 5.x manifest are stable within the 5.x line once released.",
+    "consumer_rules": [
+      "Gate on compatibility_classification before enabling a new capability id.",
+      "Treat manifest capability ids and release_integrity metadata as authoritative rather than inferring behavior from prose notes or semver alone.",
+      "Use releases/feed.json, releases/v5.0.0/manifest.json, and releases/v5.0.0/integrity.json as the release-time capability source of record for public 5.x releases.",
+      "Use GET /capabilities and GET /capability-negotiation to confirm the live runtime discovery surface for a running 5.x node."
+    ],
+    "capabilities": [
+      {"id": "substrate.zfs-storage", "availability": "published", "stability": "5.x"},
+      {"id": "substrate.jail-compute", "availability": "published", "stability": "5.x"},
+      {"id": "substrate.pf-networking", "availability": "published", "stability": "5.x"},
+      {"id": "substrate.encrypted-secrets", "availability": "published", "stability": "5.x"},
+      {"id": "substrate.veriexec-integrity", "availability": "published", "stability": "5.x"},
+      {"id": "substrate.pid1-supervisor", "availability": "published", "stability": "5.x"},
+      {"id": "substrate.branch-reality", "availability": "published", "stability": "5.x"},
+      {"id": "substrate.autonomous-governance", "availability": "published", "stability": "5.x"},
+      {"id": "substrate.economic-settlement", "availability": "published", "stability": "5.x"},
+      {"id": "substrate.distributed-fabric", "availability": "published", "stability": "5.x"},
+      {"id": "substrate.governed-images", "availability": "published", "stability": "5.x"},
+      {"id": "substrate.device-governance", "availability": "published", "stability": "5.x"},
+      {"id": "release.governed-publication", "availability": "changed", "stability": "5.x"}
+    ]
+  },
+  "principal_contract": {
+    "entity_id_field": "entity_id",
+    "principal_id_field": "principal_id",
+    "grantor_id_field": "granted_by_id",
+    "authorization_route": "GET /authorizations?entity_id={entity_id}",
+    "semantics": [
+      "entity_id names the acting or queried entity on public request surfaces.",
+      "principal_id names the entity holding authority on authorization surfaces.",
+      "granted_by_id names the grantor and must not be interpreted as the principal.",
+      "GET /authorizations returns authorizations held by the queried principal entity, not authorizations granted by it."
+    ]
+  },
+  "stable_error_taxonomy": {
+    "scope": "Stable for the published 5.0 discovery, organization, lifecycle, release-verification, and governed-release routes in openapi.yaml.",
+    "legacy_behavior": "Legacy pre-4.0 routes may still return text/plain bodies and are outside this stable taxonomy.",
+    "taxonomy": [
+      {
+        "surface": "5.0 public routes",
+        "http_status": 400,
+        "content_type": "application/json",
+        "body_fields": ["error_code", "message"],
+        "error_codes": ["not_bootstrapped", "entity_not_found", "scope_not_found", "request_hash_failed", "serialization_failed"]
+      },
+      {
+        "surface": "5.0 public routes",
+        "http_status": 409,
+        "content_type": "application/json",
+        "body_fields": ["error_code", "message"],
+        "error_codes": ["idempotency_conflict"]
+      },
+      {
+        "surface": "5.0 public routes",
+        "http_status": 422,
+        "content_type": "application/json",
+        "body_fields": ["error_code", "message"],
+        "error_codes": [
+          "action_admission_inactive",
+          "action_admission_not_found",
+          "execution_capability_binding_mismatch",
+          "execution_capability_expired",
+          "execution_capability_not_found",
+          "execution_capability_secret_mismatch",
+          "governance_authority_required",
+          "intervention_path_authority_required",
+          "principal_not_trusted"
+        ]
+      }
+    ]
+  },
+  "act_contract": {
+    "declare_intent": {
+      "route": "POST /declare-intent",
+      "principal_field": "entity_id",
+      "timing_fields": ["declared_at", "minimum_wait_ms", "earliest_execution_at"],
+      "enforcement_rule": "Acts must satisfy E4: declared_at plus minimum_intent_execution_interval_ms must be less than or equal to initiated_at."
+    },
+    "submit_act": {
+      "route": "POST /submit-act",
+      "principal_field": "executing_entity_id",
+      "authorization_field": "authorization_id",
+      "resource_consumption_field": "resource_consumption_entries",
+      "resource_consumption_entry_fields": [
+        "resource_type", "quantity", "unit", "measurement_method_id",
+        "measured_at", "within_limits", "escalation_signal_id"
+      ],
+      "elapsed_time_surfaces": [
+        "declare-intent response declared_at",
+        "declare-intent response minimum_wait_ms",
+        "declare-intent response earliest_execution_at",
+        "submit-act response initiated_at",
+        "submit-act response intent_declared_at",
+        "submit-act response elapsed_ms_since_declared"
+      ]
+    }
+  },
+  "schema_changes": [],
+  "api_changes": {
+    "added": [],
+    "removed": []
+  },
+  "required_operator_actions": [
+    "Consume releases/feed.json, releases/v5.0.0/manifest.json, and releases/v5.0.0/integrity.json before mirroring or admitting a 5.x release.",
+    "Deploy on FreeBSD 14.4-RELEASE or later with ZFS root pool named 'theorem'.",
+    "Install theorem-init to /sbin/theorem-init and remaining binaries to /usr/local/bin/.",
+    "Load PF kernel module and configure /etc/pf.conf with theorem anchor.",
+    "Review veriexec.manifest and optionally load mac_veriexec for verified execution."
+  ],
+  "artifacts": [
+    {
+      "name": "theorem-node-v5.0.0-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "074ac533334be1e7f2352c8e0ee8983a35465a2d5e58839a17fd35bb82c9560b",
+      "size_bytes": 18563463
+    },
+    {
+      "name": "theorem-node-v5.0.0-x86_64-unknown-freebsd.tar.gz.sha256",
+      "sha256": "10900aeb50cab21ba084fd7b248c05f1364e5cfc7fb071b1e5c19667b1c61000",
+      "size_bytes": 116
+    },
+    {
+      "name": "theorem-node-v5.0.0.provenance.json",
+      "sha256": "pending",
+      "size_bytes": 0
+    }
+  ],
+  "release_integrity": {
+    "release_ring": "public",
+    "evidence_asset_path": "releases/v5.0.0/integrity.json",
+    "sbom_assets": [],
+    "provenance_assets": ["theorem-node-v5.0.0.provenance.json"],
+    "minimum_version": "v5.0.0",
+    "downgrade_prevention_rule": "Once a consumer admits the 5.x public feed, it must not mirror or promote a release older than release_integrity.minimum_version without an explicit governed rollback decision.",
+    "rollback_authorization": {
+      "rule": "Rollback to an older 5.x artifact requires explicit governed approval before repointing a machine or mirror.",
+      "required_approval_count": 2,
+      "authorized_roles": ["root-governance-authority"]
+    },
+    "revocation": {
+      "ledger_path": "releases/revocations.json",
+      "record_path": "releases/revocations/v5.0.0.json"
+    },
+    "mirror_policy": {
+      "feed_path": "releases/feed.json",
+      "mirror_generated_at": "2026-03-24T22:27:13Z",
+      "mirror_expires_at": "2026-03-25T22:27:13Z",
+      "mirror_ttl_hours": 24,
+      "stale_behavior": "fail_closed"
+    }
+  }
+}
