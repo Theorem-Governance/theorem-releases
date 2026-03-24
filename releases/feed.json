@@ -2,52 +2,52 @@
   "schema_version": "1.0.0",
   "releases": [
     {
-      "version": "v5.0.0",
+      "version": "v0.5.0",
       "release_date": "2026-03-24T22:27:13Z",
       "compatibility_classification": "breaking-major",
       "release_ring": "public",
-      "minimum_version": "v5.0.0",
-      "manifest_path": "releases/v5.0.0/manifest.json",
-      "integrity_path": "releases/v5.0.0/integrity.json",
-      "conformance_report_path": "releases/v5.0.0/conformance.json",
-      "demonstration_path": "releases/v5.0.0/demo-path.json",
+      "minimum_version": "v0.5.0",
+      "manifest_path": "releases/v0.5.0/manifest.json",
+      "integrity_path": "releases/v0.5.0/integrity.json",
+      "conformance_report_path": "releases/v0.5.0/conformance.json",
+      "demonstration_path": "releases/v0.5.0/demo-path.json",
       "provenance_paths": [
-        "releases/v5.0.0/theorem-node-v5.0.0.provenance.json"
+        "releases/v0.5.0/theorem-node-v0.5.0.provenance.json"
       ],
       "revocation_ledger_path": "releases/revocations.json",
-      "revocation_record_path": "releases/revocations/v5.0.0.json",
+      "revocation_record_path": "releases/revocations/v0.5.0.json",
       "revocation_status": "active",
-      "human_release_notes_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v5.0.0",
-      "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v5.0.0"
+      "human_release_notes_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.5.0",
+      "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.5.0"
     },
     {
-      "version": "v4.0.1",
+      "version": "v0.4.1",
       "release_date": "2026-03-23T03:26:02Z",
       "compatibility_classification": "breaking-major",
       "release_ring": "public",
-      "minimum_version": "v4.0.1",
-      "manifest_path": "releases/v4.0.1/manifest.json",
-      "integrity_path": "releases/v4.0.1/integrity.json",
-      "conformance_report_path": "releases/v4.0.1/conformance.json",
-      "demonstration_path": "releases/v4.0.1/demo-path.json",
+      "minimum_version": "v0.4.1",
+      "manifest_path": "releases/v0.4.1/manifest.json",
+      "integrity_path": "releases/v0.4.1/integrity.json",
+      "conformance_report_path": "releases/v0.4.1/conformance.json",
+      "demonstration_path": "releases/v0.4.1/demo-path.json",
       "provenance_paths": [
-        "releases/v4.0.1/theorem-node-v4.0.1.provenance.json"
+        "releases/v0.4.1/theorem-node-v0.4.1.provenance.json"
       ],
       "revocation_ledger_path": "releases/revocations.json",
-      "revocation_record_path": "releases/revocations/v4.0.1.json",
+      "revocation_record_path": "releases/revocations/v0.4.1.json",
       "revocation_status": "active",
-      "human_release_notes_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v4.0.1",
-      "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v4.0.1"
+      "human_release_notes_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.4.1",
+      "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.4.1"
     },
     {
-      "version": "v3.0.0",
+      "version": "v0.3.0",
       "release_date": "2026-03-21T21:00:25Z",
       "compatibility_classification": "breaking-major",
-      "manifest_path": "releases/v3.0.0/manifest.json",
-      "conformance_report_path": "releases/v3.0.0/conformance.json",
-      "demonstration_path": "releases/v3.0.0/demo-path.json",
-      "human_release_notes_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v3.0.0",
-      "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v3.0.0"
+      "manifest_path": "releases/v0.3.0/manifest.json",
+      "conformance_report_path": "releases/v0.3.0/conformance.json",
+      "demonstration_path": "releases/v0.3.0/demo-path.json",
+      "human_release_notes_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.3.0",
+      "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.3.0"
     }
   ],
   "mirror_generated_at": "2026-03-24T22:45:00Z",

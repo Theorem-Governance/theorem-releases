@@ -1,7 +1,7 @@
 {
   "published_at": "2026-03-24T22:27:13Z",
-  "version": "v5.0.0",
+  "version": "v0.5.0",
   "status": "released",
-  "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v5.0.0",
-  "note": "v5.0.0 released. FreeBSD-native binary, checksum, manifest, integrity, conformance, demo-path, provenance, and revocation record published."
+  "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.5.0",
+  "note": "v0.5.0 released. FreeBSD-native binary, checksum, manifest, integrity, conformance, demo-path, provenance, and revocation record published."
 }

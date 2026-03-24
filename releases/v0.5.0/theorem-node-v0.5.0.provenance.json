@@ -3,7 +3,7 @@
   "buildType": "https://theorem.tech/freebsd-build/v1",
   "invocation": {
     "configSource": {"entryPoint": "freebsd/make-release.sh"},
-    "parameters": {"tag": "v5.0.0"}
+    "parameters": {"tag": "v0.5.0"}
   },
   "buildConfig": {
     "commands": ["cargo build --release --workspace"],

@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0.0",
   "product": "theorem-node",
-  "version": "v3.0.0",
+  "version": "v0.3.0",
   "release_date": "2026-03-21T21:00:25Z",
   "compatibility_classification": "breaking-major",
   "upgrade_contract": {
-    "line": "3.x",
+    "line": "0.3.x",
     "major_version_boundary_rule": "Breaking removals and incompatible semantic changes require a major version boundary.",
     "deprecation_window_policy": "Machine-consumable surfaces remain available for at least one full minor release after deprecation is published in a manifest.",
     "behavior_change_policy": "Behavior changes that tighten validation or deny previously accepted input must be classified in the manifest."
@@ -173,12 +173,12 @@
       "size_bytes": 44397
     },
     {
-      "name": "theorem-node-v3.0.0-x86_64-unknown-linux-gnu.tar.gz",
+      "name": "theorem-node-v0.3.0-x86_64-unknown-linux-gnu.tar.gz",
       "sha256": "feb24b4504a038ce2f9a110a7f9b66c5de20ce6fbdc53688d4f1c22f877f9e55",
       "size_bytes": 6141724
     },
     {
-      "name": "theorem-node-v3.0.0-x86_64-unknown-linux-gnu.tar.gz.sha256",
+      "name": "theorem-node-v0.3.0-x86_64-unknown-linux-gnu.tar.gz.sha256",
       "sha256": "f98909e9fd58205a05d1766985db0dcbd025091b4b11633ad743a352f12daa81",
       "size_bytes": 117
     },

@@ -1,11 +1,11 @@
 {
   "schema_version": "1.2.0",
   "product": "theorem-node",
-  "version": "v5.0.0",
+  "version": "v0.5.0",
   "release_date": "2026-03-24T22:27:13Z",
   "compatibility_classification": "breaking-major",
   "upgrade_contract": {
-    "line": "5.x",
+    "line": "0.5.x",
     "major_version_boundary_rule": "Breaking removals and incompatible semantic changes require a major version boundary.",
     "deprecation_window_policy": "Machine-consumable surfaces remain available for at least one full minor release after deprecation is published in a manifest.",
     "behavior_change_policy": "Behavior changes that tighten validation or deny previously accepted input must be classified in the manifest."
@@ -85,80 +85,80 @@
     "removed": []
   },
   "capability_negotiation": {
-    "surface": "releases/feed.json plus releases/v5.0.0/manifest.json, with live runtime discovery at GET /capabilities and GET /capability-negotiation",
-    "contract_line": "5.x",
+    "surface": "releases/feed.json plus releases/v0.5.0/manifest.json, with live runtime discovery at GET /capabilities and GET /capability-negotiation",
+    "contract_line": "0.5.x",
     "stability_rule": "Capability ids published in a 5.x manifest are stable within the 5.x line once released.",
     "consumer_rules": [
       "Gate on compatibility_classification before enabling a new capability id.",
       "Treat manifest capability ids and release_integrity metadata as authoritative rather than inferring behavior from prose notes or semver alone.",
-      "Use releases/feed.json, releases/v5.0.0/manifest.json, and releases/v5.0.0/integrity.json as the release-time capability source of record for public 5.x releases.",
+      "Use releases/feed.json, releases/v0.5.0/manifest.json, and releases/v0.5.0/integrity.json as the release-time capability source of record for public 5.x releases.",
       "Use GET /capabilities and GET /capability-negotiation to confirm the live runtime discovery surface for a running 5.x node."
     ],
     "capabilities": [
       {
         "id": "substrate.zfs-storage",
         "availability": "published",
-        "stability": "5.x"
+        "stability": "0.5.x"
       },
       {
         "id": "substrate.jail-compute",
         "availability": "published",
-        "stability": "5.x"
+        "stability": "0.5.x"
       },
       {
         "id": "substrate.pf-networking",
         "availability": "published",
-        "stability": "5.x"
+        "stability": "0.5.x"
       },
       {
         "id": "substrate.encrypted-secrets",
         "availability": "published",
-        "stability": "5.x"
+        "stability": "0.5.x"
       },
       {
         "id": "substrate.veriexec-integrity",
         "availability": "published",
-        "stability": "5.x"
+        "stability": "0.5.x"
       },
       {
         "id": "substrate.pid1-supervisor",
         "availability": "published",
-        "stability": "5.x"
+        "stability": "0.5.x"
       },
       {
         "id": "substrate.branch-reality",
         "availability": "published",
-        "stability": "5.x"
+        "stability": "0.5.x"
       },
       {
         "id": "substrate.autonomous-governance",
         "availability": "published",
-        "stability": "5.x"
+        "stability": "0.5.x"
       },
       {
         "id": "substrate.economic-settlement",
         "availability": "published",
-        "stability": "5.x"
+        "stability": "0.5.x"
       },
       {
         "id": "substrate.distributed-fabric",
         "availability": "published",
-        "stability": "5.x"
+        "stability": "0.5.x"
       },
       {
         "id": "substrate.governed-images",
         "availability": "published",
-        "stability": "5.x"
+        "stability": "0.5.x"
       },
       {
         "id": "substrate.device-governance",
         "availability": "published",
-        "stability": "5.x"
+        "stability": "0.5.x"
       },
       {
         "id": "release.governed-publication",
         "availability": "changed",
-        "stability": "5.x"
+        "stability": "0.5.x"
       }
     ]
   },
@@ -269,7 +269,7 @@
     "removed": []
   },
   "required_operator_actions": [
-    "Consume releases/feed.json, releases/v5.0.0/manifest.json, and releases/v5.0.0/integrity.json before mirroring or admitting a 5.x release.",
+    "Consume releases/feed.json, releases/v0.5.0/manifest.json, and releases/v0.5.0/integrity.json before mirroring or admitting a 5.x release.",
     "Deploy on FreeBSD 14.4-RELEASE or later with ZFS root pool named 'theorem'.",
     "Install theorem-init to /sbin/theorem-init and remaining binaries to /usr/local/bin/.",
     "Load PF kernel module and configure /etc/pf.conf with theorem anchor.",
@@ -277,17 +277,17 @@
   ],
   "artifacts": [
     {
-      "name": "theorem-node-v5.0.0-x86_64-unknown-freebsd.tar.gz",
+      "name": "theorem-node-v0.5.0-x86_64-unknown-freebsd.tar.gz",
       "sha256": "074ac533334be1e7f2352c8e0ee8983a35465a2d5e58839a17fd35bb82c9560b",
       "size_bytes": 18563463
     },
     {
-      "name": "theorem-node-v5.0.0-x86_64-unknown-freebsd.tar.gz.sha256",
+      "name": "theorem-node-v0.5.0-x86_64-unknown-freebsd.tar.gz.sha256",
       "sha256": "10900aeb50cab21ba084fd7b248c05f1364e5cfc7fb071b1e5c19667b1c61000",
       "size_bytes": 116
     },
     {
-      "name": "theorem-node-v5.0.0.provenance.json",
+      "name": "theorem-node-v0.5.0.provenance.json",
       "sha256": "44aa677bd524a89d602404f477a7c45a7c5fd7f39f326ae55efef6329c3a3ddd",
       "size_bytes": 601
     },
@@ -444,7 +444,7 @@
   ],
   "release_integrity": {
     "release_ring": "public",
-    "evidence_asset_path": "releases/v5.0.0/integrity.json",
+    "evidence_asset_path": "releases/v0.5.0/integrity.json",
     "sbom_assets": [
       "theorem-act-types.cdx.xml",
       "theorem-act.cdx.xml",
@@ -478,9 +478,9 @@
       "theorem-zfs.cdx.xml"
     ],
     "provenance_assets": [
-      "theorem-node-v5.0.0.provenance.json"
+      "theorem-node-v0.5.0.provenance.json"
     ],
-    "minimum_version": "v5.0.0",
+    "minimum_version": "v0.5.0",
     "downgrade_prevention_rule": "Once a consumer admits the 5.x public feed, it must not mirror or promote a release older than release_integrity.minimum_version without an explicit governed rollback decision.",
     "rollback_authorization": {
       "rule": "Rollback to an older 5.x artifact requires explicit governed approval before repointing a machine or mirror.",
@@ -491,7 +491,7 @@
     },
     "revocation": {
       "ledger_path": "releases/revocations.json",
-      "record_path": "releases/revocations/v5.0.0.json"
+      "record_path": "releases/revocations/v0.5.0.json"
     },
     "mirror_policy": {
       "feed_path": "releases/feed.json",

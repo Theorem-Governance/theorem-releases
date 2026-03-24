@@ -1,16 +1,16 @@
 {
   "schema_version": "1.0.0",
   "product": "theorem-node",
-  "version": "v4.0.1",
+  "version": "v0.4.1",
   "release_date": "2026-03-23T03:26:02Z",
   "generated_at": "2026-03-23T03:26:04Z",
   "manifest": {
-    "path": "releases/v4.0.1/manifest.json",
-    "asset_name": "theorem-release-manifest-v4.0.1.json",
+    "path": "releases/v0.4.1/manifest.json",
+    "asset_name": "theorem-release-manifest-v0.4.1.json",
     "sha256": "75720c74b98d3b772f999ef9d757298975ffc7eb35dc912096104b153bf2e6af"
   },
   "release_ring": "public",
-  "minimum_version": "v4.0.1",
+  "minimum_version": "v0.4.1",
   "downgrade_prevention_rule": "Once a consumer admits the 4.x public feed, it must not mirror or promote a release older than release_integrity.minimum_version without an explicit governed rollback decision.",
   "rollback_authorization": {
     "rule": "Rollback to an older 4.x artifact requires explicit governed approval before repointing a machine or mirror.",
@@ -83,14 +83,14 @@
   ],
   "provenance_assets": [
     {
-      "name": "theorem-node-v4.0.1.provenance.json",
+      "name": "theorem-node-v0.4.1.provenance.json",
       "sha256": "0428f1cdc44a6aa99787a1d0136a97f7781a81722311fbb58c265498d4903327",
       "size_bytes": 458
     }
   ],
   "revocation": {
     "ledger_path": "releases/revocations.json",
-    "record_path": "releases/revocations/v4.0.1.json"
+    "record_path": "releases/revocations/v0.4.1.json"
   },
   "mirror_policy": {
     "feed_path": "releases/feed.json",

@@ -1,11 +1,11 @@
 {
   "schema_version": "1.2.0",
   "product": "theorem-node",
-  "version": "v4.0.1",
+  "version": "v0.4.1",
   "release_date": "2026-03-23T03:26:02Z",
   "compatibility_classification": "breaking-major",
   "upgrade_contract": {
-    "line": "4.x",
+    "line": "0.4.x",
     "major_version_boundary_rule": "Breaking removals and incompatible semantic changes require a major version boundary.",
     "deprecation_window_policy": "Machine-consumable surfaces remain available for at least one full minor release after deprecation is published in a manifest.",
     "behavior_change_policy": "Behavior changes that tighten validation or deny previously accepted input must be classified in the manifest."
@@ -35,30 +35,30 @@
     "removed": []
   },
   "capability_negotiation": {
-    "surface": "releases/feed.json plus releases/v4.0.1/manifest.json, with live runtime discovery at GET /capabilities and GET /capability-negotiation",
-    "contract_line": "4.x",
+    "surface": "releases/feed.json plus releases/v0.4.1/manifest.json, with live runtime discovery at GET /capabilities and GET /capability-negotiation",
+    "contract_line": "0.4.x",
     "stability_rule": "Capability ids published in a 4.x manifest are stable within the 4.x line once released.",
     "consumer_rules": [
       "Gate on compatibility_classification before enabling a new capability id.",
       "Treat manifest capability ids and release_integrity metadata as authoritative rather than inferring behavior from prose notes or semver alone.",
-      "Use releases/feed.json, releases/v4.0.1/manifest.json, and releases/v4.0.1/integrity.json as the release-time capability source of record for public 4.x releases.",
+      "Use releases/feed.json, releases/v0.4.1/manifest.json, and releases/v0.4.1/integrity.json as the release-time capability source of record for public 4.x releases.",
       "Use GET /capabilities and GET /capability-negotiation to confirm the live runtime discovery surface for a running 4.x node."
     ],
     "capabilities": [
       {
         "id": "substrate.tiered-boot-integrity",
         "availability": "published",
-        "stability": "4.x"
+        "stability": "0.4.x"
       },
       {
         "id": "release.integrity-evidence",
         "availability": "published",
-        "stability": "4.x"
+        "stability": "0.4.x"
       },
       {
         "id": "release.governed-publication",
         "availability": "changed",
-        "stability": "4.x"
+        "stability": "0.4.x"
       }
     ]
   },
@@ -169,7 +169,7 @@
     "removed": []
   },
   "required_operator_actions": [
-    "Consume releases/feed.json, releases/v4.0.1/manifest.json, and releases/v4.0.1/integrity.json before mirroring or admitting a 4.x release.",
+    "Consume releases/feed.json, releases/v0.4.1/manifest.json, and releases/v0.4.1/integrity.json before mirroring or admitting a 4.x release.",
     "Treat substrate_trust_declaration.boot_integrity_chain as the canonical runtime trust-tier signal for deployed machines.",
     "Use the theorem-cloud flake target and theorem.substrateTier=2 when publishing BIOS-mode cloud deployments that rely on Nix store verification instead of UEFI Secure Boot."
   ],
@@ -210,17 +210,17 @@
       "size_bytes": 44397
     },
     {
-      "name": "theorem-node-v4.0.1-x86_64-unknown-linux-gnu.tar.gz",
+      "name": "theorem-node-v0.4.1-x86_64-unknown-linux-gnu.tar.gz",
       "sha256": "98d4bc4785e4bdefd5c55c631594c7b6b892e15da5fc78b381dbba4faef6a1bb",
       "size_bytes": 6225706
     },
     {
-      "name": "theorem-node-v4.0.1-x86_64-unknown-linux-gnu.tar.gz.sha256",
+      "name": "theorem-node-v0.4.1-x86_64-unknown-linux-gnu.tar.gz.sha256",
       "sha256": "0fff37b9d743efa5dad0bd1097e7cb80fcbdfa30b3cdefa4ece293065d9a0a01",
       "size_bytes": 117
     },
     {
-      "name": "theorem-node-v4.0.1.provenance.json",
+      "name": "theorem-node-v0.4.1.provenance.json",
       "sha256": "0428f1cdc44a6aa99787a1d0136a97f7781a81722311fbb58c265498d4903327",
       "size_bytes": 458
     },
@@ -257,7 +257,7 @@
   ],
   "release_integrity": {
     "release_ring": "public",
-    "evidence_asset_path": "releases/v4.0.1/integrity.json",
+    "evidence_asset_path": "releases/v0.4.1/integrity.json",
     "sbom_assets": [
       "theorem-bus-client.cdx.xml",
       "theorem-bus.cdx.xml",
@@ -273,9 +273,9 @@
       "theorem-witness.cdx.xml"
     ],
     "provenance_assets": [
-      "theorem-node-v4.0.1.provenance.json"
+      "theorem-node-v0.4.1.provenance.json"
     ],
-    "minimum_version": "v4.0.1",
+    "minimum_version": "v0.4.1",
     "downgrade_prevention_rule": "Once a consumer admits the 4.x public feed, it must not mirror or promote a release older than release_integrity.minimum_version without an explicit governed rollback decision.",
     "rollback_authorization": {
       "rule": "Rollback to an older 4.x artifact requires explicit governed approval before repointing a machine or mirror.",
@@ -286,7 +286,7 @@
     },
     "revocation": {
       "ledger_path": "releases/revocations.json",
-      "record_path": "releases/revocations/v4.0.1.json"
+      "record_path": "releases/revocations/v0.4.1.json"
     },
     "mirror_policy": {
       "feed_path": "releases/feed.json",

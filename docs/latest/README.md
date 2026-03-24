@@ -93,7 +93,7 @@ Note: the node exposes additional admin and runtime-internal routes beyond the
 current OpenAPI file. The OpenAPI contract documents the stable public subset,
 not every live adapter-facing route.
 
-Runtime discovery surfaces published by the `3.x` server:
+Runtime discovery surfaces published by the `0.3.x` server:
 
 - `GET /` for machine-readable discovery links
 - `GET /openapi.json` and `GET /openapi.yaml` for the live OpenAPI contract

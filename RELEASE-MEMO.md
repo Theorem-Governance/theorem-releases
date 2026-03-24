@@ -1,4 +1,4 @@
-# Theorem 5.0 Release Memo
+# Theorem 0.5 Release Memo
 
 Date: 2026-03-24
 
@@ -6,12 +6,12 @@ Audience: downstream platform operators, integration owners, and release manager
 
 Status: released
 
-Tag: `v5.0.0`
+Tag: `v0.5.0`
 
 ## Position
 
-`5.0` is the release where Theorem becomes a complete FreeBSD-native OS from
-PID 1 to organizational authority. It extends the `4.0` governed platform
+`0.5` is the release where Theorem becomes a complete FreeBSD-native OS from
+PID 1 to organizational authority. It extends the `0.4` governed platform
 contract with a full substrate layer: ZFS-backed storage, jail-based compute,
 PF networking, hardware device governance, encrypted secret management,
 governed image pipelines, distributed fabric, economic settlement, branch
@@ -19,10 +19,10 @@ reality, and autonomous governance runtime.
 
 ## What Changed From 4.0
 
-`4.0` shipped six surfaces: governed release artifacts, measured-boot recovery,
+`0.4` shipped six surfaces: governed release artifacts, measured-boot recovery,
 tenant boundaries, capacity economics, provisioning, and operator authority.
 
-`5.0` keeps all of that and adds the substrate — the OS layer that these
+`0.5` keeps all of that and adds the substrate — the OS layer that these
 governance surfaces now run on natively rather than wrapping an external host.
 
 The 30-crate workspace now covers:
@@ -65,13 +65,13 @@ Key security changes:
 
 ## Release Assets
 
-- `theorem-node-v5.0.0-x86_64-unknown-linux-gnu.tar.gz` — binary
-- `theorem-node-v5.0.0-x86_64-unknown-linux-gnu.tar.gz.sha256` — checksum
-- `theorem-node-v5.0.0.cdx.xml` — CycloneDX SBOM
+- `theorem-node-v0.5.0-x86_64-unknown-linux-gnu.tar.gz` — binary
+- `theorem-node-v0.5.0-x86_64-unknown-linux-gnu.tar.gz.sha256` — checksum
+- `theorem-node-v0.5.0.cdx.xml` — CycloneDX SBOM
 
 ## What Downstream Teams Can Do Now
 
-- Consume `releases/feed.json` for the v5.0.0 entry
+- Consume `releases/feed.json` for the v0.5.0 entry
 - Download and verify the binary from the release URL
 - Review the release contract for automation guidance
-- Automate against `v5.0.0` tag, not "latest"
+- Automate against `v0.5.0` tag, not "latest"

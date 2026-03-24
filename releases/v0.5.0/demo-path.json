@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "artifact": "theorem-5.0-demo-path",
   "generated_at": "2026-03-24T22:45:00Z",
-  "source_conformance_report": "releases/v5.0.0/conformance.json",
+  "source_conformance_report": "releases/v0.5.0/conformance.json",
   "status": "passed",
   "summary": {
     "total_steps": 12,

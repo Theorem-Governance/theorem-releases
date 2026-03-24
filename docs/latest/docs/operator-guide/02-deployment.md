@@ -13,14 +13,14 @@ symlink rather than unpacking over an in-place binary.
 Recommended layout:
 
 ```text
-/var/lib/theorem/releases/theorem-node-v3.0.0-x86_64-unknown-linux-gnu/
-/var/lib/theorem/current -> /var/lib/theorem/releases/theorem-node-v3.0.0-x86_64-unknown-linux-gnu/
+/var/lib/theorem/releases/theorem-node-v0.3.0-x86_64-unknown-linux-gnu/
+/var/lib/theorem/current -> /var/lib/theorem/releases/theorem-node-v0.3.0-x86_64-unknown-linux-gnu/
 ```
 
 Recommended install sequence:
 
 ```bash
-VERSION="v3.0.0"
+VERSION="v0.3.0"
 TARGET="x86_64-unknown-linux-gnu"
 BASE="/var/lib/theorem"
 RELEASE_DIR="${BASE}/releases/theorem-node-${VERSION}-${TARGET}"

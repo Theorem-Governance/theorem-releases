@@ -3,7 +3,7 @@
   "buildType": "https://theorem.tech/ring1-build/v1",
   "invocation": {
     "configSource": {"entryPoint": "scripts/ring1-build-release.sh"},
-    "parameters": {"tag": "v4.0.1"}
+    "parameters": {"tag": "v0.4.1"}
   },
   "buildConfig": {
     "commands": ["cargo build --release"],

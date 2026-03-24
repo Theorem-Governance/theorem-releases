@@ -1,15 +1,15 @@
 {
   "schema_version": "1.0.0",
   "product": "theorem-node",
-  "version": "v5.0.0",
+  "version": "v0.5.0",
   "release_date": "2026-03-24T22:27:13Z",
   "generated_at": "2026-03-24T22:45:00Z",
   "manifest": {
-    "path": "releases/v5.0.0/manifest.json",
-    "asset_name": "theorem-release-manifest-v5.0.0.json"
+    "path": "releases/v0.5.0/manifest.json",
+    "asset_name": "theorem-release-manifest-v0.5.0.json"
   },
   "release_ring": "public",
-  "minimum_version": "v5.0.0",
+  "minimum_version": "v0.5.0",
   "downgrade_prevention_rule": "Once a consumer admits the 5.x public feed, it must not mirror or promote a release older than release_integrity.minimum_version without an explicit governed rollback decision.",
   "rollback_authorization": {
     "rule": "Rollback to an older 5.x artifact requires explicit governed approval before repointing a machine or mirror.",
@@ -20,7 +20,7 @@
   },
   "binary_assets": [
     {
-      "name": "theorem-node-v5.0.0-x86_64-unknown-freebsd.tar.gz",
+      "name": "theorem-node-v0.5.0-x86_64-unknown-freebsd.tar.gz",
       "sha256": "074ac533334be1e7f2352c8e0ee8983a35465a2d5e58839a17fd35bb82c9560b",
       "size_bytes": 18563463,
       "target": "x86_64-unknown-freebsd",
@@ -192,13 +192,13 @@
   ],
   "provenance_assets": [
     {
-      "name": "theorem-node-v5.0.0.provenance.json",
-      "path": "releases/v5.0.0/theorem-node-v5.0.0.provenance.json"
+      "name": "theorem-node-v0.5.0.provenance.json",
+      "path": "releases/v0.5.0/theorem-node-v0.5.0.provenance.json"
     }
   ],
   "revocation": {
     "ledger_path": "releases/revocations.json",
-    "record_path": "releases/revocations/v5.0.0.json"
+    "record_path": "releases/revocations/v0.5.0.json"
   },
   "mirror_policy": {
     "feed_path": "releases/feed.json",

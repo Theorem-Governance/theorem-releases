@@ -9,7 +9,7 @@ info:
     The kernel enforces all governance rules (E1-E16). This OpenAPI file
     documents the stable public subset of the theorem-node HTTP surface.
 
-    Public 3.x capability negotiation is release-time negotiation through
+    Public 0.3.x capability negotiation is release-time negotiation through
     `releases/feed.json` and `releases/<tag>/manifest.json`, not request-time
     version headers. The published manifest is the stable capability discovery
     surface.
@@ -128,7 +128,7 @@ paths:
 
   /capabilities:
     get:
-      summary: List runtime-discoverable public 3.x capabilities
+      summary: List runtime-discoverable public 0.3.x capabilities
       operationId: listRuntimeCapabilities
       responses:
         "200":
@@ -147,7 +147,7 @@ paths:
 
   /capability-negotiation:
     get:
-      summary: Describe how to negotiate 3.x capabilities across release and runtime surfaces
+      summary: Describe how to negotiate 0.3.x capabilities across release and runtime surfaces
       operationId: getCapabilityNegotiation
       responses:
         "200":
