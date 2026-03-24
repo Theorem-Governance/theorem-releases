@@ -14,7 +14,9 @@
   "rollback_authorization": {
     "rule": "Rollback to an older 5.x artifact requires explicit governed approval before repointing a machine or mirror.",
     "required_approval_count": 2,
-    "authorized_roles": ["root-governance-authority"]
+    "authorized_roles": [
+      "root-governance-authority"
+    ]
   },
   "binary_assets": [
     {
@@ -36,7 +38,158 @@
       "veriexec_entries": 5
     }
   ],
-  "sbom_assets": [],
+  "sbom_assets": [
+    {
+      "name": "theorem-act-types.cdx.xml",
+      "sha256": "51ad7fb9c34ff4377c67bb9ded01314d397ef1922ae21ac40c52beee9796cfcb",
+      "size_bytes": 19526
+    },
+    {
+      "name": "theorem-act.cdx.xml",
+      "sha256": "b373a572cdff23fa8987d322d9dacf1473243d1efc410270f72bd4535531fea1",
+      "size_bytes": 88223
+    },
+    {
+      "name": "theorem-auto.cdx.xml",
+      "sha256": "fd6c7e8716ab5d63c962da091ff0afebb4dc92f32ec5c11558115b67ba13d0c4",
+      "size_bytes": 94779
+    },
+    {
+      "name": "theorem-boot.cdx.xml",
+      "sha256": "a6319365b6ce006b9d57cce5744e692375b7a0285cf24b0b700b35f7a1d3b76f",
+      "size_bytes": 82635
+    },
+    {
+      "name": "theorem-branch.cdx.xml",
+      "sha256": "8394b86f948a72160e582ef4d5ff9b856587d0631531758441a37568cbe7736d",
+      "size_bytes": 88011
+    },
+    {
+      "name": "theorem-build.cdx.xml",
+      "sha256": "1ed98a242a429791c899e0903f46edb056e9ba66b5d2ff4c0dcc7ab008c53c1e",
+      "size_bytes": 103802
+    },
+    {
+      "name": "theorem-bus-client.cdx.xml",
+      "sha256": "579e15b83d9618ad8730c8a6012d8a34b4149aca980f1896513396fd2b4d7484",
+      "size_bytes": 218110
+    },
+    {
+      "name": "theorem-bus.cdx.xml",
+      "sha256": "0a03df15c7cf46a0f999d74edf33ac93f40bf3eb4a8cfb398ebf1b2235576af6",
+      "size_bytes": 216864
+    },
+    {
+      "name": "theorem-compute.cdx.xml",
+      "sha256": "a4d024af1ad8cb7802d4748cad19b78989cab09018704b656c7c6243155b074a",
+      "size_bytes": 24033
+    },
+    {
+      "name": "theorem-crypto.cdx.xml",
+      "sha256": "e47e599d92eeec4436f718526256cd2f3d9a431438639ab794fab1d77b0f9ec0",
+      "size_bytes": 80737
+    },
+    {
+      "name": "theorem-dashboard.cdx.xml",
+      "sha256": "7ee869246e8abc1494818cc3762d07bba75ff4a82aff54abc3bb1c0bd76c45cd",
+      "size_bytes": 207725
+    },
+    {
+      "name": "theorem-devices.cdx.xml",
+      "sha256": "93971ff063233d5bd5280f6d68ca6d30426f7c1c8277493a112cd17f1c67668d",
+      "size_bytes": 24033
+    },
+    {
+      "name": "theorem-econ.cdx.xml",
+      "sha256": "9d86123f57d1e818c6dac5cfd130b7b9b84de749bbb17b90fe70acbee5907366",
+      "size_bytes": 30615
+    },
+    {
+      "name": "theorem-fabric.cdx.xml",
+      "sha256": "e598d4f6a894fb50bde6029c3fe89fdcf721f40a323bf8beeaedb061224a5cc9",
+      "size_bytes": 45003
+    },
+    {
+      "name": "theorem-gateway.cdx.xml",
+      "sha256": "5ec1e97480fc1a3f8ee5e217cd21693502c35da6efed94a6f9d0f362a817a026",
+      "size_bytes": 254480
+    },
+    {
+      "name": "theorem-govagent.cdx.xml",
+      "sha256": "1feb96859e869c3286d64608897d4c053d4b7d9dfaf08420ca1c653d1cb1516d",
+      "size_bytes": 263179
+    },
+    {
+      "name": "theorem-image.cdx.xml",
+      "sha256": "89879377a1c68acc126436d5961b00857f38ccbd781ceb476db79cd1100036c3",
+      "size_bytes": 81837
+    },
+    {
+      "name": "theorem-init.cdx.xml",
+      "sha256": "5913749720448ab7565e99c57ba892af4ef68f3836b3117551bc68891128f9f1",
+      "size_bytes": 314949
+    },
+    {
+      "name": "theorem-kernel.cdx.xml",
+      "sha256": "80d51028ece1e82a05d054536df759dbc7fbeed71dfca1f3e215c5f59fdeaef7",
+      "size_bytes": 51608
+    },
+    {
+      "name": "theorem-net.cdx.xml",
+      "sha256": "1534d48a13ea56b8c14f1e23db947900d4af6ea9dcdff47c76fba847c412d493",
+      "size_bytes": 24005
+    },
+    {
+      "name": "theorem-node.cdx.xml",
+      "sha256": "740aacb993979733aaa1e73a4a3807cd0d60427daab1c7dfd15190c3adb02282",
+      "size_bytes": 263217
+    },
+    {
+      "name": "theorem-secrets.cdx.xml",
+      "sha256": "430d8a5d99b89efca6a30e6ef4d0a802580b12a53bea5dbf1b79cd1c7f207b50",
+      "size_bytes": 81946
+    },
+    {
+      "name": "theorem-settle.cdx.xml",
+      "sha256": "4b8c4e1e1ef16a4f0c56bd656031e9d2bfa61f6122af1d41c656fb870502200b",
+      "size_bytes": 88221
+    },
+    {
+      "name": "theorem-storage-sqlite.cdx.xml",
+      "sha256": "2d9b5f8db5c008b15498125a8a2d9a6ec126a774d4661f8b62391c37dbe1f55e",
+      "size_bytes": 71666
+    },
+    {
+      "name": "theorem-store.cdx.xml",
+      "sha256": "e614468d960f77403b8ad9958057e3355dfa37c0099f7bb5636210ad33b560f0",
+      "size_bytes": 82642
+    },
+    {
+      "name": "theorem-supervisor.cdx.xml",
+      "sha256": "97c5f5552603342aa565e0541e214c2b36bb22676c53d947f3a2a19df74a044b",
+      "size_bytes": 255810
+    },
+    {
+      "name": "theorem-test-support.cdx.xml",
+      "sha256": "38f77201f981dc7fb6590d09137c525ac25530e3d35eeaa69155e9865727c4d8",
+      "size_bytes": 52792
+    },
+    {
+      "name": "theorem-witness-storage.cdx.xml",
+      "sha256": "b47eaec083114b233e3c75f783b199b4a14d0bd47b976870a93dcbaa131a795b",
+      "size_bytes": 86585
+    },
+    {
+      "name": "theorem-witness.cdx.xml",
+      "sha256": "bd9684ab7aa45e2fcb1278ee19572ee44985606891036729320bc1a1abe33a50",
+      "size_bytes": 66599
+    },
+    {
+      "name": "theorem-zfs.cdx.xml",
+      "sha256": "52057745142a5d1f3495f7b0176df492fa8b94d2c8013d5a56a3a8b48d6a7ae0",
+      "size_bytes": 19357
+    }
+  ],
   "provenance_assets": [
     {
       "name": "theorem-node-v5.0.0.provenance.json",
@@ -55,9 +208,24 @@
     "stale_behavior": "fail_closed"
   },
   "build_verification": {
-    "live_health_check": {"endpoint": "/health", "response": {"bootstrapped": true, "healthy": true, "status": "ok"}},
-    "live_status_check": {"endpoint": "/status", "response_summary": "25 proof obligations, 2 active entities, bootstrapped"},
-    "zfs_pool": {"name": "theorem", "state": "ONLINE", "datasets": 10, "free_gb": 71.2},
+    "live_health_check": {
+      "endpoint": "/health",
+      "response": {
+        "bootstrapped": true,
+        "healthy": true,
+        "status": "ok"
+      }
+    },
+    "live_status_check": {
+      "endpoint": "/status",
+      "response_summary": "25 proof obligations, 2 active entities, bootstrapped"
+    },
+    "zfs_pool": {
+      "name": "theorem",
+      "state": "ONLINE",
+      "datasets": 10,
+      "free_gb": 71.2
+    },
     "pf_firewall": "loaded and enabled",
     "content_store": "admit + verify tested on real ZFS",
     "binary_type": "ELF 64-bit LSB pie executable, x86-64, version 1 (FreeBSD), for FreeBSD 14.4"
