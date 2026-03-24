@@ -2,7 +2,7 @@
 
 This document defines the supported release contract for `theorem-node`
 artifacts published from the Ring 1 release host and the public machine
-contract line expected to remain stable through `4.x`.
+contract line expected to remain stable through `5.x`.
 
 ## Scope
 
@@ -49,8 +49,8 @@ Binary release assets use this naming pattern:
 
 Examples:
 
-- `theorem-node-v4.0.0-x86_64-unknown-linux-gnu.tar.gz`
-- `theorem-node-v4.0.0-x86_64-unknown-linux-gnu.tar.gz.sha256`
+- `theorem-node-v5.0.0-x86_64-unknown-linux-gnu.tar.gz`
+- `theorem-node-v5.0.0-x86_64-unknown-linux-gnu.tar.gz.sha256`
 
 The tarball expands into a directory with the same base name:
 
@@ -64,7 +64,7 @@ base name plus `.sha256`.
 Verification example:
 
 ```bash
-shasum -a 256 -c theorem-node-v4.0.0-x86_64-unknown-linux-gnu.tar.gz.sha256
+shasum -a 256 -c theorem-node-v5.0.0-x86_64-unknown-linux-gnu.tar.gz.sha256
 ```
 
 ## SBOM Contract
@@ -355,7 +355,7 @@ queryable release declaration exists.
 
 ## Automation Guidance
 
-- Automate against explicit tags such as `v4.0.0`.
+- Automate against explicit tags such as `v5.0.0`.
 - Do not treat the GitHub "latest" pointer as a stable deployment contract.
 - Before promoting a release, verify the checksum for the exact asset you
   downloaded.

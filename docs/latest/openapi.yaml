@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Theorem Governance Node API
-  version: 3.0.0
+  version: 5.0.0
   description: |
     HTTP API for a Theorem governance kernel instance. Any program that can
     make HTTP requests can interact with this API — no SDK required.
