@@ -2,7 +2,7 @@
   "schema_version": "1.2.0",
   "product": "theorem-node",
   "version": "v0.5.0",
-  "release_date": "2026-03-25T19:33:51Z",
+  "release_date": "2026-03-25T22:15:37Z",
   "compatibility_classification": "breaking-major",
   "upgrade_contract": {
     "line": "0.5.x",
@@ -429,14 +429,14 @@
     },
     {
       "name": "theorem-release-integrity-v0.5.0.json",
-      "sha256": "c539599e7cb42ed9add47c27866a4613e0d5b09bbf2d93137899249015a9a458",
-      "size_bytes": 8875,
+      "sha256": "d2dec130b1314e1fcfb2ff533d5c625066d1f4e55bad311b6398cef88321cb19",
+      "size_bytes": 8267,
       "artifact_kind": "evidence"
     },
     {
       "name": "theorem-release-manifest-v0.5.0.json",
-      "sha256": "53964f27f9cbb1353332e937b78a39642071ffcebe5b3f6257f201274dd72a93",
-      "size_bytes": 24074,
+      "sha256": "cdba6dad060fb6bb0a7f44deb27b55356636ead8a14f71f1e7b7b6122fe8b97d",
+      "size_bytes": 23073,
       "artifact_kind": "evidence"
     },
     {
@@ -495,26 +495,30 @@
     },
     {
       "name": "theoremos-v0.5.0-amd64-direct-write.img.xz",
-      "sha256": "7271df34aa489f2f74d75d49bae34940fe559071a9d28f707f34d701c8ec7d26",
-      "size_bytes": 297820304,
+      "sha256": "e8404a51eb86f5180c547a01b5e9b0d7f0ad3a656c35da6e6423dc302a6cf0c0",
+      "size_bytes": 299682056,
       "artifact_kind": "direct-write-disk-image",
       "target": "amd64-freebsd",
       "format": "raw.xz",
       "automation_strategy": "decompress-and-direct-write",
       "direct_disk_write": "allowed",
+      "seed_partition_label": "THEOREMSEED",
+      "seed_filesystem": "msdosfs",
+      "first_boot_config_path": "first-boot.conf",
+      "first_boot_config_template": "first-boot.conf.example",
       "bootable": true
     },
     {
       "name": "theoremos-v0.5.0-amd64-direct-write.img.xz.sha256",
-      "sha256": "0b0ef3040e9d719a7ff37015c8fbf4fe77e7a9e35e53b6aec838b3852ad13ad7",
+      "sha256": "c24c5aad4bffe971368793c7b6487c3e7926f4b5279a0517f438de7004ee71a0",
       "size_bytes": 108,
       "artifact_kind": "checksum",
       "format": "sha256"
     },
     {
       "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz",
-      "sha256": "785d4554aa1e83a70f98a80ecdb5ba406d51c2e2d481c9795db57f7f76bc41ec",
-      "size_bytes": 17195075,
+      "sha256": "de18eb0393e8812f16d90ab99ab206a52ee6e68efdb2a51ccfb685f13368ef63",
+      "size_bytes": 17196826,
       "artifact_kind": "installer-rootfs",
       "target": "freebsd",
       "format": "tar.gz",
@@ -527,44 +531,8 @@
     },
     {
       "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz.sha256",
-      "sha256": "03cd4313d481fe4fa4fba42caa38bba8e0450eb9648d52b2538f481b3228585f",
+      "sha256": "d200bf5faa5bb25a789bce7b94fcca4b12fffab490f6910573c999e9028f9587",
       "size_bytes": 112,
-      "artifact_kind": "checksum",
-      "format": "sha256"
-    },
-    {
-      "name": "theoremos-v0.5.0-amd64-memstick.img",
-      "sha256": "7921ab2cf0e4fe8996e587584e3444d617d33aa878038e7a88a8b04359fc9185",
-      "size_bytes": 1073838592,
-      "artifact_kind": "install-media",
-      "target": "amd64-freebsd",
-      "format": "ufs-gpt",
-      "automation_strategy": "manual-install-media",
-      "direct_disk_write": "forbidden",
-      "bootable": true
-    },
-    {
-      "name": "theoremos-v0.5.0-amd64-memstick.img.sha256",
-      "sha256": "47979de3d4ed37855684247bcd3cc1896d410fb9cac6d57560191b63552d2c12",
-      "size_bytes": 118,
-      "artifact_kind": "checksum",
-      "format": "sha256"
-    },
-    {
-      "name": "theoremos-v0.5.0-amd64.iso",
-      "sha256": "17134df722d28efc43ff3c81396a146c9926862207c746665fabc872a4d1330c",
-      "size_bytes": 750493696,
-      "artifact_kind": "install-media",
-      "target": "amd64-freebsd",
-      "format": "cd9660",
-      "automation_strategy": "manual-install-media",
-      "direct_disk_write": "forbidden",
-      "bootable": true
-    },
-    {
-      "name": "theoremos-v0.5.0-amd64.iso.sha256",
-      "sha256": "221d7be44d3dcdd937556fcc7dcce8f41d45d31deaa20c7e05d7bcb98e35bc6c",
-      "size_bytes": 109,
       "artifact_kind": "checksum",
       "format": "sha256"
     }
@@ -622,10 +590,11 @@
     },
     "mirror_policy": {
       "feed_path": "releases/feed.json",
-      "mirror_generated_at": "2026-03-25T19:33:51Z",
-      "mirror_expires_at": "2026-03-26T19:33:51Z",
+      "mirror_generated_at": "2026-03-25T22:15:37Z",
+      "mirror_expires_at": "2026-03-26T22:15:37Z",
       "mirror_ttl_hours": 24,
       "stale_behavior": "fail_closed"
     }
-  }
+  },
+  "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.5.0"
 }

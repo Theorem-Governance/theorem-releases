@@ -28,6 +28,9 @@ Additional hard rules:
   writes.
 - For `installer-rootfs`, resolve the installer at
   `${archive_root}/${installer_entrypoint}` after extraction.
+- For `direct-write-disk-image`, place `/first-boot.conf` in the FAT seed
+  partition named by `seed_partition_label` before first boot. The expected
+  template path on that partition is `first_boot_config_template`.
 - `theoremos-*.iso` and `theoremos-*-memstick.img` are install media only.
 - Current `0.5.x` unattended bare-metal contract is the
   `direct-write-disk-image` artifact. `installer-rootfs` remains valid only for

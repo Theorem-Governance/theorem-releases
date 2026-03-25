@@ -311,7 +311,10 @@
         },
         "archive_root": { "type": "string" },
         "installer_entrypoint": { "type": "string" },
+        "first_boot_config_path": { "type": "string" },
         "first_boot_config_template": { "type": "string" },
+        "seed_partition_label": { "type": "string" },
+        "seed_filesystem": { "type": "string" },
         "bootable": { "type": "boolean" }
       }
     },

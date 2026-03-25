@@ -113,7 +113,10 @@ Machine consumers must distinguish the FreeBSD artifact classes:
   disk image artifact. Its manifest entry carries
   `artifact_kind=direct-write-disk-image`,
   `automation_strategy=decompress-and-direct-write`, and
-  `direct_disk_write=allowed`.
+  `direct_disk_write=allowed`. It also carries
+  `seed_partition_label=THEOREMSEED`, `seed_filesystem=msdosfs`,
+  `first_boot_config_path=first-boot.conf`, and
+  `first_boot_config_template=first-boot.conf.example`.
 - `theoremos-<tag>-x86_64-unknown-freebsd.tar.gz` is the installer-capable
   rootfs artifact. Its manifest entry carries `artifact_kind=installer-rootfs`,
   `automation_strategy=extract-and-run-installer`, `archive_root`, an
@@ -126,6 +129,9 @@ Machine consumers must distinguish the FreeBSD artifact classes:
   published for unattended bare-metal writes.
 - Automation must fail closed if no `installer-rootfs` artifact is published
   for installer-driven bare-metal flows.
+- Direct-write consumers must inject `/first-boot.conf` into the published
+  seed partition before first boot if they need remote SSH access or static
+  network configuration.
 
 See `docs/theorem-init-contract.md` for the service lifecycle, and
 `docs/operator-guide/08-migration-4x-to-5x.md` for the migration path.
