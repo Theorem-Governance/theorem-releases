@@ -2,7 +2,7 @@
   "schema_version": "1.2.0",
   "product": "theorem-node",
   "version": "v0.5.0",
-  "release_date": "2026-03-25T12:31:05Z",
+  "release_date": "2026-03-25T15:53:51Z",
   "compatibility_classification": "breaking-major",
   "upgrade_contract": {
     "line": "0.5.x",
@@ -271,7 +271,7 @@
   "required_operator_actions": [
     "Consume releases/feed.json, releases/v0.5.0/manifest.json, and releases/v0.5.0/integrity.json before mirroring or admitting a 5.x release.",
     "Deploy on FreeBSD 14.4-RELEASE or later with ZFS root pool named 'theorem'.",
-    "Use theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz plus install.sh for autonomous bare-metal deployment; treat ISO and memstick assets as install media only.",
+    "Use theoremos-v0.5.0-amd64-direct-write.img.xz for unattended bare-metal direct disk writes; use theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz only for installer-driven bare-metal flows; treat ISO and memstick assets as install media only.",
     "Install theorem-init to /sbin/theorem-init and remaining binaries to /usr/local/bin/.",
     "Load PF kernel module and configure /etc/pf.conf with theorem anchor.",
     "Review /etc/veriexec.d/theorem.manifest and optionally load mac_veriexec for verified execution."
@@ -428,6 +428,18 @@
       "artifact_kind": "sbom"
     },
     {
+      "name": "theorem-release-integrity-v0.5.0.json",
+      "sha256": "814fb197b94cc0f170d2735463e83aa0cd2c3bea41d837b2581a10558eb82e6c",
+      "size_bytes": 8446,
+      "artifact_kind": "evidence"
+    },
+    {
+      "name": "theorem-release-manifest-v0.5.0.json",
+      "sha256": "a8883f68646ec811c7a3a57a79e633c70235db27c3dc8b3f54c9a013e5d64e07",
+      "size_bytes": 22778,
+      "artifact_kind": "evidence"
+    },
+    {
       "name": "theorem-secrets.cdx.xml",
       "sha256": "430d8a5d99b89efca6a30e6ef4d0a802580b12a53bea5dbf1b79cd1c7f207b50",
       "size_bytes": 81946,
@@ -482,23 +494,38 @@
       "artifact_kind": "sbom"
     },
     {
-      "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz",
-      "sha256": "8caa671f6fb11b0f6b84e0403375aa27765dcf0ec07608b2329b83759171d838",
-      "size_bytes": 17194711,
-      "artifact_kind": "installer-rootfs",
-      "target": "freebsd",
-      "format": "tar.gz",
-      "automation_strategy": "extract-and-run-installer",
-      "direct_disk_write": "forbidden",
-      "archive_root": "theoremos-v0.5.0-x86_64-unknown-freebsd",
-      "installer_entrypoint": "install.sh",
-      "first_boot_config_template": "etc/theorem/first-boot.conf.example",
-      "bootable": false
+      "name": "theoremos-v0.5.0-amd64-direct-write.img.xz",
+      "sha256": "b739f89941a63bbd9bd1412558c473163ad691f54abd42cfea9d2126e648f7cc",
+      "size_bytes": 296785804,
+      "artifact_kind": "direct-write-disk-image",
+      "target": "amd64-freebsd",
+      "format": "raw.xz",
+      "automation_strategy": "decompress-and-direct-write",
+      "direct_disk_write": "allowed",
+      "bootable": true
     },
     {
-      "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz.sha256",
-      "sha256": "f8940f8da34f48c636cf378595d1a0cc713cc37ec559b7f9f03c3b1009b797c0",
-      "size_bytes": 112,
+      "name": "theoremos-v0.5.0-amd64-direct-write.img.xz.sha256",
+      "sha256": "2e7d41f21b9a984fcbbdadf8fb8edcc3f78e4816615b051fc600a774cead15e4",
+      "size_bytes": 108,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theoremos-v0.5.0-amd64-memstick.img",
+      "sha256": "7921ab2cf0e4fe8996e587584e3444d617d33aa878038e7a88a8b04359fc9185",
+      "size_bytes": 1073838592,
+      "artifact_kind": "install-media",
+      "target": "amd64-freebsd",
+      "format": "ufs-gpt",
+      "automation_strategy": "manual-install-media",
+      "direct_disk_write": "forbidden",
+      "bootable": true
+    },
+    {
+      "name": "theoremos-v0.5.0-amd64-memstick.img.sha256",
+      "sha256": "47979de3d4ed37855684247bcd3cc1896d410fb9cac6d57560191b63552d2c12",
+      "size_bytes": 118,
       "artifact_kind": "checksum",
       "format": "sha256"
     },
@@ -521,20 +548,23 @@
       "format": "sha256"
     },
     {
-      "name": "theoremos-v0.5.0-amd64-memstick.img",
-      "sha256": "7921ab2cf0e4fe8996e587584e3444d617d33aa878038e7a88a8b04359fc9185",
-      "size_bytes": 1073838592,
-      "artifact_kind": "install-media",
-      "target": "amd64-freebsd",
-      "format": "ufs-gpt",
-      "automation_strategy": "manual-install-media",
+      "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "8caa671f6fb11b0f6b84e0403375aa27765dcf0ec07608b2329b83759171d838",
+      "size_bytes": 17194711,
+      "artifact_kind": "installer-rootfs",
+      "target": "freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-and-run-installer",
       "direct_disk_write": "forbidden",
-      "bootable": true
+      "archive_root": "theoremos-v0.5.0-x86_64-unknown-freebsd",
+      "installer_entrypoint": "install.sh",
+      "first_boot_config_template": "etc/theorem/first-boot.conf.example",
+      "bootable": false
     },
     {
-      "name": "theoremos-v0.5.0-amd64-memstick.img.sha256",
-      "sha256": "47979de3d4ed37855684247bcd3cc1896d410fb9cac6d57560191b63552d2c12",
-      "size_bytes": 118,
+      "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz.sha256",
+      "sha256": "f8940f8da34f48c636cf378595d1a0cc713cc37ec559b7f9f03c3b1009b797c0",
+      "size_bytes": 112,
       "artifact_kind": "checksum",
       "format": "sha256"
     }
@@ -586,16 +616,16 @@
         "root-governance-authority"
       ]
     },
-    "mirror_policy": {
-      "feed_path": "releases/feed.json",
-      "mirror_generated_at": "2026-03-25T12:31:05Z",
-      "mirror_expires_at": "2026-03-26T12:31:05Z",
-      "mirror_ttl_hours": 24,
-      "stale_behavior": "fail_closed"
-    },
     "revocation": {
       "ledger_path": "releases/revocations.json",
       "record_path": "releases/revocations/v0.5.0.json"
+    },
+    "mirror_policy": {
+      "feed_path": "releases/feed.json",
+      "mirror_generated_at": "2026-03-25T15:53:51Z",
+      "mirror_expires_at": "2026-03-26T15:53:51Z",
+      "mirror_ttl_hours": 24,
+      "stale_behavior": "fail_closed"
     }
   }
 }

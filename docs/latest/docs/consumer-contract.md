@@ -12,8 +12,8 @@ theoremOS is at the **platform preview** stage as of v0.5.0. This means:
 - The substrate technology is real and running on bare metal FreeBSD
 - The release evidence chain (manifest, integrity, conformance, provenance,
   SBOMs, revocation) is published and machine-readable
-- The FreeBSD rootfs tarball now carries an installer-capable bare-metal
-  contract via `install.sh` and `first-boot.conf`
+- The public release now publishes both a direct-write bare-metal disk image
+  and an installer-capable FreeBSD rootfs tarball
 - But: upgrade/rollback paths are not yet machine-executable
 - But: not all consumer-facing contracts are explicit
 
@@ -36,8 +36,11 @@ contract reaches **production ready** status.
   status per version.
 - **Asset naming**: `theorem-node-<tag>-<target>.tar.gz`
 - **Bare-metal artifact typing**: release manifests distinguish
-  `installer-rootfs` from `install-media`; automation must fail closed on
-  `install-media`
+  `direct-write-disk-image`, `installer-rootfs`, and `install-media`;
+  automation must fail closed on `install-media`
+- **Direct-write contract**: unattended bare-metal disk writes must consume
+  only `artifact_kind=direct-write-disk-image` with
+  `direct_disk_write=allowed`
 - **Installer archive contract**: `installer-rootfs` artifacts publish
   `archive_root` plus `installer_entrypoint`; consumers must resolve the
   installer path relative to that archive root
@@ -55,8 +58,6 @@ contract reaches **production ready** status.
 
 ### Not Yet Stable
 
-- **Direct-write disk image**: no machine-published direct-write disk image yet.
-  Use the installer-capable rootfs tarball instead of ISO/memstick media.
 - **Upgrade path**: No documented or machine-executable upgrade from N-1 to N.
 - **Rollback path**: ZFS snapshots exist but no consumer-facing rollback
   contract.
@@ -113,6 +114,16 @@ integrity = json.load(open('releases/v0.5.0/integrity.json'))
 "
 ```
 
+### Installation (direct-write bare metal)
+
+```bash
+curl -LO <release-url>/theoremos-v0.5.0-amd64-direct-write.img.xz
+curl -LO <release-url>/theoremos-v0.5.0-amd64-direct-write.img.xz.sha256
+shasum -a 256 -c theoremos-v0.5.0-amd64-direct-write.img.xz.sha256
+
+xz -dc theoremos-v0.5.0-amd64-direct-write.img.xz | dd of=/dev/<target-disk> bs=16M conv=fsync
+```
+
 ### Installation (installer-capable rootfs)
 
 ```bash
@@ -146,12 +157,10 @@ curl -s http://localhost:3456/status | python3 -m json.tool
 
 These are the gaps between "platform preview" and "production ready":
 
-1. **Direct-write disk image contract** — publish a machine-readable direct-write
-   artifact or keep installer-rootfs as the only automation contract
-2. **Upgrade contract** — documented, machine-executable N-1 → N path
-3. **Rollback contract** — documented rollback with ZFS snapshot integration
-4. **Configuration contract** — frozen config file format and location
-5. **Release validator in CI** — `scripts/validate-release.sh` runs before
+1. **Upgrade contract** — documented, machine-executable N-1 → N path
+2. **Rollback contract** — documented rollback with ZFS snapshot integration
+3. **Configuration contract** — frozen config file format and location
+4. **Release validator in CI** — `scripts/validate-release.sh` runs before
    any publication
 
 ## Versioning

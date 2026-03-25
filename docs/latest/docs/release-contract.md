@@ -109,6 +109,11 @@ configuration, sets immutable flags, and enables the theorem-init service.
 
 Machine consumers must distinguish the FreeBSD artifact classes:
 
+- `theoremos-<tag>-amd64-direct-write.img.xz` is the unattended bare-metal
+  disk image artifact. Its manifest entry carries
+  `artifact_kind=direct-write-disk-image`,
+  `automation_strategy=decompress-and-direct-write`, and
+  `direct_disk_write=allowed`.
 - `theoremos-<tag>-x86_64-unknown-freebsd.tar.gz` is the installer-capable
   rootfs artifact. Its manifest entry carries `artifact_kind=installer-rootfs`,
   `automation_strategy=extract-and-run-installer`, `archive_root`, an
@@ -117,8 +122,10 @@ Machine consumers must distinguish the FreeBSD artifact classes:
 - `theoremos-<tag>-amd64.iso` and `theoremos-<tag>-amd64-memstick.img` are
   install media only. Their manifest entries carry
   `artifact_kind=install-media` and `direct_disk_write=forbidden`.
-- Automation must fail closed if no `installer-rootfs` or future
-  `direct-write-disk-image` artifact is published for the requested release.
+- Automation must fail closed if no `direct-write-disk-image` artifact is
+  published for unattended bare-metal writes.
+- Automation must fail closed if no `installer-rootfs` artifact is published
+  for installer-driven bare-metal flows.
 
 See `docs/theorem-init-contract.md` for the service lifecycle, and
 `docs/operator-guide/08-migration-4x-to-5x.md` for the migration path.

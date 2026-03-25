@@ -29,8 +29,9 @@ Additional hard rules:
 - For `installer-rootfs`, resolve the installer at
   `${archive_root}/${installer_entrypoint}` after extraction.
 - `theoremos-*.iso` and `theoremos-*-memstick.img` are install media only.
-- Current `0.5.x` automation-safe bare-metal contract is the
-  `installer-rootfs` tarball plus `install.sh`.
+- Current `0.5.x` unattended bare-metal contract is the
+  `direct-write-disk-image` artifact. `installer-rootfs` remains valid only for
+  installer-driven automation on a prepared FreeBSD host.
 
 Minimal selection flow:
 
@@ -39,7 +40,7 @@ python3 - <<'PY'
 import json
 manifest = json.load(open("manifest.json"))
 
-deploy_mode = "bare-metal-install"
+deploy_mode = "direct-disk-write"
 allowed = {
     "bare-metal-install": {"installer-rootfs"},
     "direct-disk-write": {"direct-write-disk-image"},
