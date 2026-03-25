@@ -2,7 +2,7 @@
   "schema_version": "1.2.0",
   "product": "theorem-node",
   "version": "v0.5.0",
-  "release_date": "2026-03-25T15:53:51Z",
+  "release_date": "2026-03-25T19:33:51Z",
   "compatibility_classification": "breaking-major",
   "upgrade_contract": {
     "line": "0.5.x",
@@ -429,14 +429,14 @@
     },
     {
       "name": "theorem-release-integrity-v0.5.0.json",
-      "sha256": "814fb197b94cc0f170d2735463e83aa0cd2c3bea41d837b2581a10558eb82e6c",
-      "size_bytes": 8446,
+      "sha256": "c539599e7cb42ed9add47c27866a4613e0d5b09bbf2d93137899249015a9a458",
+      "size_bytes": 8875,
       "artifact_kind": "evidence"
     },
     {
       "name": "theorem-release-manifest-v0.5.0.json",
-      "sha256": "a8883f68646ec811c7a3a57a79e633c70235db27c3dc8b3f54c9a013e5d64e07",
-      "size_bytes": 22778,
+      "sha256": "53964f27f9cbb1353332e937b78a39642071ffcebe5b3f6257f201274dd72a93",
+      "size_bytes": 24074,
       "artifact_kind": "evidence"
     },
     {
@@ -495,8 +495,8 @@
     },
     {
       "name": "theoremos-v0.5.0-amd64-direct-write.img.xz",
-      "sha256": "b739f89941a63bbd9bd1412558c473163ad691f54abd42cfea9d2126e648f7cc",
-      "size_bytes": 296785804,
+      "sha256": "7271df34aa489f2f74d75d49bae34940fe559071a9d28f707f34d701c8ec7d26",
+      "size_bytes": 297820304,
       "artifact_kind": "direct-write-disk-image",
       "target": "amd64-freebsd",
       "format": "raw.xz",
@@ -506,8 +506,29 @@
     },
     {
       "name": "theoremos-v0.5.0-amd64-direct-write.img.xz.sha256",
-      "sha256": "2e7d41f21b9a984fcbbdadf8fb8edcc3f78e4816615b051fc600a774cead15e4",
+      "sha256": "0b0ef3040e9d719a7ff37015c8fbf4fe77e7a9e35e53b6aec838b3852ad13ad7",
       "size_bytes": 108,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "785d4554aa1e83a70f98a80ecdb5ba406d51c2e2d481c9795db57f7f76bc41ec",
+      "size_bytes": 17195075,
+      "artifact_kind": "installer-rootfs",
+      "target": "freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-and-run-installer",
+      "direct_disk_write": "forbidden",
+      "archive_root": "theoremos-v0.5.0-x86_64-unknown-freebsd",
+      "installer_entrypoint": "install.sh",
+      "first_boot_config_template": "etc/theorem/first-boot.conf.example",
+      "bootable": false
+    },
+    {
+      "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz.sha256",
+      "sha256": "03cd4313d481fe4fa4fba42caa38bba8e0450eb9648d52b2538f481b3228585f",
+      "size_bytes": 112,
       "artifact_kind": "checksum",
       "format": "sha256"
     },
@@ -544,27 +565,6 @@
       "name": "theoremos-v0.5.0-amd64.iso.sha256",
       "sha256": "221d7be44d3dcdd937556fcc7dcce8f41d45d31deaa20c7e05d7bcb98e35bc6c",
       "size_bytes": 109,
-      "artifact_kind": "checksum",
-      "format": "sha256"
-    },
-    {
-      "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz",
-      "sha256": "8caa671f6fb11b0f6b84e0403375aa27765dcf0ec07608b2329b83759171d838",
-      "size_bytes": 17194711,
-      "artifact_kind": "installer-rootfs",
-      "target": "freebsd",
-      "format": "tar.gz",
-      "automation_strategy": "extract-and-run-installer",
-      "direct_disk_write": "forbidden",
-      "archive_root": "theoremos-v0.5.0-x86_64-unknown-freebsd",
-      "installer_entrypoint": "install.sh",
-      "first_boot_config_template": "etc/theorem/first-boot.conf.example",
-      "bootable": false
-    },
-    {
-      "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz.sha256",
-      "sha256": "f8940f8da34f48c636cf378595d1a0cc713cc37ec559b7f9f03c3b1009b797c0",
-      "size_bytes": 112,
       "artifact_kind": "checksum",
       "format": "sha256"
     }
@@ -622,8 +622,8 @@
     },
     "mirror_policy": {
       "feed_path": "releases/feed.json",
-      "mirror_generated_at": "2026-03-25T15:53:51Z",
-      "mirror_expires_at": "2026-03-26T15:53:51Z",
+      "mirror_generated_at": "2026-03-25T19:33:51Z",
+      "mirror_expires_at": "2026-03-26T19:33:51Z",
       "mirror_ttl_hours": 24,
       "stale_behavior": "fail_closed"
     }

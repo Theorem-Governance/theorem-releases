@@ -4,7 +4,7 @@
     {
       "version": "v0.5.0",
       "status": "active",
-      "changed_at": "2026-03-25T15:55:40Z",
+      "changed_at": "2026-03-25T19:34:55Z",
       "changed_by": "local-zigbuild-release",
       "record_path": "releases/revocations/v0.5.0.json",
       "manifest_path": "releases/v0.5.0/manifest.json",
@@ -22,5 +22,5 @@
       "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.4.1"
     }
   ],
-  "updated_at": "2026-03-25T15:55:40Z"
+  "updated_at": "2026-03-25T19:34:55Z"
 }
