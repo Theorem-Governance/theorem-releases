@@ -36,6 +36,24 @@
       ],
       "veriexec_manifest_included": true,
       "veriexec_entries": 5
+    },
+    {
+      "name": "theoremos-v0.5.0-amd64.iso",
+      "sha256": "17134df722d28efc43ff3c81396a146c9926862207c746665fabc872a4d1330c",
+      "size_bytes": 750493696,
+      "type": "os-image",
+      "format": "cd9660",
+      "target": "amd64-freebsd",
+      "contents": "Full theoremOS rootfs with FreeBSD base, theorem binaries, veriexec manifest, PF config, installer"
+    },
+    {
+      "name": "theoremos-v0.5.0-amd64-memstick.img",
+      "sha256": "7921ab2cf0e4fe8996e587584e3444d617d33aa878038e7a88a8b04359fc9185",
+      "size_bytes": 1073838592,
+      "type": "os-image",
+      "format": "ufs-gpt",
+      "target": "amd64-freebsd",
+      "contents": "GPT-wrapped UFS image for dd to USB — same rootfs as ISO"
     }
   ],
   "sbom_assets": [
