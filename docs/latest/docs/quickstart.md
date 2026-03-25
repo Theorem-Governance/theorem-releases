@@ -21,7 +21,7 @@ expectations.
 
 Have these ready:
 
-- a published release tag such as `v0.5.0`
+- a published release tag such as `v4.0.0`
 - the release tarball and checksum for your platform
 - the matching governance specification document used to compute `SPEC_HASH`
 - concrete values for `ARTIFACT_URL` and `LOG_ENDPOINT`
@@ -32,8 +32,8 @@ Have these ready:
 Grab the latest release for your platform from [GitHub Releases](https://github.com/Theorem-Governance/theorem-releases/releases):
 
 ```bash
-# Example for x86_64 Linux — replace VERSION with the tag (e.g. v0.5.0)
-VERSION="v0.5.0"
+# Example for x86_64 Linux — replace VERSION with the tag (e.g. v4.0.0)
+VERSION="v4.0.0"
 curl -LO "https://github.com/Theorem-Governance/theorem-releases/releases/download/${VERSION}/theorem-node-${VERSION}-x86_64-unknown-linux-gnu.tar.gz"
 tar xzf theorem-node-*.tar.gz
 cd theorem-node-*/
@@ -44,7 +44,7 @@ Release asset names are stable:
 - `theorem-node-<tag>-<target>.tar.gz`
 - `theorem-node-<tag>-<target>.tar.gz.sha256`
 - `theorem-node-<tag>.cdx.xml` or equivalent CycloneDX SBOM attachment
-- `theorem-release-integrity-<tag>.json` for `0.4.x` release integrity evidence
+- `theorem-release-integrity-<tag>.json` for `4.x` release integrity evidence
 
 Use an explicit tag in automation. Do not automate against the GitHub
 "latest" pointer unless you have separately accepted the risk of preemption by
@@ -56,7 +56,7 @@ Verify the checksum:
 shasum -a 256 -c theorem-node-*.tar.gz.sha256
 ```
 
-For `0.4.x`, also review the release manifest and integrity evidence before
+For `4.x`, also review the release manifest and integrity evidence before
 promotion:
 
 ```text
@@ -123,7 +123,7 @@ The API will be available at `http://localhost:3170`.
 
 ### Runtime Discovery
 
-The running `0.4.x` server now publishes machine-readable discovery surfaces:
+The running `4.x` server now publishes machine-readable discovery surfaces:
 
 ```bash
 curl http://localhost:3170/
@@ -175,7 +175,7 @@ A CycloneDX SBOM is attached to each release for supply chain review.
 
 ## Release Integrity
 
-`0.4.x` releases also publish `releases/<tag>/integrity.json` with SBOM,
+`4.x` releases also publish `releases/<tag>/integrity.json` with SBOM,
 provenance, minimum-version, rollback-authorization, revocation, and
 mirror-expiry evidence.
 

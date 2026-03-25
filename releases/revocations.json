@@ -4,8 +4,8 @@
     {
       "version": "v0.5.0",
       "status": "active",
-      "changed_at": "2026-03-24T22:45:00Z",
-      "changed_by": "freebsd-release",
+      "changed_at": "2026-03-25T04:03:41Z",
+      "changed_by": "local-zigbuild-release",
       "record_path": "releases/revocations/v0.5.0.json",
       "manifest_path": "releases/v0.5.0/manifest.json",
       "integrity_path": "releases/v0.5.0/integrity.json",
@@ -22,5 +22,5 @@
       "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.4.1"
     }
   ],
-  "updated_at": "2026-03-24T22:45:00Z"
+  "updated_at": "2026-03-25T04:03:41Z"
 }

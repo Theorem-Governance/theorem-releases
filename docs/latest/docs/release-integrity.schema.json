@@ -15,6 +15,7 @@
     "minimum_version",
     "downgrade_prevention_rule",
     "rollback_authorization",
+    "binary_assets",
     "sbom_assets",
     "provenance_assets",
     "revocation",
@@ -52,6 +53,11 @@
           "items": { "type": "string" }
         }
       }
+    },
+    "binary_assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/artifact" }
     },
     "sbom_assets": {
       "type": "array",
@@ -102,7 +108,31 @@
       "properties": {
         "name": { "type": "string" },
         "sha256": { "type": "string" },
-        "size_bytes": { "type": "integer" }
+        "size_bytes": { "type": "integer" },
+        "artifact_kind": {
+          "type": "string",
+          "enum": [
+            "single-binary",
+            "installer-rootfs",
+            "install-media",
+            "direct-write-disk-image",
+            "checksum",
+            "sbom",
+            "provenance",
+            "evidence",
+            "other"
+          ]
+        },
+        "target": { "type": "string" },
+        "format": { "type": "string" },
+        "automation_strategy": { "type": "string" },
+        "direct_disk_write": {
+          "type": "string",
+          "enum": ["allowed", "forbidden", "not-applicable"]
+        },
+        "installer_entrypoint": { "type": "string" },
+        "first_boot_config_template": { "type": "string" },
+        "bootable": { "type": "boolean" }
       }
     }
   }

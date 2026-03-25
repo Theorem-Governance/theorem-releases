@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Theorem Governance Node API
-  version: 5.0.0
+  version: 0.5.0
   description: |
     HTTP API for a Theorem governance kernel instance. Any program that can
     make HTTP requests can interact with this API — no SDK required.
@@ -9,13 +9,13 @@ info:
     The kernel enforces all governance rules (E1-E16). This OpenAPI file
     documents the stable public subset of the theorem-node HTTP surface.
 
-    Public 0.3.x capability negotiation is release-time negotiation through
+    Public 0.5.x capability negotiation is release-time negotiation through
     `releases/feed.json` and `releases/<tag>/manifest.json`, not request-time
     version headers. The published manifest is the stable capability discovery
     surface.
 
     The running node also exposes additional operator/admin and Ring 3 adapter
-    routes. The 3.0 operator/admin contract is published below for the
+    routes. The 0.5 operator/admin contract is published below for the
     theorem-native organization surfaces; lower-level witness and adapter
     routes remain intentionally excluded from this file:
     `GET /export-state`, `GET /rebuild-authority-state`,
@@ -128,7 +128,7 @@ paths:
 
   /capabilities:
     get:
-      summary: List runtime-discoverable public 0.3.x capabilities
+      summary: List runtime-discoverable public 0.5.x capabilities
       operationId: listRuntimeCapabilities
       responses:
         "200":
@@ -147,7 +147,7 @@ paths:
 
   /capability-negotiation:
     get:
-      summary: Describe how to negotiate 0.3.x capabilities across release and runtime surfaces
+      summary: Describe how to negotiate 0.5.x capabilities across release and runtime surfaces
       operationId: getCapabilityNegotiation
       responses:
         "200":

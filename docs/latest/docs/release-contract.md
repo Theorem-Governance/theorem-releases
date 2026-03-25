@@ -42,6 +42,8 @@ Rules:
 
 ## Asset Naming
 
+### Single-Binary Tarball (backward compat)
+
 Binary release assets use this naming pattern:
 
 - `theorem-node-<tag>-<target>.tar.gz`
@@ -55,6 +57,70 @@ Examples:
 The tarball expands into a directory with the same base name:
 
 - `theorem-node-<tag>-<target>/`
+
+### Rootfs Tarball (autonomous deployment)
+
+FreeBSD rootfs tarballs contain all theorem binaries, configuration files, the
+installer script, and the first-boot provisioning example. This is the
+recommended artifact for autonomous downstream deployment.
+
+Naming pattern:
+
+- `theoremos-<tag>-<target>.tar.gz`
+- `theoremos-<tag>-<target>.tar.gz.sha256`
+
+Examples:
+
+- `theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz`
+- `theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz.sha256`
+
+The tarball expands into `theoremos-<tag>-<target>/` with this layout:
+
+```
+sbin/theorem-init                          PID 1 supervisor
+usr/local/bin/theorem-node                 Governance kernel
+usr/local/bin/theorem-bus                  Message bus
+usr/local/bin/theorem-gateway              API gateway
+usr/local/bin/theorem-supervisor           Process supervisor
+usr/local/bin/theorem-govagent             Governance agent
+usr/local/bin/theorem-witness              Witness node
+usr/local/etc/rc.d/theorem_init            FreeBSD rc.d service script
+etc/rc.conf                                FreeBSD system configuration
+etc/theorem/theorem.conf                   Default governance config
+etc/veriexec.d/theorem.manifest            Binary integrity manifest
+etc/theorem/first-boot.conf.example        First-boot provisioning template
+boot/kernel/THEOREMOS                      Custom kernel config
+install.sh                                 Non-interactive installer
+```
+
+### Install Path
+
+For autonomous deployment from the rootfs tarball:
+
+```bash
+tar xzf theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz
+cd theoremos-v0.5.0-x86_64-unknown-freebsd
+# Optional: cp etc/theorem/first-boot.conf.example /tmp/first-boot.conf && edit
+FIRST_BOOT_CONF=/tmp/first-boot.conf sh install.sh
+```
+
+The installer verifies FreeBSD >= 14, installs binaries, applies first-boot
+configuration, sets immutable flags, and enables the theorem-init service.
+
+Machine consumers must distinguish the FreeBSD artifact classes:
+
+- `theoremos-<tag>-x86_64-unknown-freebsd.tar.gz` is the installer-capable
+  rootfs artifact. Its manifest entry carries `artifact_kind=installer-rootfs`,
+  `automation_strategy=extract-and-run-installer`, and
+  `direct_disk_write=forbidden`.
+- `theoremos-<tag>-amd64.iso` and `theoremos-<tag>-amd64-memstick.img` are
+  install media only. Their manifest entries carry
+  `artifact_kind=install-media` and `direct_disk_write=forbidden`.
+- Automation must fail closed if no `installer-rootfs` or future
+  `direct-write-disk-image` artifact is published for the requested release.
+
+See `docs/theorem-init-contract.md` for the service lifecycle, and
+`docs/operator-guide/08-migration-4x-to-5x.md` for the migration path.
 
 ## Checksum Contract
 
@@ -72,8 +138,8 @@ shasum -a 256 -c theorem-node-v0.5.0-x86_64-unknown-linux-gnu.tar.gz.sha256
 Each tagged release includes a CycloneDX SBOM generated from the Rust workspace.
 The SBOM is published as a release asset alongside the binaries and checksums.
 
-NOTE: SBOM and provenance attestation assets are produced by the Ring 1 build
-pipeline on the NixOS build host. They do not appear in the source repository.
+NOTE: SBOM and provenance attestation assets are produced by the build
+pipeline on the FreeBSD build host. They do not appear in the source repository.
 The release script (`generate-release-manifest.ps1`) validates their presence
 at publication time and fails closed if they are absent.
 
@@ -137,20 +203,22 @@ alone.
 
 The intended target set is:
 
-- `x86_64-unknown-linux-gnu`
-- `aarch64-unknown-linux-gnu`
-- `x86_64-apple-darwin`
-- `aarch64-apple-darwin`
+- `x86_64-unknown-freebsd` (primary — production target)
+- `aarch64-unknown-freebsd` (planned)
+- `x86_64-unknown-linux-gnu` (legacy — may be reintroduced)
 
-Linux release publication is authoritative for production deployment and is
-allowed to proceed independently of Darwin artifact completion.
+FreeBSD release publication is authoritative for production deployment.
 
 ## Publish Semantics
 
-- Linux artifacts and the SBOM are the minimum release set required for a tag
-  to publish.
-- Darwin artifacts may be attached after the Linux release is already live.
-- A Darwin build failure must not block publication of Linux artifacts.
+- FreeBSD artifacts and the SBOMs are the minimum release set required for a
+  tag to publish.
+- FreeBSD bare-metal automation must target a manifest artifact marked
+  `artifact_kind=installer-rootfs` or `artifact_kind=direct-write-disk-image`.
+  Install media artifacts marked `artifact_kind=install-media` must not be used
+  for unattended disk writes.
+- `scripts/validate-release.sh` must pass before any publication. This is a
+  machine-enforced gate, not a human-remembered checklist.
 
 ## Machine-Readable Release Manifest
 
@@ -162,7 +230,7 @@ Every public release must ship a structured manifest with:
 - new, changed, deprecated, and removed capabilities
 - explicit capability-negotiation contract
 - explicit principal semantics contract
-- explicit stable error taxonomy for published `4.0` routes
+- explicit stable error taxonomy for published `0.5.0` routes
 - explicit act timing and resource-consumption surfaces
 - schema changes
 - API additions and removals
@@ -244,7 +312,7 @@ Every public `0.5.x` manifest must repeat these mappings in
 
 ## Stable Error Taxonomy
 
-The stable machine error taxonomy applies to the published `4.0` organization,
+The stable machine error taxonomy applies to the published `0.5.0` organization,
 execution-lifecycle, treaty, intervention, and governed-release routes that use
 JSON `api_error(...)` bodies.
 
@@ -258,7 +326,7 @@ Rules:
 - published `error_code` values are stable within `0.5.x`
 - `409` is the stable idempotency and conflict status for reused keys with a
   different request body
-- legacy pre-`4.0` routes may still return `text/plain` rejection bodies and
+- legacy pre-`0.5.0` routes may still return `text/plain` rejection bodies and
   are outside this stable taxonomy unless and until promoted into it
 
 Every public `0.5.x` manifest must publish the scoped taxonomy in
@@ -302,7 +370,7 @@ Every public `0.5.x` manifest must publish these bindings in `act_contract`.
 
 ## Conformance Evidence
 
-`4.0` publication also carries a machine-readable conformance report when
+`0.5.0` publication also carries a machine-readable conformance report when
 available.
 
 Contract files:
@@ -311,7 +379,7 @@ Contract files:
 - public conformance copy: `releases/<tag>/conformance.json`
 
 The conformance report is the published proof-of-product for the machine
-contract. If a required `4.0` user moment is still missing from executable
+contract. If a required `0.5.0` user moment is still missing from executable
 coverage, the report must say so explicitly.
 
 Contract modules verify internal fixture consistency (cross-field relationships
@@ -321,14 +389,14 @@ boundary: contracts verify structural governance correctness, not runtime truth.
 
 ## Operator Demonstration Path
 
-`4.0` publication also carries a machine-readable demonstration path artifact.
+`0.5.0` publication also carries a machine-readable demonstration path artifact.
 
 Contract files:
 
 - public demo path copy: `releases/<tag>/demo-path.json` (generated by the release pipeline)
 
 The demonstration path captures the ordered operator proof steps that establish
-the `4.0` user moments and the governed release act.
+the `0.5.0` user moments and the governed release act.
 
 ## Governed Release Declaration
 
@@ -352,6 +420,33 @@ Minimum declaration fields:
 The publish flow must fail closed if it cannot record the declaration. Release
 metadata and artifacts are not considered complete `0.5.x` publication until the
 queryable release declaration exists.
+
+## Release Process Discipline
+
+Building and releasing are structurally separate activities. They must not
+happen in the same session, the same script invocation, or the same context.
+
+**Development session:** write code, fix bugs, build, test. End with a
+committed, tagged state on `main`.
+
+**Release session:** start fresh. Validate the tagged state against this
+contract using `scripts/validate-release.sh`. Assemble artifacts. If
+validation fails, STOP. Do not fix and ship in the same session. Return to
+a development session, fix, re-tag, and start a new release session.
+
+This separation exists because the same context that fixes a build error
+lacks the perspective to catch a missing provenance hash or an empty SBOM
+array. The release session's only job is validation and publication.
+
+## Downstream Consumer Contract
+
+See `docs/consumer-contract.md` for the downstream-facing contract: what
+consumers can depend on, what is stable, what is provisional, and the
+explicit install/upgrade path.
+
+The consumer contract is a separate document because release-contract.md
+defines what the *release process* must produce, while consumer-contract.md
+defines what a *consumer* can rely on. They are complementary.
 
 ## Automation Guidance
 

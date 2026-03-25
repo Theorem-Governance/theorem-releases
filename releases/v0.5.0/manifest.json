@@ -2,7 +2,7 @@
   "schema_version": "1.2.0",
   "product": "theorem-node",
   "version": "v0.5.0",
-  "release_date": "2026-03-24T22:27:13Z",
+  "release_date": "2026-03-25T04:00:40Z",
   "compatibility_classification": "breaking-major",
   "upgrade_contract": {
     "line": "0.5.x",
@@ -271,201 +271,277 @@
   "required_operator_actions": [
     "Consume releases/feed.json, releases/v0.5.0/manifest.json, and releases/v0.5.0/integrity.json before mirroring or admitting a 5.x release.",
     "Deploy on FreeBSD 14.4-RELEASE or later with ZFS root pool named 'theorem'.",
+    "Use theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz plus install.sh for autonomous bare-metal deployment; treat ISO and memstick assets as install media only.",
     "Install theorem-init to /sbin/theorem-init and remaining binaries to /usr/local/bin/.",
     "Load PF kernel module and configure /etc/pf.conf with theorem anchor.",
-    "Review veriexec.manifest and optionally load mac_veriexec for verified execution."
+    "Review /etc/veriexec.d/theorem.manifest and optionally load mac_veriexec for verified execution."
   ],
   "artifacts": [
     {
+      "name": "theorem-act-types.cdx.xml",
+      "sha256": "51ad7fb9c34ff4377c67bb9ded01314d397ef1922ae21ac40c52beee9796cfcb",
+      "size_bytes": 19526,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-act.cdx.xml",
+      "sha256": "b373a572cdff23fa8987d322d9dacf1473243d1efc410270f72bd4535531fea1",
+      "size_bytes": 88223,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-auto.cdx.xml",
+      "sha256": "fd6c7e8716ab5d63c962da091ff0afebb4dc92f32ec5c11558115b67ba13d0c4",
+      "size_bytes": 94779,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-boot.cdx.xml",
+      "sha256": "a6319365b6ce006b9d57cce5744e692375b7a0285cf24b0b700b35f7a1d3b76f",
+      "size_bytes": 82635,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-branch.cdx.xml",
+      "sha256": "8394b86f948a72160e582ef4d5ff9b856587d0631531758441a37568cbe7736d",
+      "size_bytes": 88011,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-build.cdx.xml",
+      "sha256": "1ed98a242a429791c899e0903f46edb056e9ba66b5d2ff4c0dcc7ab008c53c1e",
+      "size_bytes": 103802,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-bus-client.cdx.xml",
+      "sha256": "579e15b83d9618ad8730c8a6012d8a34b4149aca980f1896513396fd2b4d7484",
+      "size_bytes": 218110,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-bus.cdx.xml",
+      "sha256": "0a03df15c7cf46a0f999d74edf33ac93f40bf3eb4a8cfb398ebf1b2235576af6",
+      "size_bytes": 216864,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-compute.cdx.xml",
+      "sha256": "a4d024af1ad8cb7802d4748cad19b78989cab09018704b656c7c6243155b074a",
+      "size_bytes": 24033,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-crypto.cdx.xml",
+      "sha256": "e47e599d92eeec4436f718526256cd2f3d9a431438639ab794fab1d77b0f9ec0",
+      "size_bytes": 80737,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-dashboard.cdx.xml",
+      "sha256": "7ee869246e8abc1494818cc3762d07bba75ff4a82aff54abc3bb1c0bd76c45cd",
+      "size_bytes": 207725,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-devices.cdx.xml",
+      "sha256": "93971ff063233d5bd5280f6d68ca6d30426f7c1c8277493a112cd17f1c67668d",
+      "size_bytes": 24033,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-econ.cdx.xml",
+      "sha256": "9d86123f57d1e818c6dac5cfd130b7b9b84de749bbb17b90fe70acbee5907366",
+      "size_bytes": 30615,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-fabric.cdx.xml",
+      "sha256": "e598d4f6a894fb50bde6029c3fe89fdcf721f40a323bf8beeaedb061224a5cc9",
+      "size_bytes": 45003,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-gateway.cdx.xml",
+      "sha256": "5ec1e97480fc1a3f8ee5e217cd21693502c35da6efed94a6f9d0f362a817a026",
+      "size_bytes": 254480,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-govagent.cdx.xml",
+      "sha256": "1feb96859e869c3286d64608897d4c053d4b7d9dfaf08420ca1c653d1cb1516d",
+      "size_bytes": 263179,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-image.cdx.xml",
+      "sha256": "89879377a1c68acc126436d5961b00857f38ccbd781ceb476db79cd1100036c3",
+      "size_bytes": 81837,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-init.cdx.xml",
+      "sha256": "5913749720448ab7565e99c57ba892af4ef68f3836b3117551bc68891128f9f1",
+      "size_bytes": 314949,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-kernel.cdx.xml",
+      "sha256": "80d51028ece1e82a05d054536df759dbc7fbeed71dfca1f3e215c5f59fdeaef7",
+      "size_bytes": 51608,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-net.cdx.xml",
+      "sha256": "1534d48a13ea56b8c14f1e23db947900d4af6ea9dcdff47c76fba847c412d493",
+      "size_bytes": 24005,
+      "artifact_kind": "sbom"
+    },
+    {
       "name": "theorem-node-v0.5.0-x86_64-unknown-freebsd.tar.gz",
-      "sha256": "074ac533334be1e7f2352c8e0ee8983a35465a2d5e58839a17fd35bb82c9560b",
-      "size_bytes": 18563463
+      "sha256": "3a77088caeb6909a7474fd7d721261f0b3457d8f597774ed7ff506fd1792127b",
+      "size_bytes": 6044689,
+      "artifact_kind": "single-binary",
+      "target": "freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-binary",
+      "direct_disk_write": "not-applicable",
+      "bootable": false
     },
     {
       "name": "theorem-node-v0.5.0-x86_64-unknown-freebsd.tar.gz.sha256",
-      "sha256": "10900aeb50cab21ba084fd7b248c05f1364e5cfc7fb071b1e5c19667b1c61000",
-      "size_bytes": 116
+      "sha256": "9dc31469dcbeb2b710250b452cc60dbcb646df93aea7f18749af0f0888a44ea8",
+      "size_bytes": 115,
+      "artifact_kind": "checksum",
+      "format": "sha256"
     },
     {
       "name": "theorem-node-v0.5.0.provenance.json",
-      "sha256": "44aa677bd524a89d602404f477a7c45a7c5fd7f39f326ae55efef6329c3a3ddd",
-      "size_bytes": 601
+      "sha256": "8d54f29a48e42688fa6e86ca8e15786b7ab8b828e094b77ccf07318d794cddbe",
+      "size_bytes": 613,
+      "artifact_kind": "provenance"
+    },
+    {
+      "name": "theorem-node.cdx.xml",
+      "sha256": "740aacb993979733aaa1e73a4a3807cd0d60427daab1c7dfd15190c3adb02282",
+      "size_bytes": 263217,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-release-manifest-v0.5.0.json",
+      "sha256": "eaa5a1ddd1d688c99282e34b11c888f7394cd1d7d6911efba63cc76e0857ac84",
+      "size_bytes": 21508,
+      "artifact_kind": "evidence"
+    },
+    {
+      "name": "theorem-secrets.cdx.xml",
+      "sha256": "430d8a5d99b89efca6a30e6ef4d0a802580b12a53bea5dbf1b79cd1c7f207b50",
+      "size_bytes": 81946,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-settle.cdx.xml",
+      "sha256": "4b8c4e1e1ef16a4f0c56bd656031e9d2bfa61f6122af1d41c656fb870502200b",
+      "size_bytes": 88221,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-storage-sqlite.cdx.xml",
+      "sha256": "2d9b5f8db5c008b15498125a8a2d9a6ec126a774d4661f8b62391c37dbe1f55e",
+      "size_bytes": 71666,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-store.cdx.xml",
+      "sha256": "e614468d960f77403b8ad9958057e3355dfa37c0099f7bb5636210ad33b560f0",
+      "size_bytes": 82642,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-supervisor.cdx.xml",
+      "sha256": "97c5f5552603342aa565e0541e214c2b36bb22676c53d947f3a2a19df74a044b",
+      "size_bytes": 255810,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-test-support.cdx.xml",
+      "sha256": "38f77201f981dc7fb6590d09137c525ac25530e3d35eeaa69155e9865727c4d8",
+      "size_bytes": 52792,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-witness-storage.cdx.xml",
+      "sha256": "b47eaec083114b233e3c75f783b199b4a14d0bd47b976870a93dcbaa131a795b",
+      "size_bytes": 86585,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-witness.cdx.xml",
+      "sha256": "bd9684ab7aa45e2fcb1278ee19572ee44985606891036729320bc1a1abe33a50",
+      "size_bytes": 66599,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-zfs.cdx.xml",
+      "sha256": "52057745142a5d1f3495f7b0176df492fa8b94d2c8013d5a56a3a8b48d6a7ae0",
+      "size_bytes": 19357,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "4bcd0d431ef68c0a6436f8d6282a0b3defca96a1e5e2c6ab49c5508b176335f0",
+      "size_bytes": 17194717,
+      "artifact_kind": "installer-rootfs",
+      "target": "freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-and-run-installer",
+      "direct_disk_write": "forbidden",
+      "installer_entrypoint": "install.sh",
+      "first_boot_config_template": "etc/theorem/first-boot.conf.example",
+      "bootable": false
+    },
+    {
+      "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz.sha256",
+      "sha256": "7fd819115c75427434553c7c522706fe7825d21c1b6c20c5bf71d8a383df8120",
+      "size_bytes": 112,
+      "artifact_kind": "checksum",
+      "format": "sha256"
     },
     {
       "name": "theoremos-v0.5.0-amd64.iso",
       "sha256": "17134df722d28efc43ff3c81396a146c9926862207c746665fabc872a4d1330c",
       "size_bytes": 750493696,
-      "type": "os-image",
+      "artifact_kind": "install-media",
+      "target": "amd64-freebsd",
       "format": "cd9660",
-      "target": "amd64-freebsd"
+      "automation_strategy": "manual-install-media",
+      "direct_disk_write": "forbidden",
+      "bootable": true
     },
     {
       "name": "theoremos-v0.5.0-amd64.iso.sha256",
       "sha256": "221d7be44d3dcdd937556fcc7dcce8f41d45d31deaa20c7e05d7bcb98e35bc6c",
-      "size_bytes": 109
+      "size_bytes": 109,
+      "artifact_kind": "checksum",
+      "format": "sha256"
     },
     {
       "name": "theoremos-v0.5.0-amd64-memstick.img",
       "sha256": "7921ab2cf0e4fe8996e587584e3444d617d33aa878038e7a88a8b04359fc9185",
       "size_bytes": 1073838592,
-      "type": "os-image",
+      "artifact_kind": "install-media",
+      "target": "amd64-freebsd",
       "format": "ufs-gpt",
-      "target": "amd64-freebsd"
+      "automation_strategy": "manual-install-media",
+      "direct_disk_write": "forbidden",
+      "bootable": true
     },
     {
       "name": "theoremos-v0.5.0-amd64-memstick.img.sha256",
       "sha256": "47979de3d4ed37855684247bcd3cc1896d410fb9cac6d57560191b63552d2c12",
-      "size_bytes": 118
-    },
-    {
-      "name": "theorem-act-types.cdx.xml",
-      "sha256": "51ad7fb9c34ff4377c67bb9ded01314d397ef1922ae21ac40c52beee9796cfcb",
-      "size_bytes": 19526
-    },
-    {
-      "name": "theorem-act.cdx.xml",
-      "sha256": "b373a572cdff23fa8987d322d9dacf1473243d1efc410270f72bd4535531fea1",
-      "size_bytes": 88223
-    },
-    {
-      "name": "theorem-auto.cdx.xml",
-      "sha256": "fd6c7e8716ab5d63c962da091ff0afebb4dc92f32ec5c11558115b67ba13d0c4",
-      "size_bytes": 94779
-    },
-    {
-      "name": "theorem-boot.cdx.xml",
-      "sha256": "a6319365b6ce006b9d57cce5744e692375b7a0285cf24b0b700b35f7a1d3b76f",
-      "size_bytes": 82635
-    },
-    {
-      "name": "theorem-branch.cdx.xml",
-      "sha256": "8394b86f948a72160e582ef4d5ff9b856587d0631531758441a37568cbe7736d",
-      "size_bytes": 88011
-    },
-    {
-      "name": "theorem-build.cdx.xml",
-      "sha256": "1ed98a242a429791c899e0903f46edb056e9ba66b5d2ff4c0dcc7ab008c53c1e",
-      "size_bytes": 103802
-    },
-    {
-      "name": "theorem-bus-client.cdx.xml",
-      "sha256": "579e15b83d9618ad8730c8a6012d8a34b4149aca980f1896513396fd2b4d7484",
-      "size_bytes": 218110
-    },
-    {
-      "name": "theorem-bus.cdx.xml",
-      "sha256": "0a03df15c7cf46a0f999d74edf33ac93f40bf3eb4a8cfb398ebf1b2235576af6",
-      "size_bytes": 216864
-    },
-    {
-      "name": "theorem-compute.cdx.xml",
-      "sha256": "a4d024af1ad8cb7802d4748cad19b78989cab09018704b656c7c6243155b074a",
-      "size_bytes": 24033
-    },
-    {
-      "name": "theorem-crypto.cdx.xml",
-      "sha256": "e47e599d92eeec4436f718526256cd2f3d9a431438639ab794fab1d77b0f9ec0",
-      "size_bytes": 80737
-    },
-    {
-      "name": "theorem-dashboard.cdx.xml",
-      "sha256": "7ee869246e8abc1494818cc3762d07bba75ff4a82aff54abc3bb1c0bd76c45cd",
-      "size_bytes": 207725
-    },
-    {
-      "name": "theorem-devices.cdx.xml",
-      "sha256": "93971ff063233d5bd5280f6d68ca6d30426f7c1c8277493a112cd17f1c67668d",
-      "size_bytes": 24033
-    },
-    {
-      "name": "theorem-econ.cdx.xml",
-      "sha256": "9d86123f57d1e818c6dac5cfd130b7b9b84de749bbb17b90fe70acbee5907366",
-      "size_bytes": 30615
-    },
-    {
-      "name": "theorem-fabric.cdx.xml",
-      "sha256": "e598d4f6a894fb50bde6029c3fe89fdcf721f40a323bf8beeaedb061224a5cc9",
-      "size_bytes": 45003
-    },
-    {
-      "name": "theorem-gateway.cdx.xml",
-      "sha256": "5ec1e97480fc1a3f8ee5e217cd21693502c35da6efed94a6f9d0f362a817a026",
-      "size_bytes": 254480
-    },
-    {
-      "name": "theorem-govagent.cdx.xml",
-      "sha256": "1feb96859e869c3286d64608897d4c053d4b7d9dfaf08420ca1c653d1cb1516d",
-      "size_bytes": 263179
-    },
-    {
-      "name": "theorem-image.cdx.xml",
-      "sha256": "89879377a1c68acc126436d5961b00857f38ccbd781ceb476db79cd1100036c3",
-      "size_bytes": 81837
-    },
-    {
-      "name": "theorem-init.cdx.xml",
-      "sha256": "5913749720448ab7565e99c57ba892af4ef68f3836b3117551bc68891128f9f1",
-      "size_bytes": 314949
-    },
-    {
-      "name": "theorem-kernel.cdx.xml",
-      "sha256": "80d51028ece1e82a05d054536df759dbc7fbeed71dfca1f3e215c5f59fdeaef7",
-      "size_bytes": 51608
-    },
-    {
-      "name": "theorem-net.cdx.xml",
-      "sha256": "1534d48a13ea56b8c14f1e23db947900d4af6ea9dcdff47c76fba847c412d493",
-      "size_bytes": 24005
-    },
-    {
-      "name": "theorem-node.cdx.xml",
-      "sha256": "740aacb993979733aaa1e73a4a3807cd0d60427daab1c7dfd15190c3adb02282",
-      "size_bytes": 263217
-    },
-    {
-      "name": "theorem-secrets.cdx.xml",
-      "sha256": "430d8a5d99b89efca6a30e6ef4d0a802580b12a53bea5dbf1b79cd1c7f207b50",
-      "size_bytes": 81946
-    },
-    {
-      "name": "theorem-settle.cdx.xml",
-      "sha256": "4b8c4e1e1ef16a4f0c56bd656031e9d2bfa61f6122af1d41c656fb870502200b",
-      "size_bytes": 88221
-    },
-    {
-      "name": "theorem-storage-sqlite.cdx.xml",
-      "sha256": "2d9b5f8db5c008b15498125a8a2d9a6ec126a774d4661f8b62391c37dbe1f55e",
-      "size_bytes": 71666
-    },
-    {
-      "name": "theorem-store.cdx.xml",
-      "sha256": "e614468d960f77403b8ad9958057e3355dfa37c0099f7bb5636210ad33b560f0",
-      "size_bytes": 82642
-    },
-    {
-      "name": "theorem-supervisor.cdx.xml",
-      "sha256": "97c5f5552603342aa565e0541e214c2b36bb22676c53d947f3a2a19df74a044b",
-      "size_bytes": 255810
-    },
-    {
-      "name": "theorem-test-support.cdx.xml",
-      "sha256": "38f77201f981dc7fb6590d09137c525ac25530e3d35eeaa69155e9865727c4d8",
-      "size_bytes": 52792
-    },
-    {
-      "name": "theorem-witness-storage.cdx.xml",
-      "sha256": "b47eaec083114b233e3c75f783b199b4a14d0bd47b976870a93dcbaa131a795b",
-      "size_bytes": 86585
-    },
-    {
-      "name": "theorem-witness.cdx.xml",
-      "sha256": "bd9684ab7aa45e2fcb1278ee19572ee44985606891036729320bc1a1abe33a50",
-      "size_bytes": 66599
-    },
-    {
-      "name": "theorem-zfs.cdx.xml",
-      "sha256": "52057745142a5d1f3495f7b0176df492fa8b94d2c8013d5a56a3a8b48d6a7ae0",
-      "size_bytes": 19357
+      "size_bytes": 118,
+      "artifact_kind": "checksum",
+      "format": "sha256"
     }
   ],
   "release_integrity": {
@@ -515,16 +591,16 @@
         "root-governance-authority"
       ]
     },
+    "mirror_policy": {
+      "feed_path": "releases/feed.json",
+      "mirror_generated_at": "2026-03-25T04:00:40Z",
+      "mirror_expires_at": "2026-03-26T04:00:40Z",
+      "mirror_ttl_hours": 24,
+      "stale_behavior": "fail_closed"
+    },
     "revocation": {
       "ledger_path": "releases/revocations.json",
       "record_path": "releases/revocations/v0.5.0.json"
-    },
-    "mirror_policy": {
-      "feed_path": "releases/feed.json",
-      "mirror_generated_at": "2026-03-24T22:27:13Z",
-      "mirror_expires_at": "2026-03-25T22:27:13Z",
-      "mirror_ttl_hours": 24,
-      "stale_behavior": "fail_closed"
     }
   }
 }

@@ -1,6 +1,6 @@
 Creative Commons Attribution-ShareAlike 4.0 International
 
-Copyright (c) 2026 Eric
+Copyright (c) 2026 Theorem Contributors
 
 This work — including theorem-spec.md, DECISIONS.md, and all non-code
 documents in this repository not covered by a more specific license — is
@@ -22,3 +22,21 @@ Full license text: https://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 Note: All code in this repository (Rust crates and reference implementation)
 is licensed separately under the MIT License. See LICENSE-CODE.
+
+DUAL-LICENSE BOUNDARY:
+  Code (*.rs, Cargo.toml, CI configs, Dockerfiles) → MIT (LICENSE-CODE)
+  Documentation (*.md, specs, decisions)            → CC BY-SA 4.0 (this file)
+  If a file could be classified as both, MIT applies.
+
+SHAREALIKE OBLIGATION:
+  Downstream users who modify and distribute the specification documents
+  (theorem-spec.md, DECISIONS.md, architecture docs) must release their
+  modifications under CC BY-SA 4.0. This does NOT apply to code, which
+  is MIT-licensed with no copyleft obligation.
+
+EXPORT NOTICE:
+  This software includes cryptographic functionality (Ed25519 signatures,
+  AES-256-GCM encryption, Argon2id key derivation). Export, re-export, or
+  transfer may be subject to applicable export control laws including the
+  U.S. Export Administration Regulations (EAR). Users are responsible for
+  compliance with all applicable export control requirements.

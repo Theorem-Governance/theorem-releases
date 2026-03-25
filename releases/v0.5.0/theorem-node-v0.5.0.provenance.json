@@ -1,18 +1,23 @@
 {
-  "builder": {"id": "theorem-freebsd-builder"},
-  "buildType": "https://theorem.tech/freebsd-build/v1",
+  "builder": {
+    "id": "local-zigbuild"
+  },
+  "buildType": "https://theorem.tech/local-release/v1",
   "invocation": {
-    "configSource": {"entryPoint": "freebsd/make-release.sh"},
-    "parameters": {"tag": "v0.5.0"}
+    "configSource": {
+      "repository": "nuketheburrito/theorem-governance",
+      "ref": "refs/tags/v0.5.0",
+      "entryPoint": "manual local packaging"
+    }
   },
   "buildConfig": {
-    "commands": ["cargo build --release --workspace"],
-    "timestamp": "2026-03-24T22:22:00Z",
-    "build_host": "FreeBSD 14.4-RELEASE amd64",
-    "rust_version": "1.92.0",
-    "target": "x86_64-unknown-freebsd"
+    "commit": "5804e1aeb6057528068deaed09627231418f1b94",
+    "timestamp": "2026-03-25T04:00:13Z",
+    "workflow_run_id": null
   },
   "materials": [
-    {"uri": "git+https://github.com/nuketheburrito/theorem-governance@d5eb6fb8fe255a3f343d9197c5a341dee0c3c15b"}
+    {
+      "uri": "git+https://github.com/nuketheburrito/theorem-governance@5804e1aeb6057528068deaed09627231418f1b94"
+    }
   ]
 }
