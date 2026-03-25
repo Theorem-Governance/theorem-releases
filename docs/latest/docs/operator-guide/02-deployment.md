@@ -1,9 +1,70 @@
 # Deployment
 
-This document covers the production enclave-host deployment path: release-only
-install, NixOS deployment, hardware requirements, network configuration,
-bootstrap procedure, database layout, and environment variables. For a fast
-developer install, use `docs/quickstart.md` instead.
+This document covers the production deployment path, release artifact
+selection, bare-metal installation rules, the legacy Linux/NixOS deployment
+path, hardware requirements, network configuration, bootstrap procedure,
+database layout, and environment variables. For a fast developer install, use
+`docs/quickstart.md` instead.
+
+## Artifact Selection Rules
+
+For `0.5.x` and later FreeBSD bare-metal releases, automation must resolve
+artifacts from `releases/<tag>/manifest.json` and `releases/<tag>/integrity.json`.
+Do not infer deployability from filenames, GitHub release pages, asset order,
+or assume the installer script is flat at the tarball root.
+
+Deployment modes must consume artifacts by machine-readable contract:
+
+| Deploy mode | Allowed artifact kinds | Forbidden artifact kinds |
+|-------------|------------------------|--------------------------|
+| Unattended bare-metal direct disk write | `direct-write-disk-image` | `install-media`, `installer-rootfs`, `single-binary` |
+| Unattended bare-metal install flow | `installer-rootfs` | `install-media` |
+| Human-operated boot/install media | `install-media` | n/a |
+| Service-only binary extraction | `single-binary` | `install-media` |
+
+Additional hard rules:
+
+- Any artifact with `direct_disk_write=forbidden` must be rejected for raw disk
+  writes.
+- For `installer-rootfs`, resolve the installer at
+  `${archive_root}/${installer_entrypoint}` after extraction.
+- `theoremos-*.iso` and `theoremos-*-memstick.img` are install media only.
+- Current `0.5.x` automation-safe bare-metal contract is the
+  `installer-rootfs` tarball plus `install.sh`.
+
+Minimal selection flow:
+
+```bash
+python3 - <<'PY'
+import json
+manifest = json.load(open("manifest.json"))
+
+deploy_mode = "bare-metal-install"
+allowed = {
+    "bare-metal-install": {"installer-rootfs"},
+    "direct-disk-write": {"direct-write-disk-image"},
+}
+
+candidates = [
+    artifact for artifact in manifest["artifacts"]
+    if artifact.get("artifact_kind") in allowed[deploy_mode]
+]
+
+if not candidates:
+    raise SystemExit(f"FAIL: no artifact for deploy mode {deploy_mode}")
+
+artifact = candidates[0]
+if artifact.get("direct_disk_write") == "forbidden" and deploy_mode == "direct-disk-write":
+    raise SystemExit(f"FAIL: {artifact['name']} forbids direct disk writes")
+
+print(artifact["name"])
+PY
+```
+
+The remainder of this page includes legacy Linux/NixOS service deployment
+guidance for the 4.x line. For `0.5.x` FreeBSD machine replacement and restore,
+use the manifest-driven selection rules above together with
+`docs/operator-guide/08-migration-4x-to-5x.md`.
 
 ## Release-Only Install Layout
 

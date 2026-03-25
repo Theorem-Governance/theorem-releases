@@ -2,7 +2,7 @@
   "schema_version": "1.2.0",
   "product": "theorem-node",
   "version": "v0.5.0",
-  "release_date": "2026-03-25T04:00:40Z",
+  "release_date": "2026-03-25T12:31:05Z",
   "compatibility_classification": "breaking-major",
   "upgrade_contract": {
     "line": "0.5.x",
@@ -399,8 +399,8 @@
     },
     {
       "name": "theorem-node-v0.5.0-x86_64-unknown-freebsd.tar.gz",
-      "sha256": "3a77088caeb6909a7474fd7d721261f0b3457d8f597774ed7ff506fd1792127b",
-      "size_bytes": 6044689,
+      "sha256": "c4568f7480aecf2a88b5f3aa820516f59c7ddb50be8155a3de22f2d54e813586",
+      "size_bytes": 6044677,
       "artifact_kind": "single-binary",
       "target": "freebsd",
       "format": "tar.gz",
@@ -410,14 +410,14 @@
     },
     {
       "name": "theorem-node-v0.5.0-x86_64-unknown-freebsd.tar.gz.sha256",
-      "sha256": "9dc31469dcbeb2b710250b452cc60dbcb646df93aea7f18749af0f0888a44ea8",
+      "sha256": "036b8b9a07c3353019627580c6dd46341c1edbe53f7be0f6533604b5d7ae5a33",
       "size_bytes": 115,
       "artifact_kind": "checksum",
       "format": "sha256"
     },
     {
       "name": "theorem-node-v0.5.0.provenance.json",
-      "sha256": "8d54f29a48e42688fa6e86ca8e15786b7ab8b828e094b77ccf07318d794cddbe",
+      "sha256": "6032188d2dfb2597b82dc7ef3efe5a7e2a50892fbd7b052e191326a3bc8c5d20",
       "size_bytes": 613,
       "artifact_kind": "provenance"
     },
@@ -426,12 +426,6 @@
       "sha256": "740aacb993979733aaa1e73a4a3807cd0d60427daab1c7dfd15190c3adb02282",
       "size_bytes": 263217,
       "artifact_kind": "sbom"
-    },
-    {
-      "name": "theorem-release-manifest-v0.5.0.json",
-      "sha256": "eaa5a1ddd1d688c99282e34b11c888f7394cd1d7d6911efba63cc76e0857ac84",
-      "size_bytes": 21508,
-      "artifact_kind": "evidence"
     },
     {
       "name": "theorem-secrets.cdx.xml",
@@ -489,20 +483,21 @@
     },
     {
       "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz",
-      "sha256": "4bcd0d431ef68c0a6436f8d6282a0b3defca96a1e5e2c6ab49c5508b176335f0",
-      "size_bytes": 17194717,
+      "sha256": "8caa671f6fb11b0f6b84e0403375aa27765dcf0ec07608b2329b83759171d838",
+      "size_bytes": 17194711,
       "artifact_kind": "installer-rootfs",
       "target": "freebsd",
       "format": "tar.gz",
       "automation_strategy": "extract-and-run-installer",
       "direct_disk_write": "forbidden",
+      "archive_root": "theoremos-v0.5.0-x86_64-unknown-freebsd",
       "installer_entrypoint": "install.sh",
       "first_boot_config_template": "etc/theorem/first-boot.conf.example",
       "bootable": false
     },
     {
       "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz.sha256",
-      "sha256": "7fd819115c75427434553c7c522706fe7825d21c1b6c20c5bf71d8a383df8120",
+      "sha256": "f8940f8da34f48c636cf378595d1a0cc713cc37ec559b7f9f03c3b1009b797c0",
       "size_bytes": 112,
       "artifact_kind": "checksum",
       "format": "sha256"
@@ -593,8 +588,8 @@
     },
     "mirror_policy": {
       "feed_path": "releases/feed.json",
-      "mirror_generated_at": "2026-03-25T04:00:40Z",
-      "mirror_expires_at": "2026-03-26T04:00:40Z",
+      "mirror_generated_at": "2026-03-25T12:31:05Z",
+      "mirror_expires_at": "2026-03-26T12:31:05Z",
       "mirror_ttl_hours": 24,
       "stale_behavior": "fail_closed"
     },

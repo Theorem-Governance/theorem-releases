@@ -11,13 +11,13 @@
     }
   },
   "buildConfig": {
-    "commit": "5804e1aeb6057528068deaed09627231418f1b94",
-    "timestamp": "2026-03-25T04:00:13Z",
+    "timestamp": "2026-03-25T12:30:53Z",
+    "commit": "9ece6e0da2d43955dd3a78baccce4cfc22bee454",
     "workflow_run_id": null
   },
   "materials": [
     {
-      "uri": "git+https://github.com/nuketheburrito/theorem-governance@5804e1aeb6057528068deaed09627231418f1b94"
+      "uri": "git+https://github.com/nuketheburrito/theorem-governance@9ece6e0da2d43955dd3a78baccce4cfc22bee454"
     }
   ]
 }

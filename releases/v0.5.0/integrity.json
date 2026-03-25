@@ -2,12 +2,12 @@
   "schema_version": "1.0.0",
   "product": "theorem-node",
   "version": "v0.5.0",
-  "release_date": "2026-03-25T04:00:40Z",
-  "generated_at": "2026-03-25T04:07:47Z",
+  "release_date": "2026-03-25T12:31:05Z",
+  "generated_at": "2026-03-25T12:32:02Z",
   "manifest": {
     "path": "releases/v0.5.0/manifest.json",
     "asset_name": "theorem-release-manifest-v0.5.0.json",
-    "sha256": "c7de517f4584e885a1a462627fbc70ea57a3acd1f04aa004cbd0d31a7f4edb3b"
+    "sha256": "d3f966742f8729cfcf9fda126b55d05bb211e92989a829440e23e02cd972f39a"
   },
   "release_ring": "public",
   "minimum_version": "v0.5.0",
@@ -22,8 +22,8 @@
   "binary_assets": [
     {
       "name": "theorem-node-v0.5.0-x86_64-unknown-freebsd.tar.gz",
-      "sha256": "3a77088caeb6909a7474fd7d721261f0b3457d8f597774ed7ff506fd1792127b",
-      "size_bytes": 6044689,
+      "sha256": "c4568f7480aecf2a88b5f3aa820516f59c7ddb50be8155a3de22f2d54e813586",
+      "size_bytes": 6044677,
       "artifact_kind": "single-binary",
       "target": "freebsd",
       "format": "tar.gz",
@@ -33,13 +33,14 @@
     },
     {
       "name": "theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz",
-      "sha256": "4bcd0d431ef68c0a6436f8d6282a0b3defca96a1e5e2c6ab49c5508b176335f0",
-      "size_bytes": 17194717,
+      "sha256": "8caa671f6fb11b0f6b84e0403375aa27765dcf0ec07608b2329b83759171d838",
+      "size_bytes": 17194711,
       "artifact_kind": "installer-rootfs",
       "target": "freebsd",
       "format": "tar.gz",
       "automation_strategy": "extract-and-run-installer",
       "direct_disk_write": "forbidden",
+      "archive_root": "theoremos-v0.5.0-x86_64-unknown-freebsd",
       "installer_entrypoint": "install.sh",
       "first_boot_config_template": "etc/theorem/first-boot.conf.example",
       "bootable": false
@@ -222,7 +223,7 @@
   "provenance_assets": [
     {
       "name": "theorem-node-v0.5.0.provenance.json",
-      "sha256": "8d54f29a48e42688fa6e86ca8e15786b7ab8b828e094b77ccf07318d794cddbe",
+      "sha256": "6032188d2dfb2597b82dc7ef3efe5a7e2a50892fbd7b052e191326a3bc8c5d20",
       "size_bytes": 613
     }
   ],
@@ -232,8 +233,8 @@
   },
   "mirror_policy": {
     "feed_path": "releases/feed.json",
-    "mirror_generated_at": "2026-03-25T04:00:40Z",
-    "mirror_expires_at": "2026-03-26T04:00:40Z",
+    "mirror_generated_at": "2026-03-25T12:31:05Z",
+    "mirror_expires_at": "2026-03-26T12:31:05Z",
     "mirror_ttl_hours": 24,
     "stale_behavior": "fail_closed"
   }

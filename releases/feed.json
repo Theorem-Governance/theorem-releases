@@ -3,7 +3,7 @@
   "releases": [
     {
       "version": "v0.5.0",
-      "release_date": "2026-03-25T04:00:40Z",
+      "release_date": "2026-03-25T12:31:05Z",
       "compatibility_classification": "breaking-major",
       "release_ring": "public",
       "minimum_version": "v0.5.0",
@@ -50,7 +50,7 @@
       "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.3.0"
     }
   ],
-  "mirror_generated_at": "2026-03-25T04:00:40Z",
-  "mirror_expires_at": "2026-03-26T04:00:40Z",
+  "mirror_generated_at": "2026-03-25T12:31:05Z",
+  "mirror_expires_at": "2026-03-26T12:31:05Z",
   "stale_behavior": "fail_closed"
 }

@@ -130,6 +130,7 @@
           "type": "string",
           "enum": ["allowed", "forbidden", "not-applicable"]
         },
+        "archive_root": { "type": "string" },
         "installer_entrypoint": { "type": "string" },
         "first_boot_config_template": { "type": "string" },
         "bootable": { "type": "boolean" }

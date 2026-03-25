@@ -38,6 +38,9 @@ contract reaches **production ready** status.
 - **Bare-metal artifact typing**: release manifests distinguish
   `installer-rootfs` from `install-media`; automation must fail closed on
   `install-media`
+- **Installer archive contract**: `installer-rootfs` artifacts publish
+  `archive_root` plus `installer_entrypoint`; consumers must resolve the
+  installer path relative to that archive root
 
 ### Provisional (may change shape in 0.6.x)
 
