@@ -10,6 +10,12 @@
     "version",
     "release_date",
     "compatibility_classification",
+    "release_lifecycle",
+    "release_channel",
+    "support_tiers",
+    "security_release_policy",
+    "release_notes",
+    "metadata_authentication",
     "upgrade_contract",
     "summary",
     "capabilities",
@@ -35,6 +41,16 @@
         "breaking-major"
       ]
     },
+    "release_lifecycle": { "$ref": "#/$defs/releaseLifecycle" },
+    "release_channel": { "$ref": "#/$defs/releaseChannel" },
+    "support_tiers": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/supportTier" }
+    },
+    "security_release_policy": { "$ref": "#/$defs/securityReleasePolicy" },
+    "release_notes": { "$ref": "#/$defs/releaseNotes" },
+    "metadata_authentication": { "$ref": "#/$defs/metadataAuthentication" },
     "upgrade_contract": {
       "type": "object",
       "additionalProperties": false,
@@ -48,7 +64,11 @@
         "line": { "type": "string" },
         "major_version_boundary_rule": { "type": "string" },
         "deprecation_window_policy": { "type": "string" },
-        "behavior_change_policy": { "type": "string" }
+        "behavior_change_policy": { "type": "string" },
+        "paths": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/upgradePath" }
+        }
       }
     },
     "summary": { "type": "string" },
@@ -111,6 +131,24 @@
       },
       "then": {
         "required": ["release_integrity"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^v0\\.(?:[6-9]|[1-9][0-9]+)\\."
+          }
+        },
+        "required": ["version"]
+      },
+      "then": {
+        "properties": {
+          "upgrade_contract": {
+            "required": ["paths"]
+          }
+        }
       }
     }
   ],
@@ -230,6 +268,126 @@
         "submit_act": { "$ref": "#/$defs/submitActContract" }
       }
     },
+    "releaseLifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phase",
+        "support_statement",
+        "security_support",
+        "eol_action"
+      ],
+      "properties": {
+        "phase": {
+          "type": "string",
+          "enum": ["preview", "active", "security-only", "eol"]
+        },
+        "support_statement": { "type": "string" },
+        "security_support": { "type": "string" },
+        "eol_action": { "type": "string" },
+        "supported_until": { "type": "string", "format": "date-time" },
+        "superseded_by": { "type": "string" }
+      }
+    },
+    "releaseChannel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "promotion_policy",
+        "freeze_policy",
+        "servicing_mode",
+        "published_branch"
+      ],
+      "properties": {
+        "name": { "type": "string" },
+        "promotion_policy": { "type": "string" },
+        "freeze_policy": { "type": "string" },
+        "servicing_mode": { "type": "string" },
+        "published_branch": { "type": "string" }
+      }
+    },
+    "supportTier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target",
+        "tier",
+        "release_blocking",
+        "test_depth",
+        "security_servicing",
+        "deprecation_policy"
+      ],
+      "properties": {
+        "target": { "type": "string" },
+        "tier": {
+          "type": "string",
+          "enum": ["Primary", "Legacy", "Planned"]
+        },
+        "release_blocking": { "type": "boolean" },
+        "test_depth": { "type": "string" },
+        "security_servicing": { "type": "string" },
+        "deprecation_policy": { "type": "string" }
+      }
+    },
+    "securityReleasePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "advisory_channel",
+        "severity_classes",
+        "release_cadence",
+        "emergency_release_rule",
+        "metadata_key_rotation"
+      ],
+      "properties": {
+        "advisory_channel": { "type": "string" },
+        "severity_classes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "release_cadence": { "type": "string" },
+        "emergency_release_rule": { "type": "string" },
+        "metadata_key_rotation": { "type": "string" }
+      }
+    },
+    "releaseNotes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["asset_name", "public_path", "format", "summary"],
+      "properties": {
+        "asset_name": { "type": "string" },
+        "public_path": { "type": "string" },
+        "format": {
+          "type": "string",
+          "enum": ["markdown"]
+        },
+        "summary": { "type": "string" },
+        "operator_highlights": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "metadataAuthentication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trust_root_path",
+        "verification_rule",
+        "required_roles"
+      ],
+      "properties": {
+        "trust_root_path": { "type": "string" },
+        "verification_rule": { "type": "string" },
+        "required_roles": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    },
     "declareIntentContract": {
       "type": "object",
       "additionalProperties": false,
@@ -280,6 +438,47 @@
         "summary": { "type": "string" }
       }
     },
+    "upgradePath": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from_version",
+        "to_version",
+        "mode",
+        "artifact_kind",
+        "machine_executable",
+        "state_strategy",
+        "rollback_strategy",
+        "operator_guide"
+      ],
+      "properties": {
+        "from_version": { "type": "string" },
+        "to_version": { "type": "string" },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "reimage-and-restore",
+            "in-place-boot-environment-upgrade",
+            "uefi-esp-upgrade"
+          ]
+        },
+        "artifact_kind": {
+          "type": "string",
+          "enum": [
+            "direct-write-disk-image",
+            "installer-rootfs",
+            "upgrade-bundle",
+            "uefi-esp-image"
+          ]
+        },
+        "machine_executable": { "type": "boolean" },
+        "requires_reboot": { "type": "boolean" },
+        "state_strategy": { "type": "string" },
+        "rollback_strategy": { "type": "string" },
+        "operator_guide": { "type": "string" },
+        "target_boot_environment": { "type": "string" }
+      }
+    },
     "artifact": {
       "type": "object",
       "additionalProperties": false,
@@ -293,8 +492,13 @@
           "enum": [
             "single-binary",
             "installer-rootfs",
+            "upgrade-bundle",
             "install-media",
             "direct-write-disk-image",
+            "uefi-esp-image",
+            "uefi-kernel",
+            "uefi-loader",
+            "boot-contract",
             "checksum",
             "sbom",
             "provenance",
@@ -311,8 +515,15 @@
         },
         "archive_root": { "type": "string" },
         "installer_entrypoint": { "type": "string" },
+        "upgrade_entrypoint": { "type": "string" },
         "first_boot_config_path": { "type": "string" },
         "first_boot_config_template": { "type": "string" },
+        "supported_upgrade_from": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "target_boot_environment": { "type": "string" },
+        "state_preservation": { "type": "string" },
         "seed_partition_label": { "type": "string" },
         "seed_filesystem": { "type": "string" },
         "bootable": { "type": "boolean" }
@@ -337,12 +548,10 @@
         "evidence_asset_path": { "type": "string" },
         "sbom_assets": {
           "type": "array",
-          "minItems": 1,
           "items": { "type": "string" }
         },
         "provenance_assets": {
           "type": "array",
-          "minItems": 1,
           "items": { "type": "string" }
         },
         "minimum_version": { "type": "string" },

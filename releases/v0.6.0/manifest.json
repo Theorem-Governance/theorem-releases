@@ -1,0 +1,703 @@
+{
+  "schema_version": "1.3.0",
+  "product": "theorem-node",
+  "version": "v0.6.0",
+  "release_date": "2026-03-26T21:34:16Z",
+  "compatibility_classification": "breaking-major",
+  "release_lifecycle": {
+    "phase": "preview",
+    "support_statement": "Platform preview release. Supported for evaluation, documented theoremOS install flows, UEFI native boot validation, and the published FreeBSD and theorem-native upgrade contracts.",
+    "security_support": "Best-effort fixes apply only to the latest published preview line. Older preview lines may be superseded without backport commitments.",
+    "eol_action": "When this preview line is superseded or revoked, operators must upgrade to the next supported preview line or re-image using the documented recovery path."
+  },
+  "release_channel": {
+    "name": "preview",
+    "promotion_policy": "A preview release may publish only after validate-release.sh, conformance evidence, demo-path evidence, release notes, signed metadata, and governed publication declaration succeed.",
+    "freeze_policy": "Preview release tags freeze contract surfaces and bundled artifacts at tag cut; any fix requires a new tag and a fresh release session.",
+    "servicing_mode": "latest-preview-only",
+    "published_branch": "main"
+  },
+  "support_tiers": [
+    {
+      "target": "x86_64-unknown-freebsd",
+      "tier": "Primary",
+      "release_blocking": true,
+      "test_depth": "Installer, upgrade-bundle, rollback-candidate visibility, and release-contract validation are blocking.",
+      "security_servicing": "Best-effort security servicing on the latest preview line only.",
+      "deprecation_policy": "Removal requires an explicit release-contract update and a superseding primary target."
+    },
+    {
+      "target": "x86_64-unknown-linux-gnu",
+      "tier": "Legacy",
+      "release_blocking": false,
+      "test_depth": "Legacy artifact only when explicitly emitted; absence does not block theoremOS release publication.",
+      "security_servicing": "No independent servicing promise beyond repository hygiene.",
+      "deprecation_policy": "May be omitted from public releases without blocking the primary theoremOS line."
+    },
+    {
+      "target": "aarch64-unknown-freebsd",
+      "tier": "Planned",
+      "release_blocking": false,
+      "test_depth": "No release obligation until a public artifact ships.",
+      "security_servicing": "No servicing promise until promoted from Planned.",
+      "deprecation_policy": "Intent only until a maintained line exists."
+    },
+    {
+      "target": "x86_64-unknown-uefi",
+      "tier": "Planned",
+      "release_blocking": false,
+      "test_depth": "ESP image build, QEMU UEFI boot smoke test, and boot contract verification. Absence does not block FreeBSD release publication.",
+      "security_servicing": "No independent servicing promise until promoted from Planned.",
+      "deprecation_policy": "Intent only until a maintained line exists."
+    }
+  ],
+  "security_release_policy": {
+    "advisory_channel": "Security-impacting theoremOS changes are published through release notes, release manifests, and release-integrity metadata in the public release repository.",
+    "severity_classes": [
+      "critical",
+      "high",
+      "medium",
+      "low"
+    ],
+    "release_cadence": "The latest preview line receives security fixes as out-of-band release tags when necessary; superseded preview lines receive no backport promise.",
+    "emergency_release_rule": "Critical security fixes may bypass feature batching but must still produce signed metadata, release notes, conformance evidence, and revocation-ready publication.",
+    "metadata_key_rotation": "Release metadata signing keys must be rotated by publishing a new trust-root file and using the new key for the next signed release session."
+  },
+  "release_notes": {
+    "asset_name": "theorem-release-notes-v0.6.0.md",
+    "public_path": "releases/v0.6.0/release-notes.md",
+    "format": "markdown",
+    "summary": "Consequence substrate release with three new axes (consequence awareness, self-proving, morphogenetic growth) and theorem-native UEFI boot chain. All 0.5.x substrate capabilities carry forward under the 0.6.x contract line.",
+    "operator_highlights": [
+      "Treat theoremOS as preview-only and validate all signed release metadata before promotion.",
+      "Use the direct-write image for unattended bare-metal deployment and the installer rootfs for operator-driven installs.",
+      "For theorem-native targets: write the ESP image to a GPT ESP partition and configure the UEFI NVRAM boot entry per the operator guide.",
+      "Verify the boot contract JSON references the correct kernel SHA-256 before deploying theorem-native boot."
+    ]
+  },
+  "metadata_authentication": {
+    "trust_root_path": "releases/trust-root.json",
+    "verification_rule": "Consumers must verify signed manifest, integrity, release-notes, feed, and revocation metadata against releases/trust-root.json before mirroring or promotion.",
+    "required_roles": [
+      "release-manifest",
+      "release-integrity",
+      "release-notes",
+      "release-feed",
+      "release-revocation-ledger",
+      "release-revocation-record"
+    ]
+  },
+  "upgrade_contract": {
+    "line": "0.6.x",
+    "major_version_boundary_rule": "Breaking removals and incompatible semantic changes require a major version boundary.",
+    "deprecation_window_policy": "Machine-consumable surfaces remain available for at least one full minor release after deprecation is published in a manifest.",
+    "behavior_change_policy": "Behavior changes that tighten validation or deny previously accepted input must be classified in the manifest.",
+    "paths": [
+      {
+        "from_version": "v0.5.x",
+        "to_version": "v0.6.0",
+        "mode": "in-place-boot-environment-upgrade",
+        "artifact_kind": "upgrade-bundle",
+        "machine_executable": true,
+        "state_strategy": "preserve theorem/store, theorem/log, and /var/lib/theorem across boot-environment switch",
+        "rollback_strategy": "activate previous boot environment via beadm/bectl and reboot",
+        "operator_guide": "Run upgrade.sh from the upgrade-bundle archive on a running 0.5.x system."
+      },
+      {
+        "from_version": "v0.5.x",
+        "to_version": "v0.6.0",
+        "mode": "uefi-esp-upgrade",
+        "artifact_kind": "uefi-esp-image",
+        "machine_executable": true,
+        "requires_reboot": true,
+        "state_strategy": "ESP partition generation swap — write new ESP image, update UEFI boot variables",
+        "rollback_strategy": "Restore previous ESP generation from backup partition",
+        "operator_guide": "Write the ESP image to the target ESP partition and update UEFI NVRAM boot entry."
+      }
+    ]
+  },
+  "summary": "Theorem 6.0 is the consequence substrate release. It extends the 5.0 governed platform with three new substrate axes: consequence awareness (ingestion and metabolization of consequence records as first-class substrate objects), self-proving (continuous machine-checkable proof generation replacing assertion-based trust), and morphogenetic growth (governed structural adaptation in response to consequence patterns). It also introduces theorem-native boot: a UEFI-native boot chain where theorem-uefi-loader loads theorem-machine-kernel directly from the ESP with no third-party bootloader dependency. All 0.5.x substrate capabilities carry forward. The 0.6.x contract line governs FreeBSD and theorem-native surfaces through a single release pipeline.",
+  "capabilities": {
+    "new": [
+      {
+        "id": "substrate.zfs-storage",
+        "summary": "ZFS dataset lifecycle, content-addressed artifact store, boot environments, snapshot management, and pool governance via theorem-zfs.",
+        "contract_surface": "theorem-init store, theorem-zfs"
+      },
+      {
+        "id": "substrate.jail-compute",
+        "summary": "FreeBSD jail-based workload isolation with governance admission, RCTL resource limits, and lifecycle management via theorem-compute.",
+        "contract_surface": "theorem-init workload, theorem-compute"
+      },
+      {
+        "id": "substrate.pf-networking",
+        "summary": "PF firewall rule governance via pf anchors, crossing policy enforcement, and network isolation via theorem-net.",
+        "contract_surface": "theorem-net"
+      },
+      {
+        "id": "substrate.encrypted-secrets",
+        "summary": "Argon2id+AES-256-GCM secret sealing with Capsicum capability restriction for admin operations via theorem-secrets and theorem-crypto.",
+        "contract_surface": "theorem-secrets, theorem-crypto"
+      },
+      {
+        "id": "substrate.veriexec-integrity",
+        "summary": "MAC veriexec verified execution manifest for all theorem binaries with SHA-256 hashes.",
+        "contract_surface": "theorem-init, /etc/theorem/veriexec.manifest"
+      },
+      {
+        "id": "substrate.pid1-supervisor",
+        "summary": "theorem-init PID 1 supervisor with governance runtime, quarantine escalation, service graph, alert dispatch, and boot attestation.",
+        "contract_surface": "theorem-init run"
+      },
+      {
+        "id": "substrate.branch-reality",
+        "summary": "ZFS-backed counterfactual governance lanes with branch engine, timeline graph, merge strategy, and fork ledger via theorem-branch.",
+        "contract_surface": "theorem-branch"
+      },
+      {
+        "id": "substrate.autonomous-governance",
+        "summary": "Intent compiler, self-challenger, drift detector, circuit breaker, and path-not-taken recording via theorem-auto.",
+        "contract_surface": "theorem-auto"
+      },
+      {
+        "id": "substrate.economic-settlement",
+        "summary": "Crossing settlement, privacy budgets, escrow ledger, and data retention via theorem-econ and theorem-settle.",
+        "contract_surface": "theorem-econ, theorem-settle"
+      },
+      {
+        "id": "substrate.distributed-fabric",
+        "summary": "Fleet mesh and distributed compute fabric via theorem-fabric.",
+        "contract_surface": "theorem-fabric"
+      },
+      {
+        "id": "substrate.governed-images",
+        "summary": "Staged rollout image pipeline with governance controls via theorem-image.",
+        "contract_surface": "theorem-image"
+      },
+      {
+        "id": "substrate.device-governance",
+        "summary": "Hardware device governance with devfs ruleset management via theorem-devices.",
+        "contract_surface": "theorem-devices"
+      },
+      {
+        "id": "substrate.consequence-awareness",
+        "summary": "Consequence record ingestion, metabolization, and governed predictive models as first-class substrate objects.",
+        "contract_surface": "theorem-consequence, theorem-init consequence"
+      },
+      {
+        "id": "substrate.self-proving",
+        "summary": "Continuous machine-checkable proof generation for substrate correctness, replacing assertion-based trust.",
+        "contract_surface": "theorem-proof, theorem-init proof"
+      },
+      {
+        "id": "substrate.morphogenetic-growth",
+        "summary": "Governed structural adaptation in response to consequence patterns — the substrate grows specialized organs for consequence domains it encounters.",
+        "contract_surface": "theorem-morpho, theorem-init growth"
+      },
+      {
+        "id": "substrate.theorem-native-boot",
+        "summary": "UEFI-native boot chain: theorem-uefi-loader loads theorem-machine-kernel directly from ESP, no third-party bootloader dependency.",
+        "contract_surface": "theorem-uefi-loader, theorem-machine-kernel, theorem-machine-kernel-efi"
+      }
+    ],
+    "changed": [
+      {
+        "id": "release.governed-publication",
+        "summary": "Release publication now targets both FreeBSD x86_64 and x86_64-unknown-uefi (theorem-native) through a single governed pipeline.",
+        "contract_surface": "public release contract"
+      }
+    ],
+    "deprecated": [],
+    "removed": []
+  },
+  "capability_negotiation": {
+    "surface": "releases/feed.json plus releases/v0.6.0/manifest.json, with live runtime discovery at GET /capabilities and GET /capability-negotiation",
+    "contract_line": "0.6.x",
+    "stability_rule": "Capability ids published in a 6.x manifest are stable within the 6.x line once released.",
+    "consumer_rules": [
+      "Gate on compatibility_classification before enabling a new capability id.",
+      "Treat manifest capability ids and release_integrity metadata as authoritative rather than inferring behavior from prose notes or semver alone.",
+      "Use releases/feed.json, releases/v0.6.0/manifest.json, and releases/v0.6.0/integrity.json as the release-time capability source of record for public 6.x releases.",
+      "Use GET /capabilities and GET /capability-negotiation to confirm the live runtime discovery surface for a running 6.x node."
+    ],
+    "capabilities": [
+      {
+        "id": "substrate.zfs-storage",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.jail-compute",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.pf-networking",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.encrypted-secrets",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.veriexec-integrity",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.pid1-supervisor",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.branch-reality",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.autonomous-governance",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.economic-settlement",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.distributed-fabric",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.governed-images",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.device-governance",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "release.governed-publication",
+        "availability": "changed",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.consequence-awareness",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.self-proving",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.morphogenetic-growth",
+        "availability": "published",
+        "stability": "0.6.x"
+      },
+      {
+        "id": "substrate.theorem-native-boot",
+        "availability": "published",
+        "stability": "0.6.x"
+      }
+    ]
+  },
+  "principal_contract": {
+    "entity_id_field": "entity_id",
+    "principal_id_field": "principal_id",
+    "grantor_id_field": "granted_by_id",
+    "authorization_route": "GET /authorizations?entity_id={entity_id}",
+    "semantics": [
+      "entity_id names the acting or queried entity on public request surfaces.",
+      "principal_id names the entity holding authority on authorization surfaces.",
+      "granted_by_id names the grantor and must not be interpreted as the principal.",
+      "GET /authorizations returns authorizations held by the queried principal entity, not authorizations granted by it."
+    ]
+  },
+  "stable_error_taxonomy": {
+    "scope": "Stable for the published 5.0 discovery, organization, lifecycle, release-verification, and governed-release routes in openapi.yaml.",
+    "legacy_behavior": "Legacy pre-4.0 routes may still return text/plain bodies and are outside this stable taxonomy.",
+    "taxonomy": [
+      {
+        "surface": "5.0 public routes",
+        "http_status": 400,
+        "content_type": "application/json",
+        "body_fields": [
+          "error_code",
+          "message"
+        ],
+        "error_codes": [
+          "not_bootstrapped",
+          "entity_not_found",
+          "scope_not_found",
+          "request_hash_failed",
+          "serialization_failed"
+        ]
+      },
+      {
+        "surface": "5.0 public routes",
+        "http_status": 409,
+        "content_type": "application/json",
+        "body_fields": [
+          "error_code",
+          "message"
+        ],
+        "error_codes": [
+          "idempotency_conflict"
+        ]
+      },
+      {
+        "surface": "5.0 public routes",
+        "http_status": 422,
+        "content_type": "application/json",
+        "body_fields": [
+          "error_code",
+          "message"
+        ],
+        "error_codes": [
+          "action_admission_inactive",
+          "action_admission_not_found",
+          "execution_capability_binding_mismatch",
+          "execution_capability_expired",
+          "execution_capability_not_found",
+          "execution_capability_secret_mismatch",
+          "governance_authority_required",
+          "intervention_path_authority_required",
+          "principal_not_trusted"
+        ]
+      }
+    ]
+  },
+  "act_contract": {
+    "declare_intent": {
+      "route": "POST /declare-intent",
+      "principal_field": "entity_id",
+      "timing_fields": [
+        "declared_at",
+        "minimum_wait_ms",
+        "earliest_execution_at"
+      ],
+      "enforcement_rule": "Acts must satisfy E4: declared_at plus minimum_intent_execution_interval_ms must be less than or equal to initiated_at."
+    },
+    "submit_act": {
+      "route": "POST /submit-act",
+      "principal_field": "executing_entity_id",
+      "authorization_field": "authorization_id",
+      "resource_consumption_field": "resource_consumption_entries",
+      "resource_consumption_entry_fields": [
+        "resource_type",
+        "quantity",
+        "unit",
+        "measurement_method_id",
+        "measured_at",
+        "within_limits",
+        "escalation_signal_id"
+      ],
+      "elapsed_time_surfaces": [
+        "declare-intent response declared_at",
+        "declare-intent response minimum_wait_ms",
+        "declare-intent response earliest_execution_at",
+        "submit-act response initiated_at",
+        "submit-act response intent_declared_at",
+        "submit-act response elapsed_ms_since_declared"
+      ]
+    }
+  },
+  "schema_changes": [],
+  "api_changes": {
+    "added": [],
+    "removed": []
+  },
+  "required_operator_actions": [
+    "Consume releases/feed.json, releases/v0.6.0/manifest.json, and releases/v0.6.0/integrity.json before mirroring or admitting a 6.x release.",
+    "Deploy on FreeBSD 14.4-RELEASE or later with ZFS root pool named 'theorem'.",
+    "Use theoremos-v0.6.0-amd64-direct-write.img.xz for unattended bare-metal direct disk writes; use theoremos-v0.6.0-x86_64-unknown-freebsd.tar.gz only for installer-driven bare-metal flows; treat ISO and memstick assets as install media only.",
+    "Install theorem-init to /sbin/theorem-init and remaining binaries to /usr/local/bin/.",
+    "Load PF kernel module and configure /etc/pf.conf with theorem anchor.",
+    "Review /etc/veriexec.d/theorem.manifest and optionally load mac_veriexec for verified execution.",
+    "For theorem-native targets: write the ESP image to a GPT ESP partition and configure UEFI NVRAM boot entry.",
+    "Verify the boot contract JSON references the correct kernel SHA-256 before deploying theorem-native boot."
+  ],
+  "artifacts": [
+    {
+      "name": "conformance.json",
+      "sha256": "e9c234d0e52e7ef08e70aaa0548c30a37d878bf0da86b4a16881963c11569794",
+      "size_bytes": 10589,
+      "artifact_kind": "other"
+    },
+    {
+      "name": "demo-path.json",
+      "sha256": "3334f162bba2dc9f3020c22c451b893245dc26a9aa89ed1b2ffd02f78db3d62e",
+      "size_bytes": 9555,
+      "artifact_kind": "other"
+    },
+    {
+      "name": "integrity.json",
+      "sha256": "6c6224bf56f5277986bb68eccd431b0d8fcc2f437c56950c522728350c495822",
+      "size_bytes": 4214,
+      "artifact_kind": "other"
+    },
+    {
+      "name": "manifest.json",
+      "sha256": "7e01b4551dd6393a9e65d3a74ba2e23a8f06821a62e28cf71749a4c798809d74",
+      "size_bytes": 26278,
+      "artifact_kind": "other"
+    },
+    {
+      "name": "ref-impl.cdx.json",
+      "sha256": "2567a2fc1b18b8af904066170d88bc3d2a32ad6e133dfeace9b99988c160da3b",
+      "size_bytes": 11074,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "release-notes.md",
+      "sha256": "1736d92ecbd2c698c7ab988f0ae392c1ae918a74d49d3b29e8680459100b92a2",
+      "size_bytes": 12440,
+      "artifact_kind": "other"
+    },
+    {
+      "name": "theorem-machine-kernel-v0.6.0-x86_64-unknown-uefi.efi",
+      "sha256": "dbba6a37eee92e67130fd2d8e39cd8bffda36a960a3b041c9ec29465cd84bc18",
+      "size_bytes": 289792,
+      "artifact_kind": "uefi-kernel",
+      "target": "x86_64-unknown-uefi",
+      "format": "pe32+",
+      "automation_strategy": "verify-boot-contract",
+      "direct_disk_write": "not-applicable",
+      "bootable": false
+    },
+    {
+      "name": "theorem-machine-kernel-v0.6.0-x86_64-unknown-uefi.efi.sha256",
+      "sha256": "83c3974d6da06b27f2dea0bdcff4bdc18a2c75fa55ef2d8fde0db69b0d73e2df",
+      "size_bytes": 119,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theorem-native-v0.6.0-boot-contract.json",
+      "sha256": "41c9b5c65144cc2b1aaf8adfff7c2b730ba08f457a7aa32227dcf2ec8128b37b",
+      "size_bytes": 821,
+      "artifact_kind": "boot-contract",
+      "target": "x86_64-unknown-uefi",
+      "format": "json",
+      "automation_strategy": "verify-boot-contract",
+      "direct_disk_write": "not-applicable",
+      "bootable": false
+    },
+    {
+      "name": "theorem-native-v0.6.0-boot-contract.json.sha256",
+      "sha256": "7812e43547201875983ea440b04375c19adb2dfbef35df004948a5c3dce4107c",
+      "size_bytes": 106,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theorem-native-v0.6.0-esp.img",
+      "sha256": "9fcf10abe6f5d792198c5fefaaf316cc011d592feae549576237fcdcbe9bae81",
+      "size_bytes": 67108864,
+      "artifact_kind": "uefi-esp-image",
+      "target": "x86_64-unknown-uefi",
+      "format": "fat32-esp",
+      "automation_strategy": "write-esp-partition",
+      "direct_disk_write": "allowed",
+      "bootable": true
+    },
+    {
+      "name": "theorem-native-v0.6.0-esp.img.sha256",
+      "sha256": "fdefa67a77a6c7d473db8cf14eb9064d187178b6aa31911c22506d64f543dbf9",
+      "size_bytes": 95,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theorem-node-v0.6.0-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "d456878ec999c938f8a7d4acb5742a940d65969dd5b8044f479ff1874c737f42",
+      "size_bytes": 6907497,
+      "artifact_kind": "single-binary",
+      "target": "x86_64-unknown-freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-binary",
+      "direct_disk_write": "not-applicable",
+      "bootable": false
+    },
+    {
+      "name": "theorem-node-v0.6.0-x86_64-unknown-freebsd.tar.gz.sha256",
+      "sha256": "d8162b920aa3e25a202b37993d28abe6a74993023784ba9e7f5beb4d90106c11",
+      "size_bytes": 115,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theorem-node-v0.6.0.cdx.json",
+      "sha256": "2d24fa1daa37aa67b2bf86fc084dfeae48fd6caa9c122c59851db5e1c0ed61c4",
+      "size_bytes": 299893,
+      "artifact_kind": "sbom"
+    },
+    {
+      "name": "theorem-node-v0.6.0.provenance.json",
+      "sha256": "007a8ddd9043961fe7296abded56ea92750fc9e14627c4bd99b3007328865c9b",
+      "size_bytes": 1134,
+      "artifact_kind": "provenance"
+    },
+    {
+      "name": "theorem-node-v0.6.0.provenance.json.sha256",
+      "sha256": "e410336ba34010eb331a437e67d840ac720a627a276a92ac81b30f3b7ae3ff57",
+      "size_bytes": 102,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theorem-release-integrity-v0.6.0.signature.json",
+      "sha256": "c364e982363fa351a45ff08bc87e377b7bcdd45fb1c512a8965c3dc8880cf0c3",
+      "size_bytes": 581,
+      "artifact_kind": "evidence"
+    },
+    {
+      "name": "theorem-release-manifest-v0.6.0.signature.json",
+      "sha256": "d7c591c559f0b2ecab7f3d7ffdada3f0777031efd4a2011009d37944e20b16ee",
+      "size_bytes": 580,
+      "artifact_kind": "evidence"
+    },
+    {
+      "name": "theorem-release-notes-v0.6.0.md",
+      "sha256": "1736d92ecbd2c698c7ab988f0ae392c1ae918a74d49d3b29e8680459100b92a2",
+      "size_bytes": 12440,
+      "artifact_kind": "other"
+    },
+    {
+      "name": "theorem-release-notes-v0.6.0.signature.json",
+      "sha256": "de4fccbd8647b9d92f4911f8e88b94e079858ee7179eefe7a35bce9700e3c308",
+      "size_bytes": 572,
+      "artifact_kind": "other"
+    },
+    {
+      "name": "theorem-release-trust-root.json",
+      "sha256": "70011ef25f22ecebcc50581acb6edf2266e034f520853382cf673abced6aa61d",
+      "size_bytes": 1142,
+      "artifact_kind": "other"
+    },
+    {
+      "name": "theorem-uefi-loader-v0.6.0-x86_64-unknown-uefi.efi",
+      "sha256": "817094273f6a92471d341a359bae5e8a6789d5733cb01b346c608306a34449b7",
+      "size_bytes": 329728,
+      "artifact_kind": "uefi-loader",
+      "target": "x86_64-unknown-uefi",
+      "format": "pe32+",
+      "automation_strategy": "verify-boot-contract",
+      "direct_disk_write": "not-applicable",
+      "bootable": true
+    },
+    {
+      "name": "theorem-uefi-loader-v0.6.0-x86_64-unknown-uefi.efi.sha256",
+      "sha256": "ea7a841e1e622eb793ed2bfeeeb9ae4b9358e58f4e3e123d8e35c78334a0ff72",
+      "size_bytes": 116,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theoremos-v0.6.0-amd64-direct-write.img.xz",
+      "sha256": "aea028d124887bc934919b68194cc9521829705f213edec28d4c5a1b7e77e160",
+      "size_bytes": 300903124,
+      "artifact_kind": "direct-write-disk-image",
+      "target": "amd64-freebsd",
+      "format": "raw.xz",
+      "automation_strategy": "decompress-and-direct-write",
+      "direct_disk_write": "allowed",
+      "seed_partition_label": "THEOREMSEED",
+      "seed_filesystem": "msdosfs",
+      "first_boot_config_path": "first-boot.conf",
+      "first_boot_config_template": "first-boot.conf.example",
+      "bootable": true
+    },
+    {
+      "name": "theoremos-v0.6.0-amd64-direct-write.img.xz.sha256",
+      "sha256": "ed30cc3cad8a7b3babd4ab070245de11fd5af937d5a8a701d76963d26b167078",
+      "size_bytes": 109,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theoremos-v0.6.0-x86_64-unknown-freebsd-upgrade-bundle.tar.gz",
+      "sha256": "aa2c409bbf90f7c4210950044813332064570316f4f1dfa9d96990bc84e4cacc",
+      "size_bytes": 19149944,
+      "artifact_kind": "upgrade-bundle",
+      "target": "x86_64-unknown-freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-and-run-upgrade",
+      "direct_disk_write": "forbidden",
+      "archive_root": "theoremos-v0.6.0-x86_64-unknown-freebsd-upgrade-bundle",
+      "upgrade_entrypoint": "upgrade.sh",
+      "supported_upgrade_from": [
+        "v0.5.x"
+      ],
+      "target_boot_environment": "theorem/ROOT/0.6.0",
+      "state_preservation": "preserve theorem/store, theorem/log, and /var/lib/theorem across boot-environment switch",
+      "bootable": false
+    },
+    {
+      "name": "theoremos-v0.6.0-x86_64-unknown-freebsd-upgrade-bundle.tar.gz.sha256",
+      "sha256": "3dca31750de8752f6b7aec548f10b0a5a0fe1d47a451a062e8d0a9be36d6e97d",
+      "size_bytes": 128,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theoremos-v0.6.0-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "5eacf5b00b4ae887b3a4d095a56d1430a06784d8f2312a026851d3fce5c0829e",
+      "size_bytes": 19147427,
+      "artifact_kind": "installer-rootfs",
+      "target": "x86_64-unknown-freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-and-run-installer",
+      "direct_disk_write": "forbidden",
+      "archive_root": "theoremos-v0.6.0-x86_64-unknown-freebsd",
+      "installer_entrypoint": "install.sh",
+      "first_boot_config_template": "etc/theorem/first-boot.conf.example",
+      "bootable": false
+    },
+    {
+      "name": "theoremos-v0.6.0-x86_64-unknown-freebsd.tar.gz.sha256",
+      "sha256": "6c4eb2de597185dba4eabeb2eb907a7521fc7749afa63fc372f2f68b3c881818",
+      "size_bytes": 113,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    }
+  ],
+  "release_integrity": {
+    "release_ring": "public",
+    "evidence_asset_path": "releases/v0.6.0/integrity.json",
+    "sbom_assets": [
+      "ref-impl.cdx.json",
+      "theorem-node-v0.6.0.cdx.json"
+    ],
+    "provenance_assets": [
+      "theorem-node-v0.6.0.provenance.json"
+    ],
+    "minimum_version": "v0.6.0",
+    "downgrade_prevention_rule": "Once a consumer admits the 6.x public feed, it must not mirror or promote a release older than release_integrity.minimum_version without an explicit governed rollback decision.",
+    "rollback_authorization": {
+      "rule": "Rollback to an older 6.x artifact requires explicit governed approval before repointing a machine or mirror.",
+      "required_approval_count": 2,
+      "authorized_roles": [
+        "root-governance-authority"
+      ]
+    },
+    "revocation": {
+      "ledger_path": "releases/revocations.json",
+      "record_path": "releases/revocations/v0.6.0.json"
+    },
+    "mirror_policy": {
+      "feed_path": "releases/feed.json",
+      "mirror_generated_at": "2026-03-26T21:34:16Z",
+      "mirror_expires_at": "2026-03-27T21:34:16Z",
+      "mirror_ttl_hours": 24,
+      "stale_behavior": "fail_closed"
+    }
+  }
+}

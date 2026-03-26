@@ -1,0 +1,14 @@
+{
+  "payload": {
+    "schema_version": "1.0.0",
+    "file_name": "v0.6.0.json",
+    "sha256": "374b19f90d7f9fae6484888f1a6fca8273e90ed4cfc26269badb64d3cedc7494",
+    "size_bytes": 408,
+    "role": "release-revocation-record",
+    "key_id": "theorem-release-root",
+    "signed_at": "2026-03-26T21:36:01Z"
+  },
+  "signer": "3d569d090330d1a66400cd2027cd5a950383902b9943a5602b53d82bcb186de1",
+  "signature": "67ecd1d3894efdbd2c50e1c5d5898623a121fd49803309d104f2c384fd69605465d77d66f0ebb4045f9caa294d9d057738e40d3c405df00c453b1f72e736c703",
+  "algorithm": "ed25519"
+}

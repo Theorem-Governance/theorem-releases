@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "attestation_type": "release-provenance",
+  "product": "theorem-node",
+  "version": "v0.6.0",
+  "builder": "ring1-build-freebsd-release",
+  "build_host": "",
+  "build_target": "x86_64-unknown-freebsd",
+  "generated_at": "2026-03-26T20:48:55Z",
+  "trust_context": "ring1-build",
+  "artifacts": [
+    {
+      "name": "theoremos-v0.6.0-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "5eacf5b00b4ae887b3a4d095a56d1430a06784d8f2312a026851d3fce5c0829e",
+      "artifact_kind": "installer-rootfs"
+    },
+    {
+      "name": "theorem-node-v0.6.0-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "d456878ec999c938f8a7d4acb5742a940d65969dd5b8044f479ff1874c737f42",
+      "artifact_kind": "single-binary"
+    },
+    {
+      "name": "theoremos-v0.6.0-x86_64-unknown-freebsd-upgrade-bundle.tar.gz",
+      "sha256": "aa2c409bbf90f7c4210950044813332064570316f4f1dfa9d96990bc84e4cacc",
+      "artifact_kind": "upgrade-bundle"
+    }
+  ],
+  "build_inputs": {
+    "cargo_frozen": true,
+    "cargo_net_offline": true,
+    "veriexec_manifest_hash": "cf0c2eae8b04e2ed64ccf9a99eadfc960a05b232724dc4068c82ca2b461d4e9d"
+  }
+}

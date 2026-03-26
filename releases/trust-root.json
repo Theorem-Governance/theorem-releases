@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-03-26T21:34:11Z",
+  "root_keys": [
+    {
+      "key_id": "theorem-release-root",
+      "algorithm": "ed25519",
+      "public_key_hex": "3d569d090330d1a66400cd2027cd5a950383902b9943a5602b53d82bcb186de1",
+      "status": "active"
+    }
+  ],
+  "roles": [
+    {
+      "name": "release-manifest",
+      "threshold": 1,
+      "key_ids": [
+        "theorem-release-root"
+      ]
+    },
+    {
+      "name": "release-integrity",
+      "threshold": 1,
+      "key_ids": [
+        "theorem-release-root"
+      ]
+    },
+    {
+      "name": "release-notes",
+      "threshold": 1,
+      "key_ids": [
+        "theorem-release-root"
+      ]
+    },
+    {
+      "name": "release-feed",
+      "threshold": 1,
+      "key_ids": [
+        "theorem-release-root"
+      ]
+    },
+    {
+      "name": "release-revocation-ledger",
+      "threshold": 1,
+      "key_ids": [
+        "theorem-release-root"
+      ]
+    },
+    {
+      "name": "release-revocation-record",
+      "threshold": 1,
+      "key_ids": [
+        "theorem-release-root"
+      ]
+    }
+  ]
+}

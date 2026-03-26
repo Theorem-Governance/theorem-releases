@@ -19,6 +19,7 @@ Deployment modes must consume artifacts by machine-readable contract:
 |-------------|------------------------|--------------------------|
 | Unattended bare-metal direct disk write | `direct-write-disk-image` | `install-media`, `installer-rootfs`, `single-binary` |
 | Unattended bare-metal install flow | `installer-rootfs` | `install-media` |
+| In-place theoremOS upgrade | `upgrade-bundle` | `install-media`, `direct-write-disk-image` |
 | Human-operated boot/install media | `install-media` | n/a |
 | Service-only binary extraction | `single-binary` | `install-media` |
 
@@ -28,6 +29,10 @@ Additional hard rules:
   writes.
 - For `installer-rootfs`, resolve the installer at
   `${archive_root}/${installer_entrypoint}` after extraction.
+- For `upgrade-bundle`, resolve the upgrader at
+  `${archive_root}/${upgrade_entrypoint}` after extraction and use it only on
+  an already-running theoremOS machine that matches
+  `supported_upgrade_from`.
 - For `direct-write-disk-image`, place `/first-boot.conf` in the FAT seed
   partition named by `seed_partition_label` before first boot. The expected
   template path on that partition is `first_boot_config_template`.
@@ -35,6 +40,8 @@ Additional hard rules:
 - Current `0.5.x` unattended bare-metal contract is the
   `direct-write-disk-image` artifact. `installer-rootfs` remains valid only for
   installer-driven automation on a prepared FreeBSD host.
+- Current `0.5.x -> 0.6.x` update contract is an in-place ZFS boot-environment
+  upgrade via `upgrade-bundle`, not a fresh bare-metal disk write.
 
 Minimal selection flow:
 

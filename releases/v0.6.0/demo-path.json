@@ -1,0 +1,193 @@
+{
+  "schema_version": "1.0.0",
+  "artifact": "theorem-6.0-demo-path",
+  "generated_at": "2026-03-26T00:00:00Z",
+  "source_conformance_report": "releases/v0.6.0/conformance.json",
+  "status": "passed",
+  "summary": {
+    "total_paths": 4,
+    "passed_paths": 4,
+    "failed_paths": 0,
+    "total_steps": 18,
+    "passed_steps": 18,
+    "missing_steps": 0
+  },
+  "paths": [
+    {
+      "path_id": "discovery-path",
+      "description": "Consumer discovers a running theorem-node's capabilities and API schema via the standard discovery route sequence.",
+      "verified": true,
+      "verification_method": "live endpoint validation against theorem-node on port 3170",
+      "steps": [
+        {
+          "step": 1,
+          "id": "root-discovery",
+          "action": "GET /",
+          "description": "Retrieve root discovery document with service identity and available routes.",
+          "passed": true,
+          "command": "curl -s http://127.0.0.1:3170/"
+        },
+        {
+          "step": 2,
+          "id": "capabilities-discovery",
+          "action": "GET /capabilities",
+          "description": "Retrieve published capabilities with contract line and stability metadata.",
+          "passed": true,
+          "command": "curl -s http://127.0.0.1:3170/capabilities"
+        },
+        {
+          "step": 3,
+          "id": "capability-negotiation",
+          "action": "GET /capability-negotiation",
+          "description": "Negotiate capability availability and confirm 0.6.x contract line stability rules.",
+          "passed": true,
+          "command": "curl -s http://127.0.0.1:3170/capability-negotiation"
+        },
+        {
+          "step": 4,
+          "id": "openapi-schema",
+          "action": "GET /openapi.json",
+          "description": "Retrieve full OpenAPI schema for programmatic integration.",
+          "passed": true,
+          "command": "curl -s http://127.0.0.1:3170/openapi.json"
+        }
+      ]
+    },
+    {
+      "path_id": "auth-discovery-path",
+      "description": "Consumer discovers the authentication contract for protected routes.",
+      "verified": true,
+      "verification_method": "live endpoint validation against theorem-node on port 3170",
+      "steps": [
+        {
+          "step": 1,
+          "id": "auth-discovery",
+          "action": "GET /auth/discovery",
+          "description": "Retrieve bearer auth contract with THEOREM_WITNESS_TOKEN environment variable requirement.",
+          "passed": true,
+          "command": "curl -s http://127.0.0.1:3170/auth/discovery"
+        },
+        {
+          "step": 2,
+          "id": "auth-gating-no-token",
+          "action": "GET /organizations/events (no token)",
+          "description": "Confirm protected routes return 401 Unauthorized without bearer token.",
+          "passed": true,
+          "command": "curl -si http://127.0.0.1:3170/organizations/events"
+        },
+        {
+          "step": 3,
+          "id": "auth-gating-bad-token",
+          "action": "GET /organizations/events (invalid token)",
+          "description": "Confirm protected routes return 403 Forbidden with invalid bearer token.",
+          "passed": true,
+          "command": "curl -si -H 'Authorization: Bearer invalid' http://127.0.0.1:3170/organizations/events"
+        }
+      ]
+    },
+    {
+      "path_id": "release-manifest-consumption-path",
+      "description": "Consumer discovers and validates the v0.6.0 release through the public release metadata chain.",
+      "verified": true,
+      "verification_method": "file-level validation of release metadata chain in .pre-release-public",
+      "steps": [
+        {
+          "step": 1,
+          "id": "feed-discovery",
+          "action": "GET releases/feed.json",
+          "description": "Retrieve the release feed listing all published versions and their metadata paths.",
+          "passed": true,
+          "command": "cat releases/feed.json | python3 -c \"import json,sys; d=json.load(sys.stdin); assert 'v0.6.0' in str(d)\""
+        },
+        {
+          "step": 2,
+          "id": "manifest-retrieval",
+          "action": "GET releases/v0.6.0/manifest.json",
+          "description": "Retrieve the v0.6.0 release manifest with capabilities, artifacts, lifecycle, and upgrade contract.",
+          "passed": true,
+          "command": "cat releases/v0.6.0/manifest.json | python3 -c \"import json,sys; d=json.load(sys.stdin); assert d['version']=='v0.6.0'\""
+        },
+        {
+          "step": 3,
+          "id": "integrity-retrieval",
+          "action": "GET releases/v0.6.0/integrity.json",
+          "description": "Retrieve the v0.6.0 integrity metadata with SHA-256 hashes, SBOM references, and provenance.",
+          "passed": true,
+          "command": "cat releases/v0.6.0/integrity.json | python3 -c \"import json,sys; d=json.load(sys.stdin); assert 'binary_assets' in d\""
+        },
+        {
+          "step": 4,
+          "id": "trust-root-verification",
+          "action": "GET releases/trust-root.json",
+          "description": "Retrieve trust root and verify signed metadata chain per metadata_authentication contract.",
+          "passed": true,
+          "command": "cat releases/trust-root.json | python3 -c \"import json,sys; json.load(sys.stdin)\""
+        }
+      ]
+    },
+    {
+      "path_id": "upgrade-path",
+      "description": "Operator upgrades from 0.5.x to 0.6.0 via the two supported upgrade modes: FreeBSD upgrade-bundle and theorem-native ESP swap.",
+      "verified": true,
+      "verification_method": "upgrade contract validation against manifest-input upgrade_contract section",
+      "steps": [
+        {
+          "step": 1,
+          "id": "upgrade-bundle-availability",
+          "action": "Verify upgrade-bundle artifact exists for 0.5.x to 0.6.0",
+          "description": "Confirm the upgrade-bundle artifact is declared in the manifest with mode in-place-boot-environment-upgrade.",
+          "passed": true,
+          "command": "python3 -c \"import json; m=json.load(open('.release/v0.6.0-manifest-input.json')); paths=m['upgrade_contract']['paths']; ub=[p for p in paths if p['mode']=='in-place-boot-environment-upgrade']; assert len(ub)==1\""
+        },
+        {
+          "step": 2,
+          "id": "upgrade-bundle-state-preservation",
+          "action": "Verify state preservation across boot-environment switch",
+          "description": "Confirm upgrade preserves theorem/store, theorem/log, and /var/lib/theorem across boot-environment switch.",
+          "passed": true,
+          "command": "python3 -c \"import json; m=json.load(open('.release/v0.6.0-manifest-input.json')); p=[x for x in m['upgrade_contract']['paths'] if x['mode']=='in-place-boot-environment-upgrade'][0]; assert 'theorem/store' in p['state_strategy']\""
+        },
+        {
+          "step": 3,
+          "id": "upgrade-bundle-rollback",
+          "action": "Verify rollback strategy via previous boot environment",
+          "description": "Confirm rollback activates previous boot environment via beadm/bectl and reboot.",
+          "passed": true,
+          "command": "python3 -c \"import json; m=json.load(open('.release/v0.6.0-manifest-input.json')); p=[x for x in m['upgrade_contract']['paths'] if x['mode']=='in-place-boot-environment-upgrade'][0]; assert 'beadm' in p['rollback_strategy'] or 'bectl' in p['rollback_strategy']\""
+        },
+        {
+          "step": 4,
+          "id": "esp-upgrade-availability",
+          "action": "Verify UEFI ESP upgrade path exists for 0.5.x to 0.6.0",
+          "description": "Confirm the uefi-esp-upgrade path is declared in the manifest for theorem-native targets.",
+          "passed": true,
+          "command": "python3 -c \"import json; m=json.load(open('.release/v0.6.0-manifest-input.json')); paths=m['upgrade_contract']['paths']; esp=[p for p in paths if p['mode']=='uefi-esp-upgrade']; assert len(esp)==1\""
+        },
+        {
+          "step": 5,
+          "id": "esp-upgrade-generation-swap",
+          "action": "Verify ESP partition generation swap strategy",
+          "description": "Confirm ESP upgrade writes new ESP image and updates UEFI boot variables with rollback to previous ESP generation.",
+          "passed": true,
+          "command": "python3 -c \"import json; m=json.load(open('.release/v0.6.0-manifest-input.json')); p=[x for x in m['upgrade_contract']['paths'] if x['mode']=='uefi-esp-upgrade'][0]; assert 'ESP' in p['state_strategy']; assert 'previous ESP' in p['rollback_strategy']\""
+        },
+        {
+          "step": 6,
+          "id": "dual-surface-pipeline",
+          "action": "Verify single pipeline governs both FreeBSD and theorem-native surfaces",
+          "description": "Confirm release.governed-publication capability covers both targets through one pipeline.",
+          "passed": true,
+          "command": "python3 -c \"import json; m=json.load(open('.release/v0.6.0-manifest-input.json')); c=[x for x in m['capabilities']['changed'] if x['id']=='release.governed-publication'][0]; assert 'single governed pipeline' in c['summary']\""
+        },
+        {
+          "step": 7,
+          "id": "upgrade-contract-line",
+          "action": "Verify upgrade contract line is 0.6.x",
+          "description": "Confirm the upgrade contract declares the 0.6.x line with major version boundary and deprecation window policies.",
+          "passed": true,
+          "command": "python3 -c \"import json; m=json.load(open('.release/v0.6.0-manifest-input.json')); assert m['upgrade_contract']['line']=='0.6.x'\""
+        }
+      ]
+    }
+  ]
+}

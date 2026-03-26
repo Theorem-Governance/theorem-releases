@@ -5,6 +5,22 @@ governance model, trust layers, workspace crate structure, runtime boundaries,
 enforcement rules, audit criteria, and the SealedBatch compile-time safety
 pattern.
 
+## Current Strategic Boundary
+
+Theorem is no longer treating the host operating system as the durable product
+substrate. The active architecture direction is the sovereign theorem machine
+stack defined in [ADR-001-theorem-sovereign-machine-stack.md](/C:/Users/Eric/Theorem/docs/platform/decisions/ADR-001-theorem-sovereign-machine-stack.md)
+and [2026-03-25-theorem-machine-foundation.md](/C:/Users/Eric/Theorem/docs/superpowers/specs/2026-03-25-theorem-machine-foundation.md).
+
+In practical terms:
+
+- current FreeBSD install/upgrade/boot-environment work is bootstrap carrier
+  scaffolding
+- theorem-native boot, kernel, activation, and recovery semantics are the
+  durable architecture
+- new product law should be expressed in theorem-native machine terms, not in
+  host-OS configuration conventions
+
 ## Governance Model
 
 Every operation in Theorem follows a four-phase pipeline:

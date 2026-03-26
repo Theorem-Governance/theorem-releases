@@ -1,5 +1,60 @@
 {
   "compatibility_classification": "REPLACE_WITH_COMPATIBILITY_CLASSIFICATION",
+  "release_lifecycle": {
+    "phase": "REPLACE_WITH_RELEASE_PHASE",
+    "support_statement": "REPLACE_WITH_SUPPORT_STATEMENT",
+    "security_support": "REPLACE_WITH_SECURITY_SUPPORT_POLICY",
+    "eol_action": "REPLACE_WITH_EOL_ACTION",
+    "supported_until": "REPLACE_WITH_SUPPORTED_UNTIL_OR_REMOVE",
+    "superseded_by": "REPLACE_WITH_SUPERSEDING_VERSION_OR_REMOVE"
+  },
+  "release_channel": {
+    "name": "REPLACE_WITH_CHANNEL_NAME",
+    "promotion_policy": "REPLACE_WITH_PROMOTION_POLICY",
+    "freeze_policy": "REPLACE_WITH_FREEZE_POLICY",
+    "servicing_mode": "REPLACE_WITH_SERVICING_MODE",
+    "published_branch": "REPLACE_WITH_PUBLISHED_BRANCH"
+  },
+  "support_tiers": [
+    {
+      "target": "REPLACE_WITH_TARGET_TRIPLE",
+      "tier": "Primary",
+      "release_blocking": true,
+      "test_depth": "REPLACE_WITH_TEST_DEPTH",
+      "security_servicing": "REPLACE_WITH_SECURITY_SERVICING",
+      "deprecation_policy": "REPLACE_WITH_DEPRECATION_POLICY"
+    }
+  ],
+  "security_release_policy": {
+    "advisory_channel": "REPLACE_WITH_ADVISORY_CHANNEL",
+    "severity_classes": [
+      "REPLACE_WITH_SEVERITY_CLASS"
+    ],
+    "release_cadence": "REPLACE_WITH_RELEASE_CADENCE",
+    "emergency_release_rule": "REPLACE_WITH_EMERGENCY_RELEASE_RULE",
+    "metadata_key_rotation": "REPLACE_WITH_METADATA_KEY_ROTATION"
+  },
+  "release_notes": {
+    "asset_name": "GENERATE_AT_RELEASE_TIME",
+    "public_path": "GENERATE_AT_RELEASE_TIME",
+    "format": "markdown",
+    "summary": "REPLACE_WITH_RELEASE_NOTES_SUMMARY",
+    "operator_highlights": [
+      "REPLACE_WITH_OPERATOR_HIGHLIGHT"
+    ]
+  },
+  "metadata_authentication": {
+    "trust_root_path": "REPLACE_WITH_TRUST_ROOT_PATH",
+    "verification_rule": "REPLACE_WITH_METADATA_VERIFICATION_RULE",
+    "required_roles": [
+      "release-manifest",
+      "release-integrity",
+      "release-notes",
+      "release-feed",
+      "release-revocation-ledger",
+      "release-revocation-record"
+    ]
+  },
   "summary": "REPLACE_WITH_RELEASE_SUMMARY",
   "capabilities": {
     "new": [
@@ -82,7 +137,21 @@
     "line": "REPLACE_WITH_UPGRADE_LINE",
     "major_version_boundary_rule": "REPLACE_WITH_MAJOR_VERSION_BOUNDARY_RULE",
     "deprecation_window_policy": "REPLACE_WITH_DEPRECATION_WINDOW_POLICY",
-    "behavior_change_policy": "REPLACE_WITH_BEHAVIOR_CHANGE_POLICY"
+    "behavior_change_policy": "REPLACE_WITH_BEHAVIOR_CHANGE_POLICY",
+    "paths": [
+      {
+        "from_version": "REPLACE_WITH_FROM_VERSION_RANGE",
+        "to_version": "REPLACE_WITH_TO_VERSION",
+        "mode": "REPLACE_WITH_UPGRADE_MODE",
+        "artifact_kind": "REPLACE_WITH_UPGRADE_ARTIFACT_KIND",
+        "machine_executable": true,
+        "requires_reboot": true,
+        "state_strategy": "REPLACE_WITH_STATE_STRATEGY",
+        "rollback_strategy": "REPLACE_WITH_ROLLBACK_STRATEGY",
+        "operator_guide": "REPLACE_WITH_OPERATOR_GUIDE_PATH",
+        "target_boot_environment": "REPLACE_WITH_TARGET_BOOT_ENVIRONMENT"
+      }
+    ]
   },
   "release_integrity": {
     "release_ring": "REPLACE_WITH_RELEASE_RING",

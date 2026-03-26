@@ -2,6 +2,16 @@
   "schema_version": "1.0.0",
   "records": [
     {
+      "version": "v0.6.0",
+      "status": "active",
+      "changed_at": "2026-03-26T21:35:56Z",
+      "changed_by": "ring1-release",
+      "record_path": "releases/revocations/v0.6.0.json",
+      "manifest_path": "releases/v0.6.0/manifest.json",
+      "integrity_path": "releases/v0.6.0/integrity.json",
+      "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.6.0"
+    },
+    {
       "version": "v0.5.0",
       "status": "active",
       "changed_at": "2026-03-25T22:15:38Z",
@@ -22,5 +32,5 @@
       "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.4.1"
     }
   ],
-  "updated_at": "2026-03-25T22:15:38Z"
+  "updated_at": "2026-03-26T21:35:56Z"
 }

@@ -1,0 +1,14 @@
+{
+  "payload": {
+    "schema_version": "1.0.0",
+    "file_name": "feed.json",
+    "sha256": "87a3de74940fa8a753e7bb629b1a130dc1541aace4b6bcbeb2187f4fb3e7cd4a",
+    "size_bytes": 4860,
+    "role": "release-feed",
+    "key_id": "theorem-release-root",
+    "signed_at": "2026-03-26T21:35:59Z"
+  },
+  "signer": "3d569d090330d1a66400cd2027cd5a950383902b9943a5602b53d82bcb186de1",
+  "signature": "aa8a547d938dc874f1e2d7705dccafeab8738a5b3ad468280d6a3e2ec1862ff0c4356b24ece505ce70a55f7053c9009de1715442e2cde3a4680d05bc702ddc03",
+  "algorithm": "ed25519"
+}

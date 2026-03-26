@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theorem-governance.github.io/release-signature.schema.json",
+  "title": "Theorem Release Signature Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["payload", "signer", "signature", "algorithm"],
+  "properties": {
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "file_name",
+        "sha256",
+        "size_bytes",
+        "role",
+        "key_id",
+        "signed_at"
+      ],
+      "properties": {
+        "schema_version": { "type": "string" },
+        "file_name": { "type": "string" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "size_bytes": { "type": "integer", "minimum": 0 },
+        "role": { "type": "string" },
+        "key_id": { "type": "string" },
+        "signed_at": { "type": "string" }
+      }
+    },
+    "signer": { "type": "string" },
+    "signature": { "type": "string" },
+    "algorithm": {
+      "type": "string",
+      "enum": ["ed25519"]
+    }
+  }
+}

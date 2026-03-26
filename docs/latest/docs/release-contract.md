@@ -40,6 +40,72 @@ Rules:
 - every public release must declare its compatibility classification in a
   machine-readable manifest
 
+## Lifecycle Contract
+
+Every public release manifest must declare machine-readable lifecycle state in
+`release_lifecycle`.
+
+Required fields:
+
+- `phase`: one of `preview`, `active`, `security-only`, or `eol`
+- `support_statement`: operator-readable statement of what support actually
+  exists for the line
+- `security_support`: statement of the security-fix policy for the line
+- `eol_action`: what an operator must do when the line is superseded or ended
+
+Optional fields:
+
+- `supported_until`: concrete end-of-support timestamp when support is date-bound
+- `superseded_by`: version that replaces this line when support ends by
+  supersession rather than a fixed date
+
+Rules:
+
+- lifecycle state is part of the machine contract, not release-note prose
+- consumers must read lifecycle state from the manifest and feed, not infer it
+  from semver alone
+- `eol` releases must declare either `supported_until` or `superseded_by`
+- preview-stage lines may use event-driven supersession instead of a fixed date
+
+## Release Channel Contract
+
+Every public manifest must declare a machine-readable `release_channel` object.
+
+Minimum fields:
+
+- `name`
+- `promotion_policy`
+- `freeze_policy`
+- `servicing_mode`
+- `published_branch`
+
+This is the governing answer for how a line moves from candidate to public feed.
+
+## Support-Tier Contract
+
+Every public manifest must declare machine-readable `support_tiers` entries for
+published, legacy, or planned targets.
+
+Each target entry must declare:
+
+- `target`
+- `tier`
+- `release_blocking`
+- `test_depth`
+- `security_servicing`
+- `deprecation_policy`
+
+The operational meaning of `Primary`, `Legacy`, and `Planned` lives in the
+manifest, not only in prose. See `docs/packaging-policy.md`.
+
+## Security Release Policy
+
+Every public manifest must declare `security_release_policy` with the advisory
+channel, severity classes, release cadence, emergency release rule, and
+metadata-key rotation policy.
+
+See `docs/security-release-process.md` for the repository-level standard.
+
 ## Asset Naming
 
 ### Single-Binary Tarball (backward compat)
@@ -86,6 +152,7 @@ usr/local/bin/theorem-govagent             Governance agent
 usr/local/bin/theorem-witness              Witness node
 usr/local/etc/rc.d/theorem_init            FreeBSD rc.d service script
 etc/rc.conf                                FreeBSD system configuration
+etc/theorem/machine-spec.toml              Declarative host/image specification
 etc/theorem/theorem.conf                   Default governance config
 etc/veriexec.d/theorem.manifest            Binary integrity manifest
 etc/theorem/first-boot.conf.example        First-boot provisioning template
@@ -105,7 +172,38 @@ FIRST_BOOT_CONF=/tmp/first-boot.conf sh install.sh
 ```
 
 The installer verifies FreeBSD >= 14, installs binaries, applies first-boot
-configuration, sets immutable flags, and enables the theorem-init service.
+configuration, establishes or preserves `machine-spec.toml`, renders the
+canonical host configuration from that spec, sets immutable flags, and enables
+the theorem-init service.
+
+### Upgrade Bundle (in-place theoremOS upgrade)
+
+Starting with the `0.6.x` line, theoremOS releases are expected to publish an
+in-place upgrade artifact for existing theoremOS machines:
+
+- `theoremos-<tag>-<target>-upgrade-bundle.tar.gz`
+
+The tarball expands into `theoremos-<tag>-<target>-upgrade-bundle/` and must
+contain:
+
+```text
+upgrade.sh                              Non-interactive in-place upgrader
+release.version                         Target release version
+supported-upgrade-from                  Allowed source release lines
+rootfs/install.sh                       Embedded installer payload
+rootfs/etc/theorem/release.version      Installed target release marker
+```
+
+Its manifest entry must carry:
+
+- `artifact_kind=upgrade-bundle`
+- `automation_strategy=extract-and-run-upgrade`
+- `direct_disk_write=forbidden`
+- `archive_root`
+- `upgrade_entrypoint`
+- `supported_upgrade_from`
+- `target_boot_environment`
+- `state_preservation`
 
 Machine consumers must distinguish the FreeBSD artifact classes:
 
@@ -122,6 +220,12 @@ Machine consumers must distinguish the FreeBSD artifact classes:
   `automation_strategy=extract-and-run-installer`, `archive_root`, an
   `installer_entrypoint` relative to that archive root, and
   `direct_disk_write=forbidden`.
+- `theoremos-<tag>-<target>-upgrade-bundle.tar.gz` is the in-place theoremOS
+  upgrade artifact. Its manifest entry carries `artifact_kind=upgrade-bundle`,
+  `automation_strategy=extract-and-run-upgrade`, `archive_root`,
+  `upgrade_entrypoint`, `supported_upgrade_from`, and
+  `target_boot_environment`. It is consumed only by an already-running
+  theoremOS machine during an explicit upgrade flow.
 - `theoremos-<tag>-amd64.iso` and `theoremos-<tag>-amd64-memstick.img` are
   install media only. Their manifest entries carry
   `artifact_kind=install-media` and `direct_disk_write=forbidden`.
@@ -129,12 +233,49 @@ Machine consumers must distinguish the FreeBSD artifact classes:
   published for unattended bare-metal writes.
 - Automation must fail closed if no `installer-rootfs` artifact is published
   for installer-driven bare-metal flows.
+- Upgrade automation must fail closed if no `upgrade-bundle` artifact is
+  published for an in-place theoremOS upgrade path.
 - Direct-write consumers must inject `/first-boot.conf` into the published
   seed partition before first boot if they need remote SSH access or static
   network configuration.
 
 See `docs/theorem-init-contract.md` for the service lifecycle, and
-`docs/operator-guide/08-migration-4x-to-5x.md` for the migration path.
+`docs/operator-guide/08-migration-4x-to-5x.md` for the 4.x re-image path and
+`docs/operator-guide/09-upgrade-5x.md` for the `0.5.x -> 0.6.x` in-place
+upgrade path.
+
+## In-Place Upgrade Contract (`0.5.x -> 0.6.x`)
+
+`0.6.x` releases must declare an explicit machine-readable upgrade path in
+`upgrade_contract.paths`. At minimum, one path must exist from the prior `0.x`
+line to the current release.
+
+For `v0.6.0`, the required path is:
+
+- `from_version=v0.5.x`
+- `to_version=v0.6.0`
+- `mode=in-place-boot-environment-upgrade`
+- `artifact_kind=upgrade-bundle`
+- `machine_executable=true`
+
+The required operational behavior is:
+
+- determine the currently installed theoremOS version from the running system
+- refuse execution unless the current version matches `supported_upgrade_from`
+- create a snapshot of the current boot environment before mutation
+- create or populate a target boot environment such as `theorem/ROOT/0.6.0`
+- preserve `theorem/store`, `theorem/log`, and `/var/lib/theorem`
+- preserve or import the machine spec and re-render the target boot
+  environment from it
+- switch `zpool bootfs` to the target boot environment
+- require a reboot boundary before the new runtime is considered active
+- record pending-upgrade markers and promote the new boot environment to
+  known-good only after post-boot health checks succeed
+- publish a rollback strategy that returns `bootfs` to the prior boot
+  environment and restores pre-upgrade state if needed
+- expose operator-readable boot status showing the installed release version,
+  currently booted dataset, next default dataset, rollback candidates,
+  pending-upgrade markers, and known-good state
 
 ## Checksum Contract
 
@@ -192,6 +333,26 @@ The integrity evidence is part of the shipped product contract. It must carry:
 - rollback authorization rule
 - revocation ledger and per-release record paths
 - mirror expiry with fail-closed stale behavior
+
+## Metadata Authentication Contract
+
+Release metadata is not trusted by hash alone.
+
+Every public manifest must declare `metadata_authentication` and consumers must
+verify the signed machine-readable release surfaces against
+`releases/trust-root.json`.
+
+Required signed surfaces:
+
+- `releases/<tag>/manifest.json`
+- `releases/<tag>/integrity.json`
+- `releases/<tag>/release-notes.md`
+- `releases/feed.json`
+- `releases/revocations.json`
+- `releases/revocations/<tag>.json`
+
+Release-session validation must fail closed when any required signature is
+missing or invalid.
 
 ## Recovery Contract
 
@@ -266,8 +427,9 @@ manifest is not inferred from git history.
 Every public release must also update the machine-readable release feed:
 
 - feed path: `releases/feed.json`
-- each item includes version, manifest path, human release notes URL, release
-  URL, compatibility classification, release ring, integrity path,
+- each item includes version, manifest path, release-notes path, trust-root
+  path, human release notes URL, release URL, compatibility classification,
+  lifecycle state, release channel, release ring, integrity path,
   minimum-version floor, and revocation paths
 - the feed itself carries `mirror_generated_at`, `mirror_expires_at`, and
   `stale_behavior`
@@ -396,6 +558,17 @@ The conformance report is the published proof-of-product for the machine
 contract. If a required `0.5.0` user moment is still missing from executable
 coverage, the report must say so explicitly.
 
+## Release Notes Contract
+
+Every public release must publish release notes as a governed artifact:
+
+- release asset name: `theorem-release-notes-<tag>.md`
+- public copy: `releases/<tag>/release-notes.md`
+
+Release notes are part of the machine-governed publication contract because
+they carry operator impact and security-release context, not just marketing
+summary.
+
 Contract modules verify internal fixture consistency (cross-field relationships
 within the same JSON bundle). They do not verify that fixture field values
 correspond to external infrastructure state. This is a deliberate design
@@ -451,6 +624,10 @@ a development session, fix, re-tag, and start a new release session.
 This separation exists because the same context that fixes a build error
 lacks the perspective to catch a missing provenance hash or an empty SBOM
 array. The release session's only job is validation and publication.
+
+The release session must also run the release rehearsal gate
+`scripts/rehearse-release-path.sh` against the staged public release tree
+before it is pushed.
 
 ## Downstream Consumer Contract
 
