@@ -68,8 +68,8 @@
   "artifacts": [
     {
       "name": "theoremos-v0.6.1-amd64-direct-write.img.xz",
-      "sha256": "48fd875aef9973ff7da0e4c0beea22184ccbdc95543472eb8977bbe90e8dcffa",
-      "size_bytes": 301042280,
+      "sha256": "078911f08e2b6d214e65933808812b88cdf74e1321f142af993092d29b630f0a",
+      "size_bytes": 303431108,
       "artifact_kind": "direct-write-disk-image",
       "target": "amd64-freebsd",
       "format": "raw.xz",
