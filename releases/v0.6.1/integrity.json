@@ -7,7 +7,7 @@
   "manifest": {
     "path": "releases/v0.6.1/manifest.json",
     "asset_name": "manifest.json",
-    "sha256": "bb4f7cfbd12cb974e1c086615ab701ce5b87a945c2f7b71bdefc49adc880adc4"
+    "sha256": "707b95eaeae6e50553a78a5b305f243ad6c698d31b59d8910aed50e6722c6ca4"
   },
   "release_ring": "public",
   "minimum_version": "v0.6.1",
@@ -20,8 +20,8 @@
   "binary_assets": [
     {
       "name": "theoremos-v0.6.1-amd64-direct-write.img.xz",
-      "sha256": "b01be6f107030536bfd1a257607caac3a8442c026b99976009aaa12648f4838f",
-      "size_bytes": 303431452,
+      "sha256": "48fd875aef9973ff7da0e4c0beea22184ccbdc95543472eb8977bbe90e8dcffa",
+      "size_bytes": 301042280,
       "artifact_kind": "direct-write-disk-image",
       "target": "amd64-freebsd",
       "format": "raw.xz",
@@ -35,8 +35,8 @@
     },
     {
       "name": "theoremos-v0.6.1-x86_64-unknown-freebsd.tar.gz",
-      "sha256": "a332b6645338542a4b6e7f81a984bdd5d5a67627f2c15b29be0eb04935164fe6",
-      "size_bytes": 19328516,
+      "sha256": "ba3a87b5a535010fd8cf8086e067b1f9d794fb812ce863408f2b87cd8340ba47",
+      "size_bytes": 19624339,
       "artifact_kind": "installer-rootfs",
       "target": "x86_64-unknown-freebsd",
       "format": "tar.gz",
@@ -49,8 +49,8 @@
     },
     {
       "name": "theoremos-v0.6.1-x86_64-unknown-freebsd-upgrade-bundle.tar.gz",
-      "sha256": "3134824bd253bee24b112468ea55fa1d80b03d2a864db0911c2b442bae6396e5",
-      "size_bytes": 19336276,
+      "sha256": "90c29940602603c2407a3a080a0fbbe262c55eed4fe46600c9bd86a6a53ab517",
+      "size_bytes": 19627634,
       "artifact_kind": "upgrade-bundle",
       "target": "x86_64-unknown-freebsd",
       "format": "tar.gz",
@@ -94,7 +94,7 @@
   "provenance_assets": [
     {
       "name": "theorem-node-v0.6.1.provenance.json",
-      "sha256": "541b6bd91437e4a7f9ed73dad4672d59d823ce85037147b30d6deb532a602f9d",
+      "sha256": "f236de6bbd52917e3b065a7985c618f962020e5863320263a3a940d09866f782",
       "size_bytes": 1143
     }
   ],
