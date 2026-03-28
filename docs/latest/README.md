@@ -73,9 +73,21 @@ Observability
   theorem-dashboard
 ```
 
+## Theorem Kernel (Bare Metal)
+
+Theorem also ships as a standalone bare-metal kernel that boots directly from
+BIOS with no operating system. The kernel includes PCI enumeration, virtio-net
+networking, TCP/IP, and a management server — all in a 126 KiB compressed
+image.
+
+- Kernel quick start: [`docs/kernel-quickstart.md`](docs/kernel-quickstart.md)
+- Kernel production deployment:
+  [`docs/operator-guide/11-kernel-deployment.md`](docs/operator-guide/11-kernel-deployment.md)
+
 ## Public Contracts
 
-- Fast developer install: [`docs/quickstart.md`](docs/quickstart.md)
+- Fast developer install (theorem-node): [`docs/quickstart.md`](docs/quickstart.md)
+- Kernel bare-metal deploy: [`docs/kernel-quickstart.md`](docs/kernel-quickstart.md)
 - Production deployment and operations:
   [`docs/operator-guide/`](docs/operator-guide/)
 - Release asset and checksum contract:
