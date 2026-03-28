@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.3.0",
+  "product": "theorem-node",
+  "version": "v0.6.1",
+  "release_date": "2026-03-28T13:40:00Z",
+  "compatibility_classification": "minor-patch",
+  "release_lifecycle": {
+    "phase": "preview",
+    "support_statement": "Platform preview release. Supported for evaluation, documented theoremOS install flows, BIOS native boot validation, and the published FreeBSD upgrade contract.",
+    "security_support": "Best-effort fixes apply only to the latest published preview line. Older preview lines may be superseded without backport commitments.",
+    "eol_action": "When this preview line is superseded or revoked, operators must upgrade to the next supported preview line or re-image using the documented recovery path."
+  },
+  "release_channel": {
+    "name": "preview",
+    "promotion_policy": "A preview release may publish only after conformance evidence, release notes, and release metadata succeed.",
+    "freeze_policy": "Preview release tags freeze contract surfaces and bundled artifacts at tag cut; any fix requires a new tag and a fresh release session.",
+    "servicing_mode": "latest-preview-only",
+    "published_branch": "main"
+  },
+  "support_tiers": [
+    {
+      "target": "x86_64-unknown-freebsd",
+      "tier": "Primary",
+      "release_blocking": true,
+      "test_depth": "Installer, upgrade-bundle, rollback-candidate visibility, and release-contract validation are blocking.",
+      "security_servicing": "Best-effort security servicing on the latest preview line only.",
+      "deprecation_policy": "Removal requires an explicit release-contract update and a superseding primary target."
+    },
+    {
+      "target": "x86_64-bios-native",
+      "tier": "Primary",
+      "release_blocking": true,
+      "test_depth": "Direct-write image boot, management server reachability, DHCP acquisition.",
+      "security_servicing": "Best-effort security servicing on the latest preview line only.",
+      "deprecation_policy": "Removal requires an explicit release-contract update and a superseding primary target."
+    }
+  ],
+  "upgrade_contract": {
+    "line": "0.6.x",
+    "paths": [
+      {
+        "from_version": "v0.5.x",
+        "to_version": "v0.6.1",
+        "mode": "in-place-boot-environment-upgrade",
+        "artifact_kind": "upgrade-bundle",
+        "machine_executable": true,
+        "state_strategy": "preserve theorem/store, theorem/log, and /var/lib/theorem across boot-environment switch",
+        "rollback_strategy": "activate previous boot environment via beadm/bectl and reboot",
+        "operator_guide": "Run upgrade.sh from the upgrade-bundle archive on a running 0.5.x system."
+      },
+      {
+        "from_version": "v0.6.0",
+        "to_version": "v0.6.1",
+        "mode": "in-place-boot-environment-upgrade",
+        "artifact_kind": "upgrade-bundle",
+        "machine_executable": true,
+        "state_strategy": "preserve theorem/store, theorem/log, and /var/lib/theorem across boot-environment switch",
+        "rollback_strategy": "activate previous boot environment via beadm/bectl and reboot",
+        "operator_guide": "Run upgrade.sh from the upgrade-bundle archive on a running 0.6.0 system."
+      }
+    ]
+  },
+  "summary": "Theorem 0.6.1 ships the full FreeBSD installer alongside the theorem-native BIOS kernel. The FreeBSD stack includes theorem-init, theorem-node, theorem-gateway, theorem-supervisor, and theorem-govagent with rc.d service integration, veriexec integrity manifests, and ZFS boot environments. The bare-metal BIOS kernel provides virtio-net networking, TCP/IP via smoltcp, DHCP with /32 cloud VPS workarounds, and a token-authenticated management server — all in 126 KiB compressed.",
+  "release_notes": {
+    "asset_name": "release-notes.md",
+    "format": "markdown"
+  },
+  "artifacts": [
+    {
+      "name": "theoremos-v0.6.1-amd64-direct-write.img.xz",
+      "sha256": "b01be6f107030536bfd1a257607caac3a8442c026b99976009aaa12648f4838f",
+      "size_bytes": 303431452,
+      "artifact_kind": "direct-write-disk-image",
+      "target": "amd64-freebsd",
+      "format": "raw.xz",
+      "automation_strategy": "decompress-and-direct-write",
+      "direct_disk_write": "allowed",
+      "seed_partition_label": "THEOREMSEED",
+      "seed_filesystem": "msdosfs",
+      "first_boot_config_path": "first-boot.conf",
+      "first_boot_config_template": "first-boot.conf.example",
+      "bootable": true
+    },
+    {
+      "name": "theoremos-v0.6.1-amd64-direct-write.img.xz.sha256",
+      "sha256": null,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theoremos-v0.6.1-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "a332b6645338542a4b6e7f81a984bdd5d5a67627f2c15b29be0eb04935164fe6",
+      "size_bytes": 19328516,
+      "artifact_kind": "installer-rootfs",
+      "target": "x86_64-unknown-freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-and-run-installer",
+      "direct_disk_write": "forbidden",
+      "archive_root": "theoremos-v0.6.1-x86_64-unknown-freebsd",
+      "installer_entrypoint": "install.sh",
+      "first_boot_config_template": "etc/theorem/first-boot.conf.example",
+      "bootable": false
+    },
+    {
+      "name": "theoremos-v0.6.1-x86_64-unknown-freebsd.tar.gz.sha256",
+      "sha256": null,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theoremos-v0.6.1-x86_64-unknown-freebsd-upgrade-bundle.tar.gz",
+      "sha256": "3134824bd253bee24b112468ea55fa1d80b03d2a864db0911c2b442bae6396e5",
+      "size_bytes": 19336276,
+      "artifact_kind": "upgrade-bundle",
+      "target": "x86_64-unknown-freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-and-run-upgrade",
+      "direct_disk_write": "forbidden",
+      "archive_root": "theoremos-v0.6.1-x86_64-unknown-freebsd-upgrade-bundle",
+      "upgrade_entrypoint": "upgrade.sh",
+      "supported_upgrade_from": ["v0.5.x", "v0.6.0"],
+      "target_boot_environment": "theorem/ROOT/0.6.1",
+      "state_preservation": "preserve theorem/store, theorem/log, and /var/lib/theorem across boot-environment switch",
+      "bootable": false
+    },
+    {
+      "name": "theoremos-v0.6.1-x86_64-unknown-freebsd-upgrade-bundle.tar.gz.sha256",
+      "sha256": null,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theorem-node-v0.6.1-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "087a8c424e61c5ed422befafcb799c2138c55fea48ef04c0be675e63742a8e95",
+      "size_bytes": 6907247,
+      "artifact_kind": "single-binary",
+      "target": "x86_64-unknown-freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-binary",
+      "direct_disk_write": "not-applicable",
+      "bootable": false
+    },
+    {
+      "name": "theorem-node-v0.6.1-x86_64-unknown-freebsd.tar.gz.sha256",
+      "sha256": null,
+      "artifact_kind": "checksum",
+      "format": "sha256"
+    },
+    {
+      "name": "theorem-node-v0.6.1.provenance.json",
+      "sha256": "541b6bd91437e4a7f9ed73dad4672d59d823ce85037147b30d6deb532a602f9d",
+      "size_bytes": 1143,
+      "artifact_kind": "provenance"
+    },
+    {
+      "name": "theorem-kernel-v0.6.1-amd64-direct-write.img.xz",
+      "sha256": null,
+      "artifact_kind": "direct-write-disk-image",
+      "target": "x86_64-bios-native",
+      "format": "raw.xz",
+      "automation_strategy": "decompress-and-direct-write",
+      "direct_disk_write": "allowed",
+      "bootable": true
+    },
+    {
+      "name": "theorem-kernel-v0.6.1-x86_64-bios.bin",
+      "sha256": null,
+      "artifact_kind": "kernel-binary",
+      "target": "x86_64-bios-native",
+      "format": "flat-binary",
+      "bootable": false
+    }
+  ]
+}
