@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0.0",
+  "product": "theorem-node",
+  "version": "v0.6.2",
+  "release_date": "2026-03-29T14:36:54Z",
+  "generated_at": "2026-03-29T14:36:55Z",
+  "manifest": {
+    "path": "releases/v0.6.2/manifest.json",
+    "asset_name": "theorem-release-manifest-v0.6.2.json",
+    "sha256": "0a4102ed66d2b2500173a2658a3d32af777a56341190ee485dc0249a49bf38d0"
+  },
+  "release_ring": "public",
+  "minimum_version": "v0.6.2",
+  "downgrade_prevention_rule": "Once a consumer admits the 6.x public feed, it must not mirror or promote a release older than release_integrity.minimum_version without an explicit governed rollback decision.",
+  "rollback_authorization": {
+    "rule": "Rollback to an older 6.x artifact requires explicit governed approval before repointing a machine or mirror.",
+    "required_approval_count": 2,
+    "authorized_roles": [
+      "root-governance-authority"
+    ]
+  },
+  "binary_assets": [
+    {
+      "name": "theorem-node-v0.6.2-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "abad749445c882a7d61d242c0ca9b9c6c42527b79b40b057a9ca048e60227e4a",
+      "size_bytes": 6907222,
+      "artifact_kind": "single-binary",
+      "target": "x86_64-unknown-freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-binary",
+      "direct_disk_write": "not-applicable",
+      "bootable": false
+    },
+    {
+      "name": "theoremos-v0.6.2-amd64-direct-write.img.xz",
+      "sha256": "ad5bbd05e0db7e8e74ac4c9e5f6eca14368fefa18c69078b878e7e68c813dcd1",
+      "size_bytes": 335564616,
+      "artifact_kind": "direct-write-disk-image",
+      "target": "amd64-freebsd",
+      "format": "raw.xz",
+      "automation_strategy": "decompress-and-direct-write",
+      "direct_disk_write": "allowed",
+      "first_boot_config_path": "first-boot.conf",
+      "first_boot_config_template": "first-boot.conf.example",
+      "seed_partition_label": "THEOREMSEED",
+      "seed_filesystem": "msdosfs",
+      "bootable": true
+    },
+    {
+      "name": "theoremos-v0.6.2-x86_64-unknown-freebsd-upgrade-bundle.tar.gz",
+      "sha256": "da0ac38116563275fe8ee57bdb310f883d337568aedfef07c5b2929d4a896c71",
+      "size_bytes": 19335049,
+      "artifact_kind": "upgrade-bundle",
+      "target": "x86_64-unknown-freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-and-run-upgrade",
+      "direct_disk_write": "forbidden",
+      "archive_root": "theoremos-v0.6.2-x86_64-unknown-freebsd-upgrade-bundle",
+      "upgrade_entrypoint": "upgrade.sh",
+      "supported_upgrade_from": [
+        "v0.5.x"
+      ],
+      "target_boot_environment": "theorem/ROOT/0.6.2",
+      "state_preservation": "preserve theorem/store, theorem/log, and /var/lib/theorem across boot-environment switch",
+      "bootable": false
+    },
+    {
+      "name": "theoremos-v0.6.2-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "641483d8750ed6f0cdf4cf32e3f2830e3f462275f0162ba90e8efdb7ba22bc31",
+      "size_bytes": 19332904,
+      "artifact_kind": "installer-rootfs",
+      "target": "x86_64-unknown-freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-and-run-installer",
+      "direct_disk_write": "forbidden",
+      "archive_root": "theoremos-v0.6.2-x86_64-unknown-freebsd",
+      "installer_entrypoint": "install.sh",
+      "first_boot_config_template": "etc/theorem/first-boot.conf.example",
+      "bootable": false
+    }
+  ],
+  "uefi_assets": [],
+  "sbom_assets": [
+    {
+      "name": "ref-impl.cdx.json",
+      "sha256": "e540ef30fc00d88cf1cfc8ca7e5dd3abb49baff635a624ac3d088746132624f0",
+      "size_bytes": 11074
+    },
+    {
+      "name": "theorem-node-v0.6.2.cdx.json",
+      "sha256": "2f32f27a354a2dfe0428a427419197491ed84b94a940ea48dd74e129c3b71f07",
+      "size_bytes": 300047
+    }
+  ],
+  "provenance_assets": [
+    {
+      "name": "theorem-node-v0.6.2.provenance.json",
+      "sha256": "7a23f1e5decf1628406ea8f5a70de3a1acbda222d51bca72938476b9f3470969",
+      "size_bytes": 1143
+    }
+  ],
+  "revocation": {
+    "ledger_path": "releases/revocations.json",
+    "record_path": "releases/revocations/v0.6.2.json"
+  },
+  "mirror_policy": {
+    "feed_path": "releases/feed.json",
+    "mirror_generated_at": "2026-03-29T14:36:54Z",
+    "mirror_expires_at": "2026-03-30T14:36:54Z",
+    "mirror_ttl_hours": 24,
+    "stale_behavior": "fail_closed"
+  }
+}

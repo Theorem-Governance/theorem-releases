@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "artifact": "theorem-5.0-demo-path",
+  "generated_at": "2026-03-29T14:15:58Z",
+  "source_conformance_report": "C:\\Users\\Eric\\Theorem\\.release\\v0.6.2-conformance.json",
+  "status": "passed",
+  "summary": {
+    "total_steps": 5,
+    "passed_steps": 5,
+    "missing_steps": 0
+  },
+  "steps": [
+    {
+      "step": 1,
+      "id": "artifact-hash",
+      "user_moment": "Published direct-write artifact hash matches local sidecar",
+      "status": "passed",
+      "passed": true,
+      "command": "Get-FileHash .release/v0.6.2-assets/theoremos-v0.6.2-amd64-direct-write.img.xz"
+    },
+    {
+      "step": 2,
+      "id": "booted-installed-system",
+      "user_moment": "Hetzner server boots the installed FreeBSD system from the direct-write image",
+      "status": "passed",
+      "passed": true,
+      "command": "ssh root@5.161.121.1 uname -a && hostname"
+    },
+    {
+      "step": 3,
+      "id": "ssh-port-22",
+      "user_moment": "SSH on port 22 is reachable on the live host",
+      "status": "passed",
+      "passed": true,
+      "command": "Test-NetConnection 5.161.121.1 -Port 22"
+    },
+    {
+      "step": 4,
+      "id": "release-version-match",
+      "user_moment": "Installed system release.version matches v0.6.2",
+      "status": "passed",
+      "passed": true,
+      "command": "ssh root@5.161.121.1 cat /etc/theorem/release.version"
+    },
+    {
+      "step": 5,
+      "id": "theorem-node-health-local",
+      "user_moment": "Local theorem-node health endpoint returns ok from the installed system",
+      "status": "passed",
+      "passed": true,
+      "command": "ssh root@5.161.121.1 fetch -qo - http://127.0.0.1:3170/health"
+    }
+  ]
+}

@@ -2,13 +2,13 @@
   "payload": {
     "schema_version": "1.0.0",
     "file_name": "feed.json",
-    "sha256": "87a3de74940fa8a753e7bb629b1a130dc1541aace4b6bcbeb2187f4fb3e7cd4a",
-    "size_bytes": 4860,
+    "sha256": "51a5326629f8678b3ebd8566b9a203c296cf3d152fc5c2be74a4ce77eb7662ea",
+    "size_bytes": 9125,
     "role": "release-feed",
     "key_id": "theorem-release-root",
-    "signed_at": "2026-03-26T21:35:59Z"
+    "signed_at": "2026-03-29T14:38:48Z"
   },
   "signer": "3d569d090330d1a66400cd2027cd5a950383902b9943a5602b53d82bcb186de1",
-  "signature": "aa8a547d938dc874f1e2d7705dccafeab8738a5b3ad468280d6a3e2ec1862ff0c4356b24ece505ce70a55f7053c9009de1715442e2cde3a4680d05bc702ddc03",
+  "signature": "4fe3dd530964ae1b6d7782ef13368b9cf2078343377c3944ca08247bda1260be532f35a52353b00ba28e60cf197e821541d0506e4d4527fa1a88f30d3a33570d",
   "algorithm": "ed25519"
 }

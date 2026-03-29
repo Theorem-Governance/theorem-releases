@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0.0",
+  "suite": "theorem-0.6.2-direct-write-live-conformance",
+  "generated_at": "2026-03-29T14:15:57Z",
+  "build_host": "Hetzner Cloud ccx13 UEFI + FreeBSD 14.4 installed system",
+  "git_commit": "84aeaff74b26ea74808bfa9fe64d67d579949115",
+  "status": "passed",
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "missing": 0
+  },
+  "notes": [
+    "Conformance executed against the installed v0.6.2 theoremOS consumer direct-write image on Hetzner hardware.",
+    "This run verifies the published direct-write artifact boots on the target UEFI host and exposes the expected SSH and local theorem-node health surfaces."
+  ],
+  "checks": [
+    {
+      "id": "artifact-hash",
+      "description": "Published direct-write artifact hash matches local sidecar",
+      "status": "passed",
+      "passed": true,
+      "command": "Get-FileHash .release/v0.6.2-assets/theoremos-v0.6.2-amd64-direct-write.img.xz",
+      "output": "ad5bbd05e0db7e8e74ac4c9e5f6eca14368fefa18c69078b878e7e68c813dcd1"
+    },
+    {
+      "id": "booted-installed-system",
+      "description": "Hetzner server boots the installed FreeBSD system from the direct-write image",
+      "status": "passed",
+      "passed": true,
+      "command": "ssh root@5.161.121.1 uname -a && hostname",
+      "output": "FreeBSD theoremos-v062 14.4-RELEASE; hostname=theoremos-v062"
+    },
+    {
+      "id": "ssh-port-22",
+      "description": "SSH on port 22 is reachable on the live host",
+      "status": "passed",
+      "passed": true,
+      "command": "Test-NetConnection 5.161.121.1 -Port 22",
+      "output": "TcpTestSucceeded=true"
+    },
+    {
+      "id": "release-version-match",
+      "description": "Installed system release.version matches v0.6.2",
+      "status": "passed",
+      "passed": true,
+      "command": "ssh root@5.161.121.1 cat /etc/theorem/release.version",
+      "output": "v0.6.2"
+    },
+    {
+      "id": "theorem-node-health-local",
+      "description": "Local theorem-node health endpoint returns ok from the installed system",
+      "status": "passed",
+      "passed": true,
+      "command": "ssh root@5.161.121.1 fetch -qo - http://127.0.0.1:3170/health",
+      "output": "{\"bootstrapped\":false,\"healthy\":true,\"status\":\"ok\"}"
+    }
+  ]
+}

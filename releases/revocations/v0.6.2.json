@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "version": "v0.6.2",
+  "status": "active",
+  "changed_at": "2026-03-29T14:38:45Z",
+  "changed_by": "ring1-release",
+  "manifest_path": "releases/v0.6.2/manifest.json",
+  "integrity_path": "releases/v0.6.2/integrity.json",
+  "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.6.2",
+  "ledger_path": "releases/revocations.json"
+}

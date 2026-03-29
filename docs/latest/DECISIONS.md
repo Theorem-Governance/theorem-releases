@@ -66,9 +66,18 @@ Implementation: `nix/hardening.nix` (tier-conditional boot config), `nix/module.
 
 **Amendment (2026-03-22):** Extended from UEFI-only to tiered model. The security property (binary integrity) is preserved across all tiers; the verification mechanism adapts to hardware capability. Tier 2 compensates for missing UEFI with Nix store content-addressed verification at boot — `theorem-nix-verify.service` runs before `theorem-node.service` and fails closed on mismatch. Motivated by downstream deployment on Hetzner CPX31 (BIOS-mode VM, no /sys/firmware/efi).
 
+**Amendment (2026-03-26):** Extended tiered model to FreeBSD carrier. The FreeBSD direct-write image now ships as a hybrid BIOS+UEFI GPT image with four partitions: freebsd-boot (512K, BIOS), EFI System Partition (64M, UEFI), seed (64M, first-boot config), and ZFS (remaining). Boot tier detection and verification:
+
+| Tier | FreeBSD boot chain | Integrity mechanism |
+|------|-------------------|---------------------|
+| **Tier 1** (UEFI) | ESP → theorem-uefi-loader → kernel digest check → theorem-machine-kernel-efi | Pre-boot: loader verifies kernel SHA-256 from boot.catalog.json |
+| **Tier 2** (BIOS) | pmbr → gptzfsboot → FreeBSD kernel → theorem-init | Early-boot: theorem-init verify-boot-integrity step checks all binary + kernel digests against /etc/theorem/boot-integrity.json, fails closed on mismatch |
+
+Implementation: `theorem-init/src/boot_integrity.rs` (verification module), `bootstrap.rs` verify-boot-integrity step, `freebsd/install.sh` (manifest generation at install time). Boot tier auto-detected via `machdep.bootmethod` sysctl on FreeBSD. On UEFI, the step is skipped (theorem-uefi-loader already verified). On BIOS, verification runs before veriexec load and securelevel raise. Missing manifest (pre-0.7.0 images) degrades gracefully to veriexec-only. Motivated by consumer team deployment on Hetzner CPX31.
+
 **Rationale:** The kernel controlling its own substrate means PROP-SUBSTRATE-001 declaration and reality are the same thing. The tiered model makes the trust level explicit and auditable rather than silently degrading when UEFI is absent. PA-008 verification procedures adapt per tier.
 
-**Informed by:** Ring 1 architecture, PROP-SUBSTRATE-001, downstream Hetzner deployment.
+**Informed by:** Ring 1 architecture, PROP-SUBSTRATE-001, downstream Hetzner deployment, consumer team CPX31 BIOS discovery.
 
 ---
 

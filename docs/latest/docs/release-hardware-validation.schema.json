@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theorem-governance.github.io/release-hardware-validation.schema.json",
+  "title": "Theorem Direct-Write Hardware Validation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "version",
+    "result",
+    "started_at",
+    "completed_at",
+    "validated_at",
+    "environment",
+    "artifact",
+    "checks"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["1.0.0"]
+    },
+    "version": { "type": "string" },
+    "result": {
+      "type": "string",
+      "enum": ["passed", "failed"]
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "validated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "server_id",
+        "server_ip",
+        "firmware",
+        "boot_path"
+      ],
+      "properties": {
+        "provider": { "type": "string" },
+        "server_id": { "type": "string" },
+        "server_ip": { "type": "string" },
+        "firmware": {
+          "type": "string",
+          "enum": ["UEFI", "BIOS"]
+        },
+        "boot_path": { "type": "string" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "sha256",
+        "target"
+      ],
+      "properties": {
+        "name": { "type": "string" },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "target": { "type": "string" }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "result",
+          "details"
+        ],
+        "properties": {
+          "name": { "type": "string" },
+          "result": {
+            "type": "string",
+            "enum": ["passed", "failed"]
+          },
+          "details": { "type": "string" }
+        }
+      }
+    }
+  }
+}

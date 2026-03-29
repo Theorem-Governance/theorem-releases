@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "version": "v0.6.2",
+  "result": "passed",
+  "started_at": "2026-03-29T13:55:57Z",
+  "completed_at": "2026-03-29T14:15:57Z",
+  "validated_at": "2026-03-29T14:15:57Z",
+  "environment": {
+    "provider": "Hetzner Cloud ccx13",
+    "server_id": "125042903",
+    "server_ip": "5.161.121.1",
+    "firmware": "UEFI",
+    "boot_path": "consumer-direct-write -> FreeBSD loader.efi via EFI/BOOT/BOOTX64.EFI + startup.nsh fallback"
+  },
+  "artifact": {
+    "name": "theoremos-v0.6.2-amd64-direct-write.img.xz",
+    "sha256": "ad5bbd05e0db7e8e74ac4c9e5f6eca14368fefa18c69078b878e7e68c813dcd1",
+    "target": "amd64-freebsd"
+  },
+  "checks": [
+    {
+      "name": "booted-installed-system",
+      "result": "passed",
+      "details": "Booted installed FreeBSD 14.4 system on Hetzner server 125042903 with hostname theoremos-v062."
+    },
+    {
+      "name": "ssh-port-22",
+      "result": "passed",
+      "details": "Test-NetConnection to 5.161.121.1:22 succeeded and sshd was listening on tcp4 *:22."
+    },
+    {
+      "name": "release-version-match",
+      "result": "passed",
+      "details": "Remote /etc/theorem/release.version returned v0.6.2."
+    },
+    {
+      "name": "theorem-node-health-local",
+      "result": "passed",
+      "details": "Local GET http://127.0.0.1:3170/health returned {\"bootstrapped\":false,\"healthy\":true,\"status\":\"ok\"}"
+    }
+  ]
+}
