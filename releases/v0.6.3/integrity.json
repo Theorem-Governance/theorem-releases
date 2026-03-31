@@ -2,12 +2,12 @@
   "schema_version": "1.0.0",
   "product": "theorem-node",
   "version": "v0.6.3",
-  "release_date": "2026-03-31T04:35:18Z",
-  "generated_at": "2026-03-31T04:35:19Z",
+  "release_date": "2026-03-31T04:43:17Z",
+  "generated_at": "2026-03-31T04:43:17Z",
   "manifest": {
     "path": "releases/v0.6.3/manifest.json",
     "asset_name": "theorem-release-manifest-v0.6.3.json",
-    "sha256": "6276e26e4744d12019cef691564c0ccceadca8a02cd69fa60bb7ee04d2c37a25"
+    "sha256": "a6143b6b3468ba8f41e5e0a2a945fc382ff034c667de8548a45d27b8760bc605"
   },
   "bootstrap_specification": {
     "hash_algorithm": "sha256",
@@ -176,7 +176,7 @@
   "sbom_assets": [
     {
       "name": "ref-impl.cdx.json",
-      "sha256": "18db20687c1bfff2f9cacaa99313de023072876b398c621dd4cdad6e1c5d7e87",
+      "sha256": "1fa19a85627ed7c29784ea304ec1a146a507981a4296108888d9cad782d116bb",
       "size_bytes": 11074
     },
     {
@@ -203,8 +203,8 @@
   },
   "mirror_policy": {
     "feed_path": "releases/feed.json",
-    "mirror_generated_at": "2026-03-31T04:35:18Z",
-    "mirror_expires_at": "2026-04-01T04:35:18Z",
+    "mirror_generated_at": "2026-03-31T04:43:17Z",
+    "mirror_expires_at": "2026-04-01T04:43:17Z",
     "mirror_ttl_hours": 24,
     "stale_behavior": "fail_closed"
   }

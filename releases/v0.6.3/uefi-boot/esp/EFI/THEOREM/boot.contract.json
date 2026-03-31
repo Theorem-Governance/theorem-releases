@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "generation_id": "v0.6.3",
+  "minimum_version": "v0.6.3",
+  "machine_id": "theoremos",
+  "expected_outputs": [
+    "EFI/THEOREM/loader.status.json",
+    "EFI/THEOREM/kernel.status.json",
+    "EFI/THEOREM/boot-state.json",
+    "EFI/THEOREM/runtime-handoff.json",
+    "EFI/THEOREM/runtime-launch.json",
+    "EFI/THEOREM/boot.journal.json",
+    "EFI/THEOREM/platform-status.json"
+  ],
+  "success": {
+    "loader_status": "kernel-stage-complete",
+    "kernel_status": "runtime-handoff-ready",
+    "runtime_status": "runtime-handoff-ready",
+    "runtime_lifecycle": "prepared",
+    "platform_initialized": true
+  }
+}

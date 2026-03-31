@@ -2,7 +2,7 @@
   "schema_version": "1.3.0",
   "product": "theorem-node",
   "version": "v0.6.3",
-  "release_date": "2026-03-31T04:35:18Z",
+  "release_date": "2026-03-31T04:43:17Z",
   "compatibility_classification": "compatible-behavior-tightening",
   "release_lifecycle": {
     "phase": "preview",
@@ -457,7 +457,7 @@
     },
     {
       "name": "ref-impl.cdx.json",
-      "sha256": "18db20687c1bfff2f9cacaa99313de023072876b398c621dd4cdad6e1c5d7e87",
+      "sha256": "1fa19a85627ed7c29784ea304ec1a146a507981a4296108888d9cad782d116bb",
       "size_bytes": 11074,
       "artifact_kind": "sbom"
     },
@@ -546,13 +546,13 @@
     },
     {
       "name": "theorem-release-integrity-v0.6.3.signature.json",
-      "sha256": "42187bf417ffb51c021936acbcb160b06b057d36cb3734b5a7573a1575aab55c",
+      "sha256": "1fd37b40589ceb57798e0d204b9d7e89d610cd5b8811fc8caeb1b5e6457904b4",
       "size_bytes": 581,
       "artifact_kind": "evidence"
     },
     {
       "name": "theorem-release-manifest-v0.6.3.signature.json",
-      "sha256": "c0a04c25f0445a50d2c41a209c8cf9204397c56167f1a0ee8ecd670ea6b662d5",
+      "sha256": "53d01c472e38be1af9ad63f2c0cb7f4c48054db4217d8ca8467f8cab77590429",
       "size_bytes": 580,
       "artifact_kind": "evidence"
     },
@@ -564,13 +564,13 @@
     },
     {
       "name": "theorem-release-notes-v0.6.3.signature.json",
-      "sha256": "f833499486be2d09170194da0b433b14ea84470a91f25f667cfdb9e4bbbac6aa",
+      "sha256": "cb1d3148da2a3c04af9d63a8f5eb97fe1342272391cabbddd87025a1a5cc313b",
       "size_bytes": 571,
       "artifact_kind": "other"
     },
     {
       "name": "theorem-release-trust-root.json",
-      "sha256": "22b2fc21d66464fed245330f189c811221b7d200c44b7acc56565066fe02b8d9",
+      "sha256": "9c2110f66f9c239701529057511e6eed784b85feaae9800b648a9355d96cd15d",
       "size_bytes": 1142,
       "artifact_kind": "other"
     },
@@ -710,8 +710,8 @@
     },
     "mirror_policy": {
       "feed_path": "releases/feed.json",
-      "mirror_generated_at": "2026-03-31T04:35:18Z",
-      "mirror_expires_at": "2026-04-01T04:35:18Z",
+      "mirror_generated_at": "2026-03-31T04:43:17Z",
+      "mirror_expires_at": "2026-04-01T04:43:17Z",
       "mirror_ttl_hours": 24,
       "stale_behavior": "fail_closed"
     },

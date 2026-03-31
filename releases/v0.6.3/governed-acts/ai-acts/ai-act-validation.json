@@ -1,0 +1,26 @@
+{
+  "artifacts": {
+    "accepted_regeneration": "accepted-act.json",
+    "dpo_pair": "dpo-pair.json",
+    "rejected_original": "rejected-act.json",
+    "task_result": "task-result.json"
+  },
+  "checks": [
+    {
+      "details": "Deterministic validation probe produced an original AI output that failed E14 and remained rejected.",
+      "name": "ai-original-rejected",
+      "result": "passed"
+    },
+    {
+      "details": "Deterministic validation probe produced a regeneration that passed E14 and completed a governed act.",
+      "name": "ai-retry-accepted",
+      "result": "passed"
+    }
+  ],
+  "entity_id": "019d41ff-b6cc-7010-a7d0-a91430dd981e",
+  "model_id": "validation-probe",
+  "result": "passed",
+  "schema_version": "1.0.0",
+  "scope_id": "019d41ff-b6cc-7010-a7d0-a93210289906",
+  "task_description": "Validate in-enclave AI governance path for release admission"
+}

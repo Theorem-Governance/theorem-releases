@@ -2,7 +2,7 @@
   "releases": [
     {
       "version": "v0.6.3",
-      "release_date": "2026-03-31T04:35:18Z",
+      "release_date": "2026-03-31T04:43:17Z",
       "compatibility_classification": "compatible-behavior-tightening",
       "release_lifecycle": {
         "phase": "preview",
@@ -25,6 +25,8 @@
       "trust_root_path": "releases/trust-root.json",
       "conformance_report_path": "releases/v0.6.3/conformance.json",
       "demonstration_path": "releases/v0.6.3/demo-path.json",
+      "governed_proof_path": "releases/v0.6.3/governed-acts/proof-manifest.json",
+      "uefi_boot_proof_path": "releases/v0.6.3/uefi-boot/uefi-boot-proof.json",
       "provenance_paths": [
         "releases/v0.6.3/theorem-node-v0.6.3.provenance.json",
         "releases/v0.6.3/theoremos-v0.6.3-amd64-direct-write.attestation.json"
@@ -184,7 +186,7 @@
     }
   ],
   "schema_version": "1.3.0",
-  "mirror_generated_at": "2026-03-31T04:35:18Z",
-  "mirror_expires_at": "2026-04-01T04:35:18Z",
+  "mirror_generated_at": "2026-03-31T04:43:17Z",
+  "mirror_expires_at": "2026-04-01T04:43:17Z",
   "stale_behavior": "fail_closed"
 }

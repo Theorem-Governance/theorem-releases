@@ -1,0 +1,80 @@
+{
+  "entries": [
+    {
+      "activation_manifest": {
+        "schema_version": 1,
+        "machine_id": "theoremos",
+        "generation_id": "v0.6.3",
+        "generation_digest": "sha256:18264f94046fc4c6026379909d4a2c5703ae2b5bd8c03f451c3f23ec87a8dde1",
+        "recovery_root_digest": "sha256:18264f94046fc4c6026379909d4a2c5703ae2b5bd8c03f451c3f23ec87a8dde1",
+        "volumes": [
+          {
+            "class": "ephemeral",
+            "name": "generation",
+            "mount_point": "/",
+            "source": "theorem-v0.6.3"
+          },
+          {
+            "class": "persistent",
+            "name": "state",
+            "mount_point": "/var/lib/theorem",
+            "source": "theorem-state"
+          }
+        ],
+        "artifacts": [
+          {
+            "path": "/sbin/theorem-init",
+            "name": "theorem-init",
+            "digest": "sha256:bbde063cd26391a95d04cc0e305e0eeb73e0d749a953b17b1c8b9bcd05e4a126",
+            "executable": true
+          }
+        ],
+        "tasks": [
+          {
+            "artifact": "theorem-init",
+            "name": "theorem-init",
+            "depends_on": [],
+            "args": [
+              "run"
+            ],
+            "capability": {
+              "scopes": [
+                "machine"
+              ],
+              "profile": "machine-root",
+              "grants": [
+                "activate-generation",
+                "mount-state",
+                "launch-runtime"
+              ]
+            }
+          }
+        ],
+        "network": {
+          "mode": "dhcp",
+          "default_route": null,
+          "addresses": [],
+          "hostname": "theoremos",
+          "interface": "virtio-net0",
+          "dns_servers": [
+            "1.1.1.1",
+            "9.9.9.9"
+          ]
+        },
+        "recovery": {
+          "fallback_generations": [],
+          "recovery_root": "theorem-recovery",
+          "require_health_acceptance": true,
+          "known_good_generation": "v0.6.3"
+        }
+      },
+      "healthy": true,
+      "kernel_image_path": "\\EFI\\THEOREM\\THEOKERN.EFI",
+      "generation_digest": "sha256:18264f94046fc4c6026379909d4a2c5703ae2b5bd8c03f451c3f23ec87a8dde1",
+      "minimum_version": "v0.6.3",
+      "generation_id": "v0.6.3",
+      "priority": 100,
+      "kernel_image_digest": "sha256:34d82b8925ef73ad2ea2be029c3d5a317a34c50898be95391fcceba6d0c3c768"
+    }
+  ]
+}

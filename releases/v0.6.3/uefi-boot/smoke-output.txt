@@ -1,0 +1,30 @@
+==> Launching QEMU
+    ESP: C:\Users\Eric\Theorem\.release\v0.6.3-evidence\uefi-boot\esp
+    Debug log: C:\Users\Eric\Theorem\.release\v0.6.3-evidence\uefi-boot\qemu-debug.log
+==> Launching QEMU
+    ESP: C:\Users\Eric\Theorem\.release\v0.6.3-evidence\uefi-boot\esp
+    Debug log: C:\Users\Eric\Theorem\.release\v0.6.3-evidence\uefi-boot\qemu-debug.boot2.log
+THEOREM-NATIVE BOOT SMOKE PASSED
+  Image:           C:\Users\Eric\Theorem\.release\v0.6.3-evidence\uefi-boot\esp.img
+  Kernel status:   runtime-handoff-ready
+  Runtime status:  runtime-handoff-ready
+  Task lifecycle:  prepared
+  Generation:      v0.6.3
+  Machine:         theoremos
+  Kernel SHA-256:  34d82b8925ef73ad2ea2be029c3d5a317a34c50898be95391fcceba6d0c3c768 (verified)
+  Platform arch:   x86_64
+  Serial init:     True
+  Serial log:      C:\Users\Eric\Theorem\.release\v0.6.3-evidence\uefi-boot\qemu-debug.boot2.serial.log
+  Boot 1 serial:   C:\Users\Eric\Theorem\.release\v0.6.3-evidence\uefi-boot\qemu-debug.serial.log
+  Interrupt init:  True
+  Paging init:     True
+  Timer ticks:     2
+  Volume mounts:   2 (generation=1551B state=65536B)
+  Devices probed:  2 (virtio-blk0, virtio-net0)
+  ExitBootServices: PASSED (serial verified)
+  GDT/IDT loaded:  PASSED (serial verified)
+  Virtio path:     PASSED (serial verified)
+  Boot acceptance: accepted (attempt 2)
+  Known-good gen:  v0.6.3
+  Volume handoff:  PASSED (serial verified)
+  theorem-init:    serial markers verified

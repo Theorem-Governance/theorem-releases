@@ -1,0 +1,1899 @@
+[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01HBdsDxe: loading Boot0001 "UEFI Non-Block Boot Device" from PciRoot(0x0)/Pci(0x2,0x0)
+BdsDxe: starting Boot0001 "UEFI Non-Block Boot Device" from PciRoot(0x0)/Pci(0x2,0x0)
+[ INFO]: theorem-uefi-loader\src\main.rs@046: theorem-uefi-loader: entered
+[ INFO]: theorem-uefi-loader\src\main.rs@094: theorem-uefi-loader: selected generation v0.6.3 kernel \EFI\THEOREM\THEOKERN.EFI
+[ INFO]: theorem-uefi-loader\src\main.rs@124: theorem-uefi-loader: read kernel bytes 307712
+[ INFO]: theorem-uefi-loader\src\main.rs@162: theorem-uefi-loader: kernel digest ok
+[ INFO]: theorem-uefi-loader\src\main.rs@202: theorem-uefi-loader: kernel image loaded
+theorem-uefi-loader: booting generation v0.6.3 via \EFI\THEOREM\THEOKERN.EFI
+[theorem-kernel] serial: COM1 initialized at 115200 8N1
+[theorem-kernel] structures: building GDT/IDT...
+[theorem-kernel] structures: GDT/IDT built=true
+[theorem-kernel] activation: generation=v0.6.3 machine=theoremos
+[theorem-kernel] recovery: loaded (known_good=v0.6.3 attempts=1)
+[theorem-kernel] recovery: attempt 2 of 3 for generation v0.6.3
+[theorem-kernel] recovery: consumed persisted runtime acceptance marker
+[theorem-kernel] building measurement chain...
+[theorem-kernel] measured: kernel sha256:34d82b8925ef73ad...
+[theorem-kernel] measured: activation-manifest sha256:772513a58910ee73...
+[theorem-kernel] loading theorem-init ELF from ESP...
+[theorem-kernel] theorem-init loaded: 13736 bytes
+[theorem-kernel] measured: theorem-init sha256:8869825b05afc04b...
+[theorem-kernel] ELF entry=0x2000000 segments=4
+[theorem-kernel]   [0] vaddr=0x2000000 filesz=841 memsz=841 R-X
+[theorem-kernel]   [1] vaddr=0x2000350 filesz=3667 memsz=3667 R--
+[theorem-kernel]   [2] vaddr=0x20011a8 filesz=160 memsz=160 RW-
+[theorem-kernel]   [3] vaddr=0x2002000 filesz=0 memsz=65536 RW-
+[theorem-kernel] mounting volumes...
+[theorem-kernel]   generation root: 0x3dd42018 (1551 bytes, readonly)
+[theorem-kernel]   state volume: 0x3dd31018 (65536 bytes, read-write)
+[theorem-kernel] probing PCI bus...
+[theorem-kernel] PCI: 7 devices found
+[theorem-kernel]   virtio-blk0 [1af4:1042] at pci:00:02.0 — probed
+[theorem-kernel]   virtio-net0 [1af4:1000] at pci:00:03.0 — probed
+[theorem-kernel] paging: address space layout validated (W^X)
+[theorem-kernel] writing artifacts to ESP (last UEFI I/O)...
+[theorem-kernel] recovery: generation accepted as known-good
+[theorem-kernel] measurement chain: 3 events, final=sha256:d524f718da5c8fab...
+[theorem-kernel] artifacts written, preparing ExitBootServices...
+[theorem-kernel] >>> ExitBootServices
+[theorem-kernel] ExitBootServices complete — UEFI is gone
+[theorem-kernel] theorem-native kernel owns the hardware
+[theorem-kernel] mapping theorem-init segments...
+[theorem-kernel]   mapped 0x2000000 (841 bytes)
+[theorem-kernel]   mapped 0x2000350 (3667 bytes)
+[theorem-kernel]   mapped 0x20011a8 (160 bytes)
+[theorem-kernel]   mapped 0x2002000 (65536 bytes)
+[theorem-kernel] >>> entering theorem-init
+[theorem-kernel] entry point: 0x2000000
+[theorem-kernel] handoff: ptr=0x3dd2d018 len=1010
+![theorem-init] RUNNING on bare metal
+[theorem-init] no UEFI, no FreeBSD, no Linux
+[theorem-init] handoff received: ptr=0x3dd2d018 len=1010
+[theorem-init] handoff: valid JSON object
+[theorem-init] volume: generation root mounted
+[theorem-init] volume: state volume mounted
+[theorem-init] volumes: memory-backed (pre-ExitBootServices)
+[theorem-init] theorem-native machine operational
+[theorem-kernel] theorem-init returned exit code 0
+[theorem-kernel] GDT and IDT loaded; interrupts disabled for polling mode
+[theorem-kernel] persisting runtime acceptance marker to ESP...
+[virtio] modern: common=0xc000000000 notify=0xc000003000 dev_cfg=0xc000002000
+[virtio] queue 0 size=256 desc=0x3dc11000 avail=0x3dc12000 used=0x3dc13000 notify_off=0 notify_addr=0xc000003000
+[virtio-blk] transport=modern
+[virtio-blk] capacity sectors=131072
+[fat16] mount partition lba=0
+[virtio-blk] request read sector=0 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[fat16] write_file RUNTIME OK  bytes=269
+[virtio-blk] request read sector=257 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request write sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=130 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request write sector=130 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request write sector=257 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=1 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request write sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=130 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request write sector=130 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request write sector=2 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=130 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request write sector=130 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request write sector=1661 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request write sector=1662 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request write sector=1663 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request write sector=1664 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request read sector=257 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[virtio-blk] request write sector=257 bytes=512
+[virtio-blk] header=0x3dc0f240 data=0x3dc0f260 status=0x3dc0f250
+[virtio-blk] submit
+[virtio-blk] notify
+[virtio-blk] poll
+[theorem-kernel] persisted runtime acceptance marker
+[theorem-kernel] initializing virtio devices...
+[theorem-kernel] requesting QEMU debug exit

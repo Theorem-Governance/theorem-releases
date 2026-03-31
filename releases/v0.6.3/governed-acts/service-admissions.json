@@ -1,0 +1,77 @@
+[
+  {
+    "service_name": "theorem-node",
+    "binary_hash": "927216c1b4080f056c3692a392b5ebdbe707a8a0f4ef9121aad4a718ff76b040",
+    "launch_phase": "bootstrap-core",
+    "expected_authority_mode": "boot-manifest",
+    "status": "boot-manifest",
+    "detail": null,
+    "authority": "supervisor",
+    "authority_decision_id": "boot:theorem-node",
+    "template": null,
+    "admission": null
+  },
+  {
+    "service_name": "theorem-gateway",
+    "binary_hash": "f8ae00cf3828d3b77f15acef4ea169cf79f3f881ce05bb78d39f015fba8fe6fd",
+    "launch_phase": "post-theorem-node",
+    "expected_authority_mode": "live-governance-act",
+    "status": "admitted",
+    "detail": null,
+    "authority": "019d41ff-b6cc-7010-a7d0-a91430dd981e",
+    "authority_decision_id": "019d41ff-b739-74a2-ab82-773b1d64d001",
+    "template": {
+      "action_name": "theorem.service.launch",
+      "artifact_admitted": true,
+      "artifact_governance_act_id": "019d41ff-b738-71d1-8de3-4a52f8ac2b95",
+      "binary_hash": "f8ae00cf3828d3b77f15acef4ea169cf79f3f881ce05bb78d39f015fba8fe6fd",
+      "payload": "{\"service_name\":\"theorem-gateway\",\"binary_hash\":\"f8ae00cf3828d3b77f15acef4ea169cf79f3f881ce05bb78d39f015fba8fe6fd\"}",
+      "payload_hash": "sha256:ef07d7222ba192726bdde6edb700bcf9a52438329c2f06a85969fd0c9c12fb67",
+      "service_name": "theorem-gateway"
+    },
+    "admission": {
+      "action_admission": {
+        "action_admission_id": "019d41ff-b739-74a2-ab82-774c93cd15d7",
+        "admitted_at": "2026-03-31T03:46:10.873512675+00:00",
+        "admitted_by_entity_id": "019d41ff-b6cc-7010-a7d0-a91430dd981e",
+        "expires_at": null,
+        "governance_act_id": "019d41ff-b739-74a2-ab82-773b1d64d001",
+        "principal_entity_id": "019d41ff-b6cc-7010-a7d0-a91430dd981e",
+        "scope_id": "019d41ff-b6cc-7010-a7d0-a93210289906"
+      },
+      "action_name": "theorem.service.launch",
+      "admitted": true,
+      "artifact": {
+        "admitted": true,
+        "artifact_id": "019d41ff-b738-71d1-8de3-4a6e39deb25c",
+        "governance_act_id": "019d41ff-b738-71d1-8de3-4a52f8ac2b95"
+      },
+      "authority": "019d41ff-b6cc-7010-a7d0-a91430dd981e",
+      "authority_decision_id": "019d41ff-b739-74a2-ab82-773b1d64d001",
+      "authority_mode": "live-governance-act",
+      "authorization_ref": "019d41ff-b739-74a2-ab82-774c93cd15d7",
+      "binary_hash": "f8ae00cf3828d3b77f15acef4ea169cf79f3f881ce05bb78d39f015fba8fe6fd",
+      "constraints": {
+        "max_lifetime_secs": null,
+        "network_permitted": true,
+        "permitted_actions": [
+          "execute_service",
+          "read"
+        ],
+        "resource_limits": {
+          "max_cpu_percent": 0,
+          "max_memory_bytes": 0,
+          "max_open_files": 0,
+          "max_processes": 0
+        },
+        "scope_id": "019d41ff-b6cc-7010-a7d0-a93210289906"
+      },
+      "denial_reasons": [],
+      "payload": "{\"service_name\":\"theorem-gateway\",\"binary_hash\":\"f8ae00cf3828d3b77f15acef4ea169cf79f3f881ce05bb78d39f015fba8fe6fd\"}",
+      "payload_hash": "sha256:ef07d7222ba192726bdde6edb700bcf9a52438329c2f06a85969fd0c9c12fb67",
+      "principal_entity_id": "019d41ff-b6cc-7010-a7d0-a91430dd981e",
+      "scope_id": "019d41ff-b6cc-7010-a7d0-a93210289906",
+      "service_name": "theorem-gateway"
+    }
+  }
+]

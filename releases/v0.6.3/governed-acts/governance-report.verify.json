@@ -1,0 +1,9 @@
+{
+  "report_path": "/var/lib/theorem/governance/governance-report.json",
+  "governance_state_dir": "/var/lib/theorem/governance",
+  "report_id": "b515162cc06a66d678dd05e9b1d45e75a1cf394ceb0b86626f2c1f0afc7ed96b",
+  "audit_entries_checked": 7,
+  "active_governed_workloads": 2,
+  "bootstrapped_workloads": 1,
+  "live_governed_workloads": 1
+}

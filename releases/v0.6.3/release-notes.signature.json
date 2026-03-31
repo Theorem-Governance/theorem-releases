@@ -6,9 +6,9 @@
     "size_bytes": 2209,
     "role": "release-notes",
     "key_id": "theorem-release-root",
-    "signed_at": "2026-03-31T04:37:06Z"
+    "signed_at": "2026-03-31T04:45:06Z"
   },
   "signer": "3d569d090330d1a66400cd2027cd5a950383902b9943a5602b53d82bcb186de1",
-  "signature": "13d7e96d7313e6bb00202ea2d951a3d470a83cb3d351f669afb954bb464b01e69899693e6158235615c1abcdd3eb902f38a78f3796be8a3b6d63374a1e5aa309",
+  "signature": "351c02abcc6afa0ad57dae74d426dfef6da6608341f5be80d6d71567fa9ae47fbff539a7b82bda27fa2b0fa8683a8fb53c7832ede3ad841a88e0797cf47fc80a",
   "algorithm": "ed25519"
 }

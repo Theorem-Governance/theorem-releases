@@ -1,0 +1,405 @@
+{
+  "report": {
+    "report_id": "b515162cc06a66d678dd05e9b1d45e75a1cf394ceb0b86626f2c1f0afc7ed96b",
+    "generated_at": "2026-03-31T03:46:54Z",
+    "report_type": "RuntimeEvidence",
+    "framework": "EuAiAct",
+    "system_identity": {
+      "instance_id": "theoremos-v063:theorem/ROOT/default",
+      "hostname": "theoremos-v063",
+      "boot_attestation_hash": "6a4dde51e1326bff490886abf5f9444b934043973d10b218ef81ea052fab6e99",
+      "public_key": "dbe5b848dd62ceba3aa8b68d00bf6dffcf21bf008c9b83a0a3499e91cc3f3012"
+    },
+    "sections": [
+      {
+        "title": "Transparency and Information Provision",
+        "article_reference": "EU AI Act Article 13",
+        "evidence": [
+          {
+            "description": "System identity and cryptographic binding",
+            "evidence_type": "AuditTrailEntry",
+            "timestamp": "2026-03-31T03:46:54Z",
+            "data": {
+              "boot_attestation_hash": "6a4dde51e1326bff490886abf5f9444b934043973d10b218ef81ea052fab6e99",
+              "hostname": "theoremos-v063",
+              "instance_id": "theoremos-v063:theorem/ROOT/default",
+              "public_key": "dbe5b848dd62ceba3aa8b68d00bf6dffcf21bf008c9b83a0a3499e91cc3f3012"
+            },
+            "signature": null
+          },
+          {
+            "description": "System boot recorded for 'theorem/theorem/ROOT/default'",
+            "evidence_type": "AuditTrailEntry",
+            "timestamp": "2026-03-31T03:46:14Z",
+            "data": {
+              "chain_hash": "a079b5a7301c6d295663a6ef27c3cf3dd522c54af3f8fe51fc7dd7e9653e8ec3",
+              "event": {
+                "SystemBoot": {
+                  "attestation_hash": "6a4dde51e1326bff490886abf5f9444b934043973d10b218ef81ea052fab6e99",
+                  "boot_env": "theorem/theorem/ROOT/default"
+                }
+              },
+              "event_hash": "320e4c5ee91449ca9bb28198c0c2e7b89d9767219c6c1273815ffe0322ff89b9",
+              "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "sequence": 0
+            },
+            "signature": null
+          },
+          {
+            "description": "Workload 'theorem-node' admitted by 'supervisor'",
+            "evidence_type": "AuditTrailEntry",
+            "timestamp": "2026-03-31T03:46:14Z",
+            "data": {
+              "chain_hash": "d9681f74a6f0d0e5ca4742dc263bf506ed5921010db2fa902fbd414641927970",
+              "event": {
+                "WorkloadAdmitted": {
+                  "authority": "supervisor",
+                  "authority_decision_id": "boot:theorem-node",
+                  "binary_hash": "927216c1b4080f056c3692a392b5ebdbe707a8a0f4ef9121aad4a718ff76b040",
+                  "name": "theorem-node"
+                }
+              },
+              "event_hash": "74740914cec8cc11aed035e5abd4bfa744db2204a251befba736256a32b93f10",
+              "previous_hash": "a079b5a7301c6d295663a6ef27c3cf3dd522c54af3f8fe51fc7dd7e9653e8ec3",
+              "sequence": 1
+            },
+            "signature": null
+          },
+          {
+            "description": "Workload 'theorem-gateway' admitted by '019d41ff-b6cc-7010-a7d0-a91430dd981e'",
+            "evidence_type": "AuditTrailEntry",
+            "timestamp": "2026-03-31T03:46:14Z",
+            "data": {
+              "chain_hash": "bc2f4e7c8a340ad2c2e594a9de797fb59b9cd915a0aa6c6d54916061b51623bc",
+              "event": {
+                "WorkloadAdmitted": {
+                  "authority": "019d41ff-b6cc-7010-a7d0-a91430dd981e",
+                  "authority_decision_id": "019d41ff-b739-74a2-ab82-773b1d64d001",
+                  "binary_hash": "f8ae00cf3828d3b77f15acef4ea169cf79f3f881ce05bb78d39f015fba8fe6fd",
+                  "name": "theorem-gateway"
+                }
+              },
+              "event_hash": "d173af1be385e86b705c6a1b1506535e3bf7c37d817620862d2432d2b5fa0907",
+              "previous_hash": "d9681f74a6f0d0e5ca4742dc263bf506ed5921010db2fa902fbd414641927970",
+              "sequence": 2
+            },
+            "signature": null
+          },
+          {
+            "description": "Property verification recorded (passed=27 failed=0 intact=true)",
+            "evidence_type": "AuditTrailEntry",
+            "timestamp": "2026-03-31T03:46:24Z",
+            "data": {
+              "chain_hash": "6a21feec6d5fb606e3cabacf3ec258b1d6f07ccfce516c43f4fa93cb1f9c0784",
+              "event": {
+                "PropertyVerification": {
+                  "failed": 0,
+                  "governance_intact": true,
+                  "passed": 27
+                }
+              },
+              "event_hash": "9474b7513c55dce4b96cff40b3f993f522d679bd6202995cd919dbed5b3be365",
+              "previous_hash": "bc2f4e7c8a340ad2c2e594a9de797fb59b9cd915a0aa6c6d54916061b51623bc",
+              "sequence": 3
+            },
+            "signature": null
+          },
+          {
+            "description": "Property verification recorded (passed=27 failed=0 intact=true)",
+            "evidence_type": "AuditTrailEntry",
+            "timestamp": "2026-03-31T03:46:34Z",
+            "data": {
+              "chain_hash": "e7f997895e5f5ef741e5c5559a6be422fdd82eaf402cb90fca8ef5f71676631a",
+              "event": {
+                "PropertyVerification": {
+                  "failed": 0,
+                  "governance_intact": true,
+                  "passed": 27
+                }
+              },
+              "event_hash": "9474b7513c55dce4b96cff40b3f993f522d679bd6202995cd919dbed5b3be365",
+              "previous_hash": "6a21feec6d5fb606e3cabacf3ec258b1d6f07ccfce516c43f4fa93cb1f9c0784",
+              "sequence": 4
+            },
+            "signature": null
+          },
+          {
+            "description": "Property verification recorded (passed=27 failed=0 intact=true)",
+            "evidence_type": "AuditTrailEntry",
+            "timestamp": "2026-03-31T03:46:44Z",
+            "data": {
+              "chain_hash": "f3bef34964a373310669bcb84490e1edb5b87a24bf6e2e2f5dcd4c80534a6d4b",
+              "event": {
+                "PropertyVerification": {
+                  "failed": 0,
+                  "governance_intact": true,
+                  "passed": 27
+                }
+              },
+              "event_hash": "9474b7513c55dce4b96cff40b3f993f522d679bd6202995cd919dbed5b3be365",
+              "previous_hash": "e7f997895e5f5ef741e5c5559a6be422fdd82eaf402cb90fca8ef5f71676631a",
+              "sequence": 5
+            },
+            "signature": null
+          },
+          {
+            "description": "Governed admission of workload 'theorem-node'",
+            "evidence_type": "AuthorityDecision",
+            "timestamp": "2026-03-31T03:46:14Z",
+            "data": {
+              "action": "workload_admitted",
+              "authority": "supervisor",
+              "authority_decision_id": "boot:theorem-node",
+              "binary_hash": "927216c1b4080f056c3692a392b5ebdbe707a8a0f4ef9121aad4a718ff76b040",
+              "workload": "theorem-node"
+            },
+            "signature": null
+          },
+          {
+            "description": "Governed admission of workload 'theorem-gateway'",
+            "evidence_type": "AuthorityDecision",
+            "timestamp": "2026-03-31T03:46:14Z",
+            "data": {
+              "action": "workload_admitted",
+              "authority": "019d41ff-b6cc-7010-a7d0-a91430dd981e",
+              "authority_decision_id": "019d41ff-b739-74a2-ab82-773b1d64d001",
+              "binary_hash": "f8ae00cf3828d3b77f15acef4ea169cf79f3f881ce05bb78d39f015fba8fe6fd",
+              "workload": "theorem-gateway"
+            },
+            "signature": null
+          }
+        ],
+        "assessment": {
+          "status": "Compliant",
+          "notes": "Audit trail and governance decisions are recorded with attribution."
+        }
+      },
+      {
+        "title": "Risk Management System",
+        "article_reference": "EU AI Act Article 9",
+        "evidence": [
+          {
+            "description": "Boot attestation chain verified against expected state",
+            "evidence_type": "BootAttestation",
+            "timestamp": "2026-03-31T03:46:54Z",
+            "data": {
+              "attestation_hash": "6a4dde51e1326bff490886abf5f9444b934043973d10b218ef81ea052fab6e99",
+              "verified": true
+            },
+            "signature": null
+          },
+          {
+            "description": "Runtime admitted workload 'theorem-node' under governance",
+            "evidence_type": "EnforcementAction",
+            "timestamp": "2026-03-31T03:46:14Z",
+            "data": {
+              "action": "admit",
+              "authority": "supervisor",
+              "authority_decision_id": "boot:theorem-node",
+              "binary_hash": "927216c1b4080f056c3692a392b5ebdbe707a8a0f4ef9121aad4a718ff76b040",
+              "workload": "theorem-node"
+            },
+            "signature": null
+          },
+          {
+            "description": "Runtime admitted workload 'theorem-gateway' under governance",
+            "evidence_type": "EnforcementAction",
+            "timestamp": "2026-03-31T03:46:14Z",
+            "data": {
+              "action": "admit",
+              "authority": "019d41ff-b6cc-7010-a7d0-a91430dd981e",
+              "authority_decision_id": "019d41ff-b739-74a2-ab82-773b1d64d001",
+              "binary_hash": "f8ae00cf3828d3b77f15acef4ea169cf79f3f881ce05bb78d39f015fba8fe6fd",
+              "workload": "theorem-gateway"
+            },
+            "signature": null
+          },
+          {
+            "description": "Runtime governance property verification",
+            "evidence_type": "PropertyVerification",
+            "timestamp": "2026-03-31T03:46:24Z",
+            "data": {
+              "failed": 0,
+              "governance_intact": true,
+              "passed": 27
+            },
+            "signature": null
+          },
+          {
+            "description": "Runtime governance property verification",
+            "evidence_type": "PropertyVerification",
+            "timestamp": "2026-03-31T03:46:34Z",
+            "data": {
+              "failed": 0,
+              "governance_intact": true,
+              "passed": 27
+            },
+            "signature": null
+          },
+          {
+            "description": "Runtime governance property verification",
+            "evidence_type": "PropertyVerification",
+            "timestamp": "2026-03-31T03:46:44Z",
+            "data": {
+              "failed": 0,
+              "governance_intact": true,
+              "passed": 27
+            },
+            "signature": null
+          },
+          {
+            "description": "Audit chain integrity verified before report signing",
+            "evidence_type": "PropertyVerification",
+            "timestamp": "2026-03-31T03:46:54Z",
+            "data": {
+              "chain_valid": true,
+              "entries_checked": 6,
+              "first_invalid": null
+            },
+            "signature": null
+          },
+          {
+            "description": "Current governed workload state reconstructed from the persisted audit chain",
+            "evidence_type": "PropertyVerification",
+            "timestamp": "2026-03-31T03:46:54Z",
+            "data": {
+              "active_governed_workloads": 2,
+              "bootstrapped_workloads": 1,
+              "chain_head_hash": "f3bef34964a373310669bcb84490e1edb5b87a24bf6e2e2f5dcd4c80534a6d4b",
+              "governance_state_dir": "/var/lib/theorem/governance",
+              "live_governed_workloads": 1,
+              "workloads": [
+                {
+                  "authority": "019d41ff-b6cc-7010-a7d0-a91430dd981e",
+                  "authority_decision_id": "019d41ff-b739-74a2-ab82-773b1d64d001",
+                  "authority_source": "live-governance-act",
+                  "binary_hash": "f8ae00cf3828d3b77f15acef4ea169cf79f3f881ce05bb78d39f015fba8fe6fd",
+                  "name": "theorem-gateway"
+                },
+                {
+                  "authority": "supervisor",
+                  "authority_decision_id": "boot:theorem-node",
+                  "authority_source": "boot-manifest",
+                  "binary_hash": "927216c1b4080f056c3692a392b5ebdbe707a8a0f4ef9121aad4a718ff76b040",
+                  "name": "theorem-node"
+                }
+              ]
+            },
+            "signature": null
+          }
+        ],
+        "assessment": {
+          "status": "Compliant",
+          "notes": "Boot attestation verified, enforcement actions recorded, property checks passed."
+        }
+      },
+      {
+        "title": "Quality Management System",
+        "article_reference": "EU AI Act Article 17",
+        "evidence": [
+          {
+            "description": "Governance evidence is persisted under the canonical state volume",
+            "evidence_type": "ArtifactIntegrity",
+            "timestamp": "2026-03-31T03:46:54Z",
+            "data": {
+              "audit_chain_file": "/var/lib/theorem/governance/audit-chain.jsonl",
+              "entries_checked": 6,
+              "governance_state_dir": "/var/lib/theorem/governance",
+              "persistence_class": "state-dir"
+            },
+            "signature": null
+          },
+          {
+            "description": "Runtime governance property verification",
+            "evidence_type": "PropertyVerification",
+            "timestamp": "2026-03-31T03:46:24Z",
+            "data": {
+              "failed": 0,
+              "governance_intact": true,
+              "passed": 27
+            },
+            "signature": null
+          },
+          {
+            "description": "Runtime governance property verification",
+            "evidence_type": "PropertyVerification",
+            "timestamp": "2026-03-31T03:46:34Z",
+            "data": {
+              "failed": 0,
+              "governance_intact": true,
+              "passed": 27
+            },
+            "signature": null
+          },
+          {
+            "description": "Runtime governance property verification",
+            "evidence_type": "PropertyVerification",
+            "timestamp": "2026-03-31T03:46:44Z",
+            "data": {
+              "failed": 0,
+              "governance_intact": true,
+              "passed": 27
+            },
+            "signature": null
+          },
+          {
+            "description": "Audit chain integrity verified before report signing",
+            "evidence_type": "PropertyVerification",
+            "timestamp": "2026-03-31T03:46:54Z",
+            "data": {
+              "chain_valid": true,
+              "entries_checked": 6,
+              "first_invalid": null
+            },
+            "signature": null
+          },
+          {
+            "description": "Current governed workload state reconstructed from the persisted audit chain",
+            "evidence_type": "PropertyVerification",
+            "timestamp": "2026-03-31T03:46:54Z",
+            "data": {
+              "active_governed_workloads": 2,
+              "bootstrapped_workloads": 1,
+              "chain_head_hash": "f3bef34964a373310669bcb84490e1edb5b87a24bf6e2e2f5dcd4c80534a6d4b",
+              "governance_state_dir": "/var/lib/theorem/governance",
+              "live_governed_workloads": 1,
+              "workloads": [
+                {
+                  "authority": "019d41ff-b6cc-7010-a7d0-a91430dd981e",
+                  "authority_decision_id": "019d41ff-b739-74a2-ab82-773b1d64d001",
+                  "authority_source": "live-governance-act",
+                  "binary_hash": "f8ae00cf3828d3b77f15acef4ea169cf79f3f881ce05bb78d39f015fba8fe6fd",
+                  "name": "theorem-gateway"
+                },
+                {
+                  "authority": "supervisor",
+                  "authority_decision_id": "boot:theorem-node",
+                  "authority_source": "boot-manifest",
+                  "binary_hash": "927216c1b4080f056c3692a392b5ebdbe707a8a0f4ef9121aad4a718ff76b040",
+                  "name": "theorem-node"
+                }
+              ]
+            },
+            "signature": null
+          },
+          {
+            "description": "Current boot environment identifier",
+            "evidence_type": "BootAttestation",
+            "timestamp": "2026-03-31T03:46:54Z",
+            "data": {
+              "boot_environment": "theorem/theorem/ROOT/default"
+            },
+            "signature": null
+          }
+        ],
+        "assessment": {
+          "status": "Compliant",
+          "notes": "Artifact integrity verified and drift measurements within tolerance."
+        }
+      }
+    ]
+  },
+  "signature": "5767afeeef179d21babd800078b8ea2e8c9dca72dbdb8422e90f16372943cf5bb26d9802f676805254e2d3b9a69792dcddaa0cae00d0346601d46d92ed49f409",
+  "signer": "dbe5b848dd62ceba3aa8b68d00bf6dffcf21bf008c9b83a0a3499e91cc3f3012",
+  "algorithm": "ed25519"
+}

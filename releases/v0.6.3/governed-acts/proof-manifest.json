@@ -1,0 +1,38 @@
+{
+  "canonical_audit_chain_path": "/var/lib/theorem/governance/audit-chain.jsonl",
+  "canonical_report_path": "/var/lib/theorem/governance/governance-report.json",
+  "collected_at": "2026-03-31T03:46:54Z",
+  "files": {
+    "audit_chain": "audit-chain.jsonl",
+    "report": "governance-report.json",
+    "report_key_metadata": "governance-report.meta.json",
+    "report_public_key": "governance-report.public",
+    "service_admissions": "service-admissions.json",
+    "verification": "governance-report.verify.json"
+  },
+  "governance_state_dir": "/var/lib/theorem/governance",
+  "key_store_evidence": {
+    "key_name": "governance-report",
+    "key_store_path": "/etc/theorem/keys",
+    "public_key_matches_report_signer": true,
+    "retained_metadata_path": "/var/lib/theorem/release-proof/v0.6.3/governance-report.meta.json",
+    "retained_public_key_path": "/var/lib/theorem/release-proof/v0.6.3/governance-report.public",
+    "source_metadata_path": "/etc/theorem/keys/governance-report.meta",
+    "source_public_key_path": "/etc/theorem/keys/governance-report.public"
+  },
+  "release_version": "v0.6.3",
+  "report_id": "b515162cc06a66d678dd05e9b1d45e75a1cf394ceb0b86626f2c1f0afc7ed96b",
+  "report_signer": "dbe5b848dd62ceba3aa8b68d00bf6dffcf21bf008c9b83a0a3499e91cc3f3012",
+  "report_verification": {
+    "active_governed_workloads": 2,
+    "audit_entries_checked": 7,
+    "bootstrapped_workloads": 1,
+    "live_governed_workloads": 1,
+    "status": "verified"
+  },
+  "schema_version": "1.0.0",
+  "service_admission_summary": {
+    "bootstrap_manifest_services": 1,
+    "live_governed_services": 1
+  }
+}

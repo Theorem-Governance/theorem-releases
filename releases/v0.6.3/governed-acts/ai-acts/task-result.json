@@ -1,0 +1,8 @@
+{
+  "act_id": "019d4200-66f9-7150-89ab-28faabe7683e",
+  "attestation_id": "019d4200-672c-7a80-b06c-eb5b470361b7",
+  "entity_id": "019d41ff-b6cc-7010-a7d0-a91430dd981e",
+  "scope_id": "019d41ff-b6cc-7010-a7d0-a93210289906",
+  "status": "accepted",
+  "task_description": "Validate in-enclave AI governance path for release admission"
+}

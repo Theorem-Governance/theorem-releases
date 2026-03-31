@@ -2,13 +2,13 @@
   "payload": {
     "schema_version": "1.0.0",
     "file_name": "integrity.json",
-    "sha256": "627203253283dbbda10b847685ee16283d59cf457d579a907b0fba9faf533925",
+    "sha256": "065e6708064fb35c373a9549f2d08369a2efd8bcdcc21c5b39e49eea4a15b0d2",
     "size_bytes": 8348,
     "role": "release-integrity",
     "key_id": "theorem-release-root",
-    "signed_at": "2026-03-31T04:37:05Z"
+    "signed_at": "2026-03-31T04:45:05Z"
   },
   "signer": "3d569d090330d1a66400cd2027cd5a950383902b9943a5602b53d82bcb186de1",
-  "signature": "44217db7ec05dcfe1685415b2c34c1d5096729049aa72860bbae96e23792b688143fcc439d4a761e8abd4997a948ebf0257154d7ddf2c293a3472df70c2dda00",
+  "signature": "bf95690e8fa90fca88cc0deee5a17b91668d954968d8bfbe9749dc79492926a575c534c58240927ae86905cde43210fb3adbc83a64acf92a512e07d2b0d0660a",
   "algorithm": "ed25519"
 }

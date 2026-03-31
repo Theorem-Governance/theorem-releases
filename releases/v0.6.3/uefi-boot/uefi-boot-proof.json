@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "release_version": "v0.6.3",
+  "machine_id": "theoremos",
+  "collected_at": "2026-03-30T14:49:42Z",
+  "output_dir": "C:\\Users\\Eric\\Theorem\\.release\\v0.6.3-evidence\\uefi-boot",
+  "esp_dir": "C:\\Users\\Eric\\Theorem\\.release\\v0.6.3-evidence\\uefi-boot\\esp",
+  "disk_image": "C:\\Users\\Eric\\Theorem\\.release\\v0.6.3-evidence\\uefi-boot\\esp.img",
+  "smoke_output": "C:\\Users\\Eric\\Theorem\\.release\\v0.6.3-evidence\\uefi-boot\\smoke-output.txt",
+  "boot1_serial_log": "C:\\Users\\Eric\\Theorem\\.release\\v0.6.3-evidence\\uefi-boot\\qemu-debug.serial.log",
+  "boot2_serial_log": "C:\\Users\\Eric\\Theorem\\.release\\v0.6.3-evidence\\uefi-boot\\qemu-debug.boot2.serial.log",
+  "minimum_version": {
+    "boot_catalog": "v0.6.3",
+    "boot_contract": "v0.6.3"
+  },
+  "artifacts": {
+    "loader_efi": {
+      "path": "C:\\Users\\Eric\\Theorem\\.release\\v0.6.3-evidence\\uefi-boot\\esp\\EFI\\BOOT\\BOOTX64.EFI",
+      "sha256": "a6f7364039417df094e495bb86496ea7c83047674c278f19b136c6902513bd87"
+    },
+    "kernel_efi": {
+      "path": "C:\\Users\\Eric\\Theorem\\.release\\v0.6.3-evidence\\uefi-boot\\esp\\EFI\\THEOREM\\THEOKERN.EFI",
+      "sha256": "34d82b8925ef73ad2ea2be029c3d5a317a34c50898be95391fcceba6d0c3c768"
+    },
+    "boot_catalog": {
+      "path": "C:\\Users\\Eric\\Theorem\\.release\\v0.6.3-evidence\\uefi-boot\\esp\\EFI\\THEOREM\\boot.catalog.json",
+      "sha256": "6197c59ec7cf188835b052dfada488c85e841c73c0092bec33a448372f34cec4"
+    },
+    "boot_contract": {
+      "path": "C:\\Users\\Eric\\Theorem\\.release\\v0.6.3-evidence\\uefi-boot\\esp\\EFI\\THEOREM\\boot.contract.json",
+      "sha256": "71ebf4b45f6bdc02bf3409e6e689a56bfcfc3018eea8d48f6eed0cf73efc52ab"
+    },
+    "esp_image": {
+      "path": "C:\\Users\\Eric\\Theorem\\.release\\v0.6.3-evidence\\uefi-boot\\esp.img",
+      "sha256": "a80be8485e49f2c8d559c25c80d404c23b8ff2d40d7f76d4f66174e934e9e4b3"
+    }
+  },
+  "boot_acceptance": {
+    "verdict": "accepted",
+    "attempt": 2
+  },
+  "recovery": {
+    "accepted": true,
+    "known_good_generation": "v0.6.3"
+  }
+}
