@@ -51,16 +51,18 @@ The `upgrade.sh` entrypoint is expected to perform the following steps:
 1. Read the currently installed theoremOS version from
    `/etc/theorem/release.version` and verify it matches the supported source
    line declared by `supported-upgrade-from`.
-2. Snapshot the current boot environment.
-3. Snapshot `/var/lib/theorem` state or promote it to a preserved ZFS dataset
+2. Reject any target release that is not strictly newer than the installed
+   version. Supported-source-line matching is necessary but not sufficient.
+3. Snapshot the current boot environment.
+4. Snapshot `/var/lib/theorem` state or promote it to a preserved ZFS dataset
    if it is still rooted inside the active boot environment.
-4. Create the target boot environment, for example `theorem/ROOT/0.6.0`.
-5. Install the new theoremOS payload into that target boot environment.
-6. Preserve `theorem/store`, `theorem/log`, and `/var/lib/theorem`.
-7. Preserve or import the existing machine spec and render the target host
+5. Create the target boot environment, for example `theorem/ROOT/0.6.0`.
+6. Install the new theoremOS payload into that target boot environment.
+7. Preserve `theorem/store`, `theorem/log`, and `/var/lib/theorem`.
+8. Preserve or import the existing machine spec and render the target host
    configuration from it.
-8. Set `zpool bootfs=theorem/ROOT/<target>`.
-9. Emit pending-upgrade markers and require a reboot.
+9. Set `zpool bootfs=theorem/ROOT/<target>`.
+10. Emit pending-upgrade markers and require a reboot.
 
 The new release is not considered active until the host reboots into the new
 boot environment, theorem-init observes healthy service/runtime state, and the

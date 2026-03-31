@@ -26,6 +26,7 @@
     "schema_changes",
     "api_changes",
     "required_operator_actions",
+    "bootstrap_specification",
     "artifacts"
   ],
   "properties": {
@@ -110,6 +111,7 @@
       "type": "array",
       "items": { "type": "string" }
     },
+    "bootstrap_specification": { "$ref": "#/$defs/bootstrapSpecification" },
     "artifacts": {
       "type": "array",
       "items": { "$ref": "#/$defs/artifact" }
@@ -499,6 +501,8 @@
             "uefi-kernel",
             "uefi-loader",
             "boot-contract",
+            "specification-document",
+            "specification-hash",
             "checksum",
             "sbom",
             "provenance",
@@ -509,6 +513,8 @@
         "target": { "type": "string" },
         "format": { "type": "string" },
         "automation_strategy": { "type": "string" },
+        "self_contained_bootstrap": { "type": "boolean" },
+        "bootstrap_strategy": { "type": "string" },
         "direct_disk_write": {
           "type": "string",
           "enum": ["allowed", "forbidden", "not-applicable"]
@@ -518,6 +524,7 @@
         "upgrade_entrypoint": { "type": "string" },
         "first_boot_config_path": { "type": "string" },
         "first_boot_config_template": { "type": "string" },
+        "first_boot_config_policy": { "type": "string" },
         "supported_upgrade_from": {
           "type": "array",
           "items": { "type": "string" }
@@ -527,6 +534,37 @@
         "seed_partition_label": { "type": "string" },
         "seed_filesystem": { "type": "string" },
         "bootable": { "type": "boolean" }
+      }
+    },
+    "bootstrapSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hash_algorithm",
+        "spec_hash",
+        "document_asset_name",
+        "document_public_path",
+        "document_sha256",
+        "hash_asset_name",
+        "hash_public_path"
+      ],
+      "properties": {
+        "hash_algorithm": {
+          "type": "string",
+          "enum": ["sha256"]
+        },
+        "spec_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "document_asset_name": { "type": "string" },
+        "document_public_path": { "type": "string" },
+        "document_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "hash_asset_name": { "type": "string" },
+        "hash_public_path": { "type": "string" }
       }
     },
     "releaseIntegrity": {

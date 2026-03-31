@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "attestation_type": "direct-write-build",
+  "source_artifact": "theoremos-v0.6.3-x86_64-unknown-freebsd.tar.gz",
+  "source_hash": "56ead12cd5ff01c9d6da9be762ade66dd5ff0c4b8361040fe03ca91fbc43c33a",
+  "direct_write_artifact": "theoremos-v0.6.3-amd64-direct-write.img.xz",
+  "direct_write_sha256": "b824ed0f02102ff5ad95afa770e087d057866bf5bfdf9633c283512d5fe86bb3",
+  "builder": "build-direct-write-image.ps1",
+  "build_tag": "v0.6.3",
+  "generated_at": "2026-03-31T03:39:34Z",
+  "trust_context": "legacy-local-builder"
+}

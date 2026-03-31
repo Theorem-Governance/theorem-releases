@@ -98,7 +98,7 @@ THEOREM_COMMITMENT_SECRET=<generate-a-random-secret>
 THEOREM_WITNESS_TOKEN=<generate-a-random-token>
 
 # Optional
-THEOREM_ENFORCEMENT_MODE=advisory    # or "enforce" for production
+THEOREM_ENFORCEMENT_MODE=enforce
 # THEOREM_PEER_WITNESSES=https://witness1.example.com,https://witness2.example.com
 ```
 
@@ -173,24 +173,21 @@ Or move your application off port 3170 to let theorem-node use its default.
 
 ## Step 5: Start services
 
-The rc.d dependency chain starts them in order:
+The supervised path is `theorem_init` first. It owns the governed launch plan and starts `theorem-node` from `theorem.conf` / `activation.manifest.json`.
 
 ```sh
-# Start all at once (rcorder handles ordering)
-service theorem_node start
-service theorem_gateway start
-service theorem_govagent start
+# Start the governed supervisor
+service theorem_init start
 ```
 
-Or enable them in `/etc/rc.conf` and reboot:
+Or enable the supervisor in `/etc/rc.conf` and leave `theorem_node` disabled for direct rc.d start:
 
 ```sh
-theorem_node_enable="YES"
-theorem_gateway_enable="YES"
-theorem_govagent_enable="YES"
+theorem_init_enable="YES"
+theorem_node_enable="NO"
 ```
 
-The installer (`install.sh`) sets these automatically.
+The installer (`install.sh`) now enforces that default.
 
 ## Step 6: Verify health
 
@@ -449,3 +446,51 @@ No authentication required. Not rate-limited.
 | 429 | Rate limited |
 
 Requires authentication.
+
+## On-Box Governed Release Proof
+
+For a closure release, retain governed proof from the running box instead of
+reconstructing it later on the release workstation.
+
+On the target box:
+
+```sh
+theorem-init --config /etc/theorem/theorem.conf governance collect-release-proof \
+  --version v0.6.3 \
+  --output-dir /var/lib/theorem/release-proof/v0.6.3
+```
+
+This command fails closed unless:
+
+- the signed governance report verifies against the persisted audit chain
+- at least one active workload is classified as `live-governed`
+- at least one post-`theorem-node` managed service has live theorem-node
+  admission evidence with `authority_decision_id`
+
+Retained files:
+
+- `proof-manifest.json`
+- `governance-report.json`
+- `governance-report.verify.json`
+- `audit-chain.jsonl`
+- `service-admissions.json`
+- `governance-report.public`
+- `governance-report.meta.json`
+
+From the release workstation, you can pull the same bundle over SSH:
+
+```powershell
+pwsh -File scripts/collect-on-box-governance-proof.ps1 `
+  -Tag v0.6.3 `
+  -RemoteHost root@198.51.100.10 `
+  -LocalOutputDir .release\v0.6.3-evidence\governed-acts
+```
+
+Then validate the release with the governed-proof directory attached:
+
+```sh
+bash scripts/validate-release.sh \
+  --evidence-dir .release/v0.6.3-evidence/governed-acts \
+  .pre-release-public/releases/v0.6.3 \
+  v0.6.3
+```

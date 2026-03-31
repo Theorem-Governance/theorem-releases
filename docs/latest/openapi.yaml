@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Theorem Governance Node API
-  version: 0.5.0
+  version: 0.6.3
   description: |
     HTTP API for a Theorem governance kernel instance. Any program that can
     make HTTP requests can interact with this API — no SDK required.
@@ -9,13 +9,13 @@ info:
     The kernel enforces all governance rules (E1-E16). This OpenAPI file
     documents the stable public subset of the theorem-node HTTP surface.
 
-    Public 0.5.x capability negotiation is release-time negotiation through
+    Public 0.6.x capability negotiation is release-time negotiation through
     `releases/feed.json` and `releases/<tag>/manifest.json`, not request-time
     version headers. The published manifest is the stable capability discovery
     surface.
 
     The running node also exposes additional operator/admin and Ring 3 adapter
-    routes. The 0.5 operator/admin contract is published below for the
+    routes. The 0.6 operator/admin contract is published below for the
     theorem-native organization surfaces; lower-level witness and adapter
     routes remain intentionally excluded from this file:
     `GET /export-state`, `GET /rebuild-authority-state`,
@@ -128,7 +128,7 @@ paths:
 
   /capabilities:
     get:
-      summary: List runtime-discoverable public 0.5.x capabilities
+      summary: List runtime-discoverable public 0.6.x capabilities
       operationId: listRuntimeCapabilities
       responses:
         "200":
@@ -147,7 +147,7 @@ paths:
 
   /capability-negotiation:
     get:
-      summary: Describe how to negotiate 0.5.x capabilities across release and runtime surfaces
+      summary: Describe how to negotiate 0.6.x capabilities across release and runtime surfaces
       operationId: getCapabilityNegotiation
       responses:
         "200":
@@ -386,6 +386,8 @@ paths:
     get:
       summary: List canonical authority history
       operationId: listGovernanceEvents
+      security:
+        - bearerAuth: []
       responses:
         "200":
           description: Governance event feed
@@ -1001,6 +1003,8 @@ paths:
     post:
       summary: Issue an execution capability for a previously admitted action
       operationId: issueExecutionCapability
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -1031,6 +1035,8 @@ paths:
     post:
       summary: Validate an issued execution capability without redeeming it
       operationId: validateExecutionCapability
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -1306,6 +1312,8 @@ paths:
     post:
       summary: Revoke an issued execution capability
       operationId: revokeExecutionCapability
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -1332,6 +1340,8 @@ paths:
     post:
       summary: Redeem an execution capability and bind it to an outcome reference
       operationId: redeemExecutionCapability
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -1448,6 +1458,70 @@ paths:
                   current_status: { type: string }
                   outcome_ref: { type: string, nullable: true }
                   recorded_at: { type: string, format: date-time }
+
+  /consequence/status:
+    get:
+      summary: Read current consequence loop status
+      operationId: getConsequenceStatus
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Consequence loop status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  active_models: { type: integer }
+                  total_records: { type: integer }
+
+  /consequence/models:
+    get:
+      summary: Read consequence trajectory model inventory
+      operationId: getConsequenceModels
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Consequence model inventory
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  active_models: { type: integer }
+
+  /consequence/corruption:
+    get:
+      summary: Read current anti-corruption status for the consequence loop
+      operationId: getConsequenceCorruption
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Anti-corruption status
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /consequence/barriers:
+    get:
+      summary: Read consequence loop intervention and barrier state
+      operationId: getConsequenceBarriers
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Consequence barrier state
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
 
   /releases/declared:
     get:

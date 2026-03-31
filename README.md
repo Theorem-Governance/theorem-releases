@@ -43,6 +43,8 @@ Release asset names are stable:
 
 - `theorem-node-<tag>-<target>.tar.gz`
 - `theorem-node-<tag>-<target>.tar.gz.sha256`
+- `theorem-spec.md`
+- `theorem-spec.sha256`
 - `theorem-node-<tag>.cdx.xml` or equivalent CycloneDX SBOM attachment
 - `theorem-release-integrity-<tag>.json` for `4.x` release integrity evidence
 
@@ -69,11 +71,16 @@ past `mirror_expires_at` in `releases/feed.json`.
 
 ## Bootstrap
 
-Compute the spec hash from the governance specification document provided with your license:
+Verify the published bootstrap specification bundle:
 
 ```bash
-SPEC_HASH=$(shasum -a 256 theorem-spec.md | awk '{print $1}')
+SPEC_HASH=$(tr -d ' \r\n' < theorem-spec.sha256)
+ACTUAL_SPEC_HASH=$(shasum -a 256 theorem-spec.md | awk '{print $1}')
+test "$SPEC_HASH" = "$ACTUAL_SPEC_HASH"
 ```
+
+Use the published `theorem-spec.sha256` value as the bootstrap `SPEC_HASH`. Do
+not invent or hand-transcribe a hash.
 
 Initialize a governance instance:
 
@@ -96,11 +103,11 @@ Set environment variables (e.g. in a `.env` file sourced before running):
 | Variable | Required | Default | Description |
 |---|---|---|---|
 | `THEOREM_COMMITMENT_SECRET` | **Yes** | — | HMAC secret for intent tokens (min 32 chars) |
-| `THEOREM_ENFORCEMENT_MODE` | No | `advisory` | `advisory`, `warn`, or `enforce` |
+| `THEOREM_ENFORCEMENT_MODE` | No | `enforce` | `advisory`, `warn`, or `enforce` |
 | `THEOREM_DRIFT_THRESHOLD` | No | `0.15` | Drift tolerance (0.0–1.0) |
 | `THEOREM_COMMITMENT_TOKEN_TTL_HOURS` | No | `24` | Token expiry in hours |
 | `THEOREM_WITNESS_ENDPOINTS` | No | — | Comma-separated witness peer URLs |
-| `THEOREM_WITNESS_TOKEN` | No | — | Bearer token for witness-authenticated routes and `/ready`; omit only for basic local development |
+| `THEOREM_WITNESS_TOKEN` | **Yes** | — | Bearer token for witness-authenticated routes; startup fails closed if it is missing or shorter than 32 characters |
 | `THEOREM_LOG_LEVEL` | No | `info` | Log level |
 
 `THEOREM_PEER_WITNESSES` is still accepted as a legacy compatibility alias, but
@@ -110,6 +117,7 @@ Minimal local example:
 
 ```bash
 export THEOREM_COMMITMENT_SECRET="$(openssl rand -hex 32)"
+export THEOREM_WITNESS_TOKEN="$(openssl rand -hex 32)"
 export THEOREM_LOG_LEVEL=info
 ```
 
@@ -150,8 +158,9 @@ JSON status body whenever the process is up.
 
 `/ready` is the readiness probe. It returns HTTP `200` only when the instance
 is bootstrapped and both `THEOREM_COMMITMENT_SECRET` and
-`THEOREM_WITNESS_TOKEN` are configured. In a minimal local setup you can run
-without `THEOREM_WITNESS_TOKEN`, but `/ready` will remain `503 not_ready`.
+`THEOREM_WITNESS_TOKEN` are configured. The server now fails closed at startup
+if either secret is missing, or if `THEOREM_WITNESS_TOKEN` is shorter than 32
+characters.
 
 `/status` is the richer governance-state inspection command.
 

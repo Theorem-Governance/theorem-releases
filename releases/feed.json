@@ -1,6 +1,41 @@
 {
   "releases": [
     {
+      "version": "v0.6.3",
+      "release_date": "2026-03-31T04:35:18Z",
+      "compatibility_classification": "compatible-behavior-tightening",
+      "release_lifecycle": {
+        "phase": "preview",
+        "support_statement": "Platform preview release. Supported for evaluation and documented theoremOS install flows. The consumer direct-write image is release-blocking and must be proven on Hetzner UEFI hardware before publication.",
+        "security_support": "Best-effort fixes apply only to the latest published preview line. Older preview lines may be superseded without backport commitments.",
+        "eol_action": "When this preview line is superseded or revoked, operators must upgrade to the next supported preview line or re-image using the documented recovery path."
+      },
+      "release_channel": {
+        "name": "preview",
+        "promotion_policy": "A preview release may publish only after validate-release.sh, conformance evidence, demo-path evidence, release notes, signed metadata, and governed publication declaration succeed.",
+        "freeze_policy": "Preview release tags freeze contract surfaces and bundled artifacts at tag cut; any fix requires a new tag and a fresh release session.",
+        "servicing_mode": "latest-preview-only",
+        "published_branch": "main"
+      },
+      "release_ring": "public",
+      "minimum_version": "v0.6.3",
+      "manifest_path": "releases/v0.6.3/manifest.json",
+      "integrity_path": "releases/v0.6.3/integrity.json",
+      "release_notes_path": "releases/v0.6.3/release-notes.md",
+      "trust_root_path": "releases/trust-root.json",
+      "conformance_report_path": "releases/v0.6.3/conformance.json",
+      "demonstration_path": "releases/v0.6.3/demo-path.json",
+      "provenance_paths": [
+        "releases/v0.6.3/theorem-node-v0.6.3.provenance.json",
+        "releases/v0.6.3/theoremos-v0.6.3-amd64-direct-write.attestation.json"
+      ],
+      "revocation_ledger_path": "releases/revocations.json",
+      "revocation_record_path": "releases/revocations/v0.6.3.json",
+      "revocation_status": "active",
+      "human_release_notes_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.6.3",
+      "release_url": "https://github.com/Theorem-Governance/theorem-releases/releases/tag/v0.6.3"
+    },
+    {
       "version": "v0.6.2",
       "release_date": "2026-03-29T14:36:54Z",
       "compatibility_classification": "compatible-behavior-tightening",
@@ -149,7 +184,7 @@
     }
   ],
   "schema_version": "1.3.0",
-  "mirror_generated_at": "2026-03-29T14:36:54Z",
-  "mirror_expires_at": "2026-03-30T14:36:54Z",
+  "mirror_generated_at": "2026-03-31T04:35:18Z",
+  "mirror_expires_at": "2026-04-01T04:35:18Z",
   "stale_behavior": "fail_closed"
 }

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "version": "v0.6.3",
+  "result": "passed",
+  "started_at": "2026-03-31T03:46:45Z",
+  "completed_at": "2026-03-31T03:47:12Z",
+  "validated_at": "2026-03-31T03:47:13Z",
+  "environment": {
+    "provider": "Hetzner Cloud ccx13",
+    "server_id": "125042903",
+    "server_ip": "5.161.121.1",
+    "firmware": "UEFI",
+    "boot_path": "consumer-direct-write -> FreeBSD loader.efi via EFI/BOOT/BOOTX64.EFI + startup.nsh fallback"
+  },
+  "artifact": {
+    "name": "theoremos-v0.6.3-amd64-direct-write.img.xz",
+    "sha256": "b824ed0f02102ff5ad95afa770e087d057866bf5bfdf9633c283512d5fe86bb3",
+    "target": "amd64-freebsd"
+  },
+  "checks": [
+    {
+      "name": "booted-installed-system",
+      "result": "passed",
+      "details": "Booted installed FreeBSD 14.4 system on Hetzner server 125042903 with hostname theoremos-v063."
+    },
+    {
+      "name": "ssh-port-22",
+      "result": "passed",
+      "details": "SSH access to 5.161.121.1 succeeded during runtime validation and proof collection."
+    },
+    {
+      "name": "release-version-match",
+      "result": "passed",
+      "details": "Remote /etc/theorem/release.version returned v0.6.3."
+    },
+    {
+      "name": "theorem-node-health-local",
+      "result": "passed",
+      "details": "Local GET http://127.0.0.1:3170/health returned {\"bootstrapped\":true,\"healthy\":true,\"status\":\"ok\"}."
+    },
+    {
+      "name": "zpool-autogrow",
+      "result": "passed",
+      "details": "zpool list theorem reported a 76G pool on the live Hetzner disk, confirming first-boot expansion."
+    },
+    {
+      "name": "gateway-live-governance-launch",
+      "result": "passed",
+      "details": "theorem-init log recorded theorem-gateway admission with authority_source=live-governance-act."
+    }
+  ]
+}

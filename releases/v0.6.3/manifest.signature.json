@@ -1,0 +1,14 @@
+{
+  "payload": {
+    "schema_version": "1.0.0",
+    "file_name": "manifest.json",
+    "sha256": "6276e26e4744d12019cef691564c0ccceadca8a02cd69fa60bb7ee04d2c37a25",
+    "size_bytes": 31088,
+    "role": "release-manifest",
+    "key_id": "theorem-release-root",
+    "signed_at": "2026-03-31T04:37:04Z"
+  },
+  "signer": "3d569d090330d1a66400cd2027cd5a950383902b9943a5602b53d82bcb186de1",
+  "signature": "b22d9f3a10873d7b48cc33b05b0c90471cbdd327d1236ea521f940ade229311d6b98c466f1929055c98998f45e2c6f26efada12b7b9fb6989be5de098c1e4300",
+  "algorithm": "ed25519"
+}

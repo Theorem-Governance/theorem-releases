@@ -1,0 +1,14 @@
+{
+  "payload": {
+    "schema_version": "1.0.0",
+    "file_name": "integrity.json",
+    "sha256": "627203253283dbbda10b847685ee16283d59cf457d579a907b0fba9faf533925",
+    "size_bytes": 8348,
+    "role": "release-integrity",
+    "key_id": "theorem-release-root",
+    "signed_at": "2026-03-31T04:37:05Z"
+  },
+  "signer": "3d569d090330d1a66400cd2027cd5a950383902b9943a5602b53d82bcb186de1",
+  "signature": "44217db7ec05dcfe1685415b2c34c1d5096729049aa72860bbae96e23792b688143fcc439d4a761e8abd4997a948ebf0257154d7ddf2c293a3472df70c2dda00",
+  "algorithm": "ed25519"
+}

@@ -1,0 +1,211 @@
+{
+  "schema_version": "1.0.0",
+  "product": "theorem-node",
+  "version": "v0.6.3",
+  "release_date": "2026-03-31T04:35:18Z",
+  "generated_at": "2026-03-31T04:35:19Z",
+  "manifest": {
+    "path": "releases/v0.6.3/manifest.json",
+    "asset_name": "theorem-release-manifest-v0.6.3.json",
+    "sha256": "6276e26e4744d12019cef691564c0ccceadca8a02cd69fa60bb7ee04d2c37a25"
+  },
+  "bootstrap_specification": {
+    "hash_algorithm": "sha256",
+    "spec_hash": "9b985ffa74384eb7e78a43476407fb38975767fb3564380b55d969f5aef89e7b",
+    "document_asset_name": "theorem-spec.md",
+    "document_public_path": "releases/v0.6.3/theorem-spec.md",
+    "document_sha256": "9b985ffa74384eb7e78a43476407fb38975767fb3564380b55d969f5aef89e7b",
+    "hash_asset_name": "theorem-spec.sha256",
+    "hash_public_path": "releases/v0.6.3/theorem-spec.sha256"
+  },
+  "release_ring": "public",
+  "minimum_version": "v0.6.3",
+  "downgrade_prevention_rule": "Once a consumer admits the 6.x public feed, it must not mirror or promote a release older than release_integrity.minimum_version without an explicit governed rollback decision.",
+  "rollback_authorization": {
+    "rule": "Rollback to an older 6.x artifact requires explicit governed approval before repointing a machine or mirror.",
+    "required_approval_count": 2,
+    "authorized_roles": [
+      "root-governance-authority"
+    ]
+  },
+  "binary_assets": [
+    {
+      "name": "theorem-machine-kernel-v0.6.3-x86_64-unknown-uefi.efi",
+      "sha256": "34d82b8925ef73ad2ea2be029c3d5a317a34c50898be95391fcceba6d0c3c768",
+      "size_bytes": 307712,
+      "artifact_kind": "uefi-kernel",
+      "target": "x86_64-unknown-uefi",
+      "format": "pe32+",
+      "automation_strategy": "verify-boot-contract",
+      "direct_disk_write": "not-applicable",
+      "bootable": false
+    },
+    {
+      "name": "theorem-native-v0.6.3-esp.img",
+      "sha256": "d2145563915b9c69c34e94fa034bc59d7b8586e0497da1fe9de94c93ddf76db1",
+      "size_bytes": 67108864,
+      "artifact_kind": "uefi-esp-image",
+      "target": "x86_64-unknown-uefi",
+      "format": "fat32-esp",
+      "automation_strategy": "write-esp-partition",
+      "direct_disk_write": "allowed",
+      "bootable": true
+    },
+    {
+      "name": "theorem-node-v0.6.3-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "a8f7cbc0c9cfebdfbca73fc428fb6c7f12890a9fb48cf4ac6bbe694171ab3022",
+      "size_bytes": 7069279,
+      "artifact_kind": "single-binary",
+      "target": "x86_64-unknown-freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-binary",
+      "direct_disk_write": "not-applicable",
+      "bootable": false
+    },
+    {
+      "name": "theorem-uefi-loader-v0.6.3-x86_64-unknown-uefi.efi",
+      "sha256": "a6f7364039417df094e495bb86496ea7c83047674c278f19b136c6902513bd87",
+      "size_bytes": 335872,
+      "artifact_kind": "uefi-loader",
+      "target": "x86_64-unknown-uefi",
+      "format": "pe32+",
+      "automation_strategy": "verify-boot-contract",
+      "direct_disk_write": "not-applicable",
+      "bootable": true
+    },
+    {
+      "name": "theoremos-v0.6.3-amd64-direct-write.img.xz",
+      "sha256": "b824ed0f02102ff5ad95afa770e087d057866bf5bfdf9633c283512d5fe86bb3",
+      "size_bytes": 310456736,
+      "artifact_kind": "direct-write-disk-image",
+      "target": "amd64-freebsd",
+      "format": "raw.xz",
+      "automation_strategy": "decompress-write-recover-gpt-and-first-boot-autogrow",
+      "self_contained_bootstrap": true,
+      "bootstrap_strategy": "bundled-release-metadata",
+      "direct_disk_write": "allowed",
+      "first_boot_config_path": "first-boot.conf",
+      "first_boot_config_template": "first-boot.conf.example",
+      "first_boot_config_policy": "optional-override",
+      "seed_partition_label": "THEOREMSEED",
+      "seed_filesystem": "msdosfs",
+      "bootable": true
+    },
+    {
+      "name": "theoremos-v0.6.3-x86_64-unknown-freebsd-upgrade-bundle.tar.gz",
+      "sha256": "0b86497bacba3b17bdb4063f1e562f146eb1635373fbf410230dd755d2829e97",
+      "size_bytes": 32674738,
+      "artifact_kind": "upgrade-bundle",
+      "target": "x86_64-unknown-freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-and-run-upgrade",
+      "direct_disk_write": "forbidden",
+      "archive_root": "theoremos-v0.6.3-x86_64-unknown-freebsd-upgrade-bundle",
+      "upgrade_entrypoint": "upgrade.sh",
+      "supported_upgrade_from": [
+        "v0.5.x"
+      ],
+      "target_boot_environment": "theorem/ROOT/0.6.3",
+      "state_preservation": "preserve theorem/store, theorem/log, and /var/lib/theorem across boot-environment switch",
+      "bootable": false
+    },
+    {
+      "name": "theoremos-v0.6.3-x86_64-unknown-freebsd.tar.gz",
+      "sha256": "56ead12cd5ff01c9d6da9be762ade66dd5ff0c4b8361040fe03ca91fbc43c33a",
+      "size_bytes": 32670939,
+      "artifact_kind": "installer-rootfs",
+      "target": "x86_64-unknown-freebsd",
+      "format": "tar.gz",
+      "automation_strategy": "extract-and-run-installer",
+      "self_contained_bootstrap": true,
+      "bootstrap_strategy": "bundled-release-metadata",
+      "direct_disk_write": "forbidden",
+      "archive_root": "theoremos-v0.6.3-x86_64-unknown-freebsd",
+      "installer_entrypoint": "install.sh",
+      "first_boot_config_template": "etc/theorem/first-boot.conf.example",
+      "first_boot_config_policy": "optional-override",
+      "bootable": false
+    }
+  ],
+  "uefi_assets": [
+    {
+      "name": "theorem-machine-kernel-v0.6.3-x86_64-unknown-uefi.efi",
+      "sha256": "34d82b8925ef73ad2ea2be029c3d5a317a34c50898be95391fcceba6d0c3c768",
+      "size_bytes": 307712,
+      "artifact_kind": "uefi-kernel",
+      "target": "x86_64-unknown-uefi",
+      "format": "pe32+",
+      "automation_strategy": "verify-boot-contract",
+      "direct_disk_write": "not-applicable",
+      "bootable": false
+    },
+    {
+      "name": "theorem-native-v0.6.3-boot-contract.json",
+      "sha256": "ddd2fbaa928329b89d83e4be46c2e26da8fc0ce9367e342e25ad6b4243b69038",
+      "size_bytes": 853,
+      "artifact_kind": "boot-contract",
+      "target": "x86_64-unknown-uefi",
+      "format": "json",
+      "automation_strategy": "verify-boot-contract",
+      "direct_disk_write": "not-applicable",
+      "bootable": false
+    },
+    {
+      "name": "theorem-native-v0.6.3-esp.img",
+      "sha256": "d2145563915b9c69c34e94fa034bc59d7b8586e0497da1fe9de94c93ddf76db1",
+      "size_bytes": 67108864,
+      "artifact_kind": "uefi-esp-image",
+      "target": "x86_64-unknown-uefi",
+      "format": "fat32-esp",
+      "automation_strategy": "write-esp-partition",
+      "direct_disk_write": "allowed",
+      "bootable": true
+    },
+    {
+      "name": "theorem-uefi-loader-v0.6.3-x86_64-unknown-uefi.efi",
+      "sha256": "a6f7364039417df094e495bb86496ea7c83047674c278f19b136c6902513bd87",
+      "size_bytes": 335872,
+      "artifact_kind": "uefi-loader",
+      "target": "x86_64-unknown-uefi",
+      "format": "pe32+",
+      "automation_strategy": "verify-boot-contract",
+      "direct_disk_write": "not-applicable",
+      "bootable": true
+    }
+  ],
+  "sbom_assets": [
+    {
+      "name": "ref-impl.cdx.json",
+      "sha256": "18db20687c1bfff2f9cacaa99313de023072876b398c621dd4cdad6e1c5d7e87",
+      "size_bytes": 11074
+    },
+    {
+      "name": "theorem-node-v0.6.3.cdx.json",
+      "sha256": "a1611f1f84b99b8c713ab9ab07416bf240f8807b9a2fef78a03aab051f7ba732",
+      "size_bytes": 296680
+    }
+  ],
+  "provenance_assets": [
+    {
+      "name": "theorem-node-v0.6.3.provenance.json",
+      "sha256": "3b20a09f1105a264ffd3efe55c8d579a184ec2e42a8a2895d959d2c48e63a1ab",
+      "size_bytes": 1147
+    },
+    {
+      "name": "theoremos-v0.6.3-amd64-direct-write.attestation.json",
+      "sha256": "8e0c046c2997e4153349e5570886447916bdb2541d27994dbc7e2f2726f9f1d9",
+      "size_bytes": 565
+    }
+  ],
+  "revocation": {
+    "ledger_path": "releases/revocations.json",
+    "record_path": "releases/revocations/v0.6.3.json"
+  },
+  "mirror_policy": {
+    "feed_path": "releases/feed.json",
+    "mirror_generated_at": "2026-03-31T04:35:18Z",
+    "mirror_expires_at": "2026-04-01T04:35:18Z",
+    "mirror_ttl_hours": 24,
+    "stale_behavior": "fail_closed"
+  }
+}

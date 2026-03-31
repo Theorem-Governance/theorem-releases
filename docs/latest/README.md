@@ -7,15 +7,21 @@ Its product goal is not only to record governance, but to become the trusted
 state machine for authority, revocation, release verification, and fail-closed
 governed execution.
 
-The current long-range path is:
+The current active execution line is:
 
-- `2.1` network trust fabric
-- `2.2` programmable local governance
-- `2.3` authority graph and explanation product
-- `3.0` OS for autonomous organizations
+- `0.6.3` substrate closure
+- `0.7` entity birth
+- `0.8` entity learning
+- `0.9` entity interoperation
+- `1.0` autonomous economy
 
-See [`ROADMAP.md`](ROADMAP.md) and the `3.0` execution docs in
-[`docs/execution/3.0-runbook.md`](docs/execution/3.0-runbook.md).
+The current control plane is
+[`docs/execution/1.0-runbook.md`](docs/execution/1.0-runbook.md).
+
+Historical long-range roadmap material for the older `2.x -> 3.0` framing still
+exists in [`ROADMAP.md`](ROADMAP.md) and
+[`docs/execution/3.0-runbook.md`](docs/execution/3.0-runbook.md), but those are
+not the active release train for the current repo state.
 
 ## Workspace Crates
 
@@ -94,10 +100,10 @@ image.
   [`docs/release-contract.md`](docs/release-contract.md)
 - Stable documented HTTP subset:
   [`openapi.yaml`](openapi.yaml)
-- `3.0` strategy package:
-  [`docs/superpowers/specs/2026-03-21-theorem-3.0-autonomous-organization-os.md`](docs/superpowers/specs/2026-03-21-theorem-3.0-autonomous-organization-os.md),
-  [`docs/superpowers/plans/2026-03-21-road-to-3.0.md`](docs/superpowers/plans/2026-03-21-road-to-3.0.md),
-  [`docs/execution/3.0-runbook.md`](docs/execution/3.0-runbook.md)
+- Active `1.0` execution package:
+  [`docs/superpowers/specs/2026-03-26-theorem-1.0-vision.md`](docs/superpowers/specs/2026-03-26-theorem-1.0-vision.md),
+  [`docs/products/autonomous-economy/experience-map.md`](docs/products/autonomous-economy/experience-map.md),
+  [`docs/execution/1.0-runbook.md`](docs/execution/1.0-runbook.md)
 - Licensee `T4` launch prep packet:
   [`docs/execution/theorem-t4-launch-prep-packet.md`](docs/execution/theorem-t4-launch-prep-packet.md)
 
@@ -105,7 +111,7 @@ Note: the node exposes additional admin and runtime-internal routes beyond the
 current OpenAPI file. The OpenAPI contract documents the stable public subset,
 not every live adapter-facing route.
 
-Runtime discovery surfaces published by the `3.x` server:
+Runtime discovery surfaces published by the current `0.6.x` server:
 
 - `GET /` for machine-readable discovery links
 - `GET /openapi.json` and `GET /openapi.yaml` for the live OpenAPI contract

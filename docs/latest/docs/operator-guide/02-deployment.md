@@ -33,9 +33,18 @@ Additional hard rules:
   `${archive_root}/${upgrade_entrypoint}` after extraction and use it only on
   an already-running theoremOS machine that matches
   `supported_upgrade_from`.
-- For `direct-write-disk-image`, place `/first-boot.conf` in the FAT seed
-  partition named by `seed_partition_label` before first boot. The expected
-  template path on that partition is `first_boot_config_template`.
+- For `direct-write-disk-image`, the image is self-contained and must boot
+  without any required seed injection. The FAT seed partition named by
+  `seed_partition_label` remains available as an optional override channel for
+  `/first-boot.conf` before first boot when a deployment needs host-specific
+  SSH or network settings. After writing the image, repair GPT to the full
+  target device and boot it. theoremOS expands the final ZFS partition and root
+  pool on first boot via `theorem_autogrow`; consumers must not pre-grow the
+  root partition offline before the first theoremOS boot. The manifest must
+  declare `self_contained_bootstrap=true`,
+  `bootstrap_strategy=bundled-release-metadata`, and
+  `first_boot_config_policy=optional-override`. The expected template path on
+  that partition is `first_boot_config_template`.
 - `theoremos-*.iso` and `theoremos-*-memstick.img` are install media only.
 - Current `0.5.x` unattended bare-metal contract is the
   `direct-write-disk-image` artifact. `installer-rootfs` remains valid only for
@@ -251,30 +260,16 @@ services.theorem.witnessEndpoints = [
 
 Witness endpoints are passed to the engine as `THEOREM_WITNESS_ENDPOINTS` (comma-separated list).
 
-## Initial Bootstrap Procedure
+## Bootstrap Behavior
 
-Bootstrap initializes the governance instance with genesis state. It must be run exactly once before the instance accepts any acts.
+Current theoremOS release artifacts are self-bootstrapping by default. A fresh
+direct-write deployment or installer-rootfs install carries
+`bootstrap-config.json`, and first boot applies that bundled release metadata
+automatically through `theorem_runtime_prepare` and `theorem-auto-bootstrap`.
+Operators should not run a separate manual bootstrap ceremony during the normal
+deployment path.
 
-### Step 1: Compute the Specification Hash
-
-```bash
-sha256sum theorem-spec.md
-```
-
-This hash is written into the GENESIS record and binds this instance to a specific spec version. It cannot be amended -- changing the spec requires a new bootstrap.
-
-### Step 2: Run Bootstrap
-
-Via CLI:
-
-```bash
-theorem-node --db /var/lib/theorem/theorem.db bootstrap \
-  --spec-hash <SHA256_OF_THEOREM_SPEC_MD> \
-  --artifact-url https://your-domain.example.com/artifact \
-  --log-endpoint https://your-domain.example.com/log
-```
-
-Bootstrap creates:
+The automatic bootstrap path still creates the same genesis state:
 
 - 2 genesis records (BootstrapEntity + RootScope)
 - 2 entities (system entity + bootstrap entity)
@@ -284,28 +279,23 @@ Bootstrap creates:
 - Kernel parameters (audit_interval_ms, minimum_intent_execution_interval_ms, etc.)
 - Measurement methods, resource measurement methods, integrity mechanism, attestation log, attestation schema
 
-### Step 3: Verify Bootstrap
+Use the explicit CLI bootstrap path only for recovery, custom infrastructure,
+or nonstandard installs where bundled release metadata is intentionally not the
+bootstrap source. In those cases, verify `theorem-spec.sha256` against
+`theorem-spec.md` first and then run `theorem-node ... bootstrap` yourself.
+
+### Post-Boot Verification
 
 ```bash
 theorem-node --db /var/lib/theorem/theorem.db status
-```
-
-Expected output includes `"bootstrapped": true` with entity_count >= 2, scope_count >= 1, and proof_obligation counts.
-
-```bash
 theorem-node --db /var/lib/theorem/theorem.db audit
 theorem-node --db /var/lib/theorem/theorem.db verify
 ```
 
-Both should report success after a fresh bootstrap.
-
-### Step 4: Start the Server
-
-```bash
-theorem-node --db /var/lib/theorem/theorem.db serve --port 3170
-```
-
-Or via systemd: `systemctl start theorem-node`
+Expected output includes `"bootstrapped": true` with entity_count >= 2,
+scope_count >= 1, and proof-obligation counts. On a normal theoremOS
+deployment, the server is already started by the supervised first-boot path,
+so manual `serve` invocation is not part of the standard install flow.
 
 ### Canonical Liveness and Readiness Checks
 
@@ -368,7 +358,7 @@ Both files should be on the same local SSD (DEC-007). They must not be on networ
 | `THEOREM_DATA_DIR` | (set by NixOS module) | Data directory path, used by systemd environment |
 | `THEOREM_LOG_LEVEL` | `info` | Log level set by NixOS module. Used as fallback when `RUST_LOG` is not set. Accepts same syntax as `RUST_LOG`. |
 | `THEOREM_WITNESS_ENDPOINTS` | (empty) | Comma-separated list of peer witness URLs, set by NixOS module |
-| `THEOREM_WITNESS_TOKEN` | (required for operator/admin HTTP routes) | Bearer token used by `GET /export-state`, `GET /rebuild-authority-state`, and `POST /restore-authority-state`, and by Ring 3 consumers that read token-protected authority snapshots |
+| `THEOREM_WITNESS_TOKEN` | (required; startup fails closed if missing or shorter than 32 characters) | Bearer token used by `GET /export-state`, `GET /rebuild-authority-state`, and `POST /restore-authority-state`, and by Ring 3 consumers that read token-protected authority snapshots |
 
 The same bearer token currently protects the published `3.0` organization and
 lifecycle surfaces that are intentionally operator-controlled:

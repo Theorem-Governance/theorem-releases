@@ -2,13 +2,13 @@
   "payload": {
     "schema_version": "1.0.0",
     "file_name": "revocations.json",
-    "sha256": "1ee5af14f3531030fb979c26714335abd34c81def3a444d6b6a5d09e918b24ea",
-    "size_bytes": 1810,
+    "sha256": "ddd9cc4c8fa78f344c2f335f8b86a1c2c3faabb8338080dc7910b541387aeebe",
+    "size_bytes": 2236,
     "role": "release-revocation-ledger",
     "key_id": "theorem-release-root",
-    "signed_at": "2026-03-29T14:38:49Z"
+    "signed_at": "2026-03-31T04:37:08Z"
   },
   "signer": "3d569d090330d1a66400cd2027cd5a950383902b9943a5602b53d82bcb186de1",
-  "signature": "2cd84cc12afa9f5ab8acf3373c18e03287cb7f5d1c28c2c28e06ae202bb2710360ba8e3cd4e90403aebecfa26a42ececf39aa51bac1eaac931dc6d20fd282509",
+  "signature": "5b060e5023ab89807d7f47ef94af12c0a1720b45fead246ae1e34006e531be46c91b3d19251f9852c13282991e0bab74fa724dfc46cc2a2642a617f8288f4305",
   "algorithm": "ed25519"
 }

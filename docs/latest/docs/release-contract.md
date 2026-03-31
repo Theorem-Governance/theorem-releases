@@ -4,6 +4,12 @@ This document defines the supported release contract for `theorem-node`
 artifacts published from the Ring 1 release host and the public machine
 contract line expected to remain stable through `0.5.x`.
 
+This is an artifact publication contract only. It does not define the broader
+downstream operator contract for measured boot identity, management-plane
+governance, restore semantics, or formal attestation APIs. That broader ask is
+captured separately in
+[`docs/superpowers/specs/2026-03-28-downstream-operator-contract.md`](superpowers/specs/2026-03-28-downstream-operator-contract.md).
+
 ## Scope
 
 This contract exists so deployment automation and downstream theorem-native
@@ -150,10 +156,12 @@ usr/local/bin/theorem-gateway              API gateway
 usr/local/bin/theorem-supervisor           Process supervisor
 usr/local/bin/theorem-govagent             Governance agent
 usr/local/bin/theorem-witness              Witness node
+usr/local/etc/rc.d/theorem_runtime_prepare Seed-agnostic first-boot preparation
 usr/local/etc/rc.d/theorem_init            FreeBSD rc.d service script
 etc/rc.conf                                FreeBSD system configuration
 etc/theorem/machine-spec.toml              Declarative host/image specification
 etc/theorem/theorem.conf                   Default governance config
+etc/theorem/bootstrap-config.json          Bundled theorem-node bootstrap metadata
 etc/veriexec.d/theorem.manifest            Binary integrity manifest
 etc/theorem/first-boot.conf.example        First-boot provisioning template
 boot/kernel/THEOREMOS                      Custom kernel config
@@ -167,14 +175,19 @@ For autonomous deployment from the rootfs tarball:
 ```bash
 tar xzf theoremos-v0.5.0-x86_64-unknown-freebsd.tar.gz
 cd theoremos-v0.5.0-x86_64-unknown-freebsd
-# Optional: cp etc/theorem/first-boot.conf.example /tmp/first-boot.conf && edit
-FIRST_BOOT_CONF=/tmp/first-boot.conf sh install.sh
+sh install.sh
+# Optional override-only host provisioning:
+# cp etc/theorem/first-boot.conf.example /tmp/first-boot.conf && edit
+# FIRST_BOOT_CONF=/tmp/first-boot.conf sh install.sh
 ```
 
 The installer verifies FreeBSD >= 14, installs binaries, applies first-boot
-configuration, establishes or preserves `machine-spec.toml`, renders the
-canonical host configuration from that spec, sets immutable flags, and enables
-the theorem-init service.
+configuration when present, installs bundled `bootstrap-config.json`,
+establishes or preserves `machine-spec.toml`, renders the canonical host
+configuration from that spec, sets immutable flags, and enables the
+theorem-init service. The bundled bootstrap metadata is the default bootstrap
+path; `first-boot.conf` is an override-only channel for host-specific network
+or SSH inputs.
 
 ### Upgrade Bundle (in-place theoremOS upgrade)
 
@@ -210,16 +223,22 @@ Machine consumers must distinguish the FreeBSD artifact classes:
 - `theoremos-<tag>-amd64-direct-write.img.xz` is the unattended bare-metal
   disk image artifact. Its manifest entry carries
   `artifact_kind=direct-write-disk-image`,
-  `automation_strategy=decompress-and-direct-write`, and
+  `automation_strategy=decompress-write-recover-gpt-and-first-boot-autogrow`,
+  and
   `direct_disk_write=allowed`. It also carries
+  `self_contained_bootstrap=true`,
+  `bootstrap_strategy=bundled-release-metadata`, and
   `seed_partition_label=THEOREMSEED`, `seed_filesystem=msdosfs`,
   `first_boot_config_path=first-boot.conf`, and
-  `first_boot_config_template=first-boot.conf.example`.
+  `first_boot_config_template=first-boot.conf.example`, with
+  `first_boot_config_policy=optional-override`.
 - `theoremos-<tag>-x86_64-unknown-freebsd.tar.gz` is the installer-capable
   rootfs artifact. Its manifest entry carries `artifact_kind=installer-rootfs`,
   `automation_strategy=extract-and-run-installer`, `archive_root`, an
-  `installer_entrypoint` relative to that archive root, and
-  `direct_disk_write=forbidden`.
+  `installer_entrypoint` relative to that archive root,
+  `direct_disk_write=forbidden`, `self_contained_bootstrap=true`,
+  `bootstrap_strategy=bundled-release-metadata`, and
+  `first_boot_config_policy=optional-override`.
 - `theoremos-<tag>-<target>-upgrade-bundle.tar.gz` is the in-place theoremOS
   upgrade artifact. Its manifest entry carries `artifact_kind=upgrade-bundle`,
   `automation_strategy=extract-and-run-upgrade`, `archive_root`,
@@ -235,9 +254,16 @@ Machine consumers must distinguish the FreeBSD artifact classes:
   for installer-driven bare-metal flows.
 - Upgrade automation must fail closed if no `upgrade-bundle` artifact is
   published for an in-place theoremOS upgrade path.
-- Direct-write consumers must inject `/first-boot.conf` into the published
-  seed partition before first boot if they need remote SSH access or static
-  network configuration.
+- Direct-write images must be deployable without any required seed injection.
+  `/first-boot.conf` remains an optional override path for remote SSH access
+  or static network configuration.
+- Direct-write consumers must recover GPT to the full target disk before the
+  first theoremOS boot when the target disk is larger than the baked image
+  geometry. Root partition and pool expansion now happen on-box during the
+  first theoremOS boot via `theorem_autogrow`; consumers must not pre-grow the
+  root partition offline. The supported Linux rescue flow is
+  `scripts/write-direct-write-image.sh` or an equivalent sequence that performs
+  the same post-write GPT recovery and optional seed injection.
 
 See `docs/theorem-init-contract.md` for the service lifecycle, and
 `docs/operator-guide/08-migration-4x-to-5x.md` for the 4.x re-image path and

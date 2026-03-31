@@ -4,6 +4,22 @@
 **Owner:** Product / CPO
 **Status:** Active
 
+## Current Control Plane
+
+This roadmap captures the earlier `v0.3.0 -> 2.x -> 3.0` product framing.
+
+It is not the active execution control plane for the current repo state.
+The active line is:
+
+- `0.6.3` substrate closure
+- `0.7` entity birth
+- `0.8` entity learning
+- `0.9` entity interoperation
+- `1.0` autonomous economy
+
+Use [`docs/execution/1.0-runbook.md`](docs/execution/1.0-runbook.md) as the
+current release train and gate source of truth.
+
 ## Product Thesis
 
 Theorem is not trying to become a better helper process around an existing
